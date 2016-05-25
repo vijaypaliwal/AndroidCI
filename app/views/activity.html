@@ -1494,7 +1494,7 @@
                                                 </select>-->
                                                 <select class="form-control" select2 name="country"
                                                         data-ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                    <option ng-repeat="_optionValue in StatusList">{{_optionValue.StatusValue}}</option>
+                                                    <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false">{{_optionValue.StatusValue}}</option>
                                                     <option value="">None</option>
                                                     <option value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
@@ -2756,7 +2756,13 @@
 
     }
 
-
+    var allSelectElements = document.getElementsByTagName('select');
+    for (var i = 0; i < allSelectElements.length; i++) {
+        allSelectElements[i].addEventListener('touchstart', function (e) {
+            //This is the important line
+            e.stopPropagation();
+        }, false);
+    }
 
 
 
