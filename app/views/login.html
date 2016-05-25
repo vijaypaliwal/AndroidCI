@@ -1,0 +1,216 @@
+﻿
+
+
+
+    <form class="login-form" role="form" name="myform">
+        <div class="row">
+        <div class="col-md-12">
+            <!--<div style="text-align:center">
+
+                <img class="loginlogo" src="img/u2.png" alt="Alternate Text" />
+
+                </div>-->
+
+            <div class="formarea">
+                <div class="row">
+
+                    <div class="col-xs-12">
+
+                        <div class="form-group">
+                            <label>Account Name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-briefcase"></i></span>
+                                <input type="text" class="form-control" placeholder="Account" data-ng-model="loginData.account" required autofocus>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-user"></i></span>
+                                <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-key"></i></span>
+                                <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <button style="margin-top:8px;" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="submit" ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
+                        <button style="margin-top:8px;background:#ccc;" class=" btn-large  width-100 animated center bouncein delay-6" type="button" disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    <!--<button style="margin-top:8px;" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6 loginn" type="submit" ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
+            <button style="margin-top:8px;background:#ccc;" class=" btn-large  width-100 animated center bouncein delay-6" type="button" disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>-->
+                    <!--#2196F3 !important-->
+                    <div class="bottomnavigation">
+
+
+                        <a href="#/signup" style="font-size:20px;" class="">Create Account </a>
+
+                    </div>
+
+
+                </div>
+            </div>
+    </form>
+
+<style>
+    .navbar {
+        display: none;
+    }
+
+    .side-nav
+    {
+        display:none !important;
+    }
+
+    #sidenav-overlay
+    {
+        display:none !important;
+    }
+    
+    
+     .center {
+        text-align: center;
+    }
+    .loginn {
+        background: #999999 !important;
+    }
+
+    label
+    {
+        font-size:15px;
+        color:#333;
+    }
+
+    .form-control {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius:0px;
+    }
+    
+    
+     .formarea {
+        background: #fff;
+        padding: 10px;
+        border-radius:5px;
+    }
+    
+    
+     .layoutheader {
+        display: none;
+    }
+
+    .bottomnavigation {
+        position: fixed;
+        bottom: 10px;
+        text-align: center;
+        width: 100%;
+        color: #fff;
+    }
+
+        .bottomnavigation a
+        
+        {
+            color:#fff;
+            display:block;
+            margin-top:5px;
+        }
+
+
+
+    body {
+        background: #2196F3;
+        padding-top: 7px;
+        overflow-x: hidden !important;
+    }
+
+    .loginlogo {
+        width: 82px;
+        margin-bottom: 15px;
+    }
+
+    #viewdata {
+        margin-top: 0px;
+    }
+
+   
+
+    .login-form .col-xs-5 {
+        text-align: right;
+    }
+
+    .btn-white {
+        margin: 0 auto;
+        margin-bottom: 15px;
+        background: #fff !important;
+        color: #000 !important;
+        text-align:center
+    }
+
+        .btn-white .fa-angle-right {
+            position: absolute;
+            right: 25px;
+            font-size: 25px;
+            margin-top: -2px;
+        }
+
+
+   
+
+    login-form {
+        overflow: hidden !important;
+    }
+
+    .container {
+        width: 98%;
+    }
+
+    #toolbar
+    {
+        display:none;
+    }
+
+     
+</style>
+

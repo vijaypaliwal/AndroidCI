@@ -1,0 +1,295 @@
+﻿
+<div style="top: 0;" class="topheader header Increase bgm-decrease">
+    <div style="padding-left:10px; padding-right:10px; padding-top:3px; padding-bottom:3px;" class="row" id="headerrow">
+
+        <div class="col-md-4 col-xs-3">
+            <a style="padding:4px;" href="#/login"><i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div style="text-align:center">
+                <h5>  Sign Up </h5>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-3">
+
+        </div>
+
+    </div>
+
+
+    <!-- ngIf: IsSingleMode==true -->
+
+</div>
+
+<form name="signup">
+
+    <h4>Personal Info</h4>
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <div class="form-group">
+             
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-male"></i></span>
+                    <input type="text" class="form-control" placeholder="Your Name" data-ng-model="registration.Name" required autofocus>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+               
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-globe"></i></span>
+                    <input type="text" class="form-control" placeholder="Company Name" data-ng-model="registration.Company" required>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+             
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-envelope"></i></span>
+                    <input type="text" class="form-control" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="Email Address" data-ng-model="registration.Email" required>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+            
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-briefcase"></i></span>
+                    <input type="text" class="form-control" placeholder="Account Name" data-ng-model="registration.Account" required>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+    <h4>Login Info</h4>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Username" data-ng-model="registration.UserName" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <div class="form-group">
+              
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-key"></i></span>
+                    <input type="password" class="form-control" placeholder="Password" data-ng-model="registration.Password" required>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <div>
+        <br /><br />
+    </div>
+
+    <table class="bottombtn">
+        <tr>
+           
+            <td>
+                <button class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()">Sign Up&nbsp;<i class="fa fa-sign-in"></i> </button>
+                
+            </td>
+            <td>
+                <button class="waves-effect waves-light gray-color btn-large width-100 animated center bouncein delay-6" type="reset" data-ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp;Reset </button>
+            </td>
+        </tr>
+    </table>
+
+    
+</form>
+
+<style>
+    .navbar {
+        display: none;
+    }
+
+    .side-nav {
+        display: none !important;
+    }
+
+    #sidenav-overlay {
+        display: none !important;
+    }  
+
+
+    .center {
+        text-align: center;
+    }
+
+    .loginn {
+        background: #999999 !important;
+    }
+
+    label {
+        font-size: 15px;
+        color: #333;
+    }
+
+    .form-control {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+
+  
+
+
+    .layoutheader {
+        display: none;
+    }
+
+    .bottomnavigation {
+        position: fixed;
+        bottom: 10px;
+        text-align: center;
+        width: 100%;
+        color: #fff;
+    }
+
+        .bottomnavigation a {
+            color: #fff;
+            display: block;
+            margin-top: 5px;
+        }
+
+
+
+    body {
+    
+        padding-top: 40px;
+        overflow-x: hidden !important;
+    }
+
+    .loginlogo {
+        width: 82px;
+        margin-bottom: 15px;
+    }
+
+    #viewdata {
+        margin-top: 0px;
+    }
+    .container
+    {
+        width:100%;
+    }
+
+
+
+    .login-form .col-xs-5 {
+        text-align: right;
+    }
+
+    .btn-white {
+        margin: 0 auto;
+        margin-bottom: 15px;
+        background: #fff !important;
+        color: #000 !important;
+        text-align: center;
+    }
+
+        .btn-white .fa-angle-right {
+            position: absolute;
+            right: 25px;
+            font-size: 25px;
+            margin-top: -2px;
+        }
+
+
+
+    login-form {
+        overflow: hidden !important;
+    }
+
+  
+
+    #toolbar {
+        display: none;
+    }
+
+    .bottombtn
+    {
+        position:fixed;
+        bottom:0;
+        left:0;
+        z-index:10;
+        right:0;
+        width:100%;
+    }
+
+        .bottombtn .btn-large {
+            margin-bottom: 0px;
+            border-radius: 0px;
+            z-index:10;
+        }
+
+    .btn-large i
+    {
+        font-size:16px;
+    }
+
+    .btn-large:disabled
+    {
+        color:#fff  !important;
+        opacity:0.7;
+    }
+
+    #mysignupModal {
+        text-align: center;
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        margin-top: 100px;
+    }
+
+
+</style>
