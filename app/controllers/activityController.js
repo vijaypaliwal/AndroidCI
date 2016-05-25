@@ -2242,7 +2242,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         localStorageService.set("SelectedAction", "");
         $location.path("/FindItems");
 
-        setTimeout(function () { window.location.reload(); }, 3000);
+        setTimeout(function () { window.location.reload(); }, 500);
         
     }
 
