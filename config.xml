@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.ryanw.barcodedemo"
         version   = "2.0.4">
-  <name>Clearly Inventory</name>
+  <name>Clearly Inventory Android</name>
 
   <description>
    Welcome to Clearly Inventory, an easy online inventory management software
