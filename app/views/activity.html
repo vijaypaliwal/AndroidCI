@@ -217,10 +217,7 @@
                                                 <label>Status</label>
                                                 <div class="fg-line">
                                                     <div class="select">
-
-
-
-                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate" data-native-menu="false">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
@@ -329,7 +326,7 @@
                                                 <label>Status</label>
                                                 <div class="fg-line">
                                                     <div class="select">
-                                                        <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
+                                                        <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate" data-native-menu="false">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
