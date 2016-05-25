@@ -220,15 +220,9 @@
 
 
 
-                                                        <!--<select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                                        </select>-->
-                                                        <select class="form-control" selectpicker name="country"
-                                                                data-ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                            <option ng-repeat="_optionValue in StatusList">{{_optionValue.StatusValue}}</option>
-                                                            <option value="">None</option>
-                                                            <!--<option value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>-->
                                                         </select>
                                                     </div>
                                                 </div>
@@ -335,15 +329,9 @@
                                                 <label>Status</label>
                                                 <div class="fg-line">
                                                     <div class="select">
-                                                        <!--<select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
+                                                        <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                                        </select>-->
-                                                        <select class="form-control" selectpicker name="country"
-                                                                data-ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                            <option ng-repeat="_optionValue in StatusList">{{_optionValue.StatusValue}}</option>
-                                                            <option value="">None</option>
-                                                            <!--<option value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>-->
                                                         </select>
                                                     </div>
                                                 </div>
@@ -799,15 +787,9 @@
 
 
 
-                                            <!--<select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                            <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
                                                 <option value="">None</option>
                                                 <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                            </select>-->
-                                            <select class="form-control" selectpicker name="country"
-                                                    data-ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                <option ng-repeat="_optionValue in StatusList">{{_optionValue.StatusValue}}</option>
-                                                <option value="">None</option>
-                                                <!--<option value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>-->
                                             </select>
                                         </div>
                                     </div>
@@ -1488,15 +1470,9 @@
 
 
 
-                                                <!--<select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                                <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
                                                     <option value="">None</option>
                                                     <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                                </select>-->
-                                                <select class="form-control" select2 name="country"
-                                                        data-ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                    <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false">{{_optionValue.StatusValue}}</option>
-                                                    <option value="">None</option>
-                                                    <option value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -2760,10 +2736,12 @@
     for (var i = 0; i < allSelectElements.length; i++) {
         allSelectElements[i].addEventListener('touchstart', function (e) {
             //This is the important line
+            alert("touch event start");
             e.stopPropagation();
-            alert("touch start");
         }, false);
     }
+
+
 
 
 
