@@ -16,6 +16,47 @@
         padding-bottom:2px;
     }
 
+
+    .dropdown-menu {
+        /* position: absolute; */
+        top: 100%;
+        left: 0;
+        z-index: 9;
+        display: none;
+        float: left;
+        width: auto !important;
+        padding: 5px 0;
+        margin: 2px 0px 0px;
+        list-style: inherit;
+        font-size: 13px;
+        text-align: left;
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-radius: 2px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        background-clip: padding-box;
+        font-size: 17px;
+        line-height: 30px;
+        padding-left: 10px;
+    }
+    .updiv {
+        width: auto !important;
+         height:40px;
+        font-size: 14px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        cursor: pointer;
+        padding-left: 3px;
+        padding-right: 3px;
+        margin-bottom: 20px;
+        color: #000;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        transition: All 1s ease;
+        -webkit-transition: All 1s ease;
+    }
+
     .cartitems
     {
         display:block;
@@ -82,7 +123,7 @@
 
     </div>
 
-    <div ng-if="IsSingleMode==false" onclick="cartitems()" class="collapsible-header">
+    <div ng-if="IsSingleMode==false" onclick="cartitems()" ><!--class="collapsible-header"-->
         <span class="checkout-price">Show Cart summary</span>
         <i class="ion-android-arrow-dropdown"></i>
         <span ng-click="selecteditemlist()" class="checkout-price right">{{CurrentCart.length}} Items</span>
@@ -177,14 +218,22 @@
 
                                     <div class="row">
                                         <div class="col-xs-8 col-md-8">
+
                                             <div class="form-group">
+
+
                                                 <label>Location</label>
                                                 <div class="fg-line">
+
+
+
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                         <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
                                                     </div>
+
+
 
                                                     <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
                                                         Can't move to same location please update.
@@ -202,37 +251,8 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row">
-                                        <div class="col-xs-8 col-md-8">
-
-                                            <div class="form-group">
-
-
-                                                <label>Status</label>
-                                                <div class="fg-line">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="Select Status" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate" />
-
-                                                        <span class="input-group-addon last" ng-click="statuslistfordropdown(CurrentActiveObject.InventoryID,CurrentActiveObject.MoveTransactionData.StatusToUpdate)"><i class="fa fa-search"></i></span>
-                                                    </div>
-
-
-
-                                                     
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-4 col-md-4" ng-if="$index==0">
-                                            <div class="pull-right">
-                                                <button id="LineItems2_{{CurrentActiveObject.InventoryDataList.uId}}" style="margin-top:25px;" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems2(CurrentActiveObject.MoveTransactionData.StatusToUpdate,CurrentActiveObject.InventoryDataList.uId)">
-                                                    <i class="fa fa-thumb-tack"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--<div class="row">
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>Status</label>
@@ -246,6 +266,28 @@
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
                                                     </div>
+
+                                                     
+                                                    <div  style="position: relative;">
+
+                                                        <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                            {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
+                                                            <i class="caret pull-right" style="margin-top: 8px"></i>
+                                                        </div>
+                                                       
+                                                            <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                                                <li ng-repeat="_optionValue in StatusList" ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue" >{{_optionValue.StatusValue}}
+
+
+                                                                </li>
+
+
+                                                            </ul>
+                                                        
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -262,7 +304,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>-->
+                                    </div>
 
                                 </div>
 
@@ -355,6 +397,26 @@
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div style="position: relative;">
+
+                                                    <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                        {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
+                                                        <i class="caret pull-right" style="margin-top: 8px"></i>
+                                                    </div>
+
+                                                    <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                                        <li ng-repeat="_optionValue in StatusList" ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue">
+                                                            {{_optionValue.StatusValue}}
+
+
+                                                        </li>
+
+
+                                                    </ul>
+
                                                 </div>
 
                                             </div>
@@ -813,6 +875,30 @@
                                                 <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                             </select>
                                         </div>
+                                    </div>
+                                    <div style="position: relative;">
+
+                                        <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                            {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
+                                            <i class="caret pull-right" style="margin-top: 8px"></i>
+                                        </div>
+
+                                        <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+                                            <!--<li ng-click="_optionValue.StatusValue=''">None</li>-->
+
+                                            <li ng-repeat="_optionValue in StatusList" ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue">
+                                                {{_optionValue.StatusValue}}
+                                                
+
+
+                                            </li>
+                                           
+                                                
+
+
+                                        </ul>
+
                                     </div>
 
                                 </div>
@@ -1495,6 +1581,26 @@
                                                     <option value="">None</option>
                                                     <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
+                                            </div>
+                                            <div style="position: relative;">
+
+                                                <div class=" updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                    {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
+                                                    <i class="caret pull-right" style="margin-top: 8px"></i>
+                                                </div>
+
+                                                <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                                    <li ng-repeat="_optionValue in StatusList" ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue">
+                                                        {{_optionValue.StatusValue}}
+
+
+                                                    </li>
+
+
+                                                </ul>
+
                                             </div>
                                         </div>
 
@@ -2559,47 +2665,6 @@
         </div>
     </div>
 
-    <div id="statuslistmodal" class="modal animated bounceIn">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
-            <h4>Select Status  </h4>
-            <div class="form-group">
-
-                <div class="input-group">
-                    <input style="height:47px;" type="text" id="SearchstatusValue" placeholder="Type Keyword to find status" ng-change="OnChangeStatusFunction()" class="form-control" ng-model="SearchstatusValue" required="" autofocus />
-
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-body"> 
-
-            <div ng-if="LocationSearching==true">
-                <i class="fa fa-spin fa-spinner"></i> searching please wait..
-            </div>
-
-            <div ng-if="isnolocationmsg == true" class="noitem">
-                <div style="text-align: center; border: 1px solid #eeeeee;">
-                    <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
-                    <h4 style="font-size:15px;">We can't find the status you're looking for</h4>
-
-                </div>
-            </div>
-
-            <ul class="searchresultlist" >
-                <li ng-click="StatusSetItemData(obj)" ng-repeat="obj in StatusList| filter : SearchstatusValue">
-                    <a>
-                        <span ng-bind-html="HighLightTerm(SearchstatusValue,obj.StatusValue)"></span>
-
-
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-
 
     <div id="selecteditemlistmodal" class="modal animated bounceIn">
         <div class="modal-header">
@@ -2794,7 +2859,19 @@
 
     }
 
-    
+    var allSelectElements = document.getElementsByTagName('select');
+    debugger;
+    for (var i = 0; i < allSelectElements.length; i++) {
+        allSelectElements[i].addEventListener('touchstart', function (e) {
+            //This is the important line
+            debugger;
+            alert("touch event start");
+            e.stopPropagation();
+        }, false);
+    }
+
+
+
 
 
 </script>
