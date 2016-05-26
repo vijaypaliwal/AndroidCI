@@ -827,6 +827,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.IsSingleMode = !$scope.IsSingleMode;
 
 
+        var allSelectElements = document.getElementsByTagName('select');
+        for (var i = 0; i < allSelectElements.length; i++) {
+            allSelectElements[i].addEventListener('touchstart', function (e) {
+                alert("into select")
+                e.stopPropagation();
+            }, false);
+        }
+
+
         var i = 0;
         //if ($scope.IsSingleMode == false) {
         //    if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -1230,6 +1239,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         getuom();
         $scope.getstatus()
 
+
+        var allSelectElements = document.getElementsByTagName('select');
+        for (var i = 0; i < allSelectElements.length; i++) {
+            allSelectElements[i].addEventListener('touchstart', function (e) {
+                alert("into select")
+                e.stopPropagation();
+            }, false);
+        }
+
+        setTimeout(function () {
+            var allSelectElements = document.getElementsByTagName('select');
+            for (var i = 0; i < allSelectElements.length; i++) {
+                allSelectElements[i].addEventListener('touchstart', function (e) {
+                    alert("into select")
+                    e.stopPropagation();
+                }, false);
+            }
+
+        }, 3000);
 
         CheckScopeBeforeApply();
 
