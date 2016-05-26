@@ -123,7 +123,7 @@
 
     </div>
 
-    <div ng-if="IsSingleMode==false" onclick="cartitems()" class="collapsible-header">
+    <div ng-if="IsSingleMode==false" onclick="cartitems()" ><!--class="collapsible-header"-->
         <span class="checkout-price">Show Cart summary</span>
         <i class="ion-android-arrow-dropdown"></i>
         <span ng-click="selecteditemlist()" class="checkout-price right">{{CurrentCart.length}} Items</span>
@@ -257,7 +257,7 @@
                                             <div class="form-group">
                                                 <label>Status</label>
                                                 <div class="fg-line">
-                                                    <!--<div class="select">
+                                                    <div class="select">
 
 
 
@@ -265,7 +265,7 @@
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
-                                                    </div>-->
+                                                    </div>
 
                                                      
                                                     <div  style="position: relative;">
@@ -390,14 +390,14 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <!--<div class="fg-line">
+                                                <div class="fg-line">
                                                     <div class="select">
                                                         <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
                                                     </div>
-                                                </div>-->
+                                                </div>
                                                 <div style="position: relative;">
 
                                                     <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
@@ -865,7 +865,7 @@
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <!--<div class="fg-line">
+                                    <div class="fg-line">
                                         <div class="select">
 
 
@@ -875,7 +875,7 @@
                                                 <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                             </select>
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <div style="position: relative;">
 
                                         <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
@@ -885,7 +885,7 @@
 
                                         <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
 
-                                            <li ng-click="_optionValue.StatusValue=''">None</li>
+                                            <!--<li ng-click="_optionValue.StatusValue=''">None</li>-->
 
                                             <li ng-repeat="_optionValue in StatusList" ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue">
                                                 {{_optionValue.StatusValue}}
@@ -1573,7 +1573,7 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <div class="fg-line">
-                                            <!--<div class="select">
+                                            <div class="select">
 
 
 
@@ -1581,7 +1581,7 @@
                                                     <option value="">None</option>
                                                     <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
-                                            </div>-->
+                                            </div>
                                             <div style="position: relative;">
 
                                                 <div class=" updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
@@ -1592,15 +1592,11 @@
                                                 <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
 
 
-                                                    <li ng-click="_optionValue.StatusValue=''">None</li>
-
                                                     <li ng-repeat="_optionValue in StatusList" ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue">
                                                         {{_optionValue.StatusValue}}
 
 
-
                                                     </li>
-
 
 
                                                 </ul>
