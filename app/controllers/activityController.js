@@ -1202,8 +1202,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var dsplit1 = _date.split("/");
 
 
-
-
                 var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
 
                 var day = ("0" + now.getDate()).slice(-2);
@@ -1213,6 +1211,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 = today;
 
             }
+
+
+
 
 
             if ($scope.CurrentCart[i].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[i].ApplyTransactionData.UniqueDate != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UniqueDate) != "") {
