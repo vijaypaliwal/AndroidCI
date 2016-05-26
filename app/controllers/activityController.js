@@ -866,7 +866,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var allSelectElements = document.getElementsByTagName('select');
                 for (var i = 0; i < allSelectElements.length; i++) {
                     allSelectElements[i].addEventListener('touchstart', function (e) {
-                        alert("into select")
+                      
                         this.focus;
                     }, false);
                 }
@@ -1104,7 +1104,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var allSelectElements = document.getElementsByTagName('select');
                 for (var i = 0; i < allSelectElements.length; i++) {
                     allSelectElements[i].addEventListener('touchstart', function (e) {
-                        alert("into select")
+                      
                         this.focus;
                     }, false);
                 }
