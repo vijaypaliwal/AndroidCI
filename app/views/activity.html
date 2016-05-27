@@ -32,28 +32,7 @@
 
 <div style="display:none" class="activity" ng-cloak>
 
-    <div style="top: 0;" class="topheader header Increase {{CurrentHeaderClass}}">
-        <div class="row" id="headerrow">
-
-            <div class="col-md-4 col-xs-3">
-                <a href="#/mainmenu"><i class="fa fa-home"></i></a>
-            </div>
-            <div class="col-md-4 col-xs-6">
-                <div style="text-align:center">
-                    <a ng-if="CurrentOperation!='Apply'">{{CurrentOperation}}</a>
-                    <a ng-if="CurrentOperation=='Apply'">Tag</a>
-                </div>
-            </div>
-            <div class="col-md-4 col-xs-3">
-
-            </div>
-
-        </div>
-
-
-        
-
-    </div>
+    
 
 
     <div class="maincontent">
@@ -66,16 +45,16 @@
         </div>
 
 
-        <div class="animated slideInDown singleSlide" >
+        <div class="singleSlide" >
 
             <div class="singlePanel">
 
-                <ul class="checkout-header animated fadeindown delay-2">
+                <ul class="checkout-header">
                     <li>
 
-                        <div class="cartitems collapsible-body z-depth-1">
+                        <div class="cartitems">
 
-                            <div class="mycartitem"  ng-init="parentIndex=$index" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
+                            <div class=""  ng-init="parentIndex=$index"  ng-repeat="CurrentActiveObject in CurrentCart" >
 
                                 <div class="checkout-details">
 
@@ -687,7 +666,7 @@
 
             </div>
 
-            <div class="form-inputs customActivityData" data-type="Activity" data-index="{{GetProperIndex(1)}}">
+            <div class="form-inputs customActivityData" >
 
 
                 <h4>Activity data</h4>
