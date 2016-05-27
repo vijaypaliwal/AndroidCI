@@ -43,6 +43,18 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
+
+    function preventfocus() {
+        alert("In");
+        $('select').on('focus', function (e) {
+            $(this).blur();
+            window.focus();
+        });
+    }
+
+
+   
+
     $scope.OpenmenuModal = function () {
 
         if ($("body").hasClass("modal-open")) {
@@ -1021,8 +1033,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             setTimeout(function () {
                 InitializeSwiper();
+                preventfocus();
 
-            }, 0);
+            }, 100);
         }
         CheckScopeBeforeApply();
     }
