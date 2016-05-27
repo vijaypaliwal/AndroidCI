@@ -20,7 +20,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CollapsOpen = false;
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
-    $scope.IsSingleMode = true;
+    $scope.IsSingleMode = false;
 
     $scope.CanIncrease = 'true';
     $scope.CanDecrease = 'true';
@@ -463,7 +463,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.locationlist = function (inventoryid, locationid) {
 
 
-        debugger;
+
 
         $scope.currentinventoryid = inventoryid
 
@@ -474,25 +474,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.LocationSearchList = [];
         $scope.SearchLocationValue = "";
         $scope.isnolocationmsg = false
-        $('html,body').animate({ scrollTop: 0 }, 800);
-
-    }
-
-
-    $scope.statuslistfordropdown = function (inventoryid, iStatusValue) {
-
- 
-       
-        debugger;
-       $scope.currentinventoryid = inventoryid
-
-
-       $scope.currentstatus = iStatusValue
-
-
-        $("#statuslistmodal").modal('show');
-      //  $scope.StatusSearchList = [];
-        $scope.SearchstatusValue = "";
         $('html,body').animate({ scrollTop: 0 }, 800);
 
     }
@@ -555,35 +536,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-    $scope.OnChangeStatusFunction=function()
-    {
 
-
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-        debugger;
-        $.ajax
-           ({
-               type: "POST",
-               url: serviceBase + 'GetStatus',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
-               success: function (response) {
-
-                   $scope.StatusList = response.GetStatusResult.Payload;
-                   CheckScopeBeforeApply()
-               },
-               error: function (err) {
-
-                   log.error(err.Message);
-
-               }
-           });
-
-    }
     $scope.IncreaseDecreaseValue = function (Type, IsConvert2) {
 
         switch ($scope.CurrentOperation) {
@@ -676,27 +629,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
     }
 
-
-    $scope.StatusSetItemData = function (obj)
-    {
-        var k = 0;
-
-        for (k = 0; k < $scope.CurrentCart.length; k++) {
-            if ($scope.CurrentCart[k].InventoryDataList.uId == $scope.currentinventoryid) {
-
-                
-
-                $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate = obj.StatusValue;
-                    break;
-                
-            
-            }
-
-        }
-
-        $("#statuslistmodal").modal('hide');
-        CheckScopeBeforeApply();
-    }
     $scope.LocationSetItemData = function (obj) {
 
 
@@ -827,8 +759,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.IsSingleMode = !$scope.IsSingleMode;
 
 
-    
-
         var i = 0;
         //if ($scope.IsSingleMode == false) {
         //    if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -862,19 +792,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                 }
-
-                var allSelectElements = document.getElementsByTagName('select');
-                for (var i = 0; i < allSelectElements.length; i++) {
-                    allSelectElements[i].addEventListener('touchstart', function (e) {
-
-
-                        setTimeout(function () { this.focus; }, 1000);
-
-                    
-                    }, false);
-                }
-
-
 
                 CheckScopeBeforeApply();
 
@@ -1104,18 +1021,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             setTimeout(function () {
                 InitializeSwiper();
-                var allSelectElements = document.getElementsByTagName('select');
-                for (var i = 0; i < allSelectElements.length; i++) {
-                    allSelectElements[i].addEventListener('touchstart', function (e) {
-                      
-                        setTimeout(function () { this.focus; }, 1000);
-                    }, false);
-                }
-
 
             }, 0);
         }
         CheckScopeBeforeApply();
+    }
+
+    function ConverttoMsJsonDate(_DateValue) {
+
+        var _date = angular.copy(_DateValue);
+
+        var dsplit1 = _date.split("/");
+        var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        return today;
     }
     function GetCustomDataField(Type) {
         var authData = localStorageService.get('authorizationData');
@@ -1135,7 +1059,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                    $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
+                   for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
 
+                       var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                       if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
+                           if (_defaultValue != null && _defaultValue != "") {
+                               $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                           }
+                       }
+                       else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
+                           if (_defaultValue != null && _defaultValue != "") {
+                               var _myDefault = parseFloat(_defaultValue);
+                               if (!isNaN(_myDefault)) {
+                                   $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
+
+                               }
+                           }
+                       }
+                   }
 
                    CheckScopeBeforeApply();
                    UpdateCartWithCustomFields();
@@ -1253,9 +1194,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         getuom();
         $scope.getstatus()
 
-
-     
-     
 
         CheckScopeBeforeApply();
 
@@ -2330,6 +2268,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         return _returnVar
     }
+
+    $scope.clearCartFunction = function() {
+        localStorageService.set("ActivityCart", "");
+        localStorageService.set("SelectedAction", "");
+        $location.path("/FindItems");
+    }
+
     $scope.SubmitAllActivities = function () {
 
 
@@ -2355,6 +2300,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
                     success: function (response) {
 
+                        localStorageService.set("ActivityCart", "");
+                        localStorageService.set("SelectedAction", "");
 
                         $scope.IsProcessing = false;
                         $scope.CurrentCart = [];
@@ -2364,10 +2311,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         localStorageService.set("ActivityCart", "");
                         localStorageService.set("SelectedAction", "");
 
-
-
-
-
+                        $scope.clearCartFunction();
                         $scope.$apply();
                     },
                     error: function (err) {
@@ -3201,27 +3145,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 }]);
 
 
-app.directive('selectpicker', function () {
-    return {
-        restrict: "A",
-        require: "ngModel",
-        link: function (scope, element, attrs, ctrl) {
 
-            element.select2();
-
-
-            var refreshSelect = function () {
-
-                element.trigger('change');
-            };
-
-
-            scope.$watch(attrs.ngModel, refreshSelect);
-
-
-        }
-    };
-});
 
 app.directive('bootstrapSwitch', [
         function () {
@@ -3261,5 +3185,30 @@ app.directive('bootstrapSwitch', [
             };
         }
 ]);
+
+
+
+app.directive('selectpicker', function () {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attrs, ctrl) {
+
+            element.select2();
+
+
+            var refreshSelect = function () {
+
+                element.trigger('change');
+            };
+
+
+            scope.$watch(attrs.ngModel, refreshSelect);
+
+
+        }
+    };
+});
+
 
 
