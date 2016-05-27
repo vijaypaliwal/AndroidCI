@@ -48,7 +48,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         alert("In");
         $('select').on('focus', function (e) {
             $(this).blur();
-            window.focus();
+            $("body").trigger("click");
         });
     }
 
@@ -1217,6 +1217,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope._CurrentAction = type;
         GetActionType(type);
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
+        preventfocus();
         $scope.$apply();
 
     }
@@ -2805,7 +2806,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         //  $cordovaKeyboard.disableScroll(true);
 
-
+       
         
         $('.collapsible-header').css("position", "absolute");
         $('.collapsible-body').css('margin-top', '49px');
