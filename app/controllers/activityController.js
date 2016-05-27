@@ -1222,8 +1222,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-
-
     $scope.showallmenu = function () {
 
         $("#mycartModal").modal('toggle');
