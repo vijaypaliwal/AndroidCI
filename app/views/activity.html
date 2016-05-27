@@ -55,13 +55,6 @@
 
     </div>
 
-    <div ng-if="IsSingleMode==false" onclick="cartitems()" class="collapsible-header">
-        <span class="checkout-price">Show Cart summary</span>
-        <i class="ion-android-arrow-dropdown"></i>
-        <span ng-click="selecteditemlist()" class="checkout-price right">{{CurrentCart.length}} Items</span>
-    </div>
-
-
 
     <div class="maincontent">
 
@@ -73,7 +66,7 @@
         </div>
 
 
-        <div class="animated slideInDown singleSlide" ng-if="IsSingleMode==false" data-type="Cart" data-index="0">
+        <div class="animated slideInDown singleSlide" >
 
             <div class="singlePanel">
 
@@ -82,7 +75,7 @@
 
                         <div class="cartitems collapsible-body z-depth-1">
 
-                            <div class="mycartitem" ng-if="IsSingleMode==false" ng-init="parentIndex=$index" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
+                            <div class="mycartitem"  ng-init="parentIndex=$index" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
 
                                 <div class="checkout-details">
 
@@ -897,7 +890,7 @@
     </div>
 
 
-    <div ng-if="IsSingleMode==false">
+    <div >
 
 
         <table class="bottombutton" style="width:100%;">
