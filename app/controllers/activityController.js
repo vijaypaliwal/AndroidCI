@@ -20,7 +20,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CollapsOpen = false;
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
-    $scope.IsSingleMode = false;
+    $scope.IsSingleMode = true;
 
     $scope.CanIncrease = 'true';
     $scope.CanDecrease = 'true';
@@ -42,18 +42,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
-
-
-    function preventfocus() {
-        alert("In");
-        $('select').on('focus', function (e) {
-            $(this).blur();
-            $("body").trigger("click");
-        });
-    }
-
-
-   
 
     $scope.OpenmenuModal = function () {
 
@@ -1033,9 +1021,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             setTimeout(function () {
                 InitializeSwiper();
-                preventfocus();
 
-            }, 100);
+            }, 0);
         }
         CheckScopeBeforeApply();
     }
@@ -1217,10 +1204,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope._CurrentAction = type;
         GetActionType(type);
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
-        preventfocus();
         $scope.$apply();
 
     }
+
+
 
     $scope.showallmenu = function () {
 
@@ -2804,7 +2792,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         //  $cordovaKeyboard.disableScroll(true);
 
-       
+
         
         $('.collapsible-header').css("position", "absolute");
         $('.collapsible-body').css('margin-top', '49px');
