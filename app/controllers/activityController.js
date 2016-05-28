@@ -20,7 +20,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CollapsOpen = false;
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
-    $scope.IsSingleMode = false;
+    $scope.IsSingleMode = true;
 
     $scope.CanIncrease = 'true';
     $scope.CanDecrease = 'true';
