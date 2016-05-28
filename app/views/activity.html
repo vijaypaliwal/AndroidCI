@@ -110,7 +110,7 @@
 
 
 
-                    <div class="animated slideInLeft swiper-slide" ng-if="IsSingleMode==true" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
+                    <div class="animated slideInLeft swiper-slide" ng-if="IsSingleMode==false" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
                         <div class="iteminfopanel">
                             <div class="row">
                                 <div class="col-md-1 col-xs-3">
@@ -712,7 +712,7 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide form-inputs  customActivityData" ng-if="IsSingleMode==true" data-type="Activity" data-index="{{GetProperIndex(1)}}">
+                    <div class="swiper-slide form-inputs  customActivityData" ng-if="IsSingleMode==false" data-type="Activity" data-index="{{GetProperIndex(1)}}">
 
                         <div ng-if="CurrentOperation!='Adjust'">
 
@@ -895,7 +895,7 @@
 
                     </div>
 
-                    <div class="swiper-slide form-inputs laststep" ng-if="IsSingleMode==true" data-type="LastStep" data-index="{{GetProperIndex(2)}}">
+                    <div class="swiper-slide form-inputs laststep" ng-if="IsSingleMode==false" data-type="LastStep" data-index="{{GetProperIndex(2)}}">
 
                         <div ng-if="IsSummary==false">
 
