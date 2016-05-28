@@ -99,6 +99,12 @@
             </div>
         </div>
 
+        <select class="form-control">
+            <option value="text1">text1</option>
+            <option value="text2">text2</option>
+            <option value="text3">text3</option>
+            <option value="text4">text4</option>
+        </select>
 
         <div class="animated slideInDown singleSlide" ng-if="IsSingleMode==false" data-type="Cart" data-index="0">
 
@@ -107,7 +113,7 @@
                 <ul class="collapsible checkout-header animated fadeindown delay-2" data-collapsible="accordion">
                     <li>
                         
-                        <div class="cartitems collapsible-body z-depth-1">
+                        <div class="">
 
                             <div class="mycartitem" ng-if="IsSingleMode==false" ng-init="parentIndex=$index" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
 
@@ -223,6 +229,13 @@
                                                         <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                                                        </select>
+
+                                                        <select class="form-control">
+                                                            <option value="text1">text1</option>
+                                                            <option value="text2">text2</option>
+                                                            <option value="text3">text3</option>
+                                                            <option value="text4">text4</option>
                                                         </select>
                                                     </div>
                                                 </div>
