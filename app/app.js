@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('AngularAuthApp', ['ngRoute', 'ngSanitize', 'LocalStorageModule', 'angular-loading-bar', 'ngCordova', 'localytics.directives']);
+var app = angular.module('AngularAuthApp', ['ngRoute', 'ngSanitize', 'LocalStorageModule', 'angular-loading-bar', 'ngCordova']);
 
 app.config(function ($routeProvider) {
 
@@ -26,6 +26,16 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/detail", {
         controller: "detailController",
         templateUrl: "app/views/detail.html"
+    });
+
+    $routeProvider.when("/setting", {
+        controller: "settingController",
+        templateUrl: "app/views/setting.html"
+    });
+
+    $routeProvider.when("/uom", {
+        controller: "uomController",
+        templateUrl: "app/views/uom.html"
     });
 
     $routeProvider.when("/profile", {

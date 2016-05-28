@@ -1,0 +1,103 @@
+﻿
+<style>
+    .container
+    {
+        width:100%;
+    }
+
+    .btn-large
+    {
+        text-align:center;
+        height:auto;
+        margin-top:8px;
+    }
+
+   
+
+
+        .btn-large p {
+           
+            margin: 0 0 10px;
+            text-transform: capitalize;
+            margin-top:-5px;
+            margin-bottom:8px;
+        }
+
+    .btn-large h4
+    {
+        font-size:50px;
+        text-align:right;
+    }
+
+    body
+    {
+        background:#eaeaea;
+        overflow-x:hidden !important;
+    }
+
+    .list
+    {
+        padding-left:0px;
+        margin-left:0px;
+    }
+
+    .list-group-item {
+        list-style-type: none;
+        padding:15px !important;
+        min-height:65px;
+    }
+
+    .list-group-item a {
+      font-size:22px;
+    }
+
+        .list li a{
+            padding:10px;
+            font-size:20px;
+            color:#000;
+            background:#fff;
+            border-bottom:1px solid #ccc;
+        }
+
+
+</style>
+
+<div style="margin-top:12px;" class="page-header">
+
+    <div class="row">
+        <div class="col-xs-5">
+            <a class="waves-effect" href="#/setting">
+                <img src="img/back.png" alt="Alternate Text">
+            </a>
+        </div>
+        <div class="col-xs-7">
+            <h4 style="margin-top:0px;line-height:34px; text-align:right; margin-bottom:0px; color:#000;">Manage UOM</h4>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+    <a class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
+
+        <i class="fa fa-plus-circle"></i> Add new UOM
+
+
+    </a>
+
+
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="obj in UOMList">
+        <a>{{obj.UnitOfMeasureName}}</a>
+        <a style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:100%;" class="btn btn-danger pull-right">
+            <i class="fa fa-pencil"></i>
+        </a>
+    </li>
+</ul>
+
+
+    
