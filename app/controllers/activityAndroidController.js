@@ -59,19 +59,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
         $scope.$apply();
 
     }
-    function SetStatus() {
-        alert("into function")
-        var selectField = document.getElementsByTagName('select');
-        selectField.addEventListener('touchstart' ,'mousedown', function (e) {
-            alert("into touch");
-            e.stopPropagation();
-        }, false);
-
-        $("select").click(function () {
-            alert("into focus");
-            $(this).focus();
-        });
-    }
+  
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -412,10 +400,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
                    $scope.StatusList = response.GetStatusResult.Payload;
                    CheckScopeBeforeApply();
 
-                   setTimeout(function () {
-                       SetStatus();
-
-                   }, 1500);
+                 
                },
                error: function (err) {
 

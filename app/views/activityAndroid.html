@@ -5,6 +5,11 @@
 <link href=".pgbomit/activityIOS.css" rel="stylesheet" />
 
 <style>
+
+    .updiv {
+        background: white;
+        padding: 10px;
+    }
     .collapsible-header {
         position: fixed;
         width: 100%;
@@ -215,18 +220,40 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <div class="fg-line">
-                                                    <div class="select">
+                                                <!--<div class="fg-line">
+            <div class="select">
 
 
 
-                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                            <option value="">None</option>
-                                                            <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                                        </select>
-                                                    </div>
+                <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                    <option value="">None</option>
+                    <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                </select>
+            </div>
+        </div>-->
+                                                <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                    {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
+                                                    <i class="caret pull-right" style="margin-top: 8px"></i>
                                                 </div>
+                                                <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
 
+
+                                                    <li ng-repeat="_optionValue in StatusList">
+                                                        <a>
+                                                            <table style="width: 100%">
+                                                                <tr>
+                                                                    <td ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue">{{_optionValue.StatusValue}}</td>
+
+
+                                                                </tr>
+                                                            </table>
+                                                        </a>
+
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
                                             </div>
 
 
@@ -723,85 +750,7 @@
 
 
 
-                <div style="display:none;" ng-repeat="CurrentActiveObject in CurrentCart" ng-if="$index==0">
-
-                    <div ng-if="CurrentOperation=='Move'">
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-
-
-                                <div class="form-group">
-                                    <label>Quantity <span>*</span></label>
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon" ng-click="IncreaseDecreaseValue(1,0)"><i class="fa fa-plus"></i></span>
-                                        <input placeholder1="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
-                                        <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
-                                    </div>
-                                </div>
-
-
-
-                                <div ng-if="CurrentActiveObject.MoveTransactionData.ActionQuantity>CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
-                                    <span ng-if="AllowNegative!=null && AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <br />
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-
-                                <div class="form-group">
-                                    <div class="fg-line">
-
-                                        <label>Location <span>*</span> </label>
-
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
-
-                                            <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
-                                        </div>
-
-
-
-                                        <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
-                                            Can't move to same location please update.
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <div class="fg-line">
-                                        <div class="select">
-
-
-
-                                            <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                <option value="">None</option>
-                                                <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <br />
-                    </div>
+                
 
 
                     <div class="row" ng-if=" CurrentOperation!='Convert' &&  CurrentOperation!='Move'">
