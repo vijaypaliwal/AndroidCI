@@ -38,6 +38,16 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/uom.html"
     });
 
+    $routeProvider.when("/status", {
+        controller: "statusController",
+        templateUrl: "app/views/status.html"
+    });
+
+    $routeProvider.when("/Location", {
+        controller: "LocationController",
+        templateUrl: "app/views/Location.html"
+    });
+
     $routeProvider.when("/profile", {
         controller: "profileController",
         templateUrl: "app/views/profile.html"
@@ -47,12 +57,6 @@ app.config(function ($routeProvider) {
         controller: "activityController",
         templateUrl: "app/views/activity.html"
     });
-                          
-    $routeProvider.when("/activityAndroid", {
-        controller: "activityAndroidController",
-        templateUrl: "app/views/activityAndroid.html"
-    });
-    
 
     $routeProvider.when("/inventory", {
         controller: "inventoryController",

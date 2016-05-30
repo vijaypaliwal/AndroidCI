@@ -20,7 +20,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CollapsOpen = false;
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
-    $scope.IsSingleMode = true;
+    $scope.IsSingleMode = false;
 
     $scope.CanIncrease = 'true';
     $scope.CanDecrease = 'true';
@@ -53,6 +53,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
     }
 
+    //
+    
     $scope.CancelEdit = function () {
         $scope.IsEditMode = false;
 
@@ -753,6 +755,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         return _index;
+    }
+
+    $scope.GetUOMByID = function (UOMID) {
+        if ($scope.UOMList.length > 0) {
+
+            for (var i = 0; i < $scope.UOMList.length; i++) {
+                if ($scope.UOMList[i].UnitOfMeasureID == UOMID) {
+                    return $scope.UOMList[i].UnitOfMeasureName;
+                }
+            }
+        }
     }
     $scope.changeMode = function () {
           $scope.IsSingleMode = !$scope.IsSingleMode;

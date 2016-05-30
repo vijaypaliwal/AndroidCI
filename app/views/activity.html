@@ -10,11 +10,11 @@
         background: white;
         padding: 10px;
         border: 1px solid #ccc;
+        height: 42px;
     }
 
     .dropdown-listcustom {
-        margin-top: -15px;
-        left: 15px;
+  
         width: 100%;
     }
     .collapsible-header {
@@ -360,14 +360,37 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <div class="fg-line">
+                                                <!--<div class="fg-line">
                                                     <div class="select">
                                                         <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
                                                     </div>
+                                                </div>-->
+
+                                                <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                    {{CurrentActiveObject.UpdateTransactionData.StatusToUpdate}}
+                                                    <i class="caret pull-right" style="margin-top: 8px"></i>
                                                 </div>
+                                                <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                                    <li ng-repeat="_optionValue in StatusList">
+                                                        <a>
+                                                            <table style="width: 100%">
+                                                                <tr>
+                                                                    <td ng-click="CurrentActiveObject.UpdateTransactionData.StatusToUpdate=_optionValue.StatusValue">{{_optionValue.StatusValue}}</td>
+
+
+                                                                </tr>
+                                                            </table>
+                                                        </a>
+
+                                                    </li>
+
+
+                                                </ul>
 
                                             </div>
 
@@ -658,14 +681,37 @@
 
                                                 <label>Select UOM <span>*</span></label>
 
-                                                <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
+                                                <!--<div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
                                                     <div class="select">
                                                         <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in  UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
                                                         </select>
                                                     </div>
+                                                </div>-->
+
+                                                <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                    {{GetUOMByID(CurrentActiveObject.ConvertTransactionData.ToUOMID)}}
+                                                    <i class="caret pull-right" style="margin-top: 8px"></i>
                                                 </div>
+                                                <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                                    <li ng-repeat="_optionValue in UOMList">
+                                                        <a>
+                                                            <table style="width: 100%">
+                                                                <tr>
+                                                                    <td ng-click="CurrentActiveObject.ConvertTransactionData.ToUOMID=_optionValue.UnitOfMeasureID">{{_optionValue.UnitOfMeasureName}}</td>
+
+
+                                                                </tr>
+                                                            </table>
+                                                        </a>
+
+                                                    </li>
+
+
+                                                </ul>
                                             </div>
 
 
@@ -684,7 +730,7 @@
 
                                 </div>
 
-                                <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
+                                <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" ng-init="parentIndexData=$index" data-ng-repeat="_columns in isLineItemColumnNames">
 
 
                                     <div class="col-xs-8 col-md-8">
@@ -701,18 +747,42 @@
                                                 </div>
 
                                                 <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
-                                                    <div class="fg-line">
+                                                    <!--<div class="fg-line">
 
 
 
-                                                        <div class="select">
-                                                            <select class="form-control" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+                            <div class="select">
+                                <select class="form-control" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
 
-                                                                <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
+                                    <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
 
-                                                            </select>
-                                                        </div>
+                                </select>
+                            </div>
+                        </div>-->
+
+                                                    <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                        {{CurrentActiveObject.IsLineItemData[$index].CfValue}}
+
+                                                        <i class="caret pull-right" style="margin-top: 8px"></i>
                                                     </div>
+                                                    <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                                        <li ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[parentIndexData].cfdComboValues track by $index">
+                                                            <a>
+                                                                <table style="width: 100%">
+                                                                    <tr>
+                                                                        <td ng-click="CurrentActiveObject.IsLineItemData[parentIndexData].CfValue=_optionValue;CheckScopeBeforeApply();">  {{_optionValue}}</td>
+
+
+                                                                    </tr>
+                                                                </table>
+                                                            </a>
+
+                                                        </li>
+
+
+                                                    </ul>
 
                                                 </div>
                                                 <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
