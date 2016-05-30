@@ -40,6 +40,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         else {
             UpdateStatusBar(55);
         }
+        
+       var allSelectElements = document.getElementsByTagName('select');
+        for (var i = 0; i < allSelectElements.length; i++) {
+            allSelectElements[i].addEventListener('touchstart', function (e) {
+                alert('initiating touch');
+            }, false);
+        }
+        
     });
 
     $scope.getClass = function (path) {
