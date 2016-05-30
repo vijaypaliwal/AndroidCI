@@ -47,6 +47,12 @@ app.config(function ($routeProvider) {
         controller: "activityController",
         templateUrl: "app/views/activity.html"
     });
+                          
+    $routeProvider.when("/activityAndroid", {
+        controller: "activityAndroidController",
+        templateUrl: "app/views/activityAndroid.html"
+    });
+    
 
     $routeProvider.when("/inventory", {
         controller: "inventoryController",
@@ -93,10 +99,10 @@ app.config(function ($routeProvider) {
 
 });
 
-//var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
-//var serviceBaseUrl = 'http://localhost:7440/';
-var serviceBaseUrl = 'http://dev.style.u8i9.com/';
-var serviceBase = 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/';
+var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
+var serviceBaseUrl = 'http://localhost:7440/';
+//var serviceBaseUrl = 'http://dev.style.u8i9.com/';
+//var serviceBase = 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
