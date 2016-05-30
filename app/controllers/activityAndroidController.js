@@ -59,7 +59,13 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
         $scope.$apply();
 
     }
-
+    function SetStatus() {
+        var selectField = document.getElementsByTagName('select');
+        selectField.addEventListener('touchstart' /*'mousedown'*/, function (e) {
+            alert("into touch");
+            e.stopPropagation();
+        }, false);
+    }
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -107,10 +113,8 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
             var _dataType = $(_ID).attr("custom-data-type");
             var _value = result.text;
 
-            if (_dataType != null && _dataType != undefined)
-            {
-                if(_dataType=="date" || _dataType=="datetime")
-                {
+            if (_dataType != null && _dataType != undefined) {
+                if (_dataType == "date" || _dataType == "datetime") {
                     _value = ConvertDatetoDate(_value);
                 }
 
@@ -254,7 +258,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
                     }
 
-                       $("#mybutton_" + id).addClass("movepin")
+                    $("#mybutton_" + id).addClass("movepin")
 
                     ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -281,7 +285,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
                     }
                 }
 
-                 $("#mybutton_" + id).addClass("movepin")
+                $("#mybutton_" + id).addClass("movepin")
 
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -1011,7 +1015,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
 
         $scope.CanApply = (IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3')) ? 'True' : 'False';
 
-  
+
 
         CheckScopeBeforeApply();
     }
@@ -1194,11 +1198,16 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
         getuom();
         $scope.getstatus()
 
+        setTimeout(function () {
+            SetStatus();
 
+        }, 1500);
         CheckScopeBeforeApply();
 
 
     }
+
+
 
     $scope.Operate = function (type) {
         $scope._CurrentAction = type;
@@ -1720,10 +1729,8 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
 
     }
 
-    $scope.CheckStatusValues=function(firstValue,secondValue)
-    {
-        if(firstValue!=undefined && firstValue!=null && firstValue!="")
-        {
+    $scope.CheckStatusValues = function (firstValue, secondValue) {
+        if (firstValue != undefined && firstValue != null && firstValue != "") {
             firstValue = firstValue.toLowerCase();
         }
 
@@ -1731,8 +1738,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
             secondValue = secondValue.toLowerCase();
         }
 
-        if(firstValue== secondValue)
-        {
+        if (firstValue == secondValue) {
             return true;
         }
 
@@ -2269,7 +2275,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
         return _returnVar
     }
 
-    $scope.clearCartFunction = function() {
+    $scope.clearCartFunction = function () {
         localStorageService.set("ActivityCart", "");
         localStorageService.set("SelectedAction", "");
         $location.path("/FindItems");
@@ -2793,7 +2799,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
         //  $cordovaKeyboard.disableScroll(true);
 
 
-        
+
         $('.collapsible-header').css("position", "absolute");
         $('.collapsible-body').css('margin-top', '49px');
         $('.header').css("position", "relative");
@@ -2802,7 +2808,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
         $('.singlePanel').css('margin-top', '0px');
         $('#transactionForm1').css('margin-top', '0px');
         $('.bottombutton').css("position", "relative");
-        
+
     })
     .on('blur', 'input,select', function () {
 
@@ -2829,13 +2835,13 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
 
     setTimeout(function () { $('#itUpdateDate').val(today); }, 1000);
 
-    setTimeout(function() { $('.FormDateType').val(today); }, 1000);
-   
+    setTimeout(function () { $('.FormDateType').val(today); }, 1000);
+
 
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
 
-    
+
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -2978,7 +2984,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
                     break;
                 case "Apply":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null ||$scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
