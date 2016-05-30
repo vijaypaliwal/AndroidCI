@@ -9,6 +9,13 @@
     .updiv {
         background: white;
         padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .dropdown-listcustom {
+        margin-top: -15px;
+        left: 15px;
+        width: 100%;
     }
     .collapsible-header {
         position: fixed;
@@ -221,16 +228,16 @@
                                             <div class="form-group">
                                                 <label>Status</label>
                                                 <!--<div class="fg-line">
-            <div class="select">
+                    <div class="select">
 
 
 
-                <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                    <option value="">None</option>
-                    <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                </select>
-            </div>
-        </div>-->
+                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                            <option value="">None</option>
+                            <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                        </select>
+                    </div>
+                </div>-->
                                                 <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
                                                     {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
                                                     <i class="caret pull-right" style="margin-top: 8px"></i>
@@ -254,10 +261,9 @@
 
                                                 </ul>
                                             </div>
-                                            </div>
-
-
                                         </div>
+
+
                                         <div class="col-xs-4 col-md-4" ng-if="$index==0">
 
                                             <label>&nbsp;</label>
@@ -268,6 +274,8 @@
                                                 </button>
                                             </div>
                                         </div>
+                                    </div>
+
                                     </div>
 
                                 </div>

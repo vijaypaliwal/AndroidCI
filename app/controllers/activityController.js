@@ -754,8 +754,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         return _index;
     }
-
     $scope.changeMode = function () {
+          $scope.IsSingleMode = !$scope.IsSingleMode;
+
+        $scope.$apply();
+    }
+    $scope.changeModeNew = function () {
       //  $scope.IsSingleMode = !$scope.IsSingleMode;
 
         localStorageService.set("ActivityCart", "");

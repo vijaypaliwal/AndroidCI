@@ -5,6 +5,18 @@
 <link href=".pgbomit/activityIOS.css" rel="stylesheet" />
 
 <style>
+
+    .updiv {
+        background: white;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .dropdown-listcustom {
+        margin-top: -15px;
+        left: 15px;
+        width: 100%;
+    }
     .collapsible-header {
         position: fixed;
         width: 100%;
@@ -12,24 +24,22 @@
         color: #000;
         background: #CECECE;
         z-index: 100;
-        padding-top:2px;
-        padding-bottom:2px;
+        padding-top: 2px;
+        padding-bottom: 2px;
     }
 
-    .cartitems
-    {
-        display:block;
+    .cartitems {
+        display: block;
     }
-    
-    
-     .collapsible-body {
+
+
+    .collapsible-body {
         margin-top: 85px;
     }
 
-     body
-     {
-         overflow-x:hidden !important;
-     }
+    body {
+        overflow-x: hidden !important;
+    }
 </style>
 
 <div style="display:none" class="activity" ng-cloak>
@@ -47,7 +57,7 @@
                 </div>
             </div>
             <div class="col-md-4 col-xs-3">
-                
+
             </div>
 
         </div>
@@ -106,7 +116,7 @@
 
                 <ul class="collapsible checkout-header animated fadeindown delay-2" data-collapsible="accordion">
                     <li>
-                        
+
                         <div class="cartitems collapsible-body z-depth-1">
 
                             <div class="mycartitem" ng-if="IsSingleMode==false" ng-init="parentIndex=$index" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
@@ -215,7 +225,7 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <div class="fg-line">
+                                                <!--<div class="fg-line">
                                                     <div class="select">
 
 
@@ -225,7 +235,30 @@
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
                                                     </div>
+                                                </div>-->
+
+                                                <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                                    {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
+                                                    <i class="caret pull-right" style="margin-top: 8px"></i>
                                                 </div>
+                                                <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                                    <li ng-repeat="_optionValue in StatusList">
+                                                        <a>
+                                                            <table style="width: 100%">
+                                                                <tr>
+                                                                    <td ng-click="CurrentActiveObject.MoveTransactionData.StatusToUpdate=_optionValue.StatusValue">{{_optionValue.StatusValue}}</td>
+
+
+                                                                </tr>
+                                                            </table>
+                                                        </a>
+
+                                                    </li>
+
+
+                                                </ul>
 
                                             </div>
 
@@ -671,7 +704,7 @@
                                                     <div class="fg-line">
 
 
-                                                     
+
                                                         <div class="select">
                                                             <select class="form-control" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
 
@@ -719,435 +752,11 @@
                     </li>
                 </ul>
 
-         
 
 
 
-                <div style="display:none;" ng-repeat="CurrentActiveObject in CurrentCart" ng-if="$index==0">
 
-                    <div ng-if="CurrentOperation=='Move'">
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-
-
-                                <div class="form-group">
-                                    <label>Quantity <span>*</span></label>
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon" ng-click="IncreaseDecreaseValue(1,0)"><i class="fa fa-plus"></i></span>
-                                        <input placeholder1="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
-                                        <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
-                                    </div>
-                                </div>
-
-
-
-                                <div ng-if="CurrentActiveObject.MoveTransactionData.ActionQuantity>CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
-                                    <span ng-if="AllowNegative!=null && AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <br />
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-
-                                <div class="form-group">
-                                    <div class="fg-line">
-
-                                        <label>Location <span>*</span> </label>
-
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
-
-                                            <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
-                                        </div>
-
-
-
-                                        <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
-                                            Can't move to same location please update.
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <div class="fg-line">
-                                        <div class="select">
-
-
-
-                                            <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                <option value="">None</option>
-                                                <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <br />
-                    </div>
-
-
-                    <div class="row" ng-if=" CurrentOperation!='Convert' &&  CurrentOperation!='Move'">
-                        <div class="col-xs-12 col-md-12">
-
-
-
-
-                            <div class="form-group">
-                                <label>
-                                    Quantity <span>*</span>
-
-                                    <span ng-if="CurrentOperation=='Adjust' && TrimValue(CurrentActiveObject.AdjustCalculation)!=''" class="AdjustCalculation">
-                                        <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustIncrease">{{CurrentActiveObject.AdjustCalculation}}</span>
-                                        <span ng-if="CurrentActiveObject.ActionPerformed==-1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustDecrease">{{CurrentActiveObject.AdjustCalculation}}</span>
-                                        <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity==0" class="z-depth-1 AdjustNetzero">{{CurrentActiveObject.AdjustCalculation}}</span>
-
-                                    </span>
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span>
-                                    <input type="number" pattern="[0-9]*" inputmode="numeric" id="commonnumber" placeholder1="Fill Quantity" ng-change="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
-
-                                    <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
-                                </div>
-
-
-                            </div>
-
-                            <div>
-
-
-                                <span ng-if=" CurrentOperation!='Increase'&& CurrentOperation!='Adjust' &&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
-
-                                    <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease' || CurrentOperation=='Update'||CurrentOperation=='Apply'">Quantity can't be greater than original quantity</span>
-                                    <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease' && CurrentOperation!='Update'&& CurrentOperation!='Apply'"> Quantity can't be greater than original quantity</span>
-                                </span>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="row" ng-if=" CurrentOperation=='Increase'&&  CanCost=='True'">
-
-                        <div class="col-xs-12 col-md-12">
-                            <div class="form-group">
-                                <label>Cost per unit</label>
-                                <div class="fg-line">
-
-                                    <input type="number" pattern="[0-9]*" inputmode="numeric" placeholder1="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
-
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
-
-
-                    <div ng-if="CurrentOperation=='Apply'">
-
-                        <div class="row" ng-if=" IsMyInventoryColumns('iReqValue')==true">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{ GetColumnLabel('iReqValue')}}</label>
-                                    <div class="fg-line">
-
-                                        <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
-
-                                    </div>
-                                </div>
-
-
-
-
-
-                            </div>
-
-
-
-                        </div>
-
-                        <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag2')==true">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{ GetColumnLabel('iUnitTag2')}}</label>
-                                    <div class="fg-line">
-
-                                        <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
-
-                                    </div>
-
-                                </div>
-
-
-
-                            </div>
-
-
-                        </div>
-                        <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag3')==true">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{ GetColumnLabel('iUnitTag3')}}</label>
-                                    <div class="fg-line">
-
-                                        <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-
-                        </div>
-
-                        <div class="row" ng-if=" IsMyInventoryColumns('iUniqueDate')==true">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{ GetColumnLabel('iUniqueDate')}}</label>
-                                    <div class="fg-line">
-                                        <input type="date" class="form-control unitDatePicker" placeholder1="{{ GetColumnLabel('iUniqueDate')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UniqueDate" />
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-
-                        </div>
-                        <div class="row" ng-if=" IsMyInventoryColumns('iUnitDate2')==true">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{ GetColumnLabel('iUnitDate2')}}</label>
-                                    <div class="fg-line">
-                                        <input type="date" class="form-control unitDatePicker" placeholder1="{{ GetColumnLabel('iUnitDate2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitDate2" />
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-
-                        </div>
-                        <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber1')==true">
-                            <div class="col-xs-12 col-md-12">
-
-                                <div class="form-group">
-                                    <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
-                                    <div class="fg-line">
-
-                                        <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
-
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-
-
-                        </div>
-                        <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber2')==true">
-                            <div class="col-xs-12 col-md-12">
-
-                                <div class="form-group">
-                                    <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
-                                    <div class="fg-line">
-
-                                        <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
-
-
-                    <div ng-if="CurrentOperation=='Convert'">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Quantity <span>*</span></label>
-
-                                    <div class="input-group">
-                                        <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
-
-                                            <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder1="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
-
-                                        </div>
-
-                                        <span class="input-group-addon last text" style=" max-width: 100px; white-space: nowrap;"> {{ CurrentActiveObject.InventoryDataList.uomUOM}}</span>
-                                    </div>
-                                </div>
-                                <div ng-if=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
-                                    <span ng-if=" AllowNegative!=null &&  AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
-
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                        <br />
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-
-                                <div class="form-group">
-                                    <label>New Quantity <span>*</span></label>
-                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
-
-                                        <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder1="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
-
-                                    </div>
-                                </div>
-
-
-                                <div>
-
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                        <br />
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-
-                                <div class="form-group">
-                                    <label>New Unit of Measure <span>*</span></label>
-                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
-                                        <div class="select">
-                                            <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
-                                                <option value="">None</option>
-                                                <option ng-repeat="_optionValue in  UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                    <div ng-if="CurrentOperation=='Update'">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>To Status</label>
-                                    <div class="fg-line">
-                                        <div class="select">
-                                            <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
-                                                <option value="">None</option>
-                                                <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
-                        <span ng-if="CheckOnAdjust(CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.ActionPerformed)">
-
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
-                                    <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
-
-                                        <input placeholder1="fill {{_columns}}" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-
-                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
-
-                                            <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>
-
-                                        </div>
-
-                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
-                                            <div class="fg-line">
-
-                                                <div class="select">
-                                                    <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
-
-                                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <input type="date" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="number" pattern="[0-9]*" inputmode="numeric" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="number" pattern="[0-9]*" inputmode="numeric" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'"><i class="fa fa-barcode"></i></span>
-                                    </div>
-                                    <div>
-
-                                        <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
-                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
-
-                                        </span>
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </span>
-
-
-                    </div>
-                </div>
+                
 
 
 
@@ -1155,7 +764,7 @@
 
             <div class="form-inputs customActivityData" data-type="Activity" data-index="{{GetProperIndex(1)}}">
 
-             
+
                 <h4>Activity data</h4>
 
 
@@ -1201,7 +810,7 @@
 
 
                         <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                            
+
                             <input id="CustomActivity_{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
                             <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
@@ -1236,14 +845,14 @@
                         <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)&& CheckOnAdjust(obj.cfdID,1)">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
-                                <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType"  />
+                                <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" />
                                 <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
 
                             <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
 
-                                <input type="checkbox" id="CustomActivityIncrease_{{obj.cfdID}}"  cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+                                <input type="checkbox" id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
 
                             </div>
 
@@ -1302,7 +911,7 @@
                             <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
 
                                 <input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
-                               
+
                             </div>
 
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
@@ -1386,7 +995,7 @@
                                 <div class="col-xs-10 col-md-10">
 
 
-                                    <div class="form-group" >
+                                    <div class="form-group">
                                         <label>Quantity <span>*</span></label>
                                         <div class="input-group">
 
@@ -1397,7 +1006,7 @@
                                             </div>
 
 
-                                            <span style="background: #128ece;padding:0px;" class="input-group-addon last" >
+                                            <span style="background: #128ece;padding:0px;" class="input-group-addon last">
                                                 <span style="height: 52px; width: auto; padding: 13px; background-color: transparent" data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect rotateData btnPrimary btn-icon">
                                                     <i class="fa fa-thumb-tack"></i>
                                                 </span>
@@ -1422,7 +1031,7 @@
 
 
                                 </div>
-                                
+
                             </div>
 
                             <br />
@@ -1430,7 +1039,7 @@
                             <div class="row">
                                 <div class="col-xs-10 col-md-10">
 
-                                    <div class="form-group" >
+                                    <div class="form-group">
                                         <div class="fg-line">
 
                                             <label>Location <span>*</span> </label>
@@ -1459,7 +1068,7 @@
                                     </div>
                                 </div>
 
-                                
+
                             </div>
                             <br />
                             <div class="row">
@@ -1477,6 +1086,8 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                 
 
                                     </div>
 
@@ -1797,7 +1408,7 @@
 
                                             </div>
 
-                                            <span class="input-group-addon last text" style=" max-width: 100px; white-space: nowrap;" > {{ CurrentActiveObject.InventoryDataList.uomUOM}}</span>
+                                            <span class="input-group-addon last text" style=" max-width: 100px; white-space: nowrap;"> {{ CurrentActiveObject.InventoryDataList.uomUOM}}</span>
                                         </div>
                                     </div>
                                     <div ng-if=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
@@ -1949,7 +1560,7 @@
                             <div class="col-xs-4 col-md-4">
                                 <div class="pull-right">
                                     <label>&nbsp;</label>
-                                    <button ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'"  id="lineitem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}_{{CurrentActiveObject.IsLineItemData[$index].InventoryID}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillLineItem($index,CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.IsLineItemData[$index].CfValue,CurrentActiveObject.IsLineItemData[$index].InventoryID)">
+                                    <button ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" id="lineitem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}_{{CurrentActiveObject.IsLineItemData[$index].InventoryID}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillLineItem($index,CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.IsLineItemData[$index].CfValue,CurrentActiveObject.IsLineItemData[$index].InventoryID)">
                                         <i class="fa fa-thumb-tack"></i>
                                     </button>
                                 </div>
@@ -2259,7 +1870,7 @@
                             </div>
 
 
-                            
+
 
 
                             <div ng-show="CurrentCart.length > 0">
@@ -2272,147 +1883,147 @@
                                         <li id="{{_groupRow.InventoryDataList.uId}}" data-ng-init="parentIndex = $index" data-ng-repeat="_groupRow in CurrentCart" data-toggle="tooltip" data-ng-attr-title="{{GetRowTitle(_groupRow)}}" data-ng-class="{error : _groupRow.iQty >_groupRow.oquantity}">
                                             <img class="avatar circle" ng-if="_groupRow.InventoryDataList.ImageThumbPath==''" src="img/default.png" />
                                             <img class="avatar circle" ng-if="_groupRow.InventoryDataList.ImageThumbPath!=''" src="{{_groupRow.InventoryDataList.ImageThumbPath}}" alt="" />
-                                            
-                                         
+
+
                                             <div class="comment-body">
                                                 <span class="author uppercase">{{_groupRow.ItemID}}</span>
                                                 <span class="date"> {{_groupRow.InventoryDataList.oquantity}} {{_groupRow.InventoryDataList.uomUOM}}</span>
-                                             
-                                                    <div>
-                                                       
 
-                                                        <span ng-if="IsMyInventoryColumns('pDescription')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.pDescription!=null && _groupRow.InventoryDataList.pDescription!=''&& _groupRow.InventoryDataList.pDescription!=undefined"> of {{_groupRow.InventoryDataList.pDescription}} </span>
+                                                <div>
+
+
+                                                    <span ng-if="IsMyInventoryColumns('pDescription')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.pDescription!=null && _groupRow.InventoryDataList.pDescription!=''&& _groupRow.InventoryDataList.pDescription!=undefined"> of {{_groupRow.InventoryDataList.pDescription}} </span>
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('lLoc')==true">
+                                                        @@ {{_groupRow.InventoryDataList.lLoc}} <br />
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('iStatusValue')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iStatusValue!=null && _groupRow.InventoryDataList.iStatusValue!=''&& _groupRow.InventoryDataList.iStatusValue!=undefined">
+                                                            Status:<b> {{_groupRow.InventoryDataList.iStatusValue}}</b>,
                                                         </span>
-                                                        <span ng-if="IsMyInventoryColumns('lLoc')==true">
-                                                            @@ {{_groupRow.InventoryDataList.lLoc}} <br />
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('iReqValue')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iReqValue!=null && _groupRow.InventoryDataList.iReqValue!=''&& _groupRow.InventoryDataList.iReqValue!=undefined">
+                                                            {{GetColumnLabel('iReqValue')}}:
+                                                            <b>
+                                                                {{_groupRow.InventoryDataList.iReqValue}}
+                                                            </b>,
                                                         </span>
-                                                        <span ng-if="IsMyInventoryColumns('iStatusValue')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iStatusValue!=null && _groupRow.InventoryDataList.iStatusValue!=''&& _groupRow.InventoryDataList.iStatusValue!=undefined">
-                                                                Status:<b> {{_groupRow.InventoryDataList.iStatusValue}}</b>,
-                                                            </span>
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('iUnitTag2')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iUnitTag2!=null && _groupRow.InventoryDataList.iUnitTag2!=''&& _groupRow.InventoryDataList.iUnitTag2!=undefined">
+                                                            {{GetColumnLabel('iUnitTag2')}}:<b> {{_groupRow.InventoryDataList.iUnitTag2}}</b>,
                                                         </span>
-                                                        <span ng-if="IsMyInventoryColumns('iReqValue')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iReqValue!=null && _groupRow.InventoryDataList.iReqValue!=''&& _groupRow.InventoryDataList.iReqValue!=undefined">
-                                                                {{GetColumnLabel('iReqValue')}}:
-                                                                <b>
-                                                                    {{_groupRow.InventoryDataList.iReqValue}}
-                                                                </b>,
-                                                            </span>
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('iUnitTag3')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iUnitTag3!=null && _groupRow.InventoryDataList.iUnitTag3!=''&& _groupRow.InventoryDataList.iUnitTag3!=undefined">
+                                                            {{GetColumnLabel('iUnitTag3')}}:<b> {{_groupRow.InventoryDataList.iUnitTag3}}</b>,
                                                         </span>
-                                                        <span ng-if="IsMyInventoryColumns('iUnitTag2')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iUnitTag2!=null && _groupRow.InventoryDataList.iUnitTag2!=''&& _groupRow.InventoryDataList.iUnitTag2!=undefined">
-                                                                {{GetColumnLabel('iUnitTag2')}}:<b> {{_groupRow.InventoryDataList.iUnitTag2}}</b>,
-                                                            </span>
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('iUniqueDate')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iUniqueDate!=null && _groupRow.InventoryDataList.iUniqueDate!=''&& _groupRow.InventoryDataList.iUniqueDate!=undefined">
+                                                            {{GetColumnLabel('iUniqueDate')}}:<b>{{_groupRow.InventoryDataList.iUniqueDate}}</b>,
                                                         </span>
-                                                        <span ng-if="IsMyInventoryColumns('iUnitTag3')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iUnitTag3!=null && _groupRow.InventoryDataList.iUnitTag3!=''&& _groupRow.InventoryDataList.iUnitTag3!=undefined">
-                                                                {{GetColumnLabel('iUnitTag3')}}:<b> {{_groupRow.InventoryDataList.iUnitTag3}}</b>,
-                                                            </span>
-                                                        </span>
-                                                        <span ng-if="IsMyInventoryColumns('iUniqueDate')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iUniqueDate!=null && _groupRow.InventoryDataList.iUniqueDate!=''&& _groupRow.InventoryDataList.iUniqueDate!=undefined">
-                                                                {{GetColumnLabel('iUniqueDate')}}:<b>{{_groupRow.InventoryDataList.iUniqueDate}}</b>,
-                                                            </span>
-                                                        </span>
-
-                                                        <span ng-if="IsMyInventoryColumns('iUnitDate2')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iUnitDate2!=null && _groupRow.InventoryDataList.iUnitDate2!=''&& _groupRow.InventoryDataList.iUnitDate2!=undefined">
-                                                                {{GetColumnLabel('iUnitDate2')}}:<b>{{_groupRow.InventoryDataList.iUnitDate2}}</b>,
-                                                            </span>
-                                                        </span>
-                                                        <span ng-if="IsMyInventoryColumns('iUnitNumber1')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iUnitNumber1!=null && _groupRow.InventoryDataList.iUnitNumber1!=''&& _groupRow.InventoryDataList.iUnitNumber1!=undefined">
-                                                                {{GetColumnLabel('iUnitNumber1')}}:<b>{{_groupRow.InventoryDataList.iUnitNumber1}}</b>,
-                                                            </span>
-                                                        </span>
-                                                        <span ng-if="IsMyInventoryColumns('iUnitNumber2')==true">
-                                                            <span ng-show="_groupRow.InventoryDataList.iUnitNumber2!=null && _groupRow.InventoryDataList.iUnitNumber2!=''&& _groupRow.InventoryDataList.iUnitNumber2!=undefined">
-                                                                {{GetColumnLabel('iUnitNumber2')}} :<b>{{_groupRow.InventoryDataList.iUnitNumber2}}</b>
-                                                            </span>
-                                                        </span>
-
-
-                                                    </div>
-
-                                                    <span class="{{CurrentHeaderClass}}-text" style="white-space:normal;">
-
-                                                        <span ng-if="CurrentOperation=='Increase'">
-                                                            Increased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                        </span>
-
-
-                                                        <span ng-if="CurrentOperation=='Decrease'">
-                                                            Decreased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                        </span>
-
-
-                                                        <span ng-if="CurrentOperation=='Update'">
-                                                            Update
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                            items to
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.UpdateTransactionData.StatusToUpdate}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].UpdateTransactionData.StatusToUpdate}}</span>
-
-                                                            status
-                                                        </span>
-                                                        <span ng-if="CurrentOperation=='Convert'">
-                                                            Convert  From quantity
-
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionFromQuantity}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionFromQuantity}}</span>
-
-
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.InventoryDataList.uomUOM}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].InventoryDataList.uomUOM}}</span>
-                                                            to quantity
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionToQuantity}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionToQuantity}}</span>
-
-
-                                                            <span ng-if="IsSingleMode==true"> {{GetUOMName(_groupRow.ConvertTransactionData.ToUOMID)}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{GetUOMName(_groupRow.CurrentCart[0].ConvertTransactionData.ToUOMID)}}</span>
-
-                                                        </span>
-                                                        <span ng-if="CurrentOperation=='Move'">
-                                                            Move
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.ActionQuantity}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.ActionQuantity}}</span>
-
-                                                            item(s) @@
-
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.MoveToLocationText}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.MoveToLocationText}}</span>
-                                                        </span>
-
-                                                        <span ng-if="CurrentOperation=='Apply'">
-                                                            Apply below unit data to quantity
-
-                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-
-                                                            <span ng-if="IsSingleMode==true">
-                                                                <br />
-                                                                <span ng-if="IsMyInventoryColumns('iReqValue')==true">{{GetColumnLabel('iReqValue')}}: {{_groupRow.ApplyTransactionData.UnitTag1}} <br /></span>
-                                                                <span ng-if="IsMyInventoryColumns('iUnitTag2')==true"> {{GetColumnLabel('iUnitTag2')}}:{{_groupRow.ApplyTransactionData.UnitTag2}}<br /></span>
-                                                                <span ng-if="IsMyInventoryColumns('iUnitTag3')==true">{{GetColumnLabel('iUnitTag3')}}: {{_groupRow.ApplyTransactionData.UnitTag3}}<br /></span>
-                                                                <span ng-if="IsMyInventoryColumns('iUnitNumber1')==true"> {{GetColumnLabel('iUnitNumber1')}}:{{_groupRow.ApplyTransactionData.UnitNumber1}}<br /></span>
-                                                                <span ng-if="IsMyInventoryColumns('iUnitNumber2')==true">  {{GetColumnLabel('iUnitNumber2')}}:{{_groupRow.ApplyTransactionData.UnitNumber2}}<br /></span>
-                                                                <span ng-if="IsMyInventoryColumns('iUnitDate2')==true"> {{GetColumnLabel('iUnitDate2')}}: {{_groupRow.ApplyTransactionData.UnitDate2}}<br /></span>
-                                                                <span ng-if="IsMyInventoryColumns('iUniqueDate')==true">  {{GetColumnLabel('iUniqueDate')}}:{{_groupRow.ApplyTransactionData.UniqueDate}}<br /></span>
-                                                                
-                                                                
-                                                                
-                                                            </span>
-                                                        </span>
-
                                                     </span>
 
-                                                   
-                                               
+                                                    <span ng-if="IsMyInventoryColumns('iUnitDate2')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iUnitDate2!=null && _groupRow.InventoryDataList.iUnitDate2!=''&& _groupRow.InventoryDataList.iUnitDate2!=undefined">
+                                                            {{GetColumnLabel('iUnitDate2')}}:<b>{{_groupRow.InventoryDataList.iUnitDate2}}</b>,
+                                                        </span>
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('iUnitNumber1')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iUnitNumber1!=null && _groupRow.InventoryDataList.iUnitNumber1!=''&& _groupRow.InventoryDataList.iUnitNumber1!=undefined">
+                                                            {{GetColumnLabel('iUnitNumber1')}}:<b>{{_groupRow.InventoryDataList.iUnitNumber1}}</b>,
+                                                        </span>
+                                                    </span>
+                                                    <span ng-if="IsMyInventoryColumns('iUnitNumber2')==true">
+                                                        <span ng-show="_groupRow.InventoryDataList.iUnitNumber2!=null && _groupRow.InventoryDataList.iUnitNumber2!=''&& _groupRow.InventoryDataList.iUnitNumber2!=undefined">
+                                                            {{GetColumnLabel('iUnitNumber2')}} :<b>{{_groupRow.InventoryDataList.iUnitNumber2}}</b>
+                                                        </span>
+                                                    </span>
+
+
+                                                </div>
+
+                                                <span class="{{CurrentHeaderClass}}-text" style="white-space:normal;">
+
+                                                    <span ng-if="CurrentOperation=='Increase'">
+                                                        Increased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                    </span>
+
+
+                                                    <span ng-if="CurrentOperation=='Decrease'">
+                                                        Decreased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                    </span>
+
+
+                                                    <span ng-if="CurrentOperation=='Update'">
+                                                        Update
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        items to
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.UpdateTransactionData.StatusToUpdate}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].UpdateTransactionData.StatusToUpdate}}</span>
+
+                                                        status
+                                                    </span>
+                                                    <span ng-if="CurrentOperation=='Convert'">
+                                                        Convert  From quantity
+
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionFromQuantity}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionFromQuantity}}</span>
+
+
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.InventoryDataList.uomUOM}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].InventoryDataList.uomUOM}}</span>
+                                                        to quantity
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionToQuantity}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionToQuantity}}</span>
+
+
+                                                        <span ng-if="IsSingleMode==true"> {{GetUOMName(_groupRow.ConvertTransactionData.ToUOMID)}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{GetUOMName(_groupRow.CurrentCart[0].ConvertTransactionData.ToUOMID)}}</span>
+
+                                                    </span>
+                                                    <span ng-if="CurrentOperation=='Move'">
+                                                        Move
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.ActionQuantity}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.ActionQuantity}}</span>
+
+                                                        item(s) @@
+
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.MoveToLocationText}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.MoveToLocationText}}</span>
+                                                    </span>
+
+                                                    <span ng-if="CurrentOperation=='Apply'">
+                                                        Apply below unit data to quantity
+
+                                                        <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+
+                                                        <span ng-if="IsSingleMode==true">
+                                                            <br />
+                                                            <span ng-if="IsMyInventoryColumns('iReqValue')==true">{{GetColumnLabel('iReqValue')}}: {{_groupRow.ApplyTransactionData.UnitTag1}} <br /></span>
+                                                            <span ng-if="IsMyInventoryColumns('iUnitTag2')==true"> {{GetColumnLabel('iUnitTag2')}}:{{_groupRow.ApplyTransactionData.UnitTag2}}<br /></span>
+                                                            <span ng-if="IsMyInventoryColumns('iUnitTag3')==true">{{GetColumnLabel('iUnitTag3')}}: {{_groupRow.ApplyTransactionData.UnitTag3}}<br /></span>
+                                                            <span ng-if="IsMyInventoryColumns('iUnitNumber1')==true"> {{GetColumnLabel('iUnitNumber1')}}:{{_groupRow.ApplyTransactionData.UnitNumber1}}<br /></span>
+                                                            <span ng-if="IsMyInventoryColumns('iUnitNumber2')==true">  {{GetColumnLabel('iUnitNumber2')}}:{{_groupRow.ApplyTransactionData.UnitNumber2}}<br /></span>
+                                                            <span ng-if="IsMyInventoryColumns('iUnitDate2')==true"> {{GetColumnLabel('iUnitDate2')}}: {{_groupRow.ApplyTransactionData.UnitDate2}}<br /></span>
+                                                            <span ng-if="IsMyInventoryColumns('iUniqueDate')==true">  {{GetColumnLabel('iUniqueDate')}}:{{_groupRow.ApplyTransactionData.UniqueDate}}<br /></span>
+
+
+
+                                                        </span>
+                                                    </span>
+
+                                                </span>
+
+
+
                                             </div>
                                         </li>
 
@@ -2424,10 +2035,10 @@
 
 
 
-                                <div >
+                                <div>
 
 
-                                    
+
 
                                 </div>
                             </div>
@@ -2453,8 +2064,9 @@
                 <td style="width:50%;">
                     <div ng-if="IsProcessing==false" ng-click="SubmitAllActivities()">
                         <a style="width:100%; margin-bottom:0px; border-radius:0px;" class="btn waves-effect btn-large btn-success">
-                            <i class="fa fa-check"></i> 
-                        Process</a>
+                            <i class="fa fa-check"></i>
+                            Process
+                        </a>
                     </div>
 
                     <div ng-if="IsProcessing==true" class="linkdisabled" ng-click="SubmitAllActivities()">
@@ -2482,14 +2094,14 @@
             </div>
             <div class="col-md-4 col-xs-6">
                 <div style="text-align:center">
-                    <a  ng-if="CurrentOperation!='Apply'">{{CurrentOperation}}</a>
+                    <a ng-if="CurrentOperation!='Apply'">{{CurrentOperation}}</a>
                     <a ng-if="CurrentOperation=='Apply'">Tag</a>
                 </div>
             </div>
             <div class="col-md-4 col-xs-3" data-ng-click="GoToStep(CurrentStep+1,1)">
                 <div class="pull-right">
 
-                    <a class="" ng-if="IsSingleMode==true" ng-class="{'adisabled': CurrentCart.length==0|| CurrentActiveStep==3}" > <i class="fa fa-long-arrow-right"></i></a>
+                    <a class="" ng-if="IsSingleMode==true" ng-class="{'adisabled': CurrentCart.length==0|| CurrentActiveStep==3}"> <i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -2636,6 +2248,7 @@
             <li class="bottomlink" data-dismiss="modal" data-ng-show="CanStatus=='True'" data-ng-click=" Operate(3)"><span>Update</span><a style=" background-color: #583782" class="btn waves-effect-info btn decrease"> <i class="fa fa-pencil"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" data-ng-show=" CanConvert=='True'" data-ng-click=" Operate(2)"><span>Convert</span><a style="background-color: #CE59A1" class="btn waves-effect-info btn decrease"> <i class="fa fa-refresh"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" data-ng-click=" changeMode()"><span>Switch mode</span><a style="background-color: #616161" class="btn waves-effect-info btn decrease"> <i class="fa fa-undo"></i>  </a></li>
+            <li class="bottomlink" data-dismiss="modal" data-ng-click=" changeModeNew()"><span>Switch mode New</span><a style="background-color: #616161" class="btn waves-effect-info btn decrease"> <i class="fa fa-undo"></i>  </a></li>
 
         </ul>
     </div>
@@ -2645,9 +2258,8 @@
 <a ng-click="showallmenu()" class="btn waves-effect {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-ellipsis-v"></i></a>
 
 <style>
-    #activitymneu
-    {
-      overflow:hidden;
+    #activitymneu {
+        overflow: hidden;
     }
 
         #activitymneu ul {
@@ -2660,29 +2272,26 @@
             -moz-box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
             box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
             margin-bottom: 0px;
-            padding-bottom:5px;
+            padding-bottom: 5px;
         }
 
-        #activitymneu ul li {
-
-          list-style-type:none;
-        }
-
-        #activitymneu ul li a {
-         color:#000;
-       padding-top:5px;
-       padding-bottom:5px;
-       display:block;   
-       font-family:Verdana;
-       text-decoration:none;
-       font-size:16px;
-        }
-
-            #activitymneu ul li a i {
-             min-width:30px;
+            #activitymneu ul li {
+                list-style-type: none;
             }
 
-    
+                #activitymneu ul li a {
+                    color: #000;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    display: block;
+                    font-family: Verdana;
+                    text-decoration: none;
+                    font-size: 16px;
+                }
+
+                    #activitymneu ul li a i {
+                        min-width: 30px;
+                    }
 </style>
 
 
@@ -2715,10 +2324,10 @@
 
         $(".cartitems").slideToggle();
 
-       
+
         setTimeout(function () {
             if ($(".cartitems").css("display") == "none") {
-              
+
                 $(".bottomarrow").hide();
                 $(".rightarrow").show()
 
@@ -2728,7 +2337,7 @@
                 $(".rightarrow").hide()
             }
         }, 500);
-      
+
 
 
     }
