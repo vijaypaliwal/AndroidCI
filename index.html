@@ -13,9 +13,9 @@
     <link href="css/materialize.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" type="text/css">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>-->
     <!-- Icons -->
-    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
+    <!--<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">-->
 
 
     <link href="content/css/loading-bar.css" rel="stylesheet" />
@@ -745,7 +745,7 @@
     <script>
 
 
-        var _Islive = true;
+        var _Islive = false;
 
 
         $("#mysmallModal").click(function () {
@@ -972,7 +972,7 @@
 
         var pictureSource;
         var destinationType;
-
+        var ImageListAndroid = [];
         //function onPhotoDataSuccess(imageData) {
         //    $("#myModalforlist").modal("hide");
 
@@ -1027,7 +1027,7 @@
 
         function onPhotoDataSuccess(imageData) {
 
-
+            var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
             var _length = 0;
             if ($('#list123').html() != undefined && $('#list123').html() != "" && $('#list123').children("span") != undefined) {
                 _length = $('#list123').children("span").length;
@@ -1035,6 +1035,7 @@
 
 
             var id = _length + 1;
+            _ImgObj.ImageID = id;
             var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImageNew(' + id + ')"><i class="fa fa-times"></i></a>';
             var compilehtml = crossicon;
 
@@ -1049,7 +1050,11 @@
 
             $("#defaultimg").hide();
 
+            _ImgObj.FileName = "AndroidCapture";
+            _ImgObj.bytestring = imageData;
+
             setTimeout(function () {
+                ImageListAndroid.push(_ImgObj);
                 $(".removeImage").bind("click", function () {
 
                     removeImageNew($(this).attr("altid"));

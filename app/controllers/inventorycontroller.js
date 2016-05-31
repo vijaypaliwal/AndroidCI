@@ -675,6 +675,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.InventoryObject.UnitDate2 = null;
         }
         var _sum = 0;
+        
+        alert("android Captured images");
+        alert(ImageListAndroid.length);
+        if (ImageListAndroid.length > 0)
+        {
+            for (var i = 0; i < ImageListAndroid.length; i++) {
+
+                if (ImageListAndroid[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
+                    ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
+                   
+                    $scope.ImageList.push(ImageListAndroid[i]);
+                }
+
+            }
+            CheckScopeBeforeApply();
+        }
+
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
             if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
