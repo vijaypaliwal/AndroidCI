@@ -14,6 +14,10 @@
 
     .dropdown-listcustom {
         width: 100%;
+        position:relative;
+        z-index: 1500;
+        max-height: 250px;
+        overflow-y: auto;
     }
 
     .collapsible-header {
@@ -867,13 +871,38 @@
                         <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
-                            <div class="select">
+                            <div class="select" style="display:none;">
                                 <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                     <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                 </select>
                             </div>
+
+
+                            <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                <span id="CustomActivity_{{obj.cfdID}}_label"></span>
+
+                                <i class="caret pull-right" style="margin-top: 8px"></i>
+                            </div>
+                            <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                <li ng-repeat="_optionValue in obj.cfdComboValues track by $index">
+                                    <a>
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td ng-click="UpdateActivityDropdownData(obj.cfdID,_optionValue,1)">  {{_optionValue}}</td>
+
+
+                                            </tr>
+                                        </table>
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
                             <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
@@ -928,13 +957,40 @@
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
-                                <div class="select">
+                                <div class="select" style="display:none;">
                                     <select id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                         <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                     </select>
                                 </div>
+
+                                
+
+
+                                <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                    <span id="CustomActivityIncrease_{{obj.cfdID}}_label"></span>
+
+                                    <i class="caret pull-right" style="margin-top: 8px"></i>
+                                </div>
+                                <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                    <li ng-repeat="_optionValue in obj.cfdComboValues track by $index">
+                                        <a>
+                                            <table style="width: 100%">
+                                                <tr>
+                                                    <td ng-click="UpdateActivityDropdownData(obj.cfdID,_optionValue,2)">  {{_optionValue}}</td>
+
+
+                                                </tr>
+                                            </table>
+                                        </a>
+
+                                    </li>
+
+
+                                </ul>
                                 <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
@@ -986,13 +1042,37 @@
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
-                                <div class="select">
+                                <div class="select" style="display:none;">
                                     <select id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                         <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                     </select>
                                 </div>
+
+                                <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                    <span id="CustomActivityDecrease_{{obj.cfdID}}_label"></span>
+
+                                    <i class="caret pull-right" style="margin-top: 8px"></i>
+                                </div>
+                                <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                    <li ng-repeat="_optionValue in obj.cfdComboValues track by $index">
+                                        <a>
+                                            <table style="width: 100%">
+                                                <tr>
+                                                    <td ng-click="UpdateActivityDropdownData(obj.cfdID,_optionValue,2)">  {{_optionValue}}</td>
+
+
+                                                </tr>
+                                            </table>
+                                        </a>
+
+                                    </li>
+
+
+                                </ul>
                                 <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
@@ -1643,7 +1723,7 @@
 
                         </div>
 
-                        <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
+                        <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" ng-init="parentIndexData=$index" data-ng-repeat="_columns in isLineItemColumnNames">
 
 
                             <div class="col-xs-8 col-md-8">
@@ -1662,14 +1742,14 @@
                                         <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
                                             <!--<div class="fg-line">
 
-                                                <div class="select">
-                                                    <select class="form-control" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+                            <div class="select">
+                                <select class="form-control" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
 
-                                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
+                                    <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
 
-                                                    </select>
-                                                </div>
-                                            </div>-->
+                                </select>
+                            </div>
+                        </div>-->
 
                                             <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
                                                 {{CurrentActiveObject.IsLineItemData[$index].CfValue}}
@@ -1760,13 +1840,38 @@
                                 <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
-                                    <div class="select">
+                                    <div class="select" style="display:none;">
                                         <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                             <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                         </select>
                                     </div>
+
+
+                                    <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                        <span id="CustomActivity_{{obj.cfdID}}_label"></span>
+
+                                        <i class="caret pull-right" style="margin-top: 8px"></i>
+                                    </div>
+                                    <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                        <li ng-repeat="_optionValue in obj.cfdComboValues track by $index">
+                                            <a>
+                                                <table style="width: 100%">
+                                                    <tr>
+                                                        <td ng-click="UpdateActivityDropdownData(obj.cfdID,_optionValue,1)">  {{_optionValue}}</td>
+
+
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                        </li>
+
+
+                                    </ul>
                                     <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
@@ -1820,13 +1925,37 @@
                                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
-                                        <div class="select">
+                                        <div class="select" style="display:none;">
                                             <select id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                             </select>
                                         </div>
+
+                                        <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                            <span id="CustomActivityIncrease_{{obj.cfdID}}_label"></span>
+
+                                            <i class="caret pull-right" style="margin-top: 8px"></i>
+                                        </div>
+                                        <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                            <li ng-repeat="_optionValue in obj.cfdComboValues track by $index">
+                                                <a>
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td ng-click="UpdateActivityDropdownData(obj.cfdID,_optionValue,2)">  {{_optionValue}}</td>
+
+
+                                                        </tr>
+                                                    </table>
+                                                </a>
+
+                                            </li>
+
+
+                                        </ul>
                                         <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
@@ -1878,13 +2007,37 @@
                                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
-                                        <div class="select">
+                                        <div class="select" style="display:none;">
                                             <select id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                             </select>
                                         </div>
+
+                                        <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                            <span id="CustomActivityDecrease_{{obj.cfdID}}_label"></span>
+
+                                            <i class="caret pull-right" style="margin-top: 8px"></i>
+                                        </div>
+                                        <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                            <li ng-repeat="_optionValue in obj.cfdComboValues track by $index">
+                                                <a>
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td ng-click="UpdateActivityDropdownData(obj.cfdID,_optionValue,3)">  {{_optionValue}}</td>
+
+
+                                                        </tr>
+                                                    </table>
+                                                </a>
+
+                                            </li>
+
+
+                                        </ul>
                                         <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 

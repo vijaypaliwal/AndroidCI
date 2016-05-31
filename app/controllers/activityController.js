@@ -107,10 +107,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             var _dataType = $(_ID).attr("custom-data-type");
             var _value = result.text;
 
-            if (_dataType != null && _dataType != undefined)
-            {
-                if(_dataType=="date" || _dataType=="datetime")
-                {
+            if (_dataType != null && _dataType != undefined) {
+                if (_dataType == "date" || _dataType == "datetime") {
                     _value = ConvertDatetoDate(_value);
                 }
 
@@ -254,7 +252,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
                     }
 
-                       $("#mybutton_" + id).addClass("movepin")
+                    $("#mybutton_" + id).addClass("movepin")
 
                     ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -281,7 +279,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                 }
 
-                 $("#mybutton_" + id).addClass("movepin")
+                $("#mybutton_" + id).addClass("movepin")
 
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -445,6 +443,33 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
+    $scope.UpdateActivityDropdownData = function (CustomDataID, Value, Type) {
+        var _ID = "#CustomActivity_" + CustomDataID;
+        var _ID2 = "#CustomActivity_" + CustomDataID + "_label";
+
+        switch (Type) {
+            case 1:
+                _ID = "#CustomActivity_" + CustomDataID;
+                _ID2 = "#CustomActivity_" + CustomDataID + "_label";
+                break
+            case 2:
+                _ID = "#CustomActivityIncrease_" + CustomDataID;
+                _ID2 = "#CustomActivityIncrease_" + CustomDataID + "_label";
+                break
+            case 3:
+                _ID = "#CustomActivityDecrease_" + CustomDataID;
+                _ID2 = "#CustomActivityDecrease_" + CustomDataID + "_label";
+                break
+            default:
+                _ID = "#CustomActivity_" + CustomDataID;
+                _ID2 = "#CustomActivity_" + CustomDataID + "_label";
+                break;
+        }
+
+        $(_ID).val(Value);
+        $(_ID2).html(Value);
+
+    }
     $("#headerrow a").not(".dropdown-toggle").not(".logout").click(function () {
         if ($scope.CurrentCart.length > 0) {
             $scope.CurrentHref = $(this).attr("href");
@@ -1020,7 +1045,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         $scope.CanApply = (IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3')) ? 'True' : 'False';
 
-  
+
 
         CheckScopeBeforeApply();
     }
@@ -1729,10 +1754,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-    $scope.CheckStatusValues=function(firstValue,secondValue)
-    {
-        if(firstValue!=undefined && firstValue!=null && firstValue!="")
-        {
+    $scope.CheckStatusValues = function (firstValue, secondValue) {
+        if (firstValue != undefined && firstValue != null && firstValue != "") {
             firstValue = firstValue.toLowerCase();
         }
 
@@ -1740,8 +1763,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             secondValue = secondValue.toLowerCase();
         }
 
-        if(firstValue== secondValue)
-        {
+        if (firstValue == secondValue) {
             return true;
         }
 
@@ -2278,7 +2300,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return _returnVar
     }
 
-    $scope.clearCartFunction = function() {
+    $scope.clearCartFunction = function () {
         localStorageService.set("ActivityCart", "");
         localStorageService.set("SelectedAction", "");
         $location.path("/FindItems");
@@ -2802,7 +2824,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         //  $cordovaKeyboard.disableScroll(true);
 
 
-        
+
         $('.collapsible-header').css("position", "absolute");
         $('.collapsible-body').css('margin-top', '49px');
         $('.header').css("position", "relative");
@@ -2811,7 +2833,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $('.singlePanel').css('margin-top', '0px');
         $('#transactionForm1').css('margin-top', '0px');
         $('.bottombutton').css("position", "relative");
-        
+
     })
     .on('blur', 'input,select', function () {
 
@@ -2838,13 +2860,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     setTimeout(function () { $('#itUpdateDate').val(today); }, 1000);
 
-    setTimeout(function() { $('.FormDateType').val(today); }, 1000);
-   
+    setTimeout(function () { $('.FormDateType').val(today); }, 1000);
+
 
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
 
-    
+
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -2987,7 +3009,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     break;
                 case "Apply":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null ||$scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
