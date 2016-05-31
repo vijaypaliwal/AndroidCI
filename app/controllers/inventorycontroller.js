@@ -691,7 +691,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
             CheckScopeBeforeApply();
         }
-
+        alert("android Captured images after");
+        alert($scope.ImageList.length);
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
             if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
