@@ -53,8 +53,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
     }
 
-    //
-    
     $scope.CancelEdit = function () {
         $scope.IsEditMode = false;
 
@@ -756,7 +754,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         return _index;
     }
-
     $scope.GetUOMByID = function (UOMID) {
         if ($scope.UOMList.length > 0) {
 
@@ -768,17 +765,48 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
     }
     $scope.changeMode = function () {
-          $scope.IsSingleMode = !$scope.IsSingleMode;
+        $scope.IsSingleMode = !$scope.IsSingleMode;
 
-        $scope.$apply();
-    }
-    $scope.changeModeNew = function () {
-      //  $scope.IsSingleMode = !$scope.IsSingleMode;
 
-        localStorageService.set("ActivityCart", "");
-        localStorageService.set("ActivityCart", $scope.CurrentCart);
-       
-        $location.path("/activityAndroid");
+        var i = 0;
+        //if ($scope.IsSingleMode == false) {
+        //    if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
+        //        for (i = 0; i < $scope.CurrentCart.length; i++) {
+        //            $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
+        //            $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
+        //            $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
+        //            $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
+        //            $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
+        //            $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
+        //        }
+        //    }
+
+        //}
+        setTimeout(function () {
+            InitializeSwiper();
+
+            $scope.GoToStep(0, 2);
+            $(".panel-title").click(function () {
+
+                if ($("#collapseTwo").hasClass("in")) {
+                    $(this).find("a").css("color", "inherit");
+                    $scope.CollapsClass = "";
+                    $scope.CollapsOpen = false;
+                }
+                else {
+
+                    $(this).find("a").css("color", "white");
+                    $scope.CollapsClass = $scope.CurrentHeaderClass;
+                    $scope.CollapsOpen = true;
+
+
+                }
+
+                CheckScopeBeforeApply();
+
+            });
+
+        }, 0);
         $scope.$apply();
     }
     $scope.FillQuantityToConvert = function (value, myid, Type) {
