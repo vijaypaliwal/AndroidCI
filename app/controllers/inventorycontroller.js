@@ -682,7 +682,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         {
             for (var i = 0; i < ImageListAndroid.length; i++) {
 
-                if (ImageListAndroid[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
+                if (ImageListAndroid[i].bytestring != null && ImageListAndroid[i].bytestring != undefined) {
                     ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
                    
                     $scope.ImageList.push(ImageListAndroid[i]);
