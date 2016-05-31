@@ -676,8 +676,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         var _sum = 0;
         
-        alert("android Captured images");
-        alert(ImageListAndroid.length);
+      
         if (ImageListAndroid.length > 0)
         {
             for (var i = 0; i < ImageListAndroid.length; i++) {
@@ -691,8 +690,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
             CheckScopeBeforeApply();
         }
-        alert("android Captured images after");
-        alert($scope.ImageList.length);
+     
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
             if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {

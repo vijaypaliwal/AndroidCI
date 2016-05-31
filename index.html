@@ -744,7 +744,11 @@
     </script>
     <script>
 
-
+        function randomStringNew(length, chars) {
+            var result = '';
+            for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+            return result;
+        }
         var _Islive = false;
 
 
@@ -1034,7 +1038,9 @@
             }
 
 
-            var id = _length + 1;
+            //var id = _length + 1;
+            //_ImgObj.ImageID = id;
+            var id = randomStringNew(5, '0123456789');
             _ImgObj.ImageID = id;
             var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImageNew(' + id + ')"><i class="fa fa-times"></i></a>';
             var compilehtml = crossicon;
