@@ -1304,6 +1304,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.OpenBoxAndroid = function () {
+        alert("into modal android")
         $("#myModalforlist").modal("show");
     }
 
