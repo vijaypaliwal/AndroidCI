@@ -1083,8 +1083,8 @@
                     removeImageNew($(this).attr("altid"));
                 });
             }, 100);
-
-
+            
+            $(".viewimage").find("div").html(ImageListAndroid.length);
 
 
         }
@@ -1100,7 +1100,15 @@
             });
 
 
+            for (var i = 0; i < ImageListAndroid.length; i++) {
+                if (ImageListAndroid[i].ImageID == _this) {
+                    ImageListAndroid.splice(i, 1);
+                    break;
+                }
+            }
 
+
+           
 
             removeImageNew(_this)
 
