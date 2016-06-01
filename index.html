@@ -473,6 +473,56 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
         }
+
+        #slide-out-left
+        {
+            left:0px !important;
+            display:none;
+        }
+
+        .formenuopen 
+        {
+            opacity:0.5;
+            z-index:100;
+            background:#000;
+        }
+
+
+        .top-menu {
+            left: -114px;
+            text-align: left;
+        }
+
+
+            .top-menu:before {
+                position: absolute;
+                top: -7px;
+                right: 9px;
+                display: inline-block;
+                border-right: 7px solid transparent;
+                border-bottom: 7px solid #ccc;
+                border-left: 7px solid transparent;
+                border-bottom-color: rgba(0, 0, 0, 0.2);
+                content: '';
+            }
+
+            .top-menu:after {
+                position: absolute;
+                top: -6px;
+                right: 10px;
+                display: inline-block;
+                border-right: 6px solid transparent;
+                border-bottom: 6px solid #ffffff;
+                border-left: 6px solid transparent;
+                content: '';
+            }
+
+        .top-menu i
+        {
+            line-height:initial !important;
+            color:#333 !important;
+        }
+
     </style>
 
 </head>
@@ -539,13 +589,21 @@
     </div>
 
 
+   
+
+
     <div id="toolbar" class="primary-color">
-        <div class="open-left" id="open-left" data-activates="slide-out-left">
+        <div class="open-left" id="side-left">
             <i class="ion-android-menu"></i>
         </div>
         <span class="title">Clearly Inventory</span>
-        <div class="open-right" id="open-right" data-activates="slide-out">
-            <i class="ion-android-person"></i>
+
+        <div class="dropdown open-right">
+            <a data-toggle="dropdown" class="dropdown-toggle "><i class="ion-android-person"></i></a>
+            <ul class="top-menu dropdown-menu">
+                <li><a ng-class="getClass('/profile')" href="#/profile"><i class="fa fa-user"></i> My Profile</a></li>
+                <li><a href="#"><i class="fa fa-sign-out"></i> Sign out</a></li>
+            </ul>
         </div>
     </div>
 
@@ -559,7 +617,7 @@
 
     <!-- Sidebar -->
 
-    <ul id="slide-out-left" class="side-nav collapsible">
+    <ul id="slide-out-left" class="side-nav animated slideInLeft">
         <li>
             <div class="sidenav-header primary-color">
 
@@ -822,73 +880,32 @@
 
 
 
-        $('#menu-toggle').click(function (e) {
+        $('#side-left').click(function (e) {
+
+
+
             e.stopPropagation();
 
-            $('#wrapper').toggleClass('toggled');
+            $('#slide-out-left').show();
 
-
-            setTimeout(function () {
-
-
-
-                if ($('#wrapper').hasClass('toggled')) {
-                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left animated rollIn")
-                }
-
-                else {
-
-                    $("#sidebaricon").removeClass("fa-arrow-circle-left animated rollIn").addClass("fa-bars")
-
-                }
-
-
-            }, 0);
+            $('<div class="modal-backdrop formenuopen"></div>').appendTo(document.body);
 
 
         });
-        $('#wrapper').click(function (e) {
+        $('#slide-out-left').click(function (e) {
             e.stopPropagation();
 
         });
         $('body,html').click(function (e) {
-            $('#wrapper').removeClass('toggled');
-
-            setTimeout(function () {
-
-
-
-                if ($('#wrapper').hasClass('toggled')) {
-                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left")
-                }
-
-                else {
-
-                    $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
-
-                }
-
-             
-              
-            
-
-
-            }, 300);
-
-           
-
-
-       
-            
+            $('#slide-out-left').hide();
+            $(".modal-backdrop").remove();
 
         });
 
 
-        $(".sidebar-nav li a").click(function (e) {
-
-            $("#wrapper").toggleClass("toggled");
-
-            $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
+        $("#slide-out-left a").click(function (e) {
+            $(".modal-backdrop").remove();
+            $("#slide-out-left").hide();
 
         });
 
