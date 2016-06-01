@@ -1394,7 +1394,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }, 100);
 
 
-
+        _ImageCounter = $scope.ImageList.length + ImageListAndroid.length;
+        $(".viewimage").find("div").html(_ImageCounter);
+        alert("On render" + _ImageCounter);
     }
 
 
@@ -1434,10 +1436,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $(".viewimage").hide();
 
         }
-
+        _ImageCounter = $scope.ImageList.length + ImageListAndroid.length;
+        $(".viewimage").find("div").html(_ImageCounter);
 
         removeImage(_this)
-
     }
 
     function init() {

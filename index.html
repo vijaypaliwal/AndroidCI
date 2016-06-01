@@ -994,6 +994,7 @@
         var pictureSource;
         var destinationType;
         var ImageListAndroid = [];
+        var _ImageCounter = 0;
         //function onPhotoDataSuccess(imageData) {
         //    $("#myModalforlist").modal("hide");
 
@@ -1084,9 +1085,13 @@
                 });
             }, 100);
             
-            $(".viewimage").find("div").html(ImageListAndroid.length);
 
+            _ImageCounter = _ImageCounter + ImageListAndroid.length;
+            $(".viewimage").find("div").html(_ImageCounter);
 
+            alert("on render outside");
+
+            alert(_ImageCounter);
         }
 
 
@@ -1107,7 +1112,8 @@
                 }
             }
 
-
+            _ImageCounter = _ImageCounter + ImageListAndroid.length;
+            $(".viewimage").find("div").html(_ImageCounter);
            
 
             removeImageNew(_this)
