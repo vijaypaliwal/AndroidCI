@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('AngularAuthApp', ['ngRoute', 'ngSanitize', 'LocalStorageModule', 'angular-loading-bar', 'ngCordova']);
+var app = angular.module('AngularAuthApp', ['ngRoute', 'ngSanitize', 'LocalStorageModule', 'angular-loading-bar', 'ngCordova', 'ui.sortable']);
 
 app.config(function ($routeProvider) {
 
@@ -37,7 +37,10 @@ app.config(function ($routeProvider) {
         controller: "uomController",
         templateUrl: "app/views/uom.html"
     });
-
+    $routeProvider.when("/mobileorder", {
+        controller: "mobileorderController",
+        templateUrl: "app/views/mobileorder.html"
+    });
     $routeProvider.when("/status", {
         controller: "statusController",
         templateUrl: "app/views/status.html"
