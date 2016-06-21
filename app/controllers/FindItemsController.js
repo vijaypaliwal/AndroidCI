@@ -989,7 +989,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 CheckScopeBeforeApply();
             },
             error: function (req) {
-                log.error("error during get inventory Success");
+              
                 $scope.myinventoryColumnLoaded = true;
                 CheckScopeBeforeApply();
                 console.log(req);
@@ -1033,7 +1033,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
             },
             error: function (req) {
-                log.error("error during get inventory columns");
+               
 
             },
             complete: function () {
@@ -1078,7 +1078,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
             },
             error: function (req) {
-                log.error("error during get inventory columns");
+              
 
             },
             complete: function () {
