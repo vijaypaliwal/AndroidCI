@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('AngularAuthApp', ['ngRoute', 'ngSanitize', 'LocalStorageModule', 'angular-loading-bar', 'ngCordova']);
+var app = angular.module('AngularAuthApp', ['ngRoute', 'ngSanitize', 'LocalStorageModule', 'angular-loading-bar', 'ngCordova', 'ui.sortable']);
 
 app.config(function ($routeProvider) {
 
@@ -108,8 +108,8 @@ app.config(function ($routeProvider) {
 
 //var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
 //var serviceBaseUrl = 'http://localhost:7440/';
-var serviceBaseUrl = 'http://dev.style.u8i9.com/';
-var serviceBase = 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/';
+var serviceBaseUrl = 'https://test.inventory4.com/';
+var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
