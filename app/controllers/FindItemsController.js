@@ -1,7 +1,7 @@
 ﻿
 
 'use strict';
-app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -985,7 +985,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.OpenmenuModal();
                 }
                 $scope.myinventoryColumnLoaded = true;
-
+                $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
             },
             error: function (req) {

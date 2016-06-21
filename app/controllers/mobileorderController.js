@@ -149,7 +149,6 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
             if ($scope.MyInventorycolumns[i].mobileorder != 0) {
                 $scope.MyInventorycolumns[i].mobileorder = i + 1;
-
             }
 
         }
