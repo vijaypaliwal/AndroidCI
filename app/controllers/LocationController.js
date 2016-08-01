@@ -250,17 +250,24 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                             ShowSuccess("Updated");
                         }
 
+                      
+
 
                         $scope.GetLocations();
 
                         $scope.mode = 1;
+
+                        $scope.SearchData.SearchValue = "";
+
+                      
 
                     }
 
                     if (result.CreateEditLocationResult.Payload == 0) {
 
                         log.warning("Already exist");
-
+                        $scope.IsProcessing = false;
+                        $scope.$apply();
                     }
                   
 
@@ -274,6 +281,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                 },
                 complete: function () {
+                    $scope.IsProcessing = false;
                 }
 
             });

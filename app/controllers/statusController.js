@@ -135,7 +135,6 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                         }
 
                         $scope.getstatus();
-
                         $scope.mode = 1;
 
                     }
@@ -143,13 +142,10 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                     if (result.CreateEditStatusResult.Payload == 0) {
 
                         log.warning("Already exist");
-
+                        $scope.IsProcessing = false;
+                        $scope.$apply();
                     }
                    
-
-                 
-                   
-
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;
@@ -158,9 +154,12 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
                 },
                 complete: function () {
+                    $scope.IsProcessing = false;
                 }
 
             });
+
+            $scope.$apply();
 
         }
 
