@@ -1451,7 +1451,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $(".viewimage").hide();
 
         }
-        _ImageCounter = $scope.ImageList.length + ImageListAndroid.length;
+      var  _ImageCounter = $scope.ImageList.length + ImageListAndroid.length;
         $(".viewimage").find("div").html(_ImageCounter);
 
         removeImage(_this)

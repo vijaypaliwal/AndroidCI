@@ -31,6 +31,11 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
         $location.path('/login');
         CheckScopeBeforeApply();
     }
+
+    $scope.GoTo=function(url)
+    {
+        $location.path(url);
+    }
     $scope.getstatus = function () {
 
         $scope.IsStatusLoading = true;

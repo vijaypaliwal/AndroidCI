@@ -28,8 +28,6 @@
     <link href="content/css/bootstrap-switch.css" rel="stylesheet" />
     <link href="content/css/bootstrap-multiselect.css" rel="stylesheet" />
 
-    
-
     <style>
         [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x- ng-cloak {
             display: none !important;
@@ -1143,7 +1141,6 @@
             imageURI = "data:image/jpeg;base64," + imageURI;
             var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px; ' src='" + imageURI + "'/></span>'";
 
-
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
             document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
             document.getElementById('list567').innerHTML = document.getElementById('list567').innerHTML + _htmltoRender;
@@ -1167,7 +1164,7 @@
         //
         function capturePhotoEdit() {
             // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+               navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 20, allowEdit: true,
                 correctOrientation: true,
                 destinationType: destinationType.DATA_URL
