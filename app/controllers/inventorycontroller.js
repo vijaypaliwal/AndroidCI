@@ -750,7 +750,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
-
+                  ImageListAndroid = [];
                   HideWaitingInv();
 
                   // $scope.resetObject();
@@ -764,7 +764,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
               error: function (err) {
-
 
                   console.log(err);
                   log.error("Error Occurred during operation");
@@ -1370,7 +1369,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var span = document.createElement('span');
                     span.innerHTML =
                     [
-                      '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
+                      '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:0px;" src="',
                       e.target.result,
                       '" title="', escape(theFile.name),
                       '"/> ' + compilehtml[0].outerHTML + ''
