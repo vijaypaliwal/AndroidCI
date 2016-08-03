@@ -197,6 +197,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   $scope.loadingbutton == false
 
                   ShowSuccess("Updated");
+                  $scope.GetMyinventoryColumns();
                   $scope.$apply();
               },
               error: function (err) {
