@@ -16,7 +16,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
 
     $scope.mainObjectToSend = [];
-
+    $scope.MyInventorycolumns = [];
     function init() {
         $scope.GetMyinventoryColumns();
 
@@ -67,6 +67,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               success: function (response) {
 
                   debugger;
+
 
                   var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
                   for (var i = 0; i < _myinventorycols.length; i++) {
