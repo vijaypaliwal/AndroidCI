@@ -15,7 +15,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <!-- Icons -->
-    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
 
 
     <link href="content/css/loading-bar.css" rel="stylesheet" />
@@ -314,7 +314,7 @@
             }
 
         body {
-            font-family: "Myriad Set Pro", "Lucida Grande", "Helvetica Neue", "Helvetica", "Arial", "Verdana", "sans-serif";
+         
             overflow: auto !important;
         }
 
@@ -862,8 +862,6 @@
             $("#myloginModal").removeClass('bounceOut').addClass('bounceIn');
             $('#myloginModal').show();
 
-
-
         }
 
 
@@ -1069,7 +1067,7 @@
             var compilehtml = crossicon;
 
             imageData = "data:image/jpeg;base64," + imageData;
-            var _htmltoRender = "<span><img id='" + id + "' style='height: 60px; width:60px; border:transparent; margin:0px;' src='" + imageData + "'/>" + compilehtml + "</span>";
+            var _htmltoRender = "<span><img id='" + id + "' style='height: 80px; width:80px; border:transparent; margin:0px;' src='" + imageData + "'/>" + compilehtml + "</span>";
 
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
 
@@ -1139,7 +1137,7 @@
             //
 
             imageURI = "data:image/jpeg;base64," + imageURI;
-            var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px; ' src='" + imageURI + "'/></span>'";
+            var _htmltoRender = "<span>'<img  style='height: 80px; width:80px; border:transparent; margin:0px; ' src='" + imageURI + "'/></span>'";
 
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
             document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;

@@ -3,6 +3,12 @@
 <link href="css/inventory.css" rel="stylesheet" />
 
 <style>
+    .createNewLabel {
+        font-size: 17px;
+        color: #069;
+        text-decoration: underline;
+    }
+
     .allfields {
         padding: 8px;
     }
@@ -22,34 +28,37 @@
         margin: 0 auto;
     }
 
-    .mylabel {
+    #defaultimg
+    {
+        display:block !important;
+    }
+    
+    
+     .mylabel {
         font-size: 16px;
         color: #767676;
     }
 
     .requiredfields {
         background: #DEC8C8;
-      
         padding: 5px;
     }
-    
-    .requiredfields a {
-        color: brown;
-        margin-right: 5px;
-    }
 
-    #list567 .removeImage
-    {
-        display:none;
+        .requiredfields a {
+            color: brown;
+            margin-right: 5px;
+        }
+
+    #list567 .removeImage {
+        display: none;
     }
 
     #list567 img {
         margin-left: -38px !important;
     }
 
-    #list567 img
-    {
-        position:absolute !important;
+    #list567 img {
+        position: absolute !important;
     }
 </style>
 
@@ -123,8 +132,8 @@
                                     <div ng-if="InventoryObject.AutoID==false" class="input-group">
 
                                         <div>
-                                        <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
-                                              </div>
+                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
+                                        </div>
 
 
 
@@ -172,7 +181,7 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
-                            <label>Select Location <span class="redText">*</span></label>
+                            <label>Select Location <span class="redText">*</span></label> <a class="createNewLabel pull-right" ng-click="CreateNew(1)">Add new</a>
                             <div class="input-group">
                                 <select class="form-control" id="Location" ng-model="InventoryObject.Location">
                                     <option value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
@@ -207,7 +216,7 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
-                            <label>Select UOM <span class="redText">*</span></label>
+                            <label>Select UOM <span class="redText">*</span></label> <a class="createNewLabel pull-right" ng-click="CreateNew(2)">Add new</a>
                             <div class="input-group">
 
                                 <select class="form-control" ng-model="InventoryObject.Uom" id="UOM">
@@ -254,7 +263,7 @@
                                             <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
                                         </div>
                                     </div>
-                             
+
                                     <div class="androidbtn">
 
                                         <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBoxAndroid()">
@@ -266,19 +275,19 @@
                                 </div>
                                 <div class="col-xs-6">
 
-                                    <div  class="fileUpload viewimage btn btn-primary" style="float:right; display:none" ng-click="viewimages()">
-                                       
+                                    <div class="fileUpload viewimage btn btn-primary" style="float:right; display:none" ng-click="viewimages()">
+
                                         <span>Selected <br /> Images </span>
 
                                     </div>
-                                  
+
                                 </div>
 
 
-                             
-                                
 
-                               
+
+
+
                             </div>
 
 
@@ -466,7 +475,7 @@
 
                         <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="color:white !important; width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i style="font-size:16px;" class="fa fa-plus-circle"></i>  Add Inventory</a>
                     </div>
-                    
+
 
                 </div>
 
@@ -506,8 +515,8 @@
                 </table>
 
 
-                
-                
+
+
 
                 <div ng-if="CheckRequiredField()==true || CheckCustomRequiredFields()==true" class="requiredfields" ng-show="slide == Totalslides">
 
@@ -899,7 +908,7 @@
 
 <div style="background:#fff;" id="modal3" class="modal animated bounceIn">
     <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-      
+
         <h4>All Done!  What Next?</h4>
     </div>
 
@@ -925,7 +934,29 @@
     </div>
 </div>
 
+<div style="background:#fff;" id="createnewlabel" class="modal animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
+        <button style="padding:10px; margin-top:-15px;" type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>Create new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span></h4>
+    </div>
 
+    <div style="padding:5px;" class="modal-body">
+        <br />
+        <div class="form-group">
+            <label>Enter new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> </label>
+
+            <div class="input-group">
+                <input type="text" ng-model="CreateNewLabel" class="form-control" value="" />
+
+            </div>
+            <br />
+
+            <button ng-disabled="CreateNewLabel==''" ng-click="SaveLabel(CreateType)" class="btn waves-effect waves-light primary-color"><i class="fa fa-plus"></i> Add</button>
+            <a href="#" data-dismiss="modal" class="btn waves-effect waves-light gray-color"> <i class="fa fa-times"></i> Cancel</a>
+        </div>
+
+    </div>
+</div>
 
 
 

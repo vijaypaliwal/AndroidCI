@@ -68,7 +68,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.isnolocationmsg = false;
     $scope.isnouommsg = false;
     $scope.slide = 1000;
-
+    $scope.CreateType = 0;
+    $scope.CreateNewLabel = "";
     var FileName = "";
     var StreamData = "";
 
@@ -99,6 +100,65 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
+    $scope.CreateNew=function(Type)
+    {
+        $scope.CreateType = Type;
+        $("#createnewlabel").modal('show');
+    }
+
+
+    $scope.checkDuplicate=function(type)
+    {
+        if(type==1)
+        {
+            for (var i = 0; i < $scope.LocationList.length; i++) {
+                if($scope.LocationList[i].LocationName==$scope.CreateNewLabel)
+                {
+                    return false;
+                }
+            }
+        }
+
+        if(type==2)
+        {
+            for (var i = 0; i < $scope.UOMList.length; i++) {
+                if ($scope.UOMList[i].UnitOfMeasureName == $scope.CreateNewLabel) {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
+
+    $scope.SaveLabel=function(Type)
+    {
+        if ($scope.checkDuplicate(Type)) {
+
+
+            if (Type == 1) {
+                var _locationobj = { LocationID: 0, LocationZone: "", LocationName: $scope.CreateNewLabel };
+                $scope.LocationSearchList.push(_locationobj);
+                $scope.LocationList.push(_locationobj);
+                $scope.InventoryObject.Location = $scope.CreateNewLabel;
+
+            }
+
+            if (Type == 2) {
+                var _uomobj = { UnitOfMeasureName: $scope.CreateNewLabel, UnitOfMeasureID: 0 };
+                $scope.UOMList.push(_uomobj);
+                $scope.InventoryObject.Uom = $scope.CreateNewLabel;
+            }
+            $scope.CreateNewLabel = "";
+            CheckScopeBeforeApply();
+            $("#createnewlabel").modal('hide');
+        }
+        else
+        {
+            log.error("This value already exist.");
+        }
+    }
     $scope.viewall = function () {
 
         $("#infomodal").modal('show');
@@ -879,7 +939,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#itemlistmodal").modal('hide');
         $("#locationlistmodal").modal('show');
 
-        $scope.LocationSearchList = $scope.LocationList;
+        $scope.LocationSearchList = angular.copy($scope.LocationList);
         CheckScopeBeforeApply();
         $scope.SearchLocationValue = "";
         $scope.isnolocationmsg = false
@@ -1136,7 +1196,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                    $scope.LocationList = response.GetLocationsResult.Payload;
-                   $scope.LocationSearchList = $scope.LocationList;
+                   $scope.LocationSearchList = angular.copy($scope.LocationList);
 
                    $scope.UpdateLocationAndUOMList();
                    CheckScopeBeforeApply()
@@ -1369,7 +1429,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var span = document.createElement('span');
                     span.innerHTML =
                     [
-                      '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:0px;" src="',
+                      '<img id="' + id + '" style="height: 80px; width:80px; border: 1px solid #ccc; margin:0px;" src="',
                       e.target.result,
                       '" title="', escape(theFile.name),
                       '"/> ' + compilehtml[0].outerHTML + ''
@@ -1380,7 +1440,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     $(".viewimage").show();
 
-                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:80px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
 
 
                     $("#list321").append(imagepath);
