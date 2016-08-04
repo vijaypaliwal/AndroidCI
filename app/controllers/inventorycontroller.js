@@ -2461,24 +2461,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#modal3").modal('show');
     }
 
-
-
-
     $('.arrow-left').on('click', function (e) {
         e.preventDefault()
-
-        if ($scope.slide == 0 || $scope.slide == 1000) {
-            showConfirmInventory();
-
-        }
-        else {
-            mySwiper.swipePrev();
-
-        }
-
-
+        mySwiper.swipePrev();
 
     })
+
     $('.arrow-right').on('click', function (e) {
 
         e.preventDefault()
