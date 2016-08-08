@@ -348,15 +348,16 @@
 
 
     <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:250px;max-width:250px;">
-                </div>
-
-            </div>
+        <div style="padding-top:5px; padding-bottom:5px; background:#fff;" class="modal-header">
+            <button style="padding:10px; margin-top:4px;" type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+            <h4>Image</h4>
         </div>
+
+        <div class="modal-body">
+            <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:250px;max-width:250px;">
+        </div>
+
+
     </div>
     </div>
         <div id="overlay"></div>

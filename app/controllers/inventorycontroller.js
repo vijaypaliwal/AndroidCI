@@ -816,6 +816,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               error: function (err) {
 
                   console.log(err);
+
+                  $scope.errorbox(err);
                   log.error("Error Occurred during operation");
 
                   $('#addinventories').removeClass("disabled");

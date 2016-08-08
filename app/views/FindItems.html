@@ -92,13 +92,13 @@
 
                         <div class="input-group">
 
-                            <span class="input-group-addon" id="addonData" style="padding:0px">
+                            <span class="input-group-addon" id="addonData" style="padding:0px; border:1px solid #ccc">
 
                                 <a class="waves-effect waves-effect status dropdown" style="padding:11px" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu dm-icon searchlist animated slideInDown" id="dynamicd">
+                                <ul class="dropdown-menu dm-icon searchlist" id="dynamicd">
                                     <li class="suggestItem1"><a ng-click="searchfunction('All')" alt="All">All</a></li>
                                     <li class="suggestItem2"><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
                                     <li class="suggestItem3"><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
@@ -106,11 +106,11 @@
                                     <li class="suggestItem5"><a ng-click="searchfunction('uomUOM')" alt="uomUOM">UOM</a></li>
 
 
-                                    
+
                                     <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">{{GetUnitDataLabel('iReqValue')}}</a></li>
                                     <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitTag2')" alt="iUnitTag2">{{GetUnitDataLabel('iUnitTag2')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ><a ng-click="searchfunction('iUnitTag3')" alt="iUnitTag3">{{GetUnitDataLabel('iUnitTag3')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ><a ng-click="searchfunction('iUniqueDate')" alt="iUniqueDate">{{GetUnitDataLabel('iUniqueDate')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitTag3')" alt="iUnitTag3">{{GetUnitDataLabel('iUnitTag3')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUniqueDate')" alt="iUniqueDate">{{GetUnitDataLabel('iUniqueDate')}}</a></li>
                                     <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitDate2')" alt="iUnitDate2">{{GetUnitDataLabel('iUnitDate2')}}</a></li>
                                     <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitNumber1')" alt="iUnitNumber1">{{GetUnitDataLabel('iUnitNumber1')}}</a></li>
                                     <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitNumber2')" alt="iUnitNumber2">{{GetUnitDataLabel('iUnitNumber2')}}</a></li>
@@ -121,10 +121,10 @@
 
                             </span>
 
-                            <span style="padding:5px; border-right:transparent" class="input-group-addon">
+                            <span style="padding:5px; border:1px solid #ccc; border-right:transparent" class="input-group-addon">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 
-                                    <img  src="{{CurrentActiveSearchOperator}}" alt="">
+                                    <img src="{{CurrentActiveSearchOperator}}" alt="">
                                 </a>
                                 <ul ng-if="CurrentActiveSearchType==1" class="dropdown-menu operator shadow-z-5" role="menu" aria-labelledby="dropdownMenu">
                                     <li style="text-align: left"><a tabindex="-1" ng-click="UpdateFilterData('cn',CurrentActiveSearchField)"><img src="img/filter/Contains.gif" alt=""> Contains</a></li>

@@ -99,6 +99,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               },
               error: function (err) {
                   console.log(err);
+                  $scope.errorbox(err);
                   log.error("Error Occurred during operation");
                   $scope.LocationsLoaded = true;
                   $(".save-btn").hide();
@@ -202,6 +203,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               },
               error: function (err) {
                   console.log(err);
+                  $scope.errorbox(err);
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton == false;
                   $scope.$apply();

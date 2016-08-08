@@ -75,6 +75,7 @@
                     <div class="col-xs-12">
                         <button style="margin-top:8px;" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="submit" ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
                         <button style="margin-top:8px;background:#ccc;" class=" btn-large  width-100 animated center bouncein delay-6" type="button" disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
+                     
                         </div>
                     </div>
                     </div>
@@ -86,7 +87,7 @@
                     <div class="bottomnavigation">
 
 
-                        <a href="#/signup" style="font-size:18px; text-decoration:underline;" class="">Create Account </a>
+                        <a href="#/signup" style="font-size:17px; text-decoration:underline;" class="">Create Account </a>
 
                     </div>
 
@@ -96,6 +97,28 @@
     </form>
 
 <style>
+    .input-group-addon {
+        padding: 6px 12px;
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 1;
+        color: #6f6f6f;
+        text-align: center;
+        background-color: #eeeeee !important;
+        border: 1px solid #cccccc;
+        border-radius: 0;
+    }
+        .input-group-addon i {
+            padding: 6px 12px !important;
+            font-size: initial;
+            font-weight: normal;
+            line-height: 1;
+            color: #6f6f6f !important;
+            text-align: center;
+            background-color: #eeeeee;
+            font-size: 16px !important;
+            border-radius: 0;
+        }
     .navbar {
         display: none;
     }

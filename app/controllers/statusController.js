@@ -149,7 +149,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;
-                    alert("Error");
+                    $scope.errorbox(err);
                      
 
                 },

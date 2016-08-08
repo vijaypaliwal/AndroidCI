@@ -2351,6 +2351,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     error: function (err) {
 
                         log.error("Some error occurred");
+                        $scope.errorbox(err);
                         console.log(err.responseText);
 
                     }

@@ -146,7 +146,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;
-                    alert("Error");
+                    $scope.errorbox(err);
                     debugger;
 
                 },
