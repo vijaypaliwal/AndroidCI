@@ -1045,36 +1045,7 @@
         var pictureSource;
         var destinationType;
         var ImageListAndroid = [];
-        //function onPhotoDataSuccess(imageData) {
-        //    $("#myModalforlist").modal("hide");
-
-        //    // Uncomment to view the base64 encoded image data
-        //    // console.log(imageData);
-        //    // alert("photo capture success");
-        //    //alert(imageData);
-        //    // Get image handle
-        //    //
-        //    //var smallImage = document.getElementById('smallImage');
-        //    // var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
-        //    //var compilehtml = $compile(crossicon)($scope);
-        //    // Unhide image elements
-        //    //
-        //    //  smallImage.style.display = 'block';
-
-        //    imageData = "data:image/jpeg;base64," + imageData;
-        //    var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px;' src='" + imageData + "'/></span>'";
-
-        //    document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
-
-        //    document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
-
-        //    $("#defaultimg").hide();
-
-        //    // Show the captured photo
-        //    // The inline CSS rules are used to resize the image
-        //    //
-        //    //smallImage.src = "data:image/jpeg;base64," + imageData;
-        //}
+     
 
 
         var mouseEventTypes = {
@@ -1097,142 +1068,7 @@
 
 
 
-        function onPhotoDataSuccess(imageData) {
-
-            var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
-            var _length = 0;
-            if ($('#list123').html() != undefined && $('#list123').html() != "" && $('#list123').children("span") != undefined) {
-                _length = $('#list123').children("span").length;
-            }
-
-
-            //var id = _length + 1;
-            //_ImgObj.ImageID = id;
-            var id = randomStringNew(5, '0123456789');
-            _ImgObj.ImageID = id;
-            var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImageNew(' + id + ')"><i class="fa fa-times"></i></a>';
-            var compilehtml = crossicon;
-
-            imageData = "data:image/jpeg;base64," + imageData;
-            var _htmltoRender = "<span><img id='" + id + "' style='height: 80px; width:80px; border:transparent; margin:0px;' src='" + imageData + "'/>" + compilehtml + "</span>";
-
-            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
-
-            document.getElementById('list321').innerHTML = _htmltoRender;
-            document.getElementById('list567').innerHTML = _htmltoRender;
-            $(".viewimage").show();
-            $("#myModalforlist").modal("hide");
-
-            $("#defaultimg").hide();
-
-            _ImgObj.FileName = "AndroidCapture";
-            _ImgObj.bytestring = imageData;
-
-            setTimeout(function () {
-                ImageListAndroid.push(_ImgObj);
-                $(".removeImage").bind("click", function () {
-
-                    removeImageNew($(this).attr("altid"));
-                });
-            }, 100);
-            
-            $(".viewimage").find("div").html(ImageListAndroid.length);
-
-
-        }
-
-
-        function removeImageNew(_this) {
-
-
-
-            $("#" + _this).each(function () {
-
-                $(this).parent("span").remove();
-            });
-
-
-            for (var i = 0; i < ImageListAndroid.length; i++) {
-                if (ImageListAndroid[i].ImageID == _this) {
-                    ImageListAndroid.splice(i, 1);
-                    break;
-                }
-            }
-
-
-           
-
-            removeImageNew(_this)
-
-        }
-
-
-
-        // Called when a photo is successfully retrieved
-        //
-        function onPhotoURISuccess(imageURI) {
-            // Uncomment to view the image file URI
-            // console.log(imageURI);
-            //alert("photo url success");
-            // Get image handle
-
-            //  alert(imageURI);
-
-            //  var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
-            //var compilehtml = $compile(crossicon)($scope);
-            // Unhide image elements
-            //
-
-            imageURI = "data:image/jpeg;base64," + imageURI;
-            var _htmltoRender = "<span>'<img  style='height: 80px; width:80px; border:transparent; margin:0px; ' src='" + imageURI + "'/></span>'";
-
-            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
-            document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
-            document.getElementById('list567').innerHTML = document.getElementById('list567').innerHTML + _htmltoRender;
-
-            $("#defaultimg").hide();
-        }
-
-        // A button will call this function
-        //
-        function capturePhoto() {
-            //  alert("in capture photo");
-            // Take picture using device camera and retrieve image as base64-encoded string
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-                quality: 50,
-                correctOrientation: true,
-                destinationType: destinationType.DATA_URL
-            });
-        }
-
-        // A button will call this function
-        //
-        function capturePhotoEdit() {
-            // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-               navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-                quality: 20, allowEdit: true,
-                correctOrientation: true,
-                destinationType: destinationType.DATA_URL
-            });
-        }
-
-        // A button will call this function
-        //
-        function getPhoto(source) {
-            // Retrieve image file location from specified source
-            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
-                quality: 50,
-                destinationType: destinationType.FILE_URI,
-                correctOrientation: true,
-                sourceType: source
-            });
-        }
-
-        // Called if something bad happens.
-        //
-        function onFail(message) {
-            alert('Failed because: ' + message);
-        }
+        
 
 
         function vibrate() {
@@ -1346,7 +1182,7 @@
 
             InitializeModal();
 
-
+            $cordovaSplashscreen.hide();
         }
 
         function onOffline() {
