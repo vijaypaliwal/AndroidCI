@@ -66,12 +66,11 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-                  debugger;
                   $scope.MyInventorycolumns = [];
 
                   var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
                   for (var i = 0; i < _myinventorycols.length; i++) {
-                      // if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
+                       if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
                       {
                           $scope.MyInventorycolumns.push(_myinventorycols[i]);
                       }
@@ -95,7 +94,6 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                       }
                   }
                   $scope.$apply();
-                  console.log($scope.MyInventorycolumns);
               },
               error: function (err) {
                   console.log(err);
@@ -162,7 +160,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
 
     $scope.saveColumns = function () {
-
+        $(".fa-check").addClass("fa-spin");
         $scope.LocationsLoaded = false;
 
         $scope.loadingbutton == true;
@@ -196,13 +194,14 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton == false
-
+                  $(".fa-check").removeClass("fa-spin");
                   ShowSuccess("Updated");
                   $scope.GetMyinventoryColumns();
                   $scope.$apply();
               },
               error: function (err) {
                   console.log(err);
+                  $(".fa-check").removeClass("fa-spin");
                   $scope.errorbox(err);
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton == false;

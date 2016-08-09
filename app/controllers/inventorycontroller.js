@@ -817,7 +817,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                   console.log(err);
 
-                  $scope.errorbox(err);
+                  $scope.Inventoryerrorbox(errorThrown);
                   log.error("Error Occurred during operation");
 
                   $('#addinventories').removeClass("disabled");
@@ -829,7 +829,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+    $scope.Inventoryerrorbox = function (error) {
 
+        $("#Inventoryerror").modal('show');
+        $("#errortext").html(error)
+
+    }
+
+    $scope.MylogOut = function () {
+
+        $("#modalerror").modal('hide');
+        $("#Inventoryerror").modal('hide');
+        $location.path('/login');
+    }
     function ConverttoMsJsonDate(_DateValue) {
 
         var _date = angular.copy(_DateValue);
