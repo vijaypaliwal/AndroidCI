@@ -46,7 +46,7 @@
 
     
     .btn-warning {
-        border-radius: 0px;
+        border-radius: 0px !important;
     }
 
 </style>
@@ -1161,8 +1161,8 @@
                                             </div>
 
 
-                                            <span style="background: #128ece;padding:0px;" class="input-group-addon last">
-                                                <span style="height: 52px; width: auto; padding: 13px; background-color: transparent" data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect rotateData btnPrimary btn-icon">
+                                            <span class="input-group-addon last">
+                                                <span  data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect rotateData btnPrimary btn-icon">
                                                     <i class="fa fa-thumb-tack"></i>
                                                 </span>
 
@@ -1204,8 +1204,8 @@
 
                                                 <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
 
-                                                <span style="background: #128ece;padding:0px;" class="input-group-addon last">
-                                                    <span style="height: 52px; width: auto; padding: 13px; background-color: transparent; " id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
+                                                <span  class="input-group-addon last">
+                                                    <span  id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
                                                         <i class="fa fa-thumb-tack"></i>
                                                     </span>
                                                 </span>

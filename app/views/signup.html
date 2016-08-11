@@ -129,23 +129,20 @@
             </div>
         </div>
     </div>
-    <div>
-        <br /><br />
+
+    <div class="row">
+        <div class="col-xs-6">
+            <button class="waves-effect btn width-100 btn-primary" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()">Sign Up&nbsp;<i class="fa fa-sign-in"></i> </button>
+        </div>
+
+        <div class="col-xs-6">
+            <button class="waves-effect btn width-100 btn-gray" type="reset" data-ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp;Reset </button>
+        </div>
     </div>
+   
 
-    <table class="bottombtn">
-        <tr>
-           
-            <td>
-                <button class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()">Sign Up&nbsp;<i class="fa fa-sign-in"></i> </button>
-                
-            </td>
-            <td>
-                <button class="waves-effect waves-light gray-color btn-large width-100 animated center bouncein delay-6" type="reset" data-ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp;Reset </button>
-            </td>
-        </tr>
-    </table>
-
+    
+    <br />
     
 </form>
 
