@@ -12,7 +12,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     $scope.Isbuttonshow = false;
 
-    $scope.loadingbutton == false;
+    $scope.loadingbutton = false;
 
 
     $scope.mainObjectToSend = [];
@@ -161,7 +161,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     $scope.saveColumns = function () {
         $(".fa-check").addClass("fa-spin");
-        $scope.LocationsLoaded = false;
+   
 
         $scope.loadingbutton = true;
 
@@ -191,9 +191,8 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               success: function (response) {
 
                   debugger;
-
-                  $scope.LocationsLoaded = true;
-                  $scope.loadingbutton == false
+               
+                  $scope.loadingbutton = false
                   $(".fa-check").removeClass("fa-spin");
                   ShowSuccess("Updated");
                   $scope.GetMyinventoryColumns();
@@ -204,7 +203,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   $(".fa-check").removeClass("fa-spin");
                   $scope.errorbox(err);
                   $scope.LocationsLoaded = true;
-                  $scope.loadingbutton == false;
+                  $scope.loadingbutton = false;
                   $scope.$apply();
                   log.error("Error Occurred during operation");
 

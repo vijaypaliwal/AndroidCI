@@ -170,10 +170,11 @@
 
     .save-btn {
         margin-bottom: 4px;
-        padding-left: 3px;
-        padding-right: 3px;
-        width: 85px;
+        width: 88px;
+        height: 35px;
+        line-height: 35px;
         text-transform: capitalize;
+        border-radius: 18px;
     }
 
     .ordernumber {
@@ -207,17 +208,20 @@
         white-space: nowrap;
         position: fixed;
         left: 96%;
-        top: 35%;
+        top: 42%;
     }
 
     .myLinkToTop {
         position: fixed;
-        top: 28%;
+        top: 30%;
         right: 6px;
         width: 40px;
+        height: 40px;
+        line-height: 40px;
         padding: 0px;
         text-align: center;
-        border-radius: 0px;
+        border-radius: 100%;
+        padding: 0px;
     }
 
 
@@ -226,15 +230,24 @@
         top: 20%;
         right: 6px;
         width: 40px;
+        height: 40px;
+        line-height: 40px;
         padding: 0px;
         text-align: center;
-        border-radius: 0px;
+        border-radius: 100%;
+        padding: 0px;
     }
 
     .btn-primary.dropdown-toggle {
         opacity: 0.5;
     }
+
+    .btn-success.dropdown-toggle {
+        border-radius: 16px;
+    }
 </style>
+
+
 
 <div style="margin-top: 12px;" class="page-header">
 
@@ -251,7 +264,9 @@
         </div>
 
         <div style="text-align:right" class="col-xs-3">
-            <a class="btn save-btn btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</a>
+            <a ng-if="loadingbutton==false" class="btn save-btn btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</a>
+
+            <a ng-if="loadingbutton==true" disabled class="btn save-btn btn-primary"><i class="fa fa-check fa-spin"></i> Save</a>
         </div>
     </div>
 </div>

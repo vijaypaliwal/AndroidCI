@@ -7588,7 +7588,7 @@ small {
     .btn.disabled, .disabled.btn-large, .btn-floating.disabled, .btn-large.disabled, .btn:disabled, .btn-large:disabled, .btn-large:disabled, .btn-floating:disabled {
    
         box-shadow: none;
-        color: #9F9F9F !important;
+     
         cursor: default;
     }
 
@@ -7769,7 +7769,6 @@ button.btn-floating {
 .waves-effect {
     position: relative;
     cursor: pointer;
-    display: inline-block;
     overflow: hidden;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -8149,7 +8148,7 @@ select:focus {
 
 button:focus {
     outline: none;
-    background-color: #2ab7a9;
+    
 }
 
 label {
