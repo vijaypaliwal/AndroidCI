@@ -2,9 +2,12 @@
 app.controller('currentinventoryController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
-    $scope.CurrentView = {Name:"CurrentInventory"};
+    $scope.CurrentView = "Current Inventory"
     $scope.InventoryViews = [];
     $scope.InventoryList = [];
+
+    $scope.isviewload = false;
+
     $scope.GetInventoryViews = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -38,6 +41,24 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
           });
 
     }
+
+
+    $scope.showfilter = function() {
+        $("#modalfilter").modal('show');
+    }
+
+    $scope.viewdetail = function(viewname) {
+        $scope.isviewload = true;
+        $scope.CurrentView = viewname;
+    }
+
+    $scope.showview = function() {
+        $scope.isviewload = false;
+        $scope.CurrentView = "Current Inventory";
+    }
+
+
+
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();

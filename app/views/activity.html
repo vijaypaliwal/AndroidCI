@@ -68,7 +68,6 @@
             <div class="col-md-4 col-xs-3">
 
             </div>
-
         </div>
 
 
@@ -155,20 +154,11 @@
                                                 <label>Quantity</label>
 
                                                 <div class="input-group">
-
                                                     <div class="fg-line">
-
                                                         <input placeholder1="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
-
                                                     </div>
-
                                                 </div>
                                             </div>
-
-
-
-
-
 
 
                                             <div ng-if="CurrentActiveObject.MoveTransactionData.ActionQuantity>CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
@@ -234,17 +224,6 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <!--<div class="fg-line">
-                                                    <div class="select">
-
-
-
-                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                            <option value="">None</option>
-                                                            <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>-->
 
                                                 <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
                                                     {{CurrentActiveObject.MoveTransactionData.StatusToUpdate}}
@@ -276,7 +255,6 @@
                                         <div class="col-xs-4 col-md-4" ng-if="$index==0">
 
                                             <label>&nbsp;</label>
-
                                             <div class="pull-right">
                                                 <button id="LineItems2_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems2(CurrentActiveObject.MoveTransactionData.StatusToUpdate,CurrentActiveObject.InventoryDataList.uId)">
                                                     <i class="fa fa-thumb-tack"></i>

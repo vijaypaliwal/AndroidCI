@@ -7,4 +7,13 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
+    $(document).ready(function () {
+        getAppVersion(function (version) {
+
+            $(".versiontextlabel").html(version)
+
+        });
+    });
+   
+
 }]);
