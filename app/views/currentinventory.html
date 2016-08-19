@@ -72,7 +72,6 @@
     }
 
     .operator {
-        margin-left: -50px;
         max-height: 250px;
         overflow-y: auto;
         text-align: center;
@@ -137,20 +136,20 @@
         padding-bottom: 10px;
     }
 
-
     .Addbtn {
         position: fixed;
         bottom: 23px;
-        right: 13px;
+        right: 12px;
+        background: #b39a99 !important;
         z-index: 13000;
         color: #fff !important;
         height: 50px;
         width: 50px;
         border-radius: 100%;
         text-align: center;
-        line-height: 55px;
+        line-height: 50px;
+        cursor: pointer;
     }
-
     .save-btn {
         margin-bottom: 4px;
         width: 88px;
@@ -327,10 +326,10 @@
     {
         white-space:normal !important;
     }
-    code
-    {
-      color:#000;
-      float:right;
+    code {
+        color: #000;
+        float: right;
+        font-weight:800;
     }
 
     body
@@ -341,6 +340,172 @@
     .contentsection {
         overflow-x: hidden !important;
     }
+    .table-striped
+    {
+        padding:10px;
+        background:#fff;
+        margin-bottom:10px;
+    }
+
+        .table-striped tr td p {
+            text-align: center;
+            font-size: 11px;
+        }
+
+    .table > tbody > tr > td
+    {
+        border:transparent !important;
+    }
+    .well
+    {
+        padding:10px;
+        margin-bottom:7px;
+    }
+
+    .morebtn {
+        float: right;
+        background: #fafafa;
+        color: #afaeae !important;
+        padding: 0;
+        position: absolute;
+        right: 30px;
+        border: 1px solid #ccc;
+        border-radius: 100%;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        line-height: 26px;
+        font-size: 15px;
+        margin-top: 49px;
+        cursor: pointer;
+        z-index:9;
+    }
+
+        .morebtn i {
+            font-size: 15px;
+        }
+        
+         .ExtraTr {
+            display: none;
+        }
+    .newroundbtn {
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        position: fixed;
+        padding: 0px;
+        margin-top: 15px;
+        margin-left: 15px;
+        line-height: 37px;
+        z-index: 100;
+        color: #fff;
+        font-size: 25px;
+    }
+    .table-responsive
+    {
+        border:transparent;
+        overflow-x: hidden !important;
+    }
+
+    .fa-filter {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+    input[type=text]:focus
+    {
+        border:transparent;
+        box-shadow:none !important;
+        border:1px solid #ccc;
+        border-bottom:1px solid #ccc !important;
+    }
+
+    .Addbtn {
+        position: fixed;
+        bottom: 23px;
+        right: 12px;
+        background: #b39a99 !important;
+        z-index: 13000;
+        color: #fff !important;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+        .Addbtn .fa {
+            font-size: 24px;
+            margin-top: 13px;
+            color: #fff !important;
+        }
+
+    .selectAction {
+        position: fixed;
+        bottom: 75px;
+        right: 35px;
+    }
+
+
+
+        .selectAction li {
+            list-style-type: none;
+        }
+
+
+            .selectAction li span {
+                color: #000;
+            }
+
+
+        .selectAction .btn {
+            height: 34px;
+            width: 34px;
+            padding: 0px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 34px;
+            border: transparent;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+    #myModal2 {
+        position: fixed;
+        right: 13px;
+        font-size: 18px;
+        text-align: right;
+        display: none;
+        background: transparent;
+        overflow: hidden;
+    }
+
+        #myModal2 span {
+            font-size: 16px;
+            font-family: verdana;
+            margin-right: 7px;
+        }
+
+
+        #myModal2 .modal-body {
+            background: transparent;
+        }
+
+    .rotate {
+        -ms-transform: rotate(42deg);
+        -webkit-transform: rotate(42deg);
+        transform: rotate(42deg);
+    }
+
+    .cd-top.cd-is-visible {
+        visibility: visible;
+        opacity: 0.7;
+    }
+
+    .cd-top {
+        visibility: hidden;
+    }
 </style>
 
 <div class="report-header">
@@ -348,22 +513,52 @@
     <div class="row">
 
         <div class="col-xs-12">
-            <h4 class="text">{{CurrentView}} <small>Reports</small></h4>
+            <h4 class="text">{{CurrentView.Name}} <small>Reports</small></h4>
         </div>
 
 
     </div>
 </div>
+<div ng-if="isDataLoading==false">
 
+    <div class="modal-backdrop fade in"></div>
+    <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+        <img src="img/loader.gif" alt="Alternate Text" />
+
+        <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
+    </div>
+</div>
 
 <a ng-if="isviewload==false" class="waves-effect roundbtn btn btn-success">+ </a>
 
-<a ng-if="isviewload==true" ng-click="showview()" class="waves-effect roundbtn btn btn-success"> <i class="fa fa-th-list"></i> </a>
+<a ng-if="isviewload==true" ng-click="showview()" class="waves-effect newroundbtn"> <i class="fa fa-arrow-circle-left"></i> </a>
 
-<a style="right:20px;" ng-if="isviewload==true" ng-click="showfilter()" class="waves-effect roundbtn btn btn-warning"> <i class="fa fa-filter"></i> </a>
+<a ng-if="isviewload==true" ng-click="showfilter()" class="btn roundbtn" style="right: 12px; background: #f04124;"><i class="fa fa-filter" style="font-size: 17px; color:#fff "></i> </a>
+
+
+<!--<a ng-click="OpenmenuModal()" class="Addbtn waves-effect btn-info btn-floating" ng-if="isviewload==true">
+    <i class="fa fa-plus"></i>
+</a>
+
+
+<div id="myModal2" class="modal bottommenu fade">
+
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+            <li ng-click="applysorting()" class="bottomlink"> <span>Apply sorting</span> <a class="waves-effect btn-success btn decrease"  data-dismiss="modal"> <i class="fa fa-sort-alpha-asc"></i> </a></li>
+            <li class="bottomlink"> <span>Advanced search</span> <a class="waves-effect btn-warning btn decrease"  data-dismiss="modal"> <i style="padding-left:10px !important;" class="fa fa-filter"></i> </a></li>
+            <li class="bottomlink" > <span>Show Filter</span> <a class="waves-effect btn-success btn decrease"  data-dismiss="modal"> <i style="padding-left:10px !important;" class="fa fa-filter"></i> </a></li>
+            <li class="bottomlink"> <span>Close</span> <a class="waves-effect btn-gray btn decrease" data-dismiss="modal"> <i  class="fa fa-times"></i> </a></li>
+          
+        </ul>
+    </div>
+</div>-->
+
+<a class="Addbtn cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
+
 
 <div class="contentsection">
-    
+
 
     <div ng-if="isviewload==false" class="infoareas">
 
@@ -375,8 +570,7 @@
                 </a>
             </div>
 
-            <div ng-click="viewdetail(_obj.Name)" class="col-xs-10">
-
+            <div  class="col-xs-10">
                 <div style="padding-top:0px;" class="row">
                     <div class="col-xs-9">
                         <a class="text">{{_obj.Name}} </a>
@@ -388,64 +582,147 @@
                         </span>
                     </div>
                 </div>
-
             </div>
-
         </div>
+    </div>
 
+
+    <div ng-if="isviewload==true" class="paginationtext">
+
+        <span style="font-size:13px;">{{currentrecord}} of {{totalrecords}} <span>records shown <span class="pull-right" ng-click="clearfilterArray()"></span> </span> </span>
     </div>
 
 
     <div ng-if="isviewload==true" class="table-responsive">
-        <table class="table table-striped">
+        
 
-            <tbody>
-                <tr>
-                    <td><code class="w3-codespan">Item name</code></td>
-                    <td>BLC23654</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Item Description</code></td>
-                    <td>Indicates a successful or positive action Indicates a successful or positive actionIndicates a successful or positive action</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Quantity</code></td>
-                    <td>180</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Unit of measure</code></td>
-                    <td>Active</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Status</code></td>
-                    <td>Indicates a dangerous or potentially negative action</td>
-                </tr>
+        <div style="margin-top:10px;" class="input-group">
 
-                <tr>
-                    <td><code class="w3-codespan">Expiration date</code></td>
-                    <td>25/11/2015</td>
-                </tr>
-            </tbody>
-        </table>
+            <span style="padding:5px; border:1px solid #ccc; border-right:transparent" class="input-group-addon">
+                <a class="dropdown-toggle"  aria-expanded="true">
+                    <i style="padding:0px; background:transparent; color:#afaeae !important; font-size:16px !important;" class="fa fa-search"></i>
+                </a>
+            </span>
+
+            <input style="border-left:transparent" type="text" ng-model="FilterData.SearchValue" class="form-control ng-pristine ng-valid" placeholder="Type to Search">
+
+            <a style="border:1px solid #ccc; border-left:transparent;" ng-if="FilterData.SearchValue!=''" class="input-group-addon last textData" ng-click="clearfilter()" style="margin-top: 0px;"><i class="fa fa-times" style="font-size:30px !important; padding-left:10px; padding-right:10px; padding-top:0px; padding-bottom:0px; color:#6b6b6b !important; background:transparent"></i> </a>
+
+            <a class="input-group-addon last textData" ng-click="GetInventoryDataAccordingToView()" style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
+          
+
+        </div>
+
+        <div ng-if="InventoryList.length==0" style="text-align:center;" class="well">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <img style="height:150px; width:200px;" src="img/oops_image.png" alt="Alternate Text" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>No such records found !!</h4>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <a ng-click="clearfilter()" class="btn btn-primary width-100"> <i class="fa fa-times"></i> Clear filter</a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="well" ng-repeat="_obj in InventoryList" ng-init="parentIndex=$index">
+            <table class="table table-striped">
+
+                <tbody id="row_{{_obj.iID}}">
+
+                    <tr ng-if="IsAvailableColumn('ImagePath')">
+                        <td style="text-align:center;" colspan="2">
+                            <img ng-if="_obj.ImagePath !=''" style="height:55px; width:55px; border-radius:55px;" src="{{_obj.ImagePath}}" alt="Alternate Text" />
+
+                            <img ng-if="_obj.ImagePath ==''" style="height:55px; width:55px; border-radius:55px;" src="img/default.png" alt="Alternate Text" />
+                        </td>
+
+                    </tr>
+
+                    <tr ng-repeat="_obj2 in Columns" ng-class="{'ExtraTr':$index > 2}" ng-if="_obj2.ColumnID!='LeaveBlank' && _obj2.Visible!=false && _obj2.ColumnID != 'Button1' && _obj2.ColumnID != 'Button2' && _obj2.ColumnID != 'ImagePath' ">
+
+                        <td width="50%">
+                            <code ng-if="_obj2.isFirstFurtherCalculated == true || _obj2.isSecondFurtherCalculated == true" class="w3-codespan">{{_obj2.DisplayLabel}}</code>
+                            <code ng-if="_obj2.isFirstFurtherCalculated == false && _obj2.isSecondFurtherCalculated == false" ng-click="applysorting(_obj2.ColumnID)" class="w3-codespan">{{_obj2.DisplayLabel}}</code>
+                            <a class="morebtn" ng-click="ShowHideDiv(_obj.iID)" ng-if="$index==0"><i class="fa fa-chevron-up" id="icon_{{_obj.iID}}"></i></a>
+                        </td>
+                        <td width="50%">{{GetCellData(_obj2.ColumnID,parentIndex,_obj2.isCalculated) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 </div>
 
 
-<div style="background:#fff; padding:0px;" id="modalfilter" class="modal animated bounceIn">
+<div style="background:#fff; padding:0px; overflow-x:hidden;" id="filtermodal" class="modal animated bounceIn">
     <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-
-        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <span style="opacity:0.8; margin-top:-12px;" class="close">
+            <i style="font-size:40px; color:brown" data-dismiss="modal" class="fa fa-times"></i>
+        </span>
         <h4>Apply filters</h4>
     </div>
 
-    <div style="padding:5px;" class="modal-body">
-       
+    <div style="padding:10px;" class="modal-body">
 
-        <div><br /></div>
+        <div class="row" ng-repeat="_obj in FilterArray" ng-if="_obj.ColumnName!='Button1' && _obj.ColumnName!='Button2'&& _obj.ColumnName!='ImagePath' && isFurtherCalculatedColumn(_obj.ColumnName)==false">
+            <div class="col-xs-6">
+                <h6>{{GetDisplayLabel(_obj.ColumnName) }}</h6>
+            </div>
 
+            <div class="col-xs-6">
+
+                <select ng-if="_obj.ColumnName=='iStatusValue'" ng-model="_obj.SearchValue" class="form-control">
+                    <option value="" >Choose Status</option>
+                    <option value="{{obj.StatusValue}}" ng-selected="obj.StatusValue==_obj.SearchValue" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
+                </select>
+
+                <select ng-if="_obj.ColumnName=='uomUOM'"  ng-model="_obj.SearchValue" class=" form-control">
+                    <option value="">Choose UOM</option>
+                    <option value="{{obj.UnitOfMeasureName}}" ng-selected="obj.UnitOfMeasureName==_obj.SearchValue" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
+                </select>
+
+                <input class="form-control" type="text" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='string' && _obj.ColumnName!='iStatusValue' && _obj.ColumnName!='uomUOM'" ng-model="_obj.SearchValue" value="" />
+                <input class="form-control" type="date" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='date'||GetColumnDataType(_obj.ColumnName)=='datetime'" ng-model="_obj.SearchValue" value="" />
+                <input class="form-control" type="number" data-type="number" pattern="[0-9]*" inputmode="numeric" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='number'||GetColumnDataType(_obj.ColumnName)=='decimal' ||GetColumnDataType(_obj.ColumnName)=='money' || GetColumnDataType(_obj.ColumnName)=='currency'" ng-model="_obj.SearchValue" value="" />
+                <select class="form-control" ng-if="GetColumnDataType(_obj.ColumnName)=='combobox'" ng-model="_obj.SearchValue">
+                    <option ng-repeat="_data in GetComboData(_obj.ColumnName)" value="{{_data}}">{{_data}}</option>
+                </select>
+            </div>
+            <div class="col-xs-12">
+                <br />
+            </div>
+        </div>
 
     </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <a class="btn btn-primary width-100 pull-left" ng-click="GetInventoryDataAccordingToView()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-filter"></i>Filter</a>
+            </div>
+            <div class="col-xs-6">
+                <a class="btn btn-danger width-100 pull-left" style="border-radius:45px; padding-left:10px; padding-right:10px;" ng-click="clearfilterArray()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-times"></i>Clear</a>
+            </div>
+        </div>
+        
+    </div>
+
 </div>
 
 
@@ -459,6 +736,30 @@
     $('.myMenuLink').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 'slow');
         return false;
+    });
+</script>
+<script>
+
+    var offset = 50;
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    var offset_opacity = 1200;
+    //duration of the top scrolling animation (in ms)
+    var scroll_top_duration = 700;
+    //grab the "back to top" link
+    var $back_to_top = $('.cd-top');
+
+    function scrollToTop() {
+
+        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
+    }
+
+
+
+    $(window).scroll(function () {
+        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('cd-fade-out');
+        }
     });
 </script>
 
