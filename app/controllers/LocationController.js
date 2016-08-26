@@ -193,13 +193,15 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                     if ($scope.ActualTotalRecords) {
                     } else {
-                        $scope.OpenmenuModal();
+                      
                     }
                 }
                 else {
                     $scope.ShowErrorMessage("Get locations", 1, 1, result.LoadLocationsResult.Message)
 
                 }
+
+                $scope.LocationsLoaded = true;
 
                 CheckScopeBeforeApply();
             },
@@ -347,6 +349,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
+
+
+
                         if (result.DeleteLocationResult.Success == true) {
                        
 

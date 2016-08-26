@@ -294,7 +294,7 @@
     padding-bottom: 9px;
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 100;
     left:0;
     right:0;
 }
@@ -359,6 +359,11 @@
     color: #fff;
     font-size: 25px;
     }
+
+ .newbackbtn i
+ {
+     color:#fff !important;
+ }
 
  .btn-large
  {
