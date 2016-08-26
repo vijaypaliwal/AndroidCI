@@ -3,6 +3,18 @@
 <link href="css/finditem.css" rel="stylesheet" />
 
 <style>
+
+    .newbackbtn {
+        margin-left: 15px;
+    }
+
+    .cartImage
+    {
+        font-size: 35px;
+        color: #fff;
+        margin: 15px;
+        margin-left: 6px;
+    }
     .drag-target
     {
         display:none;
@@ -52,25 +64,40 @@
         color:#fff;
     }
 
-  
- 
+   
 </style>
 
-<div>
 
+
+<div class="title-header">
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Inventory <small>{{currentrecord}} of {{totalrecords}} <span ng-if="totalrecords<1">record</span> <span ng-if="totalrecords>1">records</span>  shown</small> </h4>
+        </div>
+    </div>
+</div>
+
+<a ng-if="isshowsearch==false" ng-click="showsearch()" class="btn btn-danger roundbtntitle"> <i class="fa fa-search"></i> </a>
+
+<a ng-if="isshowsearch==true" ng-click="hidesearch()" class="btn btn-danger roundbtntitle"> <i class="fa fa-times"></i> </a>
+<a href="#/mainmenu" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
+<div>
+    <br /><br /><br />
 
     <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
-    <div class="page-header">
+    <!--<div class="page-header">
 
 
         <div style="padding-left:2px;" class="col-xs-5">
-            <h4 style="margin-top:0px;">Inventory </h4>
+            <h4 style="margin-top:0px;"> </h4>
         </div>
-        <div style="text-align:right" class="col-xs-7">
-            <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} <span ng-if="totalrecords<1">record</span> <span ng-if="totalrecords>1">records</span>  shown</p>
+        <div style="text-align:right; display:none;" class="col-xs-7 paginationtext">
+            <p style="font-size:13px;"></p>
         </div>
-    </div>
+    </div>-->
 
 
     <div ng-if="myinventoryColumnLoaded==false">
@@ -83,11 +110,11 @@
         </div>
     </div>
     <div id="sticky-anchor"></div>
-    <div id="sticky" class="topup">
+    <div class="" style="margin-bottom:7px;" ng-if="isshowsearch==true" id="" >
         <table class="searchtable">
             <tbody>
                 <tr>
-                  
+
                     <td>
 
 
@@ -156,8 +183,8 @@
                                 </ul>
                             </span>
 
-                         
-                            
+
+
                             <div style="position:relative" class="fg-line">
 
                                 <span ng-if="CurrentActiveSearchType==1">
@@ -166,34 +193,32 @@
                                 </span>
 
                                 <span ng-if="CurrentActiveSearchType==3">
-                                 
+
                                     <input style="border-radius:0px;" id="MasterSearchDate" type="date" ng-model="SearchDateValue" class="form-control" placeholder="Type to Search">
                                 </span>
                                 <span ng-if="CurrentActiveSearchType==2">
-                                 
+
                                     <input style="border-radius:0px;" id="MasterSearchNumber" type="number" ng-model="SearchNumberValue" class="form-control" placeholder="Type to Search">
                                 </span>
                                 <span ng-if="CurrentActiveSearchType==4">
-                                    
+
                                     <select ng-if="CurrentActiveSearchField == 'iStatusValue'" class="form-control" multiple-select multiple="multiple" ng-model="SearchStatusValue" ng-options="obj.StatusValue for obj in StatusList track by obj.StatusValue" id="MasterSearchStatus"></select>
 
                                     <select ng-if="CurrentActiveSearchField == 'uomUOM'" class="form-control" multiple-select multiple="multiple" ng-model="SearchUOMValue" ng-options="obj.UnitOfMeasureName for obj in UOMList track by obj.UnitOfMeasureName" id="MasterSearchUOM"></select>
-                                    
-                                    
+
+
 
                                 </span>
-                                    <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
-</div>
+                                <i id="btnClearSearch" class="fa fa-times filtercross" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
+                            </div>
 
                             <a class="input-group-addon last textData" style="margin-top: 0px;  width: 37px;" id="btnMasterSearch" ng-click="SearchInventory()"><i class="fa fa-search" style="font-size:20px;"></i> </a>
-                            <a class="input-group-addon last"  style="margin-top: 0px;  width: 37px;  " ng-click="ScanItemSearch()" ><i class="fa fa-barcode " style=" color: #2196F3; font-weight: 400;"></i></a>
+                            <a class="input-group-addon last" style="margin-top: 0px;  width: 37px;  " ng-click="ScanItemSearch()"><i class="fa fa-barcode " style=" color: #2196F3; font-weight: 400;"></i></a>
                         </div>
 
 
-</td>
-                    <td>
-                        
                     </td>
+                    <td></td>
                     <td></td>
                 </tr>
             </tbody>
@@ -212,7 +237,7 @@
             <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
             <br /><br />
         </div>
-        <div style="position:relative;" ng-if="ActualTotalRecords==0">
+        <div ng-if="ActualTotalRecords==0">
             <br />
             <h5>You don't have any inventory records yet. Click the "New Inventory" button below to put something in inventory.</h5>
             <br />
@@ -235,9 +260,9 @@
                     <a class="">
                         <span class="img">
                             <span class="imghelper"></span>
-                            <img ng-if="_obj.ImageThumbPath==''" src="img/default.png" alt="loading.." />
+                            <i ng-if="_obj.ImageThumbPath==''" class="fa fa-shopping-cart cartImage"></i>
                             <img class="thumbimg" ng-if="_obj.ImageThumbPath!=''" style="display:none !important;" src="{{_obj.ImageThumbPath}}" alt="loading.." imageonload />
-                            <img style="height:32px;width:32px; border:transparent" ng-if="_obj.ImageThumbPath!=''" src="img/loader.gif" class="loadingImage" alt="loading.." />
+                            <img style="height:32px;width:32px; border:transparent" ng-if="_obj.ImageThumbPath!=''" src="img/loader1.gif" class="loadingImage" alt="loading.." />
                         </span>
                         <span class="product clearfix" ng-click="GoToDetailPage(_obj)" on-long-press="SetCurrentObject(_obj)" on-touch-end="ShowOptionModal()">
                             <!--<span class="product clearfix" ng-click="ShowOptionModal()">-->
@@ -346,10 +371,9 @@
         </div>
     </div>
 
-    <a ng-click="OpenmenuModal()" class="Addbtn waves-effect btn-info btn-floating" ng-if="mainObjectToSend.length==0">
-        <i class="fa fa-plus"></i>
+    <a ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info btn-floating" ng-if="mainObjectToSend.length==0">
+        <i class="fa fa-bars"></i>
     </a>
-
 
     <div style="text-align:center; top:100px; overflow:hidden;" id="myModalforlist" class="modal fade">
         <div class="modal-body">
@@ -392,7 +416,7 @@
         </div>
     </div>
 
-    <a data-backdrop="static" style="text-decoration:none;" ng-click="OpentransactionModal()" class="animated {{CurrentActiveClass}} cartbtn waves-effect btn-floating btn-primary" ng-if="mainObjectToSend.length>0">
+    <a data-backdrop="static" style="text-decoration:none;" ng-click="OpentransactionModal()" class="animated {{CurrentActiveClass}} cartbtn waves-effect btn-floating" ng-if="mainObjectToSend.length>0">
         <span class="cartcounter" style="font-size:32px;"> {{mainObjectToSend.length}}</span>
         <i style="display:none;" class="cartcrossicon fa fa-times"></i>
     </a>

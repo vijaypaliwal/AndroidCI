@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('settingController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
+app.controller('settingController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -10,7 +10,7 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
     $scope.IsStatusLoading = false;
     $scope.IsLocationLoading = false;
     $scope.Iscolumnloading = false;
-
+    $scope.columnlist = [];
     $scope.mainObjectToSend = [];
     function init() {
         $scope.getuom();
@@ -36,7 +36,7 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
     $scope.getstatus = function () {
 
         $scope.IsStatusLoading = true;
-      
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -50,25 +50,57 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   $scope.IsStatusLoading = false;
-                   debugger;
 
-                   $scope.StatusList = response.GetStatusResult.Payload;
+                   if (response.GetStatusResult.Success == true) {
+                       $scope.StatusList = response.GetStatusResult.Payload;
+
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting Status count", 1, 1, response.GetStatusResult.Message)
+
+                   }
+                   $scope.IsStatusLoading = false;
+
+
                    $scope.$apply();
                },
                error: function (err) {
                    $scope.IsStatusLoading = false;
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Getting Status count", 2, 1, err.statusText);
+
 
                }
            });
 
     }
 
+
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+        }
+    }
+
+
+
     $scope.getuom = function () {
         $scope.IsUOMLoading = true;
 
-        
+
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -84,13 +116,21 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    $scope.IsUOMLoading = false;
-                   debugger;
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                   if (response.GetUnitsOfMeasureResult.Success == true) {
+                       $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+
+
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting UOM count", 1, 1, response.GetUnitsOfMeasureResult.Message)
+
+                   }
                    $scope.$apply();
+
                },
                error: function (err) {
                    $scope.IsUOMLoading = false;
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Getting UOM count", 2, 1, err.statusText);
 
                }
            });
@@ -112,18 +152,26 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   debugger;
-                   $scope.IsLocationLoading = false;
-                   $scope.LocationList = response.GetLocationsResult.Payload;
-                   $scope.LocationSearchList = $scope.LocationList;
 
-               
+                   $scope.IsLocationLoading = false;
+
+                   if (response.GetLocationsResult.Success == true) {
+                       $scope.LocationList = response.GetLocationsResult.Payload;
+                       $scope.LocationSearchList = $scope.LocationList;
+
+
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting Location count", 1, 1, response.GetLocationsResult.Message)
+
+                   }
+
                    $scope.$apply();
                },
                error: function (response) {
 
                    $scope.IsLocationLoading = false;
-                   console.log(response);
+                   $scope.ShowErrorMessage("Getting Location count", 2, 1, response.statusText);
 
 
                }
@@ -135,7 +183,7 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
 
         $scope.Iscolumnloading = true;
 
-    
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -150,22 +198,38 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-                 
-
+                  debugger;
                   $scope.Iscolumnloading = false;
 
-                  $scope.columnlist = response.GetMyInventoryColumnsResult.Payload;
-                
+
+                  if (response.GetMyInventoryColumnsResult.Success == true) {
+
+
+
+
+
+                      var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
+                      for (var i = 0; i < _myinventorycols.length; i++) {
+                          if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty") {
+                              $scope.columnlist.push(_myinventorycols[i]);
+                          }
+                      }
+
+
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Getting My inventory column's count", 1, 1, response.GetMyInventoryColumnsResult.Message)
+
+                  }
+
                   $scope.$apply();
 
-                  console.log($scope.MyInventorycolumns);
               },
               error: function (err) {
-                  console.log(err);
-                  log.error("Error Occurred during operation");
                   $scope.LocationsLoaded = true;
                   $(".save-btn").hide();
-                  $scope.errorbox(err);
+                  $scope.ShowErrorMessage("Getting My inventory column's count", 2, 1, err.statusText);
                   $scope.$apply();
 
               }
@@ -178,6 +242,6 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
 
 
 
- 
+
 
 }]);

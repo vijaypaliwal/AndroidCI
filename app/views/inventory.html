@@ -3,18 +3,7 @@
 <link href="css/inventory.css" rel="stylesheet" />
 
 <style>
-    .imgcounter {
-        font-size: 18px;
-        padding: 8px;
-        padding-left: 13px;
-        padding-right: 5px;
-        background: white;
-        padding-top: 5px;
-        color: #333;
-        margin-top: 13px;
-        border-radius: 100%;
-        text-align: left;
-    }
+
     .createNewLabel {
         font-size: 17px;
         color: #069;
@@ -22,21 +11,6 @@
     }
     .allfields {
         padding: 8px;
-    }
-
-    .Addbtn {
-        position: fixed !important;
-        bottom: 0px;
-        color: #0083C7 !important;
-        text-align: center;
-        width: 125px;
-        left: 0px;
-        line-height: 8px;
-        right: 0px;
-        padding-top: 0px;
-        height: 18px;
-        z-index: 1000 !important;
-        margin: 0 auto;
     }
 
     .mylabel {
@@ -79,7 +53,7 @@
         padding: 7px;
         box-shadow: 0 1px 11px rgba(0,0,0,.27);
         padding-top: 0px;
-        padding-bottom: 0px;
+        padding-bottom: 6px;
         background: white;
     }
 
@@ -88,6 +62,7 @@
         min-height:90px;
         padding-right:12px;
     }
+
 
         .swiper-slide .form-group {
             margin-bottom: 0px;
@@ -114,14 +89,9 @@
         border-radius:100%;
         padding:0px;
         line-height:50px;
-        margin:5px;
+       
     }
 
-        .roundbutton  i
-        {
-            font-size:17px;
-        }
-        
         
          .fa-barcode {
             color: #fff !important;
@@ -144,20 +114,165 @@
         background: transparent;
     }
 
+        .iteminfo .row
+        {
+            display:block;
+        }
+        
+        
+         .collapsible-header {
+            width: 100% !important;
+            min-height: 46px !important;
+            display: block !important;
+            position: relative;
+            padding-left: 0px;
+            padding-right: 0px;
+            border: transparent;
+        }
 
-.collapsible-header
-{
- width:100% !important;
-}
+    .imgcounter {
+        font-size: 18px;
+        padding: 8px;
+        padding-left: 13px;
+        padding-right: 5px;
+        background: white;
+        padding-top: 5px;
+        color: #333;
+        margin-top: 13px;
+        border-radius: 100%;
+        text-align: left;
+    }
+
+    .collapsible-header i
+    {
+        width:auto;
+        padding:0px !important;
+       
+    }
+
+    .iteminfo
+    {
+      min-height:96px !important;
+      width:100% !important;
+      position:relative;
+    }
+
+    .Addbtn {
+        position: fixed;
+        bottom: 23px;
+        right: 25px;
+        background: #f44336 !important;
+        z-index: 13000;
+        color: #fff !important;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+        .Addbtn .fa {
+            font-size: 24px;
+            margin-top: 13px;
+            color: #fff !important;
+        }
+
+    .selectAction {
+        position: fixed;
+        bottom: 75px;
+        right: 35px;
+    }
+
+
+
+        .selectAction li {
+            list-style-type: none;
+        }
+
+
+            .selectAction li span {
+                color: #000;
+            }
+
+
+        .selectAction .btn {
+            height: 34px;
+            width: 34px;
+            padding: 0px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 34px;
+            border: transparent;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+    #myModal2 {
+        position: fixed;
+        right: 13px;
+        font-size: 18px;
+        text-align: right;
+        display: none;
+        background: transparent;
+        overflow: hidden;
+    }
+
+        #myModal2 span {
+            font-size: 16px;
+            font-family: verdana;
+            margin-right: 7px;
+        }
+
+
+        #myModal2 .modal-body {
+            background: transparent;
+        }
+
+    .rotate {
+        -ms-transform: rotate(42deg);
+        -webkit-transform: rotate(42deg);
+        transform: rotate(42deg);
+    }
+
+    .lessOpacity {
+        opacity: 0.4;
+    }
+
+    .moreCounter {
+        margin-left: -45px;
+        font-size: 22px;
+        color: #696565;
+        position: absolute;
+        margin-top: 12px;
+    }
+
+    .maincontent
+    {
+        padding-top:50px;
+    }
+    .newbackbtn
+    {
+        margin-left:15px;
+    }
 
 
 </style>
 
 
-<a style="z-index:1000;" class="Addbtn animated fadeIn" ng-click="viewall()">
-    View all details
-</a>
+<div class="title-header">
 
+    <div class="row">
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Add Inventory <small> {{CurrentCount+1}} / {{Totalslides+1}}</small> </h4>
+        </div>
+    </div>
+</div>
+
+
+<a ng-click="viewall()" class="btn btn-danger roundbtntitle"> <i class="fa fa-info"></i> </a>
+<a href="#/mainmenu" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
 
 <div class="maincontent animated slideInLeft">
                   
@@ -169,12 +284,9 @@
                 <br /><br /><br />
                 <img src="img/loader.gif" alt="Alternate Text" />
             </div>
-            <h4 style="margin-top:21px;">Add Inventory <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></h4>
+       
             <div style="display:none;" class="swiper-container">
                 
-
-            
-
 
                     <div class="swiper-wrapper">
 
@@ -199,21 +311,21 @@
 
                                             <div>
 
-                                                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
+                                                <input type="text" id="ItemName" class="form-control" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" />
 
                                             </div>
 
 
 
-                                            <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
-                                            <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-undo"></i></span>
+                                            <span class="input-group-addon waves-effect waves-effect last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
+                                            <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-undo"></i></span>
                                         </div>
 
 
                                         <div ng-if="InventoryObject.AutoID==true" class="input-group">
 
                                             <div>
-                                                <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
+                                                <input placeholder="Automated" my-enter="GoToNext()" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
                                             </div>
 
                                         </div>
@@ -228,9 +340,9 @@
                             <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
                                 <label>Item Description </label>
                                 <div class="input-group">
-                                    <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
+                                    <input type="text" id="pDescriptionForm" my-enter="GoToNext()" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
 
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -239,14 +351,13 @@
                                 <label>Quantity</label>
 
                                 <div class="input-group">
-                                    <span class="input-group-addon" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
+                                    <span class="input-group-addon waves-effect waves-effect" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
                                     <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="Quantity" value="" />
 
-                                    <span class="input-group-addon" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
+                                    <span class="input-group-addon waves-effect waves-effect" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
                                 </div>
 
                             </div>
-
 
 
                             <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
@@ -255,8 +366,8 @@
                                     <select class="form-control" id="Location" ng-model="InventoryObject.Location">
                                         <option value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                     </select>
-                                    <span class="input-group-addon last" ng-click="locationlist()"><i class="fa fa-search"></i></span>
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="locationlist()"><i class="fa fa-search"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
@@ -267,18 +378,18 @@
                                 <label>Location Group</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_lZone','#lZone')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_lZone','#lZone')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
 
                             <div class="form-group" ng-if="obj.ColumnName=='iStatusValue'">
-                                <label>Status</label>
+                                <label>Status </label>
                                 <div class="input-group">
                                     <select class="form-control" id="Status" ng-model="InventoryObject.Status">
-                                        <option value="{{obj.StatusValue}}" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
+                                        <option value="{{obj.StatusValue}}" ng-selected="obj.StatusValue==InventoryObject.Status" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
                                     </select>
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -292,7 +403,7 @@
                                         <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                     </select>
 
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -300,19 +411,16 @@
                                 <label>Item Group</label>
                                 <div class="input-group">
                                     <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
-
-
-
 
                             <div class="form-group" ng-if="obj.ColumnName=='iCostPerUnit'">
                                 <label>Cost per unit</label>
 
                                 <div class="input-group">
                                     <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Cost','#Costperunit')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect last" ng-click="GetLastValue('Inv_Cost','#Costperunit')"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
@@ -323,27 +431,35 @@
 
 
                                 <div class="row">
-                                    <div class="col-xs-6">
-                                        <div class="androidbtn">
-                                            <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBoxAndroid()">
+                                    <!--<div class="col-xs-6">
+                                        <div class="iosbtn">
+                                            <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
                                                 <div><i class="fa fa-plus-circle"></i></div>
-                                                <span>Add Image</span>
+                                                <span>Add</span>
 
                                                 <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
                                             </div>
                                         </div>
 
 
-                                    </div>
-                                    <div class="col-xs-6">
+                                    </div>-->
+                                    <div class="col-xs-12">
 
-                                        <div class="fileUpload viewimage btn btn-primary" style="float:right;" ng-if="ImageList.length>0" ng-click="viewimages()">
-                                            <span><span class="imgcounter"> {{ImageList.length}} </span>
-<br /> Images</span>
+
+                                        <h4 style="text-align:center;" ng-if="ImageList.length==0">No Image seleceted</h4>
+
+                                        <div class="viewimage " ng-if="ImageList.length>0" ng-click="viewimages()">
+
+
+                                            <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+
+                                                <img src="{{_obj.bytestring}}" ng-if="$index<4" height="60" width="60" ng-class="{'lessOpacity':$index==3}" alt="Alternate Text" />
+                                                <span class="moreCounter" ng-if="ImageList.length>3 && $index==3">3+</span>
+                                            </span>
+                                          
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div>
                                     <br />
@@ -355,14 +471,14 @@
 
                                 <div class="input-group">
                                     <input id="UniqueTag" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
                                 <label>{{obj.ColumnLabel}}</label>
                                 <div class="input-group">
                                     <input id="UnitTag2" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitTag3'" class="form-group">
@@ -370,7 +486,7 @@
                                 <label>{{obj.ColumnLabel}}</label>
                                 <div class="input-group">
                                     <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUniqueDate'" class="form-group">
@@ -378,7 +494,7 @@
 
                                 <div class="input-group">
                                     <input id="UniqueDate" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitDate2'" class="form-group">
@@ -387,14 +503,14 @@
 
                                 <div class="input-group">
                                     <input id="UnitDate2" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
                                 <label>{{obj.ColumnLabel}}</label>
                                 <div class="input-group">
                                     <input id="UnitNumber1" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
-                                    <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitNumber2'" class="form-group">
@@ -404,16 +520,11 @@
                                 <div class="input-group">
 
                                     <input id="UnitNumber2" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
-                                    <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
-
                             </div>
 
-
                         </div>
-
-
-
 
 
                         <div class="swiper-slide CustomItemCols" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
@@ -424,7 +535,7 @@
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
 
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='checkbox'">
@@ -444,24 +555,24 @@
 
                                         </select>
                                     </div>
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
 
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -476,7 +587,7 @@
                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
@@ -496,24 +607,24 @@
 
                                         </select>
                                     </div>
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
 
                                 </div>
 
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                             </div>
@@ -523,7 +634,7 @@
 
                         <div class="swiper-slide">
 
-                            <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="color:white !important; width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect btn-primary width-100"> <i style="font-size:16px;" class="fa fa-plus-circle"></i>  Add Inventory</a>
+                            <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect btn btn-primary"> <i class="fa fa-plus-circle"></i> Add Inventory</a>
                         </div>
 
 
@@ -531,12 +642,18 @@
 
             
 
-                    <table style="width:100%; margin-top:-7px; background:#f5f5f5;">
+                    <table style="width:100%; margin-top:-10px;">
                         <tr>
                             <td>
                                 <button type="button" class="waves-effect roundbutton btn btn-default arrow-left bknext"><i class="fa fa-angle-left"></i></button>
                             </td>
+                            <td ng-if="CurrentActiveField=='iStatusValue'">
 
+                                <div style="text-align:center;">
+                                    <a class="scanbtn btn btn-success roundbutton" ng-click="CreateNew(3)"><i class="fa fa-plus"></i></a>
+                                </div>
+
+                            </td>
                             <td ng-if="CurrentActiveField=='lLoc'">
 
                                 <div style="text-align:center;">
@@ -549,11 +666,15 @@
                                 <div style="text-align:center">
                                     <a class="scanbtn btn btn-success roundbutton" ng-click="CreateNew(2)"><i class="fa fa-plus"></i></a>
                                 </div>
-
                                 
                             </td>
 
-
+                            <td style="text-align:center;" ng-if="CurrentActiveField=='Image'">
+                                <a class="scanbtn btn btn-success roundbutton" ng-click="OpenBox()">
+                                    <i class="fa fa-picture-o"></i>
+                                    <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
+                                </a>
+                            </td>  
 
                             <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
 
@@ -565,7 +686,7 @@
                                    
                                  
                                     <button class="scanbtn btn btn-primary roundbutton" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></button>
-                                    <a class="scanbtn waves-effect btn btn-primary roundbutton" ng-if="CurrentActiveField!='pPart'&& CurrentActiveField!='iQty' && CurrentActiveField!='uomUOM'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></a>
+                                    <a class="scanbtn waves-effect btn btn-primary roundbutton" ng-if="CurrentActiveField!='pPart'&& CurrentActiveField!='iQty'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></a>
                                 </div>
 
 
@@ -625,72 +746,81 @@
 
             </div>
 
+            <br />
+            
 
+            <table style="background:#fff;">
+                <tr>
+                    <td>
+                     <div style="padding:7px; font-size:14px;"> Item Detail</div>
+                   </td>
+                    <td><div style="color:#0083C7; padding:7px; text-align:right; font-size:14px;" ng-click="viewall()">View all detail</div></td>
+                </tr>
+            </table>
 
-            <ul class="collapsible animated fadeinright delay-1" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header" onclick="Toggle()"><i class="ion-android-arrow-dropdown right"></i>Item information </div>
-                    <div class="collapsible-body" id="iteminfo">
-                        <div class="iteminfo">
+            <div style="background:#fff; margin-left:0px; margin-right:0px; border-top:1px solid #ccc" class="row">
+                <div style="padding-left:0px; padding-right:0px;" class="col-xs-12">
+                    <div class="iteminfo">
 
-                            <div class="row ">
-                                <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
+                        <div class="row ">
+                            <div class="col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
-                                    <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
-                                        <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
+                                <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
+                                    <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
 
-                                            <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
-                                        </span>
-                                    </output>
+                                        <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+                                    </span>
+                                </output>
 
-                                    <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
-                                </div>
+                                <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
+                            </div>
 
-                                <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+                            <div class="col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
 
-                                    <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
+                                <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
 
-                                    <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
-                                </div>
-                                <div class="col-md-10 col-xs-8">
-                                    <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
+                                <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
+                            </div>
+                            <div class="col-xs-8">
+                                <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
 
-                                    <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
+                                <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
 
-                                    <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
+                                <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
 
-                                    <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
+                                <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
 
-                                </div>
                             </div>
                         </div>
                     </div>
-                </li>
-
-             
-
-            </ul>
-
-         
-      
-            
+                </div> 
+            </div>
 
         </div>
-
 
     </form>
 
 
-
 </div>
 
+<div id="myModal2" class="modal bottommenu fade">
 
-<div id="myModalforlist" class="modal fade" role="dialog">
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
+            <li> <a href="#/reportmenu"><span class="newinv">Go to Reports</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-th-list"></i> </a></li>
+            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+        </ul>
+    </div>
+</div>
+
+<a ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info">
+    <i class="fa fa-bars"></i>
+</a>
+
+
+<div id="myModalforlist" class="modal bottom-sheet bottom-modal fade" role="dialog">
     <!-- Modal content-->
-
-
-
-
     <div class="modal-body">
 
         <ul>
@@ -698,29 +828,30 @@
                 <a ng-click="capturePhotoNew();"> <i class="fa fa-camera"></i> Capture Photo</a>
             </li>
             <li>
-                <a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Library</a>
+                
+                <!--<a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Library</a>-->
+                <a ng-click="getPhoto()"><i class="fa fa-picture-o"></i> From Photo Library</a>
             </li>
         </ul>
 
 
 
     </div>
-    <!--<div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-    </div>-->
-
+    <div class="modal-footer">
+        <button type="button" class="btn width-100 btn-gray" data-dismiss="modal">Cancel</button>
+    </div>
 
 </div>
 
 
 <div id="itemlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
         <h4>Select Item <span style="font-size:11px;" ng-if="SearchList.length > 0">{{SearchList.length}} Item(s) found</span> </h4>
         <div class="form-group">
             <div class="input-group">
                 <input id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
-                <span class="input-group-addon last">
+                <span class="input-group-addon waves-effect last">
                     <a ng-click="ScanNewsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
@@ -759,13 +890,13 @@
 
 <div id="locationlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
         <h4>Select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
         <div class="form-group">
 
             <div class="input-group">
                 <input type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
-                <span class="input-group-addon last">
+                <span class="input-group-addon waves-effect last">
                     <a ng-click="ScanLocationsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
@@ -803,13 +934,13 @@
 
 <div id="uomlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
         <h4>Select Unit of measure <span style="font-size:11px;" ng-if="UOMSearchList.length > 0">{{UOMSearchList.length}} UOM(s) found</span></h4>
         <div class="form-group">
 
             <div class="input-group">
                 <input type="text" id="searchuom" placeholder="Type Keyword to find uom" ng-change="OnChangeUOMFunction()" class="form-control" ng-model="SearchUOMValue" required="" autofocus />
-                <span class="input-group-addon last">
+                <span class="input-group-addon waves-effect last">
                     <a ng-click="ScanUOMsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
@@ -846,8 +977,8 @@
 
 
 <div style="background:#fff;" id="infomodal" class="modal animated bounceIn">
-    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-        <button style="padding:10px; margin-top:-15px;" type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+    <div  class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
         <h4>View all summary</h4>
     </div>
 
@@ -1035,76 +1166,61 @@
 </div>
 
 
-<div style="background:#fff;" id="modal3" class="modal animated bounceIn">
+<div style="background:#fff;" id="modal3" class="modal bottom-modal bottom-sheet animated bounceInUp">
     <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-      
-        <h4>All Done!  What Next?</h4>
+
+        <h4> All Done!  What Next?</h4>
     </div>
 
-    <div style="padding:5px;" class="modal-body">
-        <p style="padding-left:15px; margin-top:20px;" ng-click="notmove()">Put other things in inventory.</p>
-        <hr />
-        <p style="padding-left:15px;" ng-click="confirmmove()">Go to inventory.</p>
+    <div class="modal-body">
+        <ul>
+            <li>
+                <a ng-click="notmove()"> <i class="fa fa-plus"></i> Add more inventory.</a>
+            </li>
+            <li>
 
+                <a ng-click="confirmmove()"> <i class="fa fa-shopping-cart"></i> Go to inventory.</a>
+            </li>
+
+         
+        </ul>
+      
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn width-100 btn-gray" data-dismiss="modal">Cancel</button>
     </div>
 </div>
 
 
 <div style="background:#fff;" id="imagemodal" class="modal animated bounceIn">
-    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-        <button style="padding:10px; margin-top:-15px;" type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+    <div class="modal-header">
+        <button  type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
         <h4>Uploaded images</h4>
     </div>
 
     <div style="padding:5px;" class="modal-body">
-
         <br />
         <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
 
-            <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
-            <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-times"></i></a>
+            <img style="border:1px solid #ccc;" src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+            <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-trash-o"></i></a>
         </span>
 
     </div>
 </div>
 
-<div style="background:#fff; padding:0px;" id="Inventoryerror" class="modal bottom-sheet animated bounceIn">
-    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-
-        <h4 style="color:brown; font-size:14px;">Opps some thing went wrong !!</h4>
-
-    </div>
-
-    <div style="padding:5px;" class="modal-body">
-        <h4 style="padding-left: 15px; color: brown; font-size:20px; margin-top:10px" id="errortext">Time out</h4>
-
-
-
-        <a ng-click="addinventory()" style="padding-left:15px; margin-top:20px; font-size:16px;">Retry</a>
-        <br /><br />
-
-
-        <a ng-click="MylogOut()" style="padding-left:15px; margin-top:20px; font-size:16px;">Log out</a>
-        <br /><br />
-
-        <a ng-click="reload()" style="padding-left: 15px; font-size: 16px;">Refresh page</a>
-
-        <div><br /></div>
-
-
-    </div>
-</div>
-
 <div style="background:#fff;" id="createnewlabel" class="modal animated bounceIn">
-    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-        <button style="padding:10px; margin-top:-15px;" type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+    <div class="modal-header">
+        <button  type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
         <h4>Create new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span></h4>
     </div>
 
     <div style="padding:5px;" class="modal-body">
         <br />
         <div class="form-group">
-            <label>Enter new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> </label>
+            <label>Enter new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> <span ng-if="CreateType==3">Status</span> </label>
 
             <div class="input-group">
                 <input type="text" ng-model="CreateNewLabel" class="form-control" value="" />
@@ -1113,18 +1229,53 @@
             <br />
 
             <div class="row">
-                <div class="col-xs-6">
-                    <button ng-disabled="CreateNewLabel==''" ng-click="SaveLabel(CreateType)" class="btn waves-effect btn btn-primary width-100"><i class="fa fa-plus"></i> Add</button>
-                </div>
-                <div class="col-xs-6">
-                    <a href="#" data-dismiss="modal" class="btn btn-gray width-100"> <i class="fa fa-times"></i> Cancel</a>
+                <div class="col-xs-12">
+                    <button ng-disabled="CreateNewLabel==''" ng-click="SaveLabel(CreateType)" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+                    <a href="#" data-dismiss="modal" class="btn btn-gray"> <i class="fa fa-times"></i> Cancel</a>
                 </div>
             </div>
-          
         </div>
 
     </div>
 </div>
+
+<div id="Inventoryerror" class="modal bottom-modal bottom-sheet animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
+        <h4 style="color:brown; font-size:14px;">Opps some thing went wrong !!</h4>
+
+    </div>
+
+    <div class="modal-body">
+        <h4 style="padding-left: 15px; color: brown; font-size:20px; margin-top:10px" id="errortext">Time out</h4>
+
+
+        <ul>
+            <li>
+                <a ng-click="addinventory()" ><i class="fa fa-repeat" aria-hidden="true"></i> Retry</a>
+            </li>
+            <li>
+
+                <a ng-click="MylogOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
+            </li>
+
+            <li>
+
+                <a ng-click="reload()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh page</a>
+            </li>
+
+        </ul>
+
+
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn width-100 btn-gray" data-dismiss="modal">Cancel</button>
+    </div>
+
+</div>
+
 <script>
     function Toggle() {
         $("#iteminfo").toggle("slow");

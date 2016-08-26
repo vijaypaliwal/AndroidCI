@@ -48,7 +48,25 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
 
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+    });
 
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+        }
+    }
     $scope.GetMyinventoryColumns = function () {
 
         $scope.LocationsLoaded = false;
@@ -156,6 +174,57 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         }
         $scope.$apply();
     }
+
+    var counter = 0;
+
+    $scope.saveColumnsNew = function () {
+
+
+        // $scope.LocationsLoaded = false;
+
+        counter = 1;
+        for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
+            if ($scope.MyInventorycolumns[i].mobileorder != 0) {
+                $scope.MyInventorycolumns[i].mobileorder = i + 1;
+
+            }
+
+        }
+
+
+        $scope.$apply();
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'SaveMyInventoryColumn',
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
+              success: function (response) {
+                  $scope.LocationsLoaded = true;
+                  $scope.loadingbutton = false
+                  if (response.SaveMyInventoryColumnResult.Success == true) {
+                      $scope.GetMyinventoryColumns();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Updating my inventory columns", 1, 1, response.SaveMyInventoryColumnResult.Message)
+
+                  }
+
+                  $scope.$apply();
+              },
+              error: function (err) {
+                  $scope.ShowErrorMessage("Updating my inventory columns", 2, 1, err.statusText);
+
+              }
+          });
+    };
 
 
 

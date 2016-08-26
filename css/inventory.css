@@ -101,32 +101,16 @@
         padding-right: 0px;
     }
 
-    #myModalforlist {
-        top: 25%;
-        overflow: hidden;
-        width: 95%;
-        margin: 0 auto;
-    }
+  
 
-        #myModalforlist ul {
-            padding: 0px;
-            margin-bottom: 0px;
-        }
+                .modal.bottom-sheet
+                {
+                  
+                }
 
-            #myModalforlist ul li {
-                padding: 14px;
-                border-bottom: 1px solid #ccc;
+                .modal-backdrop {
                 background: #fff;
-                list-style-type: none;
-            }
-
-                #myModalforlist ul li a {
-                    padding-left: 20px;
-                    display: block;
-                    width: 100%;
-                    text-decoration: none !important;
-                    background: #fff;
-                    color: #000;
+  
                 }
 
 
@@ -178,11 +162,7 @@
         overflow: hidden;
     }
 
-        #itemlistmodal .modal-header {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 7px;
-        }
+     
 
         #itemlistmodal .modal-body {
             overflow: auto;
@@ -191,11 +171,7 @@
             padding: 7px;
         }
 
-        #itemlistmodal .modal-header .close {
-            margin-top: 6px;
-            opacity: 1;
-            padding-left: 25px;
-        }
+      
 
     .searchresultlist {
         padding-left: 0px;
@@ -237,11 +213,7 @@
         overflow: hidden;
     }
 
-        #locationlistmodal .modal-header {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 7px;
-        }
+        
 
         #locationlistmodal .modal-body {
             overflow: auto;
@@ -250,11 +222,7 @@
             padding: 7px;
         }
 
-        #locationlistmodal .modal-header .close {
-            margin-top: 6px;
-            opacity: 1;
-            padding-left: 25px;
-        }
+     
 
     #uomlistmodal {
         background: #fff;
@@ -266,11 +234,7 @@
         overflow: hidden;
     }
 
-        #uomlistmodal .modal-header {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 7px;
-        }
+      
 
         #uomlistmodal .modal-body {
             overflow: auto;
@@ -279,11 +243,7 @@
             padding: 7px;
         }
 
-        #uomlistmodal .modal-header .close {
-            margin-top: 6px;
-            opacity: 1;
-            padding-left: 25px;
-        }
+     
 
     .swiper-container table .ibtn {
         border-radius: 100% !important;

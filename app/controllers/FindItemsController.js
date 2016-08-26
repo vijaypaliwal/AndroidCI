@@ -1,7 +1,7 @@
 ﻿
 
 'use strict';
-app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
+app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -76,7 +76,15 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.searchstring = "";
 
+    $scope.isshowsearch = false;
 
+    $scope.showsearch = function () {
+        $scope.isshowsearch = true;
+    }
+
+    $scope.hidesearch = function () {
+        $scope.isshowsearch = false;
+    }
 
 
     $scope.CurrentActiveSearchType = 1;
@@ -298,7 +306,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         var _Value = $.trim($('#MasterSearch').val());
 
 
-        debugger;
+         
 
         switch ($scope.CurrentActiveSearchType) {
             case 1:
@@ -339,13 +347,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         if ($("body").hasClass("modal-open")) {
             $("#myModal2").modal('hide');
 
-            $(".Addbtn .fa").removeClass('rotate');
 
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
         }
         else {
             $("#myModal2").modal('show');
-            $(".Addbtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+
         }
     }
 
@@ -551,13 +560,20 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-
-                   $scope.StatusList = response.GetStatusResult.Payload;
-                   CheckScopeBeforeApply()
+                   if (response.GetStatusResult.Success == true) {
+                       $scope.StatusList = response.GetStatusResult.Payload;
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("status list", 1, 1, response.GetStatusResult.Message);
+                       
+                   }
+                 
                },
                error: function (err) {
 
-                   log.error(err.Message);
+                   $scope.errorbox(err);
+                   $scope.ShowErrorMessage("status list", 2, 1, err.statusText);
 
                }
            });
@@ -581,12 +597,19 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
-                   CheckScopeBeforeApply()
+                   if (response.GetUnitsOfMeasureResult.Success == true) {
+                       $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("unit of measure list", 1, 1, response.GetUnitsOfMeasureResult.Message);
+                   }
+
+                   
                },
                error: function (err) {
-
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("unit of measure list", 2, 1, err.statusText);
+                   
 
                }
            });
@@ -959,6 +982,12 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
+               
+                if (result.GetInventoriesResult.Success == true) {
+               
+                $(".searchtable").removeClass("disablepointer")
+
+                
 
                 $scope._areImagesShown = result.GetInventoriesResult.Payload[0].AreImagesShown
                 $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
@@ -969,6 +998,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.currentrecord = _TotalRecordsCurrent;
                 $scope.totalrecords = result.GetInventoriesResult.Payload[0].TotalRercords;
                 $scope.ActualTotalRecords = result.GetInventoriesResult.Payload[0].ActualTotalRecords;
+
+                $(".paginationtext").show();
+
                 if (_TotalRecordsCurrent == 0) {
                     $(".norecords").show();
                     $(".bottomlink").hide();
@@ -983,19 +1015,33 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 if ($scope.ActualTotalRecords) {
                 } else {
                     $scope.OpenmenuModal();
+                    $(".searchtable").addClass("disablepointer");
                 }
+
+                
+                }
+                else {
+                    
+                    $scope.ShowErrorMessage("current inventories", 1, 1, result.GetInventoriesResult.Message)
+                }
+
                 $scope.myinventoryColumnLoaded = true;
-                $cordovaKeyboard.disableScroll(false);
-                CheckScopeBeforeApply();
-            },
-            error: function (req) {
               
-                $scope.myinventoryColumnLoaded = true;
                 CheckScopeBeforeApply();
-                console.log(req);
+            
+                },
+            error: function (req) {
+                $(".paginationtext").show();
+              //
+
+                $scope.myinventoryColumnLoaded = true;
+              
+                CheckScopeBeforeApply();
+                $scope.ShowErrorMessage("current inventories", 2, 1, req.statusText);
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
+              
                 SetSelectedIfAny();
             }
         });
@@ -1017,7 +1063,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
-
+                if (result.GetUnitDataColumnsResult.Success == true) {
+               
                 // MY inventory column region
                 var _TempArrayMyInventory = result.GetUnitDataColumnsResult.Payload;
 
@@ -1030,10 +1077,18 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
                 CheckScopeBeforeApply();
+                }
+                else {
 
+                    $scope.ShowErrorMessage("unit data columns", 1, 1, result.GetUnitDataColumnsResult.Message);
+                    
+                }
             },
             error: function (req) {
-               
+
+                $scope.ShowErrorMessage("unit data columns", 2, 1, req.statusText);
+
+            
 
             },
             complete: function () {
@@ -1056,11 +1111,15 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $.ajax({
             type: "POST",
             url: serviceBase + 'GetMyInventoryColumns',
+            timeout: 5000,
             data: JSON.stringify({ SecurityToken: $scope.SecurityToken }),
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
 
+                 
+                if (result.GetMyInventoryColumnsResult.Success == true) {
+                
                 // MY inventory column region
                 var _TempArrayMyInventory = result.GetMyInventoryColumnsResult.Payload;
 
@@ -1068,16 +1127,23 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
                     _TempArrayMyInventory[i].ColumnName = _ColName[0];
 
-                    if (_TempArrayMyInventory[i].Show == "True") {
+                    if (_TempArrayMyInventory[i].mobileorder != 0) {
                         $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                     }
                 }
 
-
                 CheckScopeBeforeApply();
+                }
+                else {
+                    $scope.ShowErrorMessage("my inventory columns", 1, 1, result.GetMyInventoryColumnsResult.Message);
 
+                    
+                }
             },
             error: function (req) {
+
+                $scope.ShowErrorMessage("my inventory columns", 2, 1, req.statusText);
+
               
 
             },
@@ -1211,9 +1277,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
-
-
-
             $scope.SearchValue = result.text;
 
             CheckScopeBeforeApply();
@@ -1388,12 +1451,17 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     });
 
 
+  
+
     $('#myModal2').on('shown.bs.modal', function () {
-        $(".Addbtn .fa").addClass('rotate');
+        $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+
     });
 
     $('#myModal2').on('hidden.bs.modal', function () {
-        $(".Addbtn .fa").removeClass('rotate');
+        
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+
     });
 
     $('#mycartModal').on('shown.bs.modal', function () {
@@ -1650,8 +1718,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     iReqValue: v.iReqValue,
                     iCostPerUnit: v.pDefaultCost,
 
-
-
                 });
             }
 
@@ -1664,6 +1730,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $scope.PopulateInventoryItems();
 
         $scope.getuom();
+
+
        
         //SetSelectedIfAny();
 

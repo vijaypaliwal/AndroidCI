@@ -18,6 +18,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/mainmenu.html"
     });
 
+    $routeProvider.when("/help", {
+        controller: "helpController",
+        templateUrl: "app/views/help.html"
+    });
+
     $routeProvider.when("/signup", {
         controller: "signupController",
         templateUrl: "app/views/signup.html"
@@ -26,6 +31,11 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/detail", {
         controller: "detailController",
         templateUrl: "app/views/detail.html"
+    });
+
+    $routeProvider.when("/mobileorder", {
+        controller: "mobileorderController",
+        templateUrl: "app/views/mobileorder.html"
     });
 
     $routeProvider.when("/setting", {
@@ -37,10 +47,7 @@ app.config(function ($routeProvider) {
         controller: "uomController",
         templateUrl: "app/views/uom.html"
     });
-    $routeProvider.when("/mobileorder", {
-        controller: "mobileorderController",
-        templateUrl: "app/views/mobileorder.html"
-    });
+
     $routeProvider.when("/status", {
         controller: "statusController",
         templateUrl: "app/views/status.html"
@@ -93,13 +100,13 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/tokens", {
-     controller: "tokensManagerController",
-     templateUrl: "app/views/tokens.html"
+        controller: "tokensManagerController",
+        templateUrl: "app/views/tokens.html"
     });
 
     $routeProvider.when("/associate", {
-       controller: "associateController",
-      templateUrl: "app/views/associate.html"
+        controller: "associateController",
+        templateUrl: "app/views/associate.html"
     });
 
     $routeProvider.when("/reportmenu", {
@@ -111,6 +118,17 @@ app.config(function ($routeProvider) {
         controller: "currentinventoryController",
         templateUrl: "app/views/currentinventory.html"
     });
+
+    $routeProvider.when("/inventoryactivity", {
+        controller: "inventoryactivityController",
+        templateUrl: "app/views/inventoryactivity.html"
+    });
+
+    $routeProvider.when("/itemreport", {
+        controller: "itemreportController",
+        templateUrl: "app/views/itemreport.html"
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/login" });
 
