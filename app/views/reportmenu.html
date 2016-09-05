@@ -41,15 +41,19 @@
         overflow-x:hidden !important;
     }
 
-       .col-xs-3 span {
-        padding: 10px;
+    .col-xs-3 div {
         background: #fff;
         color: #000;
         font-size: 20px;
         border-radius: 100%;
         padding-left: 15px;
         padding-right: 15px;
-        }
+        height: 50px;
+        width: 50px;
+        padding: 0px;
+        float: right;
+        margin-right: -32px;
+    }
       .col-xs-9
       {
        text-align:left;
@@ -87,13 +91,13 @@
           
 
             <div class="col-xs-3">
-                <div ng-if="loadcounter==false">
+                <div ng-if="loadcounter1==false">
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
                 </div>
               
-                <span ng-if="loadcounter==true">
+                <div ng-if="loadcounter1==true">
                     {{InventoryViews.length}}
-                </span>
+                </div>
                
             </div>
 
@@ -129,13 +133,13 @@
            
 
             <div class="col-xs-3">
-                <div ng-if="loadcounter==false">
+                <div ng-if="loadcounter2==false">
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
                 </div>
 
-                <span ng-if="loadcounter==true">
+                <div ng-if="loadcounter2==true">
                     {{ActivityViews.length}}
-                </span>
+                </div>
 
             </div>
 
@@ -149,14 +153,20 @@
     <a class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
-                <i class="fa fa-th-list"></i>  Restock
+                <i class="fa fa-th-list"></i> Global Restock
 
             </div>
           
 
             <div class="col-xs-3">
 
-               
+                <div ng-if="loadcounter4==false">
+                    <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
+                </div>
+
+                <div ng-if="loadcounter4==true">
+                    {{GlobalViews.length}}
+                </div>
              
             </div>
 
@@ -166,14 +176,20 @@
 
     </a>
 
-    <a class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
+    <a href="#/LocalRestock" class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
-             <i class="fa fa-th-list"></i> Local Restock
+                <i class="fa fa-th-list"></i> Local Restock
             </div>
-          
+
             <div class="col-xs-3">
-            
+                <div ng-if="loadcounter5==false">
+                    <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
+                </div>
+
+                <div ng-if="loadcounter5==true">
+                    {{LocalViews.length}}
+                </div>
             </div>
         </div>
     </a>
@@ -185,7 +201,13 @@
             </div>
            
             <div class="col-xs-3">
+                <div ng-if="loadcounter3==false">
+                    <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
+                </div>
 
+                <div ng-if="loadcounter3==true">
+                    {{ItemViews.length}}
+                </div>
             </div>
         </div>
     </a>
