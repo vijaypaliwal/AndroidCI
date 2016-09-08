@@ -857,6 +857,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                       $scope.movetolist();
                       // $location.path('/inventory');
 
+                      ShowSuccess("Saved");
+
                       CheckScopeBeforeApply()
                   }
                   else {
