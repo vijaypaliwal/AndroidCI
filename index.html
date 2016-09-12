@@ -343,6 +343,28 @@
             width: 100%;
         }
 
+        .waitingContent {
+            background: rgba(71, 79, 88, 0.8);
+            padding: 10px;
+            margin: 0 auto;
+            z-index: 1050;
+            text-align: center;
+        }
+
+        #mysmallModalWaiting {
+            bottom: 0;
+            overflow: hidden;
+            position: fixed;
+            z-index: 1050;
+            display: none;
+            text-align: center;
+            width: 100%;
+            left: 0;
+            right: 0;
+            font-size: 14px;
+        }
+
+
         #mysmallModal {
             top: 30%;
             overflow: hidden;
@@ -568,6 +590,19 @@
 
         </div>
     </div>
+
+
+    <div id="mysmallModalWaiting" class="animated">
+        <div class="waitingContent">
+
+
+            <span style="display:block;color:#fafafa;">
+                Loading..
+            </span>
+
+        </div>
+    </div>
+
     <div class="animated" id="myloginModal">
 
         <div class="errorcontent" style="width:122px;background:#000;">
@@ -877,7 +912,6 @@
         });
 
 
-
         function hideSuccess() {
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
         }
@@ -889,7 +923,21 @@
             $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
             $("#mysmallModalSave").removeClass('bounceOut').addClass('bounceIn');
             $('#mysmallModalSave').show();
+        }
 
+
+        function ShowGlobalWaitingDiv() {
+            $("#mysmallModalWaiting").removeClass('fadeOut').addClass('fadeIn');
+            $('#mysmallModalWaiting').show();
+        }
+        function HideGlobalWaitingDiv() {
+            $("#mysmallModalWaiting").removeClass('fadeIn').addClass('fadeOut');
+
+            setTimeout(function () {
+                $("#mysmallModalWaiting").hide();
+                $("#mysmallModalWaiting span").html("Loading..");
+
+            }, 500);
 
         }
 

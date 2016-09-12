@@ -2,7 +2,7 @@
 app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
-    $scope.CurrentView = { Name: "Current Inventory" };
+    $scope.CurrentView = { Name: "Global Restock" };
     $scope.GlobalRestockViews = [];
     $scope.GlobalRestockList = [];
     $scope.CustomItemDataList = [];
@@ -706,7 +706,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
 
     $scope.showview = function() {
         $scope.isviewload = false;
-        $scope.CurrentView = { Name: "Items" };
+        $scope.CurrentView = { Name: "Global Restock" };
     }
 
     function CheckScopeBeforeApply() {
@@ -746,6 +746,31 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             else {
                 $scope.FilterData.SearchValue = "";
             }
+            ShowGlobalWaitingDiv();
+            var count = 0;
+            var timer = setInterval(function () {
+                count = count + 1;
+
+
+                if (count > 7) {
+
+
+                    $("#mysmallModalWaiting span").html("Server still processing, almost there..");
+
+                }
+                else if (count > 5) {
+
+                    $("#mysmallModalWaiting span").html("Please wait a bit more...");
+
+                }
+                else if (count > 1) {
+                    $("#mysmallModalWaiting span").html("Backend processing in progress..");
+
+                }
+
+
+
+            }, 1000);
             $.ajax
               ({
                   type: "POST",
@@ -768,7 +793,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                       $scope.ActualTotalRecords = response.GetGlobalRestockResult.Payload[0].ActualTotalRecords;
                       $scope.FilterArray = response.GetGlobalRestockResult.Payload[0].Filters;
                       CheckScopeBeforeApply();
-                      // FillFilterArray();
+                    
                       UpdateFilterArray();
 
                       }
@@ -787,6 +812,9 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                   complete: function () {
                       _IsLazyLoadingUnderProgress = 0;
                       $scope.isDataLoading = true;
+
+                      HideGlobalWaitingDiv();
+                      clearInterval(timer);
                   }
               });
              }
