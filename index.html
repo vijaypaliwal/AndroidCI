@@ -1,23 +1,20 @@
 ﻿<!DOCTYPE html>
-<html data-ng-app="AngularAuthApp">
+<html data-ng-app="ClearlyInventoryApp">
 <head>
-    <meta name="keywords" content="angularjs,SPA,Single Page Application,refresh tokens,authentication,bearer token authentication,OWIN,bootstrap,bootstrap ui,tutorial,JS framework,ASP.NET WEB API 2,Taiseer Joudeh" />
+    <meta name="keywords" content="Clearly Inventory - Online Inventory Management Software" />
     <meta name="description" content="Welcome to Clearly Inventory, an easy online inventory management software for small business and organizations - web based, fast, sharable, and customizable." />
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
 
-    <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0, height=device-height" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-   scale=1.0, user-scalable=no;">
     <title>ClearlyInventory App</title>
     <link href="content/css/bootstrap.min.css" rel="stylesheet" />
 
     <link href="css/materialize.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/button.css" rel="stylesheet" type="text/css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <!-- Icons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
-
 
     <link href="content/css/loading-bar.css" rel="stylesheet" />
     <link href="content/css/font-awesome.min.css" rel="stylesheet" />
@@ -29,17 +26,27 @@
     <link href="content/css/bootstrap-switch.css" rel="stylesheet" />
     <link href="content/css/bootstrap-multiselect.css" rel="stylesheet" />
 
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+
+    <link href="css/button.css" rel="stylesheet" type="text/css">
+    <script>
+        //window.onerror = function (error, file, line) {
+        //    alert(error + ", " + file + ", " + line);
+        //}
+    </script>
     <style>
         [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x- ng-cloak {
             display: none !important;
         }
 
-        .input-group {
-            width: 100%;
+        .side-nav
+        {
+            z-index:1500;
         }
-
-        .side-nav {
-            z-index: 1500;
+        
+        
+         .input-group {
+            width: 100%;
         }
 
         .sidebar-nav li a.active {
@@ -74,6 +81,8 @@
             position: absolute;
         }
 
+       
+
 
 
         label {
@@ -86,6 +95,10 @@
             padding-bottom: 0px;
             color: #fff;
             border-bottom: transparent;
+        }
+
+        .drag-target {
+            display: none;
         }
 
         h3 {
@@ -158,7 +171,7 @@
             text-align: center;
             padding-left: 5px !important;
             padding-right: 5px !important;
-            border-radius: 4px !important;
+        
             margin-top: 0px !important;
         }
 
@@ -235,7 +248,8 @@
             display: inline-block;
         }
 
-       
+      
+
 
         .scanbtn {
             width: 100%;
@@ -297,19 +311,7 @@
                 color: #6683DA;
                 cursor: pointer;
             }
-
-        body {
-         
-            overflow: auto !important;
-        }
-
-        .btn {
-            font-size: 16px;
-        }
-
-        .arrow-right {
-            border-left: 1px solid #fff !important;
-        }
+      
 
         .bootstrap-switch-primary {
             background: #0083C7 !important;
@@ -343,14 +345,6 @@
             width: 100%;
         }
 
-        .waitingContent {
-            background: rgba(71, 79, 88, 0.8);
-            padding: 10px;
-            margin: 0 auto;
-            z-index: 1050;
-            text-align: center;
-        }
-
         #mysmallModalWaiting {
             bottom: 0;
             overflow: hidden;
@@ -363,7 +357,6 @@
             right: 0;
             font-size: 14px;
         }
-
 
         #mysmallModal {
             top: 30%;
@@ -392,13 +385,20 @@
             background: rgba(52, 73, 94,0.8);
             padding: 10px;
             margin: 0 auto;
-            width: 150px;
+            width: 160px;
             z-index: 1050;
+            text-align:center;
         }
 
-
-
-        .bgColorTransparent {
+        .waitingContent {
+            background: rgba(71, 79, 88, 0.8);
+            padding: 10px;
+            margin: 0 auto;
+            z-index: 1050;
+            text-align: center;
+        }
+        
+         .bgColorTransparent {
             background-color: transparent !important;
         }
 
@@ -453,8 +453,9 @@
         }
 
 
+
         #toolbar {
-          text-align:center;
+            text-align:center;
         }
 
         .tablink {
@@ -477,20 +478,6 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
         }
-
-        #slide-out-left
-        {
-            left:0px !important;
-            display:none;
-        }
-
-        .formenuopen 
-        {
-            opacity:0.5;
-            z-index:100;
-            background:#000;
-        }
-
 
         .top-menu {
             left: -114px;
@@ -524,10 +511,10 @@
             .top-menu i {
                 line-height: initial !important;
                 color: #333 !important;
-             font-size:15px !important;
+                font-size:15px !important;
             }
-
     </style>
+
     <style>
         .input-group-addon {
             background: #fff;
@@ -548,18 +535,17 @@
                 cursor: pointer;
             }
 
-            .input-group-addon .fa-barcode {
-                padding-left: 10px;
-                padding-right: 13px;
+            .input-group-addon .fa-barcode
+            {
+                padding-left:10px;
+                padding-right:13px;
             }
     </style>
-
-
 
 </head>
 <body data-ng-controller="indexController">
     <!-- Sidebar -->
-    <div class="nointernet alert alert-danger">
+    <div style="z-index:10000;" class="nointernet alert alert-danger">
         <h3><i class="fa fa-exclamation-triangle"></i> No Internet Connection</h3>
         <p>Sorry, no internet connectivity detected. Please reconnect and try again.</p>
     </div>
@@ -605,7 +591,7 @@
 
     <div class="animated" id="myloginModal">
 
-        <div class="errorcontent" style="width:122px;background:#000;">
+        <div class="errorcontent" style="background:#000;">
 
             <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
 
@@ -619,9 +605,7 @@
 
 
     <div style="display:none;" class="animated" id="mysignupModal">
-
-        <div class="errorcontent" style="width:122px;background:#000;">
-
+        <div class="errorcontent" style="background:#000;">
             <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
 
             <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
@@ -633,15 +617,11 @@
     </div>
 
 
-   
-
-
     <div id="toolbar" class="primary-color">
-        <div class="open-left" id="side-left">
+        <div class="open-left" id="open-left" data-activates="slide-out-left">
             <i class="ion-android-menu"></i>
         </div>
         <span class="title">Clearly Inventory</span>
-
         <div class="dropdown open-right">
             <a data-toggle="dropdown" class="dropdown-toggle "><i class="ion-android-person"></i></a>
             <ul class="top-menu dropdown-menu">
@@ -652,8 +632,12 @@
     </div>
 
 
+    
+
+
     <div class="container" id="viewdata">
         <div data-ng-view="">
+            
         </div>
 
     </div>
@@ -661,7 +645,7 @@
 
     <!-- Sidebar -->
 
-    <ul id="slide-out-left" class="side-nav animated slideInLeft">
+    <ul id="slide-out-left" class="side-nav collapsible">
         <li>
             <div class="sidenav-header primary-color">
 
@@ -674,7 +658,8 @@
                 </div>
             </div>
         </li>
-        <li><a ng-class="getClass('/mainmenu')" href="#/mainmenu" class="no-child"><i class="fa fa-bars"></i>First inventory</a></li>
+        <!--<li><a href="#/mainmenu" class="no-child"><i class="ion-android-list"></i> Main menu</a></li>-->
+        <li><a ng-class="getClass('/mainmenu')" href="#/mainmenu" class="no-child"><i class="fa fa-bars"></i>First Inventory</a></li>
         <li><a ng-class="getClass('/FindItems')" href="#/FindItems" class="no-child"><i class="fa fa-bars"></i>Go to Inventory</a></li>
         <li><a ng-class="getClass('/inventory')" href="#/inventory" class="no-child"><i class="fa fa-plus-circle"></i> Add Inventory</a></li>
         <li><a ng-class="getClass('/reportmenu')" href="#/reportmenu" class="no-child"><i class="fa fa-th-list"></i> Reports</a></li>
@@ -724,53 +709,66 @@
         </li>
     </ul>
 
-    <div style="background:#fff; padding:0px;" id="modalerror" class="modal bottom-sheet animated bounceIn">
+    <div id="modalerror" class="modal bottom-sheet bottom-modal animated bounceIn">
         <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
 
-            <h4 style="color:brown; font-size:14px;">Opps some thing went wrong !!</h4>
+            <h4 style="color:brown; font-size:14px;">Oops some thing went wrong !!</h4>
 
         </div>
 
-        <div style="padding:5px;" class="modal-body">
+        <div class="modal-body">
             <h4 style="padding-left: 15px; color: brown; font-size: 14px; " id="errortext">Time out</h4>
 
+            <ul>
+                <li>
+                    <a ng-click="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
+                </li>
 
-            <a ng-click="logOut()" style="padding-left:15px; margin-top:20px; font-size:16px;">Log out</a>
-            <br /><br />
+                <li>
 
-            <a ng-click="reload()" style="padding-left: 15px; font-size: 16px;">Refresh page</a>
+                    <a ng-click="reload()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh page</a>
+                </li>
 
-            <div><br /></div>
+            </ul>
 
+
+            <div class="modal-footer">
+                <button type="button" class="btn width-100 btn-gray" data-dismiss="modal">Cancel</button>
+            </div>
 
         </div>
     </div>
+
+
     <!-- 3rd party libraries -->
     <script src="scripts/jquery-1.11.0.min.js"></script>
 
     <script src="scripts/jquery-ui.js"></script>
+
+   <!--<script src="scripts/jquery.ui.touch-punch.js"></script>
+
+   <script src="scripts/fastclick.js"></script>-->
+
 
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/bootstrap-switch.js"></script>
 
     <script src="scripts/bootstrap-multiselect.js"></script>
 
-    
+
 
     <script src="js/materialize.min.js"></script>
     <script src="js/functions.js"></script>
     <script src="scripts/angular.min.js"></script>
-   
-
-   
     <script src="scripts/angular-sanitize.js"></script>
     <script src="scripts/angular-route.min.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
+ 
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    
 
     <script src="js/sortableUI.js"></script>
-
+    
     <script src="scripts/loading-bar.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/ng-cordova.js"></script>
@@ -790,8 +788,10 @@
     <script src="app/controllers/indexController.js?v=2"></script>
     <script src="app/controllers/loginController.js?v=2"></script>
     <script src="app/controllers/mainmenuController.js?v=2"></script>
+    <script src="app/controllers/helpController.js?v=2"></script>
     <script src="app/controllers/signupController.js?v=2"></script>
     <script src="app/controllers/inventorycontroller.js?v=2"></script>
+    <script src="app/controllers/ordersController.js?v=2"></script>
     <script src="app/controllers/FindItemsController.js?v=2"></script>
     <script src="app/controllers/detailController.js?v=2"></script>
     <script src="app/controllers/settingController.js?v=2"></script>
@@ -814,13 +814,13 @@
 
     <script src="app/controllers/LocalrestockController.js?v=2"></script>
 
-
     <script src="app/controllers/GlobalrestockController.js?v=2"></script>
 
     <script src="app/controllers/inventorysummaryController.js?v=2"></script>
+
+    
     <!-- Load custom filters -->
     <!-- Load custom directives -->
-  
 
     <script>
         var supportTouch = $.support.touch,
@@ -891,13 +891,14 @@
     </script>
     <script>
 
+
         function randomStringNew(length, chars) {
             var result = '';
             for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
             return result;
         }
-        var _Islive = false;
 
+        var _Islive = false;
 
         $("#mysmallModal").click(function () {
             hideSuccess();
@@ -912,8 +913,11 @@
         });
 
 
+
         function hideSuccess() {
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
+            
+            
         }
 
         function HideWaitingInv() {
@@ -923,14 +927,17 @@
             $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
             $("#mysmallModalSave").removeClass('bounceOut').addClass('bounceIn');
             $('#mysmallModalSave').show();
+
+
         }
 
-
-        function ShowGlobalWaitingDiv() {
+        function ShowGlobalWaitingDiv()
+        {
             $("#mysmallModalWaiting").removeClass('fadeOut').addClass('fadeIn');
             $('#mysmallModalWaiting').show();
         }
-        function HideGlobalWaitingDiv() {
+        function HideGlobalWaitingDiv()
+        {
             $("#mysmallModalWaiting").removeClass('fadeIn').addClass('fadeOut');
 
             setTimeout(function () {
@@ -958,6 +965,8 @@
             $("#myloginModal").removeClass('bounceOut').addClass('bounceIn');
             $('#myloginModal').show();
 
+
+
         }
 
 
@@ -980,32 +989,73 @@
 
 
 
-        $('#side-left').click(function (e) {
-
-
-
+        $('#menu-toggle').click(function (e) {
             e.stopPropagation();
 
-            $('#slide-out-left').show();
+            $('#wrapper').toggleClass('toggled');
 
-            $('<div class="modal-backdrop formenuopen"></div>').appendTo(document.body);
+
+            setTimeout(function () {
+
+
+
+                if ($('#wrapper').hasClass('toggled')) {
+                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left animated rollIn")
+                }
+
+                else {
+
+                    $("#sidebaricon").removeClass("fa-arrow-circle-left animated rollIn").addClass("fa-bars")
+
+                }
+
+
+            }, 0);
 
 
         });
-        $('#slide-out-left').click(function (e) {
+        $('#wrapper').click(function (e) {
             e.stopPropagation();
 
         });
         $('body,html').click(function (e) {
-            $('#slide-out-left').hide();
-            $(".formenuopen").remove();
+            $('#wrapper').removeClass('toggled');
+
+            setTimeout(function () {
+
+
+
+                if ($('#wrapper').hasClass('toggled')) {
+                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left")
+                }
+
+                else {
+
+                    $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
+
+                }
+
+
+
+
+
+
+            }, 300);
+
+
+
+
+
+
 
         });
 
 
-        $("#slide-out-left a").click(function (e) {
-            $(".formenuopen").remove();
-           $("#slide-out-left").hide();
+        $(".sidebar-nav li a").click(function (e) {
+
+            $("#wrapper").toggleClass("toggled");
+
+            $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
 
         });
 
@@ -1048,6 +1098,9 @@
                 ['Restart', 'Exit']         // buttonLabels
             );
         }
+
+
+   
 
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
@@ -1094,7 +1147,36 @@
         var pictureSource;
         var destinationType;
         var ImageListAndroid = [];
-     
+        //function onPhotoDataSuccess(imageData) {
+        //    $("#myModalforlist").modal("hide");
+
+        //    // Uncomment to view the base64 encoded image data
+        //    // console.log(imageData);
+        //    // alert("photo capture success");
+        //    //alert(imageData);
+        //    // Get image handle
+        //    //
+        //    //var smallImage = document.getElementById('smallImage');
+        //    // var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
+        //    //var compilehtml = $compile(crossicon)($scope);
+        //    // Unhide image elements
+        //    //
+        //    //  smallImage.style.display = 'block';
+
+        //    imageData = "data:image/jpeg;base64," + imageData;
+        //    var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px;' src='" + imageData + "'/></span>'";
+
+        //    document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
+
+        //    document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
+
+        //    $("#defaultimg").hide();
+
+        //    // Show the captured photo
+        //    // The inline CSS rules are used to resize the image
+        //    //
+        //    //smallImage.src = "data:image/jpeg;base64," + imageData;
+        //}
 
 
         var mouseEventTypes = {
@@ -1117,22 +1199,159 @@
 
 
 
-        
+        function onPhotoDataSuccess(imageData) {
+
+            var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+            var _length = 0;
+            if ($('#list123').html() != undefined && $('#list123').html() != "" && $('#list123').children("span") != undefined) {
+                _length = $('#list123').children("span").length;
+            }
+
+
+            //var id = _length + 1;
+            //_ImgObj.ImageID = id;
+            var id = randomStringNew(5, '0123456789');
+            _ImgObj.ImageID = id;
+            var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImageNew(' + id + ')"><i class="fa fa-times"></i></a>';
+            var compilehtml = crossicon;
+
+            imageData = "data:image/jpeg;base64," + imageData;
+            var _htmltoRender = "<span><img id='" + id + "' style='height: 80px; width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px;' src='" + imageData + "'/>" + compilehtml + "</span>";
+
+            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
+
+            document.getElementById('list321').innerHTML = _htmltoRender;
+            document.getElementById('list567').innerHTML = _htmltoRender;
+            $(".viewimage").show();
+            $("#myModalforlist").modal("hide");
+
+            $("#defaultimg").hide();
+
+            _ImgObj.FileName = "IphoneCapture";
+            _ImgObj.bytestring = imageData;
+
+            setTimeout(function () {
+                ImageListAndroid.push(_ImgObj);
+                $(".removeImage").bind("click", function () {
+
+                    removeImageNew($(this).attr("altid"));
+                });
+            }, 100);
+
+            $(".viewimage").find("div").html(ImageListAndroid.length);
+
+
+        }
+
+
+        function removeImageNew(_this) {
+
+
+
+            $("#" + _this).each(function () {
+
+                $(this).parent("span").remove();
+            });
+
+
+            for (var i = 0; i < ImageListAndroid.length; i++) {
+                if (ImageListAndroid[i].ImageID == _this) {
+                    ImageListAndroid.splice(i, 1);
+                    break;
+                }
+            }
+
+
+
+
+            removeImageNew(_this)
+
+        }
+
+
+
+        // Called when a photo is successfully retrieved
+        //
+        function onPhotoURISuccess(imageURI) {
+            // Uncomment to view the image file URI
+            // console.log(imageURI);
+            //alert("photo url success");
+            // Get image handle
+
+            //  alert(imageURI);
+
+            //  var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
+            //var compilehtml = $compile(crossicon)($scope);
+            // Unhide image elements
+            //
+
+            imageURI = "data:image/jpeg;base64," + imageURI;
+            var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px; ' src='" + imageURI + "'/></span>'";
+
+
+            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
+            document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
+            document.getElementById('list567').innerHTML = document.getElementById('list567').innerHTML + _htmltoRender;
+
+            $("#defaultimg").hide();
+        }
+
+        // A button will call this function
+        //
+        function capturePhoto() {
+            //  alert("in capture photo");
+            // Take picture using device camera and retrieve image as base64-encoded string
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                quality: 50,
+                correctOrientation: true,
+                destinationType: destinationType.DATA_URL
+            });
+        }
+
+ 
+
+        // A button will call this function
+        //
+        function capturePhotoEdit() {
+            // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                quality: 20, allowEdit: true,
+                correctOrientation: true,
+                destinationType: destinationType.DATA_URL
+            });
+        }
+
+        // A button will call this function
+        //
+        function getPhoto(source) {
+            // Retrieve image file location from specified source
+            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+                quality: 50,
+                destinationType: destinationType.FILE_URI,
+                correctOrientation: true,
+                sourceType: source
+            });
+        }
+
+        // Called if something bad happens.
+        //
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
 
 
         function vibrate() {
-            navigator.notification.vibrate(2000);
+           // navigator.notification.vibrate(2000);
         }
 
 
         function playBeep() {
-            navigator.notification.beep(1);
+            //navigator.notification.beep(1);
         }
-    
-     
 
-        function UpdateStatusBar(Type)
-        {
+
+
+        function UpdateStatusBar(Type) {
 
 
 
@@ -1163,7 +1382,7 @@
 
                         }
                         break;
-                    case 2: 
+                    case 2:
 
 
                         if (_Islive) {
@@ -1202,10 +1421,6 @@
                             StatusBar.backgroundColorByHexString("#f8c217");
 
 
-
-
-
-
                         }
                         break;
                     default:
@@ -1215,23 +1430,27 @@
 
                         }
                         break;
-
-
                 }
             }
-          
-
         }
 
         function onDeviceReady() {
 
+            navigator.splashscreen.hide();
+           
+            getAppVersion(function (version) {
+             
+
+                $(".versiontextlabel").html(version)
+
+               
+            });
+           
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
-
-            InitializeModal();
-
             $cordovaSplashscreen.hide();
+            InitializeModal();
         }
 
         function onOffline() {
@@ -1250,10 +1469,13 @@
                 case -90:
                 case 90:
 
+                    //alert(window.orientation);
+
                     $("#mycartModal").addClass("activitylist")
 
                     break;
                 default:
+                   // alert(window.orientation);
                     $("#mycartModal").removeClass("activitylist")
                     break;
             }
@@ -1266,7 +1488,6 @@
 
 
     </script>
-
 
     <script>
         var addRippleEffect = function (e) {
@@ -1294,7 +1515,8 @@
         document.addEventListener('click', addRippleEffect, false);
     </script>
 
- 
+  
+
 
     <script>
 
