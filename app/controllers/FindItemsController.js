@@ -931,6 +931,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.GetInventories = function () {
 
 
+        $("#slide-out-left").hide();
+        
+
         if ($scope.loadingblock == false) {
 
               $scope.myinventoryColumnLoaded = false;
