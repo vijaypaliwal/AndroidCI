@@ -39,14 +39,12 @@
             display: none !important;
         }
 
-        .side-nav
-        {
-            z-index:1500;
-        }
-        
-        
-         .input-group {
+        .input-group {
             width: 100%;
+        }
+
+        .side-nav {
+            z-index: 1500;
         }
 
         .sidebar-nav li a.active {
@@ -81,8 +79,6 @@
             position: absolute;
         }
 
-       
-
 
 
         label {
@@ -95,10 +91,6 @@
             padding-bottom: 0px;
             color: #fff;
             border-bottom: transparent;
-        }
-
-        .drag-target {
-            display: none;
         }
 
         h3 {
@@ -171,7 +163,7 @@
             text-align: center;
             padding-left: 5px !important;
             padding-right: 5px !important;
-        
+            border-radius: 4px !important;
             margin-top: 0px !important;
         }
 
@@ -248,7 +240,6 @@
             display: inline-block;
         }
 
-      
 
 
         .scanbtn {
@@ -311,7 +302,18 @@
                 color: #6683DA;
                 cursor: pointer;
             }
-      
+
+        body {
+            overflow: auto !important;
+        }
+
+        .btn {
+            font-size: 16px;
+        }
+
+        .arrow-right {
+            border-left: 1px solid #fff !important;
+        }
 
         .bootstrap-switch-primary {
             background: #0083C7 !important;
@@ -345,6 +347,14 @@
             width: 100%;
         }
 
+        .waitingContent {
+            background: rgba(71, 79, 88, 0.8);
+            padding: 10px;
+            margin: 0 auto;
+            z-index: 1050;
+            text-align: center;
+        }
+
         #mysmallModalWaiting {
             bottom: 0;
             overflow: hidden;
@@ -357,6 +367,7 @@
             right: 0;
             font-size: 14px;
         }
+
 
         #mysmallModal {
             top: 30%;
@@ -385,20 +396,13 @@
             background: rgba(52, 73, 94,0.8);
             padding: 10px;
             margin: 0 auto;
-            width: 160px;
+            width: 150px;
             z-index: 1050;
-            text-align:center;
         }
 
-        .waitingContent {
-            background: rgba(71, 79, 88, 0.8);
-            padding: 10px;
-            margin: 0 auto;
-            z-index: 1050;
-            text-align: center;
-        }
-        
-         .bgColorTransparent {
+
+
+        .bgColorTransparent {
             background-color: transparent !important;
         }
 
@@ -453,9 +457,8 @@
         }
 
 
-
         #toolbar {
-            text-align:center;
+            text-align: center;
         }
 
         .tablink {
@@ -478,6 +481,18 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
         }
+
+        #slide-out-left {
+            left: 0px !important;
+            display: none;
+        }
+
+        .formenuopen {
+            opacity: 0.5;
+            z-index: 100;
+            background: #000;
+        }
+
 
         .top-menu {
             left: -114px;
@@ -511,10 +526,9 @@
             .top-menu i {
                 line-height: initial !important;
                 color: #333 !important;
-                font-size:15px !important;
+                font-size: 15px !important;
             }
     </style>
-
     <style>
         .input-group-addon {
             background: #fff;
@@ -535,10 +549,9 @@
                 cursor: pointer;
             }
 
-            .input-group-addon .fa-barcode
-            {
-                padding-left:10px;
-                padding-right:13px;
+            .input-group-addon .fa-barcode {
+                padding-left: 10px;
+                padding-right: 13px;
             }
     </style>
 
@@ -891,14 +904,13 @@
     </script>
     <script>
 
-
         function randomStringNew(length, chars) {
             var result = '';
             for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
             return result;
         }
-
         var _Islive = false;
+
 
         $("#mysmallModal").click(function () {
             hideSuccess();
@@ -913,11 +925,8 @@
         });
 
 
-
         function hideSuccess() {
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
-            
-            
         }
 
         function HideWaitingInv() {
@@ -927,17 +936,14 @@
             $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
             $("#mysmallModalSave").removeClass('bounceOut').addClass('bounceIn');
             $('#mysmallModalSave').show();
-
-
         }
 
-        function ShowGlobalWaitingDiv()
-        {
+
+        function ShowGlobalWaitingDiv() {
             $("#mysmallModalWaiting").removeClass('fadeOut').addClass('fadeIn');
             $('#mysmallModalWaiting').show();
         }
-        function HideGlobalWaitingDiv()
-        {
+        function HideGlobalWaitingDiv() {
             $("#mysmallModalWaiting").removeClass('fadeIn').addClass('fadeOut');
 
             setTimeout(function () {
@@ -965,8 +971,6 @@
             $("#myloginModal").removeClass('bounceOut').addClass('bounceIn');
             $('#myloginModal').show();
 
-
-
         }
 
 
@@ -989,73 +993,32 @@
 
 
 
-        $('#menu-toggle').click(function (e) {
+        $('#side-left').click(function (e) {
+
+
+
             e.stopPropagation();
 
-            $('#wrapper').toggleClass('toggled');
+            $('#slide-out-left').show();
 
-
-            setTimeout(function () {
-
-
-
-                if ($('#wrapper').hasClass('toggled')) {
-                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left animated rollIn")
-                }
-
-                else {
-
-                    $("#sidebaricon").removeClass("fa-arrow-circle-left animated rollIn").addClass("fa-bars")
-
-                }
-
-
-            }, 0);
+            $('<div class="modal-backdrop formenuopen"></div>').appendTo(document.body);
 
 
         });
-        $('#wrapper').click(function (e) {
+        $('#slide-out-left').click(function (e) {
             e.stopPropagation();
 
         });
         $('body,html').click(function (e) {
-            $('#wrapper').removeClass('toggled');
-
-            setTimeout(function () {
-
-
-
-                if ($('#wrapper').hasClass('toggled')) {
-                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left")
-                }
-
-                else {
-
-                    $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
-
-                }
-
-
-
-
-
-
-            }, 300);
-
-
-
-
-
-
+            $('#slide-out-left').hide();
+            $(".formenuopen").remove();
 
         });
 
 
-        $(".sidebar-nav li a").click(function (e) {
-
-            $("#wrapper").toggleClass("toggled");
-
-            $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
+        $("#slide-out-left a").click(function (e) {
+            $(".formenuopen").remove();
+            $("#slide-out-left").hide();
 
         });
 
@@ -1098,9 +1061,6 @@
                 ['Restart', 'Exit']         // buttonLabels
             );
         }
-
-
-   
 
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
@@ -1147,36 +1107,7 @@
         var pictureSource;
         var destinationType;
         var ImageListAndroid = [];
-        //function onPhotoDataSuccess(imageData) {
-        //    $("#myModalforlist").modal("hide");
 
-        //    // Uncomment to view the base64 encoded image data
-        //    // console.log(imageData);
-        //    // alert("photo capture success");
-        //    //alert(imageData);
-        //    // Get image handle
-        //    //
-        //    //var smallImage = document.getElementById('smallImage');
-        //    // var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
-        //    //var compilehtml = $compile(crossicon)($scope);
-        //    // Unhide image elements
-        //    //
-        //    //  smallImage.style.display = 'block';
-
-        //    imageData = "data:image/jpeg;base64," + imageData;
-        //    var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px;' src='" + imageData + "'/></span>'";
-
-        //    document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
-
-        //    document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
-
-        //    $("#defaultimg").hide();
-
-        //    // Show the captured photo
-        //    // The inline CSS rules are used to resize the image
-        //    //
-        //    //smallImage.src = "data:image/jpeg;base64," + imageData;
-        //}
 
 
         var mouseEventTypes = {
@@ -1199,154 +1130,16 @@
 
 
 
-        function onPhotoDataSuccess(imageData) {
 
-            var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
-            var _length = 0;
-            if ($('#list123').html() != undefined && $('#list123').html() != "" && $('#list123').children("span") != undefined) {
-                _length = $('#list123').children("span").length;
-            }
-
-
-            //var id = _length + 1;
-            //_ImgObj.ImageID = id;
-            var id = randomStringNew(5, '0123456789');
-            _ImgObj.ImageID = id;
-            var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImageNew(' + id + ')"><i class="fa fa-times"></i></a>';
-            var compilehtml = crossicon;
-
-            imageData = "data:image/jpeg;base64," + imageData;
-            var _htmltoRender = "<span><img id='" + id + "' style='height: 80px; width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px;' src='" + imageData + "'/>" + compilehtml + "</span>";
-
-            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
-
-            document.getElementById('list321').innerHTML = _htmltoRender;
-            document.getElementById('list567').innerHTML = _htmltoRender;
-            $(".viewimage").show();
-            $("#myModalforlist").modal("hide");
-
-            $("#defaultimg").hide();
-
-            _ImgObj.FileName = "IphoneCapture";
-            _ImgObj.bytestring = imageData;
-
-            setTimeout(function () {
-                ImageListAndroid.push(_ImgObj);
-                $(".removeImage").bind("click", function () {
-
-                    removeImageNew($(this).attr("altid"));
-                });
-            }, 100);
-
-            $(".viewimage").find("div").html(ImageListAndroid.length);
-
-
-        }
-
-
-        function removeImageNew(_this) {
-
-
-
-            $("#" + _this).each(function () {
-
-                $(this).parent("span").remove();
-            });
-
-
-            for (var i = 0; i < ImageListAndroid.length; i++) {
-                if (ImageListAndroid[i].ImageID == _this) {
-                    ImageListAndroid.splice(i, 1);
-                    break;
-                }
-            }
-
-
-
-
-            removeImageNew(_this)
-
-        }
-
-
-
-        // Called when a photo is successfully retrieved
-        //
-        function onPhotoURISuccess(imageURI) {
-            // Uncomment to view the image file URI
-            // console.log(imageURI);
-            //alert("photo url success");
-            // Get image handle
-
-            //  alert(imageURI);
-
-            //  var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
-            //var compilehtml = $compile(crossicon)($scope);
-            // Unhide image elements
-            //
-
-            imageURI = "data:image/jpeg;base64," + imageURI;
-            var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px; ' src='" + imageURI + "'/></span>'";
-
-
-            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
-            document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
-            document.getElementById('list567').innerHTML = document.getElementById('list567').innerHTML + _htmltoRender;
-
-            $("#defaultimg").hide();
-        }
-
-        // A button will call this function
-        //
-        function capturePhoto() {
-            //  alert("in capture photo");
-            // Take picture using device camera and retrieve image as base64-encoded string
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-                quality: 50,
-                correctOrientation: true,
-                destinationType: destinationType.DATA_URL
-            });
-        }
-
- 
-
-        // A button will call this function
-        //
-        function capturePhotoEdit() {
-            // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-                quality: 20, allowEdit: true,
-                correctOrientation: true,
-                destinationType: destinationType.DATA_URL
-            });
-        }
-
-        // A button will call this function
-        //
-        function getPhoto(source) {
-            // Retrieve image file location from specified source
-            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
-                quality: 50,
-                destinationType: destinationType.FILE_URI,
-                correctOrientation: true,
-                sourceType: source
-            });
-        }
-
-        // Called if something bad happens.
-        //
-        function onFail(message) {
-            alert('Failed because: ' + message);
-        }
 
 
         function vibrate() {
-           // navigator.notification.vibrate(2000);
+            navigator.notification.vibrate(2000);
         }
 
 
         function playBeep() {
-            //navigator.notification.beep(1);
+            navigator.notification.beep(1);
         }
 
 
@@ -1421,6 +1214,10 @@
                             StatusBar.backgroundColorByHexString("#f8c217");
 
 
+
+
+
+
                         }
                         break;
                     default:
@@ -1430,26 +1227,23 @@
 
                         }
                         break;
+
+
                 }
             }
+
+
         }
 
         function onDeviceReady() {
 
-         
-           
-            getAppVersion(function (version) {
-             
-
-                $(".versiontextlabel").html(version)
-
-            });
-           
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
-            $cordovaSplashscreen.hide();
+
             InitializeModal();
+
+            $cordovaSplashscreen.hide();
         }
 
         function onOffline() {
@@ -1468,13 +1262,10 @@
                 case -90:
                 case 90:
 
-                    //alert(window.orientation);
-
                     $("#mycartModal").addClass("activitylist")
 
                     break;
                 default:
-                   // alert(window.orientation);
                     $("#mycartModal").removeClass("activitylist")
                     break;
             }
@@ -1487,6 +1278,7 @@
 
 
     </script>
+
 
     <script>
         var addRippleEffect = function (e) {
@@ -1514,7 +1306,6 @@
         document.addEventListener('click', addRippleEffect, false);
     </script>
 
-  
 
 
     <script>
@@ -1561,9 +1352,6 @@
                 hideSuccess();
             }, 3000)
         }
-    </script>
-
-    <script>
     </script>
 
 
