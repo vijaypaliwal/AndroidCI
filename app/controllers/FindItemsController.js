@@ -54,6 +54,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.SearchValue = "";
     $scope.StatusList = [];
 
+    $scope.loadingblock = false;
+
     $scope.UOMList = [];
     $scope.CurrentObj = {};
     $scope.SearchNumberValue = "";
@@ -262,15 +264,19 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() < 500) {
-                if (_PageSize < $scope.totalrecords) {
+                //if (_PageSize < $scope.totalrecords)
+              //  {
+
+                    $scope.loadingblock = true;
+
                     _IsLazyLoadingUnderProgress = 1;
-                    $scope.myinventoryColumnLoaded = false;
+                   // $scope.myinventoryColumnLoaded = false;
                     CheckScopeBeforeApply();
                     $scope.GetInventories();
-                }
-                else {
+              //  }
+                //else {
                     // log.info("You have already loaded all data.")
-                }
+             //   }
 
             }
         }
@@ -924,7 +930,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-        $scope.myinventoryColumnLoaded = false;
+
+        if ($scope.loadingblock == false) {
+
+              $scope.myinventoryColumnLoaded = false;
+
+        }
+
+      
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -1026,7 +1039,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
 
                 $scope.myinventoryColumnLoaded = true;
-              
+                $cordovaKeyboard.disableScroll(false);
+
+                $scope.loadingblock = false;
+
                 CheckScopeBeforeApply();
             
                 },
@@ -1035,13 +1051,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
               //
 
                 $scope.myinventoryColumnLoaded = true;
-              
+               // $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
                 $scope.ShowErrorMessage("current inventories", 2, 1, req.statusText);
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
-              
+              //  $cordovaKeyboard.disableScroll(false);
                 SetSelectedIfAny();
             }
         });
@@ -1731,10 +1747,49 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         $scope.getuom();
 
-
+        $scope.SendEmail();
        
         //SetSelectedIfAny();
 
+    }
+
+    $scope.SendEmail = function () {
+        var _Latestsignup = localStorageService.get("LatestSignUp");
+        
+        if(_Latestsignup=="true")
+        {
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
+            }
+
+            $.ajax
+               ({
+                   type: "POST",
+                   url: serviceBase + 'SendEmail',
+                   contentType: 'application/json; charset=utf-8',
+                   dataType: 'json',
+                   data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+                   success: function (response) {
+                       if (response.SendEmailResult.Success == true) {
+                           localStorageService.set("LatestSignUp", false);
+                           CheckScopeBeforeApply()
+                       }
+                       else {
+                           $scope.ShowErrorMessage("Sending Email", 1, 1, response.SendEmailResult.Message);
+
+                       }
+
+                   },
+                   error: function (err) {
+
+                       $scope.errorbox(err);
+                       $scope.ShowErrorMessage("Sending Email", 2, 1, err.statusText);
+
+                   }
+               });
+
+        }
     }
 
     function setZeroData() {

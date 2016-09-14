@@ -1,10 +1,9 @@
 ﻿'use strict';
 app.controller('indexController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', '$cordovaStatusbar', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard, $cordovaStatusbar) {
-    function checkurl()
-    {
+    function checkurl() {
         var path = "activity";
         if ($location.path().substr(0, path.length) !== path) {
-           // UpdateStatusBar(55);
+            // UpdateStatusBar(55);
         }
         else {
             console.log("into activity");
@@ -21,6 +20,56 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $location.path('/login');
     }
 
+
+    $scope.ShowErrorMessage = function (Place, TextType, Type, Message) {
+        var _returnError = ""
+        if (Message != undefined && Message != null) {
+
+        }
+        else {
+            Message = "";
+        }
+        switch (TextType) {
+            case 1:
+                _returnError = "Error occurred in fetching " + Place + " " + Message;
+                break;
+            case 2:
+                _returnError = "Error in your requested data while getting " + Place + " " + Message;
+                break;
+            case 3:
+                _returnError = "Error occurred during updating data " + Place + " " + Message;
+                break;
+            default:
+                _returnError = "Error in your requested data while getting " + Place + " " + Message;
+        }
+
+        switch (Type) {
+            case 1:
+                log.error(_returnError);
+                break;
+            case 2:
+                log.warning(_returnError);
+                break;
+            default:
+
+        }
+    }
+
+
+    $(document).ajaxError(function (event, jqxhr, settings, exception) {
+
+        if (jqxhr.status != 200 && (jqxhr.readyState != 0 || jqxhr.status != 0)) {
+            if (exception != "timeout") {
+
+                $(".modal").modal("hide");
+                HideGlobalWaitingDiv();
+                $("#modalerror").modal('show');
+                $("#errortext").html(exception);
+            }
+        }
+    });
+
+
     $scope.reload = function () {
 
         window.location.reload();
@@ -36,19 +85,16 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
     $scope.$on('$locationChangeStart', function (event) {
-       
+
         var _path = $location.path();
-        if(_path=="/inventory")
-        {
+        if (_path == "/inventory") {
             $cordovaKeyboard.disableScroll(true);
         }
-        else
-        {
+        else {
             $cordovaKeyboard.disableScroll(false);
         }
 
-        if(_path=="/activity")
-        {
+        if (_path == "/activity") {
 
         }
         else {
@@ -61,23 +107,22 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
     $scope.authentication = authService.authentication;
 
-    $scope.GetProfileData=function()
-    {
+    $scope.GetProfileData = function () {
 
 
         authService.GetuserInfo();
         setTimeout(function () {
             $scope.UserInfoData = authService.UserInfo;
             if ($scope.UserInfoData != null && $scope.UserInfoData != undefined) {
-               
+
                 console.log($scope.UserInfoData);
                 $scope.username = $scope.UserInfoData.username;
                 $scope.myprofileimage = $scope.UserInfoData.myprofileimage;
                 $scope.picURl = $scope.UserInfoData.picURl;
                 $scope.$apply();
             }
-        },1000)
-       
+        }, 1000)
+
     }
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
@@ -90,12 +135,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
         return retValue;
     }
-    $scope.Validation=function(value,type)
-    {
+    $scope.Validation = function (value, type) {
         switch (type) {
             case 1:
                 value = TryParseInt(value, -9890);
-                if (value!=-9890 && typeof (value) === "number") {
+                if (value != -9890 && typeof (value) === "number") {
                     return true;
                 }
                 else { return false; }
@@ -117,6 +161,65 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
     }
 
+
+
+    $scope.UploadImage = function (txnID, ImageList) {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        //  log.info("Image upload processing started at backend side, please be patient .")
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'UploadImage',
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'text json',
+              async: true,
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
+              success: function (response) {
+                  if (response.UploadImageResult.Success == true) {
+
+                      log.success("Image has been uploaded success fully for last inventory record.");
+                      var _path = $location.path();
+                      if (_path == "/inventory") {
+                          $scope.GetInventories();
+                      }
+
+                      CheckScopeBeforeApply();
+                  }
+                  else {
+
+                      $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
+                  }
+
+              },
+              error: function (err, textStatus, errorThrown) {
+                  if (err.readyState == 0 || err.status == 0) {
+
+                  }
+                  else {
+                      if (textStatus != "timeout") {
+                          if (err.status == 200) {
+                              log.success("Image has been uploaded success fully for last inventory record.");
+                              var _path = $location.path();
+                              if (_path == "/inventory") {
+                                  $scope.GetInventories();
+                              }
+
+                          }
+                          else {
+                              log.error(err.statusText);
+
+                          }
+                      }
+                  }
+              }
+          });
+
+    }
     $scope.SaveImages = function (txnID, ImageList) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -147,23 +250,21 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
              },
              error: function (err) {
                  alert(err.status);
-                 if (err.status == 200 || err.status == "200")
-                 {
+                 if (err.status == 200 || err.status == "200") {
                      log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
                  }
                  else {
                      console.log(err);
                      log.error("Error Occurred during operation");
                  }
-              
+
 
 
              }
          });
     }
 
-    if (_Islive)
-    {
+    if (_Islive) {
         checkurl();
 
     }

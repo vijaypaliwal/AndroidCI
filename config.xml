@@ -3,12 +3,13 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.clearlyinventory"
         version   = "1.0.3">
+  
   <name>Clearly Inventory</name>
 
   <description>
    Welcome to Clearly Inventory, an easy online inventory management software
   </description>
-
+  
   <author href="http://www.clearlyinventory.com/" email="support@clearlyinventory.com">
    SHIVAM ITCS Team
   </author>
@@ -17,10 +18,10 @@
   <!--gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" /-->
   <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
   <gap:plugin name="org.apache.cordova.camera" />
-    <gap:plugin name="org.apache.cordova.file" />
-    <gap:plugin name="org.apache.cordova.file-transfer" />
-    <gap:plugin name="org.apache.cordova.network-information" />
-   <gap:plugin name="de.phonostar.softkeyboard-custom" spec="0.1.1" source="pgb" />
+  <gap:plugin name="org.apache.cordova.file" />
+  <gap:plugin name="org.apache.cordova.file-transfer" />
+  <gap:plugin name="org.apache.cordova.network-information" />
+  <gap:plugin name="de.phonostar.softkeyboard-custom" spec="0.1.1" source="pgb" />
   <gap:plugin name="org.apache.cordova.geolocation"/>
   <gap:plugin name="org.apache.cordova.dialogs"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
@@ -56,6 +57,9 @@
   <icon src=".pgbomit/res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
   <icon src=".pgbomit/res/icon/android/icon-72-hdpi.png"   gap:platform="android"    gap:density="hdpi" />
   <icon src=".pgbomit/res/icon/android/icon-96-xhdpi.png"  gap:platform="android"    gap:density="xhdpi" />
+  
+  
+  
   <icon src=".pgbomit/res/icon/blackberry/icon-80.png"     gap:platform="blackberry" />
   <icon src=".pgbomit/res/icon/blackberry/icon-80.png"     gap:platform="blackberry" gap:state="hover"/>
   <icon src=".pgbomit/res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
@@ -75,6 +79,12 @@
   <gap:splash src=".pgbomit/res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
   <gap:splash src=".pgbomit/res/screen/android/screen-hdpi-portrait.png"  gap:platform="android" gap:density="hdpi" />
   <gap:splash src=".pgbomit/res/screen/android/screen-xhdpi-portrait.png" gap:platform="android" gap:density="xhdpi" />
+  
+  <gap:splash src=".pgbomit/res/screen/android/screen-ldpi-landscape.png"  gap:platform="android" gap:density="ldpi" />
+  <gap:splash src=".pgbomit/res/screen/android/screen-mdpi-landscape.png"  gap:platform="android" gap:density="mdpi" />
+  <gap:splash src=".pgbomit/res/screen/android/screen-hdpi-landscape.png"  gap:platform="android" gap:density="hdpi" />
+  <gap:splash src=".pgbomit/res/screen/android/screen-xhdpi-landscape.png" gap:platform="android" gap:density="xhdpi" />
+  
   <gap:splash src=".pgbomit/res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />
   <gap:splash src=".pgbomit/res/screen/ios/screen-iphone-portrait.png"    gap:platform="ios"     width="320" height="480" />
   <gap:splash src=".pgbomit/res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios"     width="640" height="1136" />
