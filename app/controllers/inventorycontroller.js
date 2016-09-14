@@ -2157,7 +2157,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         bootbox.confirm("Are you sure to exit ?", function (result) {
             if (result) {
 
-                $location.path('/mainmenu');
+                $location.path('/FindItems');
 
                 CheckScopeBeforeApply()
 
