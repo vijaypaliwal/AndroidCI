@@ -1039,7 +1039,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
 
                 $scope.myinventoryColumnLoaded = true;
-                $cordovaKeyboard.disableScroll(false);
+             //   $cordovaKeyboard.disableScroll(false);
 
                 $scope.loadingblock = false;
 
