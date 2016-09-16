@@ -5,6 +5,28 @@
     padding-right: 6px;
 }*/
 
+.innerCols
+{
+   background: #eeeeee;
+}
+.innerCols div span{
+    font-size:12px !important;
+    float:left;
+    margin-right:5px;
+}
+.innerCols div{
+    width:50%;
+    float:left;
+}
+.mtm5
+{
+    margin-top:-5px !important;
+}
+.noneMax
+{
+max-height:240px !important;
+}
+
     .navbar-toggle {
         display: block !important;
     }
@@ -324,7 +346,7 @@
     }
 
     .mylabel {
-        font-size: 16px;
+        font-size: 13px;
         color: #767676;
     }
 
@@ -360,11 +382,12 @@
     }
 
     .swiper-container {
-       
-        box-shadow: 0 1px 11px rgba(0,0,0,.27);
+       box-shadow: 0 5px 2px 1px #DBDBDB;
+        
         padding: 0px;
        
         background: white;
+       margin:-5px;
     }
 
     .swiper-slide
@@ -561,7 +584,7 @@
 
     .maincontent
     {
-        padding-top:50px;
+        padding-top:20px;
     }
     .newbackbtn
     {
@@ -589,18 +612,19 @@
 
 
      .btnarea .btn {
-        font-size: 13px;
-        height: 35px;
-        line-height: 35px;
-        padding-left:10px;
-        padding-right:10px;
+      font-size: 15px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 45px;
+    padding-left: 10px;
+    padding-right: 10px;
         max-width:200px;
     }
 
 
     .btnarea .btn i {
-        font-size: 13px;
-        margin-right:2px;
+        font-size: 14px;
+        margin-right:3px;
     }
 
     .btnarea .btn .fa-barcode
@@ -644,4 +668,30 @@
         .alignright
         {
          text-align:right;
+        }
+
+        #infomodal
+        {
+            overflow-x:hidden;
+            left:initial;
+            position:fixed;
+            right:0;
+            width:270px;
+            font-size:13px;
+                box-shadow: 0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
+        }
+
+        #infomodal h4
+        {
+            font-size:15px;
+        }
+
+        .imgsection
+        {
+            text-align: center;
+    background: #f2f2f2;
+    padding-bottom: 10px;
+ 
+    width: 100%;
+    padding-top: 5px;
         }

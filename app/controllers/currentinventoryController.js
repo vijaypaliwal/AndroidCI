@@ -86,10 +86,11 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     function onSwipeDown()
     {
         $('#mylist').on('swipedown', function () {
-
+            alert("into swipe down 1");
             if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                alert("into swipe down 2");
                 if ($(window).scrollTop() < 500) {
-
+                    alert("into scroll top");
                     $scope.loadingblock = true;
 
                     _IsLazyLoadingUnderProgress = 1;

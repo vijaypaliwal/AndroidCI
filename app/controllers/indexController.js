@@ -19,7 +19,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $("#Inventoryerror").modal('hide');
         $location.path('/login');
     }
+    $scope.GetTrimmedString = function (id) {
+        var _string = $(id).val();
+        if (_string != null && _string != undefined) {
+            _string = $.trim(_string);
+        }
 
+        return _string==""?true:false;
+    }
 
     $scope.ShowErrorMessage = function (Place, TextType, Type, Message) {
         var _returnError = ""
@@ -170,7 +177,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $scope.SecurityToken = authData.token;
         }
 
-        //  log.info("Image upload processing started at backend side, please be patient .")
+      //  log.info("Image upload processing started at backend side, please be patient .")
         $.ajax
           ({
               type: "POST",
@@ -184,7 +191,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                       log.success("Image has been uploaded success fully for last inventory record.");
                       var _path = $location.path();
-                      if (_path == "/inventory") {
+                      if (_path == "/inventory")
+                      {
                           $scope.GetInventories();
                       }
 
@@ -202,7 +210,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                   }
                   else {
                       if (textStatus != "timeout") {
-                          if (err.status == 200) {
+                          if (err.status == 200)
+                          {
                               log.success("Image has been uploaded success fully for last inventory record.");
                               var _path = $location.path();
                               if (_path == "/inventory") {

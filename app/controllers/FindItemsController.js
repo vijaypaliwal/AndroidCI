@@ -1,7 +1,7 @@
 ﻿
 
 'use strict';
-app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -931,9 +931,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.GetInventories = function () {
 
 
-        $("#slide-out-left").hide();
-        
-
         if ($scope.loadingblock == false) {
 
               $scope.myinventoryColumnLoaded = false;
@@ -1042,7 +1039,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
 
                 $scope.myinventoryColumnLoaded = true;
-             //   $cordovaKeyboard.disableScroll(false);
+                $cordovaKeyboard.disableScroll(false);
 
                 $scope.loadingblock = false;
 
@@ -1054,13 +1051,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
               //
 
                 $scope.myinventoryColumnLoaded = true;
-               // $cordovaKeyboard.disableScroll(false);
+                $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
                 $scope.ShowErrorMessage("current inventories", 2, 1, req.statusText);
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
-              //  $cordovaKeyboard.disableScroll(false);
+                $cordovaKeyboard.disableScroll(false);
                 SetSelectedIfAny();
             }
         });
@@ -1130,7 +1127,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $.ajax({
             type: "POST",
             url: serviceBase + 'GetMyInventoryColumns',
-            timeout: 5000,
             data: JSON.stringify({ SecurityToken: $scope.SecurityToken }),
             contentType: 'application/json',
             dataType: 'json',
@@ -1160,9 +1156,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
             },
             error: function (req) {
+                if (req.statusText != "timeout") {
 
-                $scope.ShowErrorMessage("my inventory columns", 2, 1, req.statusText);
-
+                    $scope.ShowErrorMessage("my inventory columns", 2, 1, req.statusText);
+                }
               
 
             },
@@ -1803,7 +1800,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         }
         else {
-            $scope._areZeroRecordsShown = false;
+            $scope._areZeroRecordsShown = true;
         }
         CheckScopeBeforeApply();
     }
