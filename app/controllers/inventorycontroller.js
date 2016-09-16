@@ -9,16 +9,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.StatusList = [];
     $scope.UOMSearching = false;
     $scope.CurrentActiveField = "";
+    $scope.CurrentActiveFieldType = "";
     $scope.CurrentActiveFieldDatatype = "";
     $scope.Totalslides = 0;
     $scope.CurrentCount = 0;
     $scope.IsFormDataloaded = false;
+    $scope.Isopendiv = true;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
+
+    $scope.SetIsOpen=function(_bool)
+    {
+        $scope.Isopendiv = _bool;
+        CheckScopeBeforeApply();
+
+    }
 
     $scope.CommonArray = ['Image', 'iUnitNumber1', 'iUnitNumber2', 'iUniqueDate', 'iUnitDate2', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
 
@@ -200,6 +209,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+    $scope.leavepage = function() {
+
+    }
+
 
     $scope.GetLastValueCustom = function (id, Type) {
 
@@ -290,6 +303,39 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+    $scope.GetAllLastValue=function()
+    {
+        $scope.GetLastValue('Inv_ItemID', '#ItemName');
+        $scope.GetLastValue('Inv_Description', '#pDescriptionForm');
+        $scope.GetLastValue('Inv_lZone', '#lZone');
+        $scope.GetLastValue('Inv_ItemGroup', '#itemgroup');
+        $scope.GetLastValue('Inv_Status', '#Status');
+        $scope.GetLastValue('Inv_Location', '#Location');
+        $scope.GetLastValue('Inv_Uom', '#UOM');
+        $scope.GetLastValue('Inv_Cost', '#Costperunit');
+        $scope.GetLastValue('Inv_UniqueTag', '#UniqueTag');
+        $scope.GetLastValue('Inv_UnitTag2', '#UnitTag2');
+        $scope.GetLastValue('Inv_UnitTag3', '#UnitTag3');
+        $scope.GetLastValue('Inv_UniqueDate', '#UniqueDate');
+        $scope.GetLastValue('Inv_UnitDate2', '#UnitDate2');
+        $scope.GetLastValue('Inv_UnitNumber1', '#UnitNumber1');
+        $scope.GetLastValue('Inv_UnitNumber2', '#UnitNumber2');
+        if ($scope.CustomItemDataList.length > 0) {
+
+            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                var obj = $scope.CustomItemDataList[i];
+                $scope.GetLastValueCustom(obj.cfdID, 1);
+            }
+        }
+
+        if ($scope.CustomActivityDataList.length > 0) {
+
+            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                var obj = $scope.CustomActivityDataList[i];
+                $scope.GetLastValueCustom(obj.cfdID, 2);
+            }
+        }
+    }
     $scope.$watch('InventoryObject', function () {
 
 
@@ -442,10 +488,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 dataType: 'json',
 
                 data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchUOMValue }),
-                error: function () {
-
+                error: function (err, textStatus, errorThrown) {
                     $scope.UOMSearching = false;
-                    $scope.ShowErrorMessage("Unit of measure search", 2, 1, err.statusText);
+                    if (err.readyState == 0 || err.status == 0) {
+
+                    }
+                    else {
+
+
+                        if (textStatus != "timeout") {
+
+
+                            $scope.ShowErrorMessage("Unit of measure search", 2, 1, err.statusText);
+                        }
+                    }
                 },
 
                 success: function (data) {
@@ -507,10 +563,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 dataType: 'json',
 
                 data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchItemValue }),
-                error: function () {
-
+                error: function (err, textStatus, errorThrown) {
                     $scope.ItemSearching = false;
-                    $scope.ShowErrorMessage("Search Items", 2, 1, err.statusText);
+                    if (err.readyState == 0 || err.status == 0) {
+
+                    }
+                    else {
+                        if (textStatus != "timeout") {
+
+
+                            $scope.ShowErrorMessage("Search Items", 2, 1, err.statusText);
+                        }
+                    }
 
                 },
 
@@ -680,24 +744,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.resetObject = function () {
         $scope.InventoryObject = {
-            IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
+            IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
             UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
             UnitTag3: "", CustomPartData: [], CustomTxnData: []
         };
         $scope.ImageList = [];
 
-        $("#defaultimg").remove();
+       // $("#defaultimg").remove();
 
-        if ($scope.IsAvailableMyInventoryColumn('Image') == true) {
+        //if ($scope.IsAvailableMyInventoryColumn('Image') == true) {
 
-            $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:80px; width:80px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
-        }
-        else {
-            $('#list321').html('<img id="defaultimg" style="height:80px; width:80px; border:1px solid #ccc;" src="img/na.jpg" alt="Alternate Text">');
+        //    $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:80px; width:80px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
+        //}
+        //else {
+        //    $('#list321').html('<img id="defaultimg" style="height:80px; width:80px; border:1px solid #ccc;" src="img/na.jpg" alt="Alternate Text">');
 
-        }
+        //}
 
-        $('#list123').html('');
+        //$('#list123').html('');
+        CheckScopeBeforeApply();
     }
 
     $scope.addinventory = function () {
@@ -836,7 +901,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
 
 
-
         ShowWaitingInv();
         $.ajax
           ({
@@ -845,19 +909,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": _toSendImages }),
+             
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
                   if (response.AddInventoryDataResult.Success == true) {
 
+                      //  log.success("New Inventory Added Successfully.")
+
+                      ShowSuccess("Saved");
+
+                      if (_toSendImages.length > 0)
+                      {
+                         // log.info("Image upload started it will continue in backend you can do other work.")
+                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages);
+                      }
                       ImageListAndroid = [];
 
                       // $scope.resetObject();
 
                       $scope.movetolist();
                       // $location.path('/inventory');
-
-                      ShowSuccess("Saved");
 
                       CheckScopeBeforeApply()
                   }
@@ -876,21 +948,28 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   console.log(jqXHR);
               },
               error: function (err, textStatus, errorThrown) {
+                  if (err.readyState == 0 || err.status == 0) {
 
-                   
-                  HideWaitingInv();
+                  }
+                  else {
+                      if (textStatus != "timeout") {
 
-                  $scope.ShowErrorMessage("New Inventory", 2, 1, err.statusText);
+                          HideWaitingInv();
 
-                  $scope.Inventoryerrorbox(errorThrown);
+                          $scope.ShowErrorMessage("New Inventory", 2, 1, err.statusText);
 
+                          $scope.Inventoryerrorbox(errorThrown);
+
+
+                      }
+                  }
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
 
               }
           });
 
-
+        
     }
 
     $scope.Inventoryerrorbox = function (error) {
@@ -1125,9 +1204,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   }
 
               },
-              error: function (err) {
-                  console.log(err);
-                  $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
+              error: function (err, textStatus, errorThrown) {
+                  if (err.readyState == 0 || err.status == 0) {
+
+                  }
+                  else {
+                      if (textStatus != "timeout") {
+                          $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
+                      }
+                  }
 
 
               }
@@ -1172,9 +1257,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   }
 
               },
-              error: function (err) {
-                  console.log(err);
-                  $scope.ShowErrorMessage("My inventory Columns", 2, 1, err.statusText);
+              error: function (err, textStatus, errorThrown) {
+                  if (err.readyState == 0 || err.status == 0) {
+
+                  }
+                  else {
+                      if (textStatus != "timeout") {
+                          console.log(err);
+                          $scope.ShowErrorMessage("My inventory Columns", 2, 1, err.statusText);
+                      }
+                  }
 
 
               }
@@ -1208,9 +1300,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    }
        
                },
-               error: function (err) {
-                   $scope.ShowErrorMessage("Getting Status", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
 
+                   }
+                   else {
+                       if (textStatus != "timeout") {
+                           $scope.ShowErrorMessage("Getting Status", 2, 1, err.statusText);
+                       }
+                   }
 
                }
            });
@@ -1266,9 +1364,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    }
                 
                },
-               error: function (err) {
-                   $scope.ShowErrorMessage("Getting UOMs", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
 
+                   }
+                   else {
+                       if (textStatus != "timeout") {
+                           $scope.ShowErrorMessage("Getting UOMs", 2, 1, err.statusText);
+                       }
+                   }
 
                }
            });
@@ -1305,11 +1409,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    
                },
-               error: function (response) {
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
+
+                   }
+                   else {
+                       if (textStatus != "timeout") {
 
 
-                   console.log(response);
-                   $scope.ShowErrorMessage("Getting locations", 2, 1, response.statusText);
+                           console.log(err);
+                           $scope.ShowErrorMessage("Getting locations", 2, 1, err.statusText);
+                       }
+                   }
 
 
                }
@@ -1337,8 +1448,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    $scope.ItemList = response.GetItemsResult.Payload;
                    CheckScopeBeforeApply()
                },
-               error: function (err) {
-                   log.error(err.statusText);
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
+
+                   }
+                   else {
+                       if (textStatus != "timeout") {
+                           log.error(err.statusText);
+                       }
+                   }
                }
            });
 
@@ -1368,9 +1486,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    }
                
                },
-               error: function (response) {
-                   //log.error(response.statusText);
-                   $scope.ShowErrorMessage("Active unit data columns", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
+
+                   }
+                   else {
+                       if (textStatus != "timeout") {
+                           //log.error(response.statusText);
+                           $scope.ShowErrorMessage("Active unit data columns", 2, 1, err.statusText);
+                       }
+                   }
 
                }
            });
@@ -1476,8 +1601,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    }
                },
-               error: function (response) {
-                   $scope.ShowErrorMessage("Custom Field's data", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
+
+                   }
+                   else {
+                       if (textStatus != "timeout") {
+                           $scope.ShowErrorMessage("Custom Field's data", 2, 1, err.statusText);
+                       }
+                   }
 
                    //$scope.InventoryObject.Location = 678030;
                }
@@ -2089,39 +2221,51 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         return bytes;
     }
-    $scope.UploadImage = function () {
+    //$scope.UploadImage = function (txnID,ImageList) {
 
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-
-        StreamData = StreamData.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
-
-        if (StreamData != null && StreamData != "" && StreamData != undefined) {
-
-            $.ajax
-              ({
-                  type: "POST",
-                  url: serviceBase + 'UploadImage',
-                  contentType: 'application/json; charset=utf-8',
-                  dataType: 'text json',
-
-                  data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "FileName": FileName, "stream": StreamData }),
-                  success: function (response) {
-                      log.success("image success");
+    //    var authData = localStorageService.get('authorizationData');
+    //    if (authData) {
+    //        $scope.SecurityToken = authData.token;
+    //    }
 
 
-                      CheckScopeBeforeApply()
-                  },
-                  error: function (response) {
-                      //  log.error("Into error");
-                      console.log(response);
-                      log.error(response.statusText);
-                  }
-              });
-        }
-    }
+    //        $.ajax
+    //          ({
+    //              type: "POST",
+    //              url: serviceBase + 'UploadImage',
+    //              contentType: 'application/json; charset=utf-8',
+    //              dataType: 'text json',
+    //              async: true,
+    //              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
+    //              success: function (response) {
+
+    //                  if (response.UploadImageResult.Success == true)
+    //                  {
+
+    //                  log.success("Image has been uploaded success fully for last inventory record.");
+
+
+    //                  CheckScopeBeforeApply()
+    //                  }
+//else {
+
+//                          $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
+//}
+
+    //              },
+    //              error: function (err, textStatus, errorThrown) {
+    //                  if (err.readyState == 0 || err.status == 0) {
+
+    //                  }
+    //                  else {
+    //                      if (textStatus != "timeout") {
+    //                          log.error(err.statusText);
+    //                      }
+    //                  }
+    //              }
+    //          });
+        
+    //}
 
     $scope.UpDownValue = function (value, IsUp) {
         if ($.trim($scope.InventoryObject.Quantity) == "") {
@@ -2301,6 +2445,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         $scope.slide = $(this).index();
                         $scope.CurrentCount = $(this).index();
                         $scope.CurrentActiveField = ColumnName;
+                        $scope.CurrentActiveFieldType = "Inventory";
                         CheckScopeBeforeApply();
                         return false;
                     }
@@ -2317,6 +2462,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         $scope.slide = $(this).index();
                         $scope.CurrentCount = $(this).index();
                         $scope.CurrentActiveField = ColumnName;
+                        $scope.CurrentActiveFieldType = "Activity";
                         CheckScopeBeforeApply();
                         return false;
                     }
@@ -2477,9 +2623,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var _colName = $(".swiper-slide-active").attr("data-column");
                     var _colType = $(".swiper-slide-active").attr("data-type");
                     _colid = $(".swiper-slide-active").attr("data-id");
+                    var _fieldType = $(".swiper-slide-active").attr("field-type");
 
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
                     $scope.CurrentActiveFieldDatatype = _colType;
+                    $scope.CurrentActiveFieldType = _fieldType == "activity" ? "Activity" : "Inventory";
                     CheckScopeBeforeApply();
 
 
@@ -2554,10 +2702,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.notmove = function () {
-        window.location.reload();
-        //  $scope.getstep(0);
+        //window.location.reload();
+        $scope.resetObject();
+          $scope.getstep(0);
 
-        //   $("#modal3").modal('hide');
+          $("#modal3").modal('hide');
 
         $(".Addbtn").show()
     }
@@ -2591,14 +2740,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         e.preventDefault()
 
         if ($scope.slide == 0 || $scope.slide == 1000) {
-           
+           // showConfirmInventory();
 
         }
         else {
             mySwiper.swipePrev();
 
         }
-
 
 
     })
