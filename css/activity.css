@@ -247,25 +247,16 @@ label {
     font-size: 32px;
 }
 
-.bootbox-confirm {
-    top: 20%;
-}
-
 .mybootboxbody {
     padding-left: 20px;
     padding-top: 0px;
     padding-bottom: 0px;
 }
 
-
-
 #toolbar
 {
     display:none;
 }
-
-
-
 
 
 .itemcheckicon {
