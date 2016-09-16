@@ -7,14 +7,13 @@
     border-radius: 45px;
     padding-left: 15px;
     padding-right: 15px;
-    text-transform:capitalize;
+    text-transform: capitalize;
+    color: #fff !important;
 }
 
-
-.btn-primary i
-{
-    font-size:18px;
-}
+    .btn-primary i {
+        font-size: 18px;
+    }
 
 .btn-gray {
     background: #949494 !important;
@@ -27,12 +26,15 @@
     font-size: 17px;
     padding-left: 15px;
     padding-right: 15px;
-    text-transform:capitalize;
+    text-transform: capitalize;
 }
 
-.btn-gray i
-{
-    font-size:18px;
+.primary-color {
+    color: #fff !important;
+}
+
+.btn-gray i {
+    font-size: 18px;
 }
 
 .bootbox .modal-body {
@@ -41,9 +43,12 @@
 }
 
 .bootbox .mybootboxbody {
-    padding: 15px;
     padding-top: 0px;
     text-align: left;
+    padding-left: 13px;
+    background: #d6d6d6;
+    padding-bottom: 7px;
+    color: brown;
 }
 
 .cartitems .input-group-addon {
@@ -98,6 +103,7 @@
 .input-group-addon .fa-minus {
     padding-left: 14px !important;
     padding-right: 14px !important;
+    padding-top:14px !important;
 }
 
 .input-group-addon .fa-barcode {
@@ -148,7 +154,7 @@
         .bottom-modal ul li {
             padding: 14px;
             border: 1px solid #ccc;
-            background: #2196F3 ;
+            background: #2196F3;
             list-style-type: none;
             margin-bottom: 10px;
             border-radius: 20px;
@@ -288,6 +294,7 @@
 .lesstop12 {
     margin-top: -12px;
 }
+
 .title-header {
     background-color: #2196F3;
     color: #fff;
@@ -295,8 +302,8 @@
     position: fixed;
     width: 100%;
     z-index: 100;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
 }
 
     .title-header h4, small {
@@ -332,22 +339,20 @@
     padding: 0px;
     margin-top: 18px;
     background: #f44336;
-    color: #fff;
-    line-height:40px;
+    color: #fff !important;
+    line-height: 33px;
     z-index: 100;
-    color: #fff;
     font-size: 25px;
     right: 15px;
 }
 
 
-
-.top50
-{
-    padding-top:50px;
+.top50 {
+    padding-top: 50px;
 }
- .newbackbtn {
-      height: 40px;
+
+.newbackbtn {
+    height: 40px;
     width: 40px;
     border-radius: 100%;
     position: fixed;
@@ -358,82 +363,87 @@
     z-index: 100;
     color: #fff;
     font-size: 25px;
-    }
-
- .newbackbtn i
- {
-     color:#fff !important;
- }
-
- .btn-large
- {
-     border-radius:50px;
- }
-
- .btn-large i {
-    font-size: 17px;
 }
 
- .left15
- {
-     margin-left:15px;
- }
-
-   #filtermodal img
-    {
-        background:#fff;
-        border-radius:100%;
+    .newbackbtn i {
+        color: #fff !important;
     }
 
-    #filtermodal .input-group-addon
-    {
-        background:#2196F3;
-        padding-left:0px !important;
-        padding-right:0px !important;
+.btn-large {
+    border-radius: 50px;
+}
+
+    .btn-large i {
+        font-size: 17px;
     }
 
+.left15 {
+    margin-left: 15px !important;
+}
 
-    #filtermodal .dropdown-menu img {
-        background: transparent;
-        border:1px solid #ccc;
-    }
+#filtermodal img {
+    background: #fff;
+    border-radius: 100%;
+}
 
-       #filtermodal .form-control
-    {
-      border-top-left-radius:0px;
-      border-bottom-left-radius:0px;
-      border-left:transparent;
-    }
+#filtermodal .input-group-addon {
+    background: #2196F3;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
 
-      #filtermodal #firstDiv .fa-calendar
-      {
-          padding:6px !important;
-          color:#000 !important;
-          background:#fff !important;
-          border-radius:100% !important;
-      }
 
-       #filtermodal #firstDiv .input-group-addon
-      {
-        padding-left:12px !important;
-        padding-right:12px !important;
-      }
+#filtermodal .dropdown-menu img {
+    background: transparent;
+    border: 1px solid #ccc;
+}
 
-       .finditems img
-    {
-        background:#fff;
-        border-radius:100%;
-    }
+#filtermodal .form-control {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: transparent;
+}
 
-      .finditems.input-group-addon
-    {
-        background:#2196F3;
-        padding-left:8px !important;
-        padding-right:8px !important;
-        border-right:1px solid #fff;
-    }
+#filtermodal #firstDiv .fa-calendar {
+    padding: 6px !important;
+    color: #000 !important;
+    background: #fff !important;
+    border-radius: 100% !important;
+}
 
-      #toast-container {
+#filtermodal #firstDiv .input-group-addon {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+.finditems img {
+    background: #fff;
+    border-radius: 100%;
+}
+
+.finditems.input-group-addon {
+    background: #2196F3;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    border-right: 1px solid #fff;
+}
+
+
+.finditems .dropdown-menu img {
+    background: transparent;
+    border: 1px solid #ccc;
+}
+
+
+.finditems .fa-caret-down {
+    background: #fff;
+    color: #000 !important;
+    padding: 7px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+#toast-container {
     position: fixed !important;
     z-index: 999999;
     width: 100%;
@@ -447,3 +457,56 @@
     background: #3CB371;
     color: #fff !important;
 }
+
+.bootbox .modal-dialog
+{
+    width:94%;
+      border-radius:10px;
+}
+
+.bootbox .modal-content
+{
+   background:#fff;
+   box-shadow:none;
+   border:transparent;
+ 
+}
+
+.bootbox .modal-body
+{
+ background: #d6d6d6;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding-bottom:5px;
+}
+
+.bootbox
+{
+    position:fixed;
+    bottom:0;
+    top:initial;
+}
+
+
+.bootbox .modal-footer {
+    background: #fff;
+    padding: 0px;
+    margin-top: 0px;
+    border: transparent;
+    padding-bottom: 10px;
+    margin-top:10px;
+    padding-left:7px;
+    padding-right:7px;
+}
+
+
+.bootbox .btn {
+  width:100%;
+  margin-bottom:10px;
+  margin-left:0px !important;
+  text-align:left;
+}
+
+
+
+

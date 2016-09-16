@@ -1001,7 +1001,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                
                 $(".searchtable").removeClass("disablepointer")
 
-                
 
                 $scope._areImagesShown = result.GetInventoriesResult.Payload[0].AreImagesShown
                 $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
