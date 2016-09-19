@@ -32,9 +32,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     };
 
-    var _login = function (loginData) {
-
-
+    var _login = function (loginData)
+    {
 
         var data = "UserName=" + loginData.userName + "&Password=" + loginData.password + "&AccountName=" + loginData.account;
 
@@ -51,10 +50,14 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             url: serviceBase + 'Login',
             contentType: 'application/json; charset=utf-8',
             dataType: 'text json',
+            timeout:10000,
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
+
+                 
+
                 $("#loginBtn").removeClass("disabled");
-                $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
+                $(".fa-sign-in").removeClass("fa-spin");
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
                 $(".side-nav").show();
                 if (response.LoginResult.Success == true) {
@@ -63,25 +66,27 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     if (loginData.useRefreshTokens) {
                         localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
                         localStorageService.set('lastlogindata', { userName: loginData.userName, Password: loginData.password, AccountName: loginData.account });
-
+                        localStorageService.set('AccountID', loginData.account);
                     }
                     else {
                         localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
                         localStorageService.set('lastlogindata', { userName: loginData.userName, Password: loginData.password, AccountName: loginData.account });
+                        localStorageService.set('AccountID', loginData.account);
                     }
                     _authentication.isAuth = true;
                     _authentication.userName = loginData.userName;
                     _authentication.useRefreshTokens = loginData.useRefreshTokens;
-
                     _Getuserinfo();
-
                     deferred.resolve(response);
+                    
 
                 }
                 else {
+
+
                     $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
-                 
                     playBeep();
+
                     log.error(response.LoginResult.Message);
 
                 }
@@ -89,15 +94,33 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
             },
             error: function (err) {
-                $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
 
-                playBeep();
-                $("#loginBtn").removeClass("disabled");
-                $(".fa-sign-in").removeClass("fa-spin");
-                $(".side-nav").show();
+                 
+                if (err.readyState == 0 || err.status == 0) {
+                    if (err.statusText == "timeout")
+                    {
+                        log.error("Request has been discarded due to time out issue, please try again.")
+                    }
+                    else {
+                        log.error("Seems like some issue in network, please try again.")
+
+                    }
+                }
+                
+                else {
+                log.error("Error occurred due to error::" + err.statusText);
+                log.error(err.responseText);
+
+               
                 _logOut();
                 deferred.reject(err);
+                }
+                $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
+                $(".fa-sign-in").removeClass("fa-spin");
 
+                $("#loginBtn").removeClass("disabled");
+                $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
+                $(".side-nav").show();
             }
         });
 
@@ -126,7 +149,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                success: function (response) {
 
 
-                   debugger;
+                    
                    _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
 

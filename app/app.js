@@ -146,6 +146,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/inventorysummary.html"
     });
 
+    $routeProvider.when("/Accounts", {
+        controller: "AccountsController",
+        templateUrl: "app/views/Accounts.html"
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/login" });
 

@@ -86,8 +86,10 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     function onSwipeDown()
     {
         $('#mylist').on('swipedown', function () {
+
             if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
                 if ($(window).scrollTop() < 500) {
+
                     $scope.loadingblock = true;
 
                     _IsLazyLoadingUnderProgress = 1;
@@ -333,6 +335,26 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
         }
     }
+
+    $("body").on("click", function (e) {
+
+        if ($(e.target).hasClass('modal-backdrop')) {
+
+            $('#filtermodal').removeClass('bounceInRight');
+
+            $('#filtermodal').addClass('bounceOutRight');
+
+            setTimeout(function () {
+
+                $('#filtermodal').removeClass('bounceOutRight');
+
+                $('#filtermodal').addClass('bounceInRight');
+
+                $('#filtermodal').modal('hide');
+
+            }, 500)
+        }
+    });
 
     $scope.GetCustomFieldNameByMap = function (ID) {
         var _return = "N/A";
