@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('mobileorderController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
+app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -44,63 +44,8 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     var counter = 0;
 
-    $scope.saveColumnsNew = function () {
-
-
-        // $scope.LocationsLoaded = false;
-
-        counter = 1;
-        for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
-            if ($scope.MyInventorycolumns[i].mobileorder != 0) {
-                $scope.MyInventorycolumns[i].mobileorder = i + 1;
-
-            }
-
-        }
-
-
-        $scope.$apply();
-
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-        $.ajax
-          ({
-              type: "POST",
-              url: serviceBase + 'SaveMyInventoryColumn',
-              contentType: 'application/json; charset=utf-8',
-              dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
-              success: function (response) {
-                  $scope.LocationsLoaded = true;
-                  $scope.loadingbutton = false
-                  if (response.SaveMyInventoryColumnResult.Success == true) {
-                      $scope.GetMyinventoryColumns();
-
-                  }
-                  else {
-                      $scope.ShowErrorMessage("Updating my inventory columns", 1, 1, response.SaveMyInventoryColumnResult.Message)
-
-                  }
-                  
-                  $scope.$apply();
-              },
-              error: function (err) {
-                  $scope.ShowErrorMessage("Updating my inventory columns", 2, 1, err.statusText);
-
-              }
-          });
-    };
-    $scope.$on('$locationChangeStart', function (event) {
-
-        if (counter == 0) {
-
-            $scope.saveColumnsNew();
-        }
-
-
-    });
+   
+   
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
@@ -130,7 +75,29 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
 
+    $scope.ChangeValue=function()
+    {
+        setTimeout(function () {
+            
 
+            for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
+                if($scope.MyInventorycolumns[i].originalMobileOrder==false)
+                {
+                    $scope.MyInventorycolumns[i].mobileorder = 0;
+                }
+                else if ($scope.MyInventorycolumns[i].originalMobileOrder == true) {
+                    $scope.MyInventorycolumns[i].mobileorder = i + 1;
+                }
+
+                $scope.$apply();
+
+            }
+        },100)
+        
+    }
+
+    $scope.$watch('MyInventorycolumns', $scope.ChangeValue, true);
+   
     $scope.GetMyinventoryColumns = function () {
 
         $scope.LocationsLoaded = false;
@@ -156,6 +123,9 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   for (var i = 0; i <_myinventorycols.length; i++) {
                       if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
                       {
+                          debugger;
+                          _myinventorycols[i].Show = _myinventorycols[i].Show == "True" ? true : false;
+
                           $scope.MyInventorycolumns.push(_myinventorycols[i]);
                       }
                   }
@@ -200,25 +170,6 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
     }
 
 
-    $scope.sortableOptions = {
-        start: function (evt, ui) {
-            $(this).attr("style", "cursor:move")
-
-           $cordovaKeyboard.disableScroll(true);
-        },
-        items: "tr",
-        update: function (e, ui) {
-        },
-        placeholder: "alert alert-info",
-        cancel: ".unsortable",
-        stop: function (e, ui) {
-
-             
-        $cordovaKeyboard.disableScroll(false);
-
-
-        }
-    };
 
     $scope.offmobileorder = function ()
     {
@@ -313,3 +264,37 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
     init();
 
 }]);
+
+
+app.directive('bootstrapSwitch', [
+        function () {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    var _id = element[0].id;
+
+
+                    element.bootstrapSwitch({
+                        onText: _id == 'AutoID' ? 'Auto' : 'On',
+                        offText: _id == 'AutoID' ? 'Manual' : 'Off'
+                    });
+                    element.on('switchChange.bootstrapSwitch', function (event, state) {
+                        if (ngModel) {
+                            scope.$apply(function () {
+                                ngModel.$setViewValue(state);
+                            });
+                        }
+                    });
+
+                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                        if (newValue) {
+                            element.bootstrapSwitch('state', true, true);
+                        } else {
+                            element.bootstrapSwitch('state', false, true);
+                        }
+                    });
+                }
+            };
+        }
+]);

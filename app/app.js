@@ -151,6 +151,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/Accounts.html"
     });
 
+    $routeProvider.when("/selectcolumns", {
+        controller: "selectcolumnsController",
+        templateUrl: "app/views/selectcolumns.html"
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/login" });
 
