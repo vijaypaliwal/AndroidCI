@@ -78,11 +78,6 @@
         z-index: 10;
         width: 100%;
     }
-
-    #slide-out-left 
-    {
-        display:none !important;
-    }
 </style>
 
 <div style="text-align:center; margin-bottom:15px;">
@@ -112,7 +107,7 @@
                     </div>
                     <div ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)" class="col-xs-9">
                         <h4>{{_obj.AccountName}} </h4>
-                        <p>{{_obj.AccountID}}</p>
+                        <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
                         <p>{{_obj.Email}}</p>
 
                         <i class="fa fa-angle-right"></i>

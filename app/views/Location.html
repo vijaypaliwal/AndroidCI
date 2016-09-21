@@ -1,6 +1,68 @@
 ﻿
 <link href="css/settingmenu.css" rel="stylesheet" />
+<style>
+    .cd-top.cd-is-visible {
+        visibility: visible;
+        opacity: 0.7;
+    }
 
+    .cd-top {
+        height: 47px;
+        width: 47px;
+        color: #fff !important;
+        background: #b39a99;
+        position: fixed;
+        left: 25px;
+        bottom: 25px;
+        border-radius: 100%;
+        z-index: 100;
+        font-size: 25px;
+        padding-left: 12px;
+        padding-top: 4px;
+        opacity: 1;
+        visibility: hidden;
+    }
+</style>
+
+<style>
+    .text.btn-warning {
+        height: 35px;
+        width: 35px;
+        line-height: 35px;
+        border-radius: 100%;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .list-group-item {
+        background-color: #e2e2e2;
+    }
+
+    .list-group-item {
+        padding: 12px !important;
+        border: transparent;
+        border-bottom: 2px solid #d8d8d8;
+        border-left: 3px solid #2196F3;
+    }
+
+        .list-group-item a {
+            font-size: 17px;
+        }
+    .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-inline-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        margin-bottom: 0;
+        font-size: 17px;
+    }
+
+    .left-border {
+        border-left: 3px solid #FF4081;
+    }
+</style>
 <div class="title-header">
     <div class="row">
         <div class="col-xs-12">
@@ -16,8 +78,10 @@
 
 <div class="top50">
 
-    <div ng-if="mode == 1" class="listview animated zoomIn">
-
+    <div ng-show="mode == 1" class="listview animated zoomIn" id="mylist">
+        <div ng-if="loadingblock==true" style="background:#ECECEC; text-align:center; margin-top:-5px; padding-top:12px; padding-bottom:12px;">
+            <img style="height:30px;" src="img/loader.gif" alt="Alternate Text">
+        </div>
 
         <div id="sticky-anchor"></div>
         <div id="sticky" class="topup">
@@ -65,11 +129,18 @@
 
 
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="obj in Locations" ng-if="obj.LocationName != ''">
+            <li ng-class="{'left-border': $index % 2 === 0 }" class="list-group-item" ng-repeat="obj in Locations" ng-if="obj.LocationName != ''">
 
                 <div class="row">
-                    <div class="col-xs-7">
-                        <a>{{obj.LocationName}}</a>
+                    <div class="col-xs-2">
+                        <a class="btn text btn-warning">{{$index+1}}</a>
+                    </div>
+
+                    <div class="col-xs-5">
+                        <a class="text">{{obj.LocationName}}</a>
+                        <br />
+                        <a class="text" style="font-size: 12px; color: #a69a9a;"><span ng-if="GetTrimmedStringLoc(obj.LocationDescription)!=''">{{obj.LocationDescription}},</span><span ng-if="GetTrimmedStringLoc(obj.LocationZone)!=''">{{obj.LocationZone}}</span></a>
+
                     </div>
 
                     <div class="col-xs-5">
@@ -151,7 +222,7 @@
 
     </div>
 </div>
-
+<a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
  <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
     <i class="fa fa-bars"></i>
 </a>
@@ -166,3 +237,27 @@
         </ul>
     </div>
 </div>
+<script>
+
+    var offset = 50;
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    var offset_opacity = 1200;
+    //duration of the top scrolling animation (in ms)
+    var scroll_top_duration = 700;
+    //grab the "back to top" link
+    var $back_to_top = $('.cd-top');
+
+    function scrollToTop() {
+
+        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
+    }
+
+
+
+    $(window).scroll(function () {
+        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('cd-fade-out');
+        }
+    });
+</script>
