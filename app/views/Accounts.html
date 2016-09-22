@@ -78,13 +78,16 @@
         z-index: 10;
         width: 100%;
     }
+
+    #slide-out-left
+    {
+        display:none !important;
+    }
 </style>
 
 <div style="text-align:center; margin-bottom:15px;">
-
     <img style="height:75px; width:75px;" src="img/u2.png" alt="Alternate Text" />
-  
-</div>
+ </div>
 
 <div class="animated slideInDown maincontent">
 
@@ -92,10 +95,8 @@
     <p style="color:#615a5a; font-size:13px;">Click on account you want to enter</p>
 
     <div ng-if="IsLoading==true" class="loaderanimation">
-
         <img src="img/loader.gif" alt="Alternate Text" />
     </div>
-
 
     <ul class="list-group">
         <li ng-repeat="_obj in AccountsList"  class="list-group-item" ng-class="{'selected':CheckCurrentAccount(_obj.AccountName)==true}">

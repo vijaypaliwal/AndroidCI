@@ -15,6 +15,11 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
     $scope.loadingbutton = false;
 
 
+    $scope.TriggerCheck=function()
+    {
+        alert("left swiped");
+    }
+
     $scope.mainObjectToSend = [];
 
     function init() {
@@ -198,7 +203,9 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
         $scope.$apply();
     }
 
+  
 
+   
 
     $scope.saveColumns = function () {
 
@@ -293,6 +300,45 @@ app.directive('bootstrapSwitch', [
                         } else {
                             element.bootstrapSwitch('state', false, true);
                         }
+                    });
+                }
+            };
+        }
+]);
+
+
+app.directive('customSwipe', [
+        function () {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    $(element).swipe({
+                        swipe: function (event, direction, distance, duration, fingerCount) {
+                            //This only fires when the user swipes left
+                            
+
+                            alert("Swipe");
+
+                            setTimeout(function () {
+                                element.find("input").trigger("click");
+                                //if (direction == "right" || direction == "up") {
+
+                                //    element.find("input").prop("checked", "checked");
+                                //    element.find("input").prop("checked", true);
+
+                                //}
+                                //else if (direction == "left" || direction == "down") {
+                                //    element.find("input").prop("checked", false);
+                                //    element.find("input").removeAttr("checked");
+
+                                //}
+
+                                //element.find("input").trigger("change");
+
+                            },10)
+                        },
+                        threshold: 10
                     });
                 }
             };
