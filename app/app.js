@@ -155,7 +155,10 @@ app.config(function ($routeProvider) {
         controller: "selectcolumnsController",
         templateUrl: "app/views/selectcolumns.html"
     });
-
+    $routeProvider.when("/customfield", {
+        controller: "customfieldController",
+        templateUrl: "app/views/customfield.html"
+    });
 
     $routeProvider.otherwise({ redirectTo: "/login" });
 
