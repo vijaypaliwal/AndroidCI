@@ -204,7 +204,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         start: function (evt, ui) {
             $(this).attr("style", "cursor:move")
 
-           $cordovaKeyboard.disableScroll(true);
+       
         },
         items: "tr",
         update: function (e, ui) {
@@ -212,9 +212,6 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         placeholder: "alert alert-info",
         cancel: ".unsortable",
         stop: function (e, ui) {
-
-             
-        $cordovaKeyboard.disableScroll(false);
 
 
         }

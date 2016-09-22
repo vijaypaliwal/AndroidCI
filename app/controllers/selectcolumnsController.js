@@ -318,8 +318,6 @@ app.directive('customSwipe', [
                             //This only fires when the user swipes left
                             
 
-                            alert("Swipe");
-
                             setTimeout(function () {
                                 element.find("input").trigger("click");
                                 //if (direction == "right" || direction == "up") {
