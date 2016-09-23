@@ -195,9 +195,10 @@
                                 <a class="text ng-binding">{{_obj.Name}} </a>
                             </div>
                             <div class="col-xs-4" custom-swipe>
+
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
-                                        <input type="checkbox" ng-model="_obj.IsActive">
+                                        <input type="checkbox" ng-change="UpdateCustomField(_obj)" ng-model="_obj.IsActive">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
@@ -227,9 +228,10 @@
                                 <a class="text ng-binding">{{_obj.Name}} </a>
                             </div>
                             <div class="col-xs-4" custom-swipe>
+
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
-                                        <input type="checkbox" ng-model="_obj.IsActive">
+                                        <input type="checkbox" ng-change="UpdateCustomField(_obj)" ng-model="_obj.IsActive">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
@@ -244,6 +246,8 @@
 
 
     </table>
+
+    
 </div>
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect">
