@@ -68,6 +68,7 @@
 
 
     <div ng-if="isviewload==true" class="table-responsive">
+        <div id="sticky-anchor"></div>
         <div ng-if="loadingblock==true" style="background:#ECECEC; text-align:center; margin-top:-5px; padding-top:12px; padding-bottom:12px;">
             <img style="height:30px;" src="img/loader.gif" alt="Alternate Text">
         </div>
@@ -255,13 +256,24 @@
                 <div class="head" onclick="Toggle('#SecondDiv')"><i class="fa fa-caret-down right"></i>Column filter</div>
                 <div class="main-body" id="SecondDiv">
                     <div class="row" ng-show="IsAvailableColumn('ImagePath')">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 imgfilterarea">
 
-                            Has Image
-                            <div class="checkbox">
-                                <input type="checkbox" ng-model="HasImage" bootstrap-switch>
+                            <div class="row">
+                                <div class="col-xs-7">
+                                    <p> Has Image</p>
+                                    <a ng-click="ClearImageFilter()" ng-if="HasImage!=''">Clear Image filter</a>
+                                </div>
+
+                                <div class="col-xs-5">
+                                    <div custom-swipe class="btn-group custombtnGroup">
+                                        <label class="switch1">
+                                            <input type="checkbox" ng-model="HasImage">
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            <a ng-click="ClearImageFilter()" ng-if="HasImage!=''" style="text-decoration:underline">Clear Image filter</a>
+
                         </div>
 
 
