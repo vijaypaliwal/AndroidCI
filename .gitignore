@@ -3,3 +3,4 @@ app/controllers/helpController.js
 app/views/activity-.html
 app/views/activityAndroid.html
 app/views/help.html
+app/views/FindItems123.html
