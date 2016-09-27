@@ -2784,7 +2784,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         e.preventDefault()
         mySwiper.swipeNext()
-
+        CheckScopeBeforeApply();
     })
 
 
