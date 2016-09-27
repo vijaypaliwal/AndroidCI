@@ -225,10 +225,31 @@
                             </ul>
 
                         </span>
-                        <select ng-if="_obj.ColumnName=='iStatusValue'" ng-model="_obj.SearchValue" class="form-control">
-                            <option value="">Choose Status</option>
-                            <option value="{{obj.StatusValue}}" ng-selected="obj.StatusValue==_obj.SearchValue" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
-                        </select>
+                        <div ng-if="_obj.ColumnName=='iStatusValue'">
+
+
+                            <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                {{_obj.SearchValue}}
+                                <i class="caret pull-right" style="margin-top: 8px"></i>
+                            </div>
+                            <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                <li ng-repeat="_optionValue in StatusList">
+                                    <a>
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td ng-click="_obj.SearchValue=_optionValue.StatusValue">{{_optionValue.StatusValue}}</td>
+                                            </tr>
+                                        </table>
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+
                     </div>
                     <div class="input-group" ng-if="_obj.ColumnName=='uomUOM'">
 
@@ -243,10 +264,32 @@
                             </ul>
 
                         </span>
-                        <select ng-if="_obj.ColumnName=='uomUOM'" ng-model="_obj.SearchValue" class=" form-control">
-                            <option value="">Choose UOM</option>
-                            <option value="{{obj.UnitOfMeasureName}}" ng-selected="obj.UnitOfMeasureName==_obj.SearchValue" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
-                        </select>
+
+                        <div ng-if="_obj.ColumnName=='uomUOM'">
+
+
+                            <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                {{_obj.SearchValue}}
+                                <i class="caret pull-right" style="margin-top: 8px"></i>
+                            </div>
+                            <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                <li ng-repeat="_optionValue in UOMList">
+                                    <a>
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td ng-click="_obj.SearchValue=_optionValue.UnitOfMeasureName">{{_optionValue.UnitOfMeasureName}}</td>
+                                            </tr>
+                                        </table>
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+
                     </div>
                     <div class="input-group" ng-if="GetColumnDataType(_obj.ColumnName)=='string' && _obj.ColumnName!='iStatusValue' && _obj.ColumnName!='uomUOM'">
                         <span style="padding:5px; border:1px solid #ccc; border-right:transparent" class="input-group-addon">
@@ -296,9 +339,32 @@
                             </ul>
 
                         </span>
-                        <select class="form-control" ng-model="_obj.SearchValue">
-                            <option ng-repeat="_data in GetComboData(_obj.ColumnName)" value="{{_data}}">{{_data}}</option>
-                        </select>
+
+                        <div ng-if="GetColumnDataType(_obj.ColumnName)=='combobox'">
+
+
+                            <div class="updiv dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                                {{_obj.SearchValue}}
+                                <i class="caret pull-right" style="margin-top: 8px"></i>
+                            </div>
+                            <ul class="dropdown-menu operator dropdown-listcustom" role="menu" aria-labelledby="dropdownMenu">
+
+
+                                <li ng-repeat="_data in GetComboData(_obj.ColumnName)">
+                                    <a>
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td ng-click="_obj.SearchValue=_data">{{_data}}</td>
+                                            </tr>
+                                        </table>
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+                     
                     </div>
 
                     <div class="input-group" ng-if="GetColumnDataType(_obj.ColumnName)=='number'||GetColumnDataType(_obj.ColumnName)=='decimal' ||GetColumnDataType(_obj.ColumnName)=='money' || GetColumnDataType(_obj.ColumnName)=='currency'">
