@@ -299,8 +299,14 @@
 
                             <div ng-if="obj.cfdDataType=='checkbox'">
 
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+                                        <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
 
-                                <input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />
+                                <!--<input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />-->
 
 
                             </div>
@@ -346,9 +352,16 @@
                             </div>
 
 
-                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                            <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                                <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+                                        <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+
+                                <!--<input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>-->
 
                             </div>
 

@@ -747,9 +747,16 @@
 
                                                 <input placeholder1="fill {{_columns}}" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                                <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
+                                                <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="">
 
-                                                    <input type="checkbox" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>
+                                                    <div class="btn-group custombtnGroup">
+                                                        <label class="switch1">
+                                                            <input type="checkbox" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+                                                            <div class="slider round"></div>
+                                                        </label>
+                                                    </div>
+
+                                                    <!--<input type="checkbox" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>-->
 
                                                 </div>
 
@@ -866,9 +873,16 @@
                         </div>
 
 
-                        <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                        <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                            <input type="checkbox" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+                            <div class="btn-group custombtnGroup">
+                                <label class="switch1">
+                                    <input type="checkbox" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                    <div class="slider round"></div>
+                                </label>
+                            </div>
+
+                            <!--<input type="checkbox" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>-->
 
                         </div>
 
@@ -952,9 +966,16 @@
                             </div>
 
 
-                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                            <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                                <input type="checkbox" id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+                                        <input type="checkbox" id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+
+                                <!--<input type="checkbox" id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>-->
 
                             </div>
 
@@ -1037,9 +1058,16 @@
                             </div>
 
 
-                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                            <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                                <input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+                                        <input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+
+                                <!--<input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>-->
 
                             </div>
 
@@ -1753,9 +1781,16 @@
 
                                         <input placeholder1="fill {{_columns}}" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
+                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="">
 
-                                            <input type="checkbox" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>
+                                            <div class="btn-group custombtnGroup">
+                                                <label class="switch1">
+                                                    <input type="checkbox" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+                                                    <div class="slider round"></div>
+                                                </label>
+                                            </div>
+
+                                            <!--<input type="checkbox" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>-->
 
                                         </div>
 
@@ -1851,9 +1886,15 @@
                                 </div>
 
 
-                                <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                                <div ng-if="obj.cfdDataType=='checkbox'" class="">
+                                    <div class="btn-group custombtnGroup">
+                                        <label class="switch1">
+                                            <input type="checkbox" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
 
-                                    <input type="checkbox" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+                                    <!--<input type="checkbox" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>-->
 
                                 </div>
 
@@ -1936,9 +1977,16 @@
                                     </div>
 
 
-                                    <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                                    <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                                        <input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+                                        <div class="btn-group custombtnGroup">
+                                            <label class="switch1">
+                                                <input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </div>
+
+                                        <!--<input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>-->
 
                                     </div>
 
@@ -2018,9 +2066,16 @@
                                     </div>
 
 
-                                    <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                                    <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                                        <input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+                                        <div class="btn-group custombtnGroup">
+                                            <label class="switch1">
+                                                <input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </div>
+
+                                        <!--<input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>-->
 
                                     </div>
 
@@ -2650,17 +2705,17 @@
 
         $(".cartitems").slideToggle();
 
-
         setTimeout(function () {
             if ($(".cartitems").css("display") == "none") {
-
                 $(".bottomarrow").hide();
-                $(".rightarrow").show()
+                $(".rightarrow").show();
+                $(".customActivityData").css("padding-top", "50px");
 
             }
             else {
                 $(".bottomarrow").show();
-                $(".rightarrow").hide()
+                $(".rightarrow").hide();
+                $(".customActivityData").css("padding-top", "10px");
             }
         }, 500);
 

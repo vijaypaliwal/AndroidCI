@@ -132,17 +132,14 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
         }
-
         $scope.FilterData.SearchValue = "";
         $scope.ClearImageFilter();
+        $scope.ShowGroupedData = false;
         CheckScopeBeforeApply();
         $scope.GetInventoryGroupedDataAccordingToView();
     }
     $scope.clearfilter = function () {
         $scope.clearfilterArray();
-
-        //  CheckScopeBeforeApply();
-        //  $scope.GetInventoryGroupedDataAccordingToView();
     }
     $scope.GetComboData = function (ColumnName) {
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -150,13 +147,11 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
                 console.log($scope.CustomItemDataList[i].cfdComboValues);
                 return $scope.CustomItemDataList[i].cfdComboValues;
             }
-
         }
-
     }
+
     $scope.GetDisplayLabel = function (ColumnName) {
         var DataType = ""
-
 
         DataType = $scope.GetCustomFieldNameByMap(ColumnName);
         if (DataType == "N/A") {
@@ -207,6 +202,8 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         }
         CheckScopeBeforeApply();
     }
+
+
     function FillFilterArray() {
         $scope.FilterArray = [];
         for (var i = 0; i < $scope.Columns.length; i++) {
