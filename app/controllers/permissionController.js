@@ -245,6 +245,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
         $scope.GetPermission(5);
 
         $scope.GetAccountuser();
+        $('#slide-out-left').hide();
     }
 
 

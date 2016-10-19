@@ -21,12 +21,125 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.$apply();
     }
 
-    $scope.changepage = function () {
-        setTimeout(
-        function () {
-            $scope.getactivepermission();
-        }, 500
-        )
+    $scope.CurrentUserKey = localStorageService.get('UserKey');
+
+    $scope.CurrentAccount = localStorageService.get('AccountID');
+
+    $scope.GetPermission = function (Type, Key) {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetUserPermissions',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type, "UserKey": Key }),
+               success: function (response) {
+
+                   debugger;
+
+
+                   if (response.GetUserPermissionsResult.Success == true) {
+                       if (Type == 4) {
+
+                           $scope.Permissions1 = response.GetUserPermissionsResult.Payload;
+
+
+                       }
+
+                       if (Type == 3) {
+
+                           $scope.Permissions2 = response.GetUserPermissionsResult.Payload;
+
+                       }
+
+                       if (Type == 5) {
+
+                           $scope.Permissions3 = response.GetUserPermissionsResult.Payload;
+
+                       }
+                   }
+                   else {
+                       //   $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
+
+                   }
+
+
+
+                   $scope.$apply();
+               },
+               error: function (response) {
+
+                   alert("Error");
+
+                   //   log.error(response.statusText);
+                   //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
+
+                   //$scope.InventoryObject.Location = 678030;
+               },
+               complete: function () {
+
+
+
+               }
+           });
+
+    }
+
+    $scope.IsActivePermissionLink = function () {
+        $scope.IsActivePermission = $scope.checkpermission('URL:configure/users/userlist.aspx');
+        $scope.$apply();
+    }
+
+    $scope.getactivepermission = function () {
+        $scope.CurrentUserKey = localStorageService.get('UserKey');
+        setTimeout(function () {
+            $scope.GetPermission(3, $scope.CurrentUserKey);
+        }, 10);
+        setTimeout(function () {
+            $scope.GetPermission(4, $scope.CurrentUserKey);
+        }, 10);
+        setTimeout(function () {
+            $scope.GetPermission(5, $scope.CurrentUserKey);
+        }, 10);
+        $scope.$apply();
+        setTimeout(function () {
+
+            $scope.Permission = [];
+            for (var i = 0; i < $scope.Permissions1.length; i++) {
+                $scope.Permission.push($scope.Permissions1[i]);
+            }
+            for (var i = 0; i < $scope.Permissions2.length; i++) {
+                $scope.Permission.push($scope.Permissions2[i]);
+            }
+            for (var i = 0; i < $scope.Permissions3.length; i++) {
+                $scope.Permission.push($scope.Permissions3[i]);
+            }
+            $scope.$apply();
+            $scope.IsActivePermissionLink();
+        }, 500);
+
+
+    }
+
+    $scope.checkpermission = function (permissioncode) {
+
+
+
+        for (var i = 0; i < $scope.Permission.length; i++) {
+            if ($scope.Permission[i].PermissionCode == permissioncode) {
+
+
+                return $scope.Permission[i].IsTurnedOn;
+
+            }
+        }
+
     }
 
     $scope.logOut = function () {
