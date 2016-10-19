@@ -12,20 +12,20 @@
     font-size:29px;
 }
 
-.AdjustNetzero {
-    color: #767676 !important;
- 
+.AdjustNetzero 
+{
+ color: #767676 !important;
 }
 
 .AdjustCalculation 
 {
-    white-space:nowrap;
+white-space:nowrap;
 }
 
 
-.AdjustIncrease {
-    color: #177B3D !important;
-   
+.AdjustIncrease 
+{
+color: #177B3D !important;
 }
 
 .AdjustDecrease {
@@ -33,39 +33,37 @@
   
 }
 
-.singlePanel {
-    margin-top: 35px;
-}
-
-.bgm-orange {
-    background-color: #f8c217 !important;
-}
-
-.topheader a {
-    font-size: 18px;
-    padding: 10px;
-    font-weight: 100;
-    font-family: verdana;
-}
-
-.form-group label span {
-    color: red;
-}
-
-.combinemodetemplate
+.singlePanel 
 {
+margin-top: 35px;
+}
 
+.bgm-orange
+ {
+ background-color: #f8c217 !important;
+ }
+
+.topheader a
+ {
+ font-size: 18px;
+ padding: 10px;
+ font-weight: 100;
+ font-family: verdana;
+}
+
+.form-group label span
+{
+color: red;
 }
 
 .combinemodelist
 {
-    padding:5px;
-
+padding:5px;
 }
 
 .combinemodelist .form-control
 {
-    margin-top:5px;
+ margin-top:5px;
 }
 
 .combinemodelist .form-group
@@ -419,14 +417,16 @@ position: absolute;
         padding: 7px;
     }
 
-    #locationlistmodal .modal-header .close {
+    #locationlistmodal .modal-header .close 
+    {
         margin-top: 6px;
         opacity: 1;
         padding-right:8px;
     }
 
 
-#selecteditemlistmodal {
+#selecteditemlistmodal 
+{
     background: #fff;
     background-color: #fff;
     width: 100%;
@@ -453,18 +453,19 @@ position: absolute;
         opacity: 1;
     }
 
-.searchresultlist {
+ .searchresultlist 
+   {
     padding-left: 0px;
     border: 1px solid #eaeaea;
-}
+   }
 
-
-    .searchresultlist li a {
+    .searchresultlist li a
+     {
         color: #000;
         padding-left: 10px;
         font-size: 16px;
         text-decoration: none;
-    }
+      }
 
     .searchresultlist li {
         list-style-type: none;

@@ -11,12 +11,22 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
 
 
+
+
     $scope.currentactiveaccount = function (AccountName) {
         localStorageService.set("ActivityCart", "");
         localStorageService.set("SelectedAction", "");
         localStorageService.set('AccountID', AccountName);
         $scope.CurrentAccount = localStorageService.get('AccountID');
         $scope.$apply();
+    }
+
+    $scope.changepage = function () {
+        setTimeout(
+        function () {
+            $scope.getactivepermission();
+        }, 500
+        )
     }
 
     $scope.logOut = function () {
@@ -106,6 +116,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $("#modalerror").modal('show');
         $("#errortext").html(error)
 
+    }
+
+    $scope.changepage = function () {
+        setTimeout(
+        function () {
+            $scope.getactivepermission();
+        }, 500
+        )
     }
 
 

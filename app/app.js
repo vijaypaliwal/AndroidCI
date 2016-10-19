@@ -160,6 +160,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/customfield.html"
     });
 
+    $routeProvider.when("/permission", {
+        controller: "permissionController",
+        templateUrl: "app/views/permission.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });
