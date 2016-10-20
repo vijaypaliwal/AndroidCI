@@ -10,9 +10,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
     }
 
-
-
-
     $scope.currentactiveaccount = function (AccountName) {
         localStorageService.set("ActivityCart", "");
         localStorageService.set("SelectedAction", "");
@@ -21,9 +18,18 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.$apply();
     }
 
-    $scope.CurrentUserKey = localStorageService.get('UserKey');
+    $scope.Permission = [];
+    $scope.Permission1 = [];
+    $scope.Permission2 = [];
+    $scope.Permission3 = [];
+    $scope.Permission4 = [];
+    $scope.IsActivePermission = false;
+
 
     $scope.CurrentAccount = localStorageService.get('AccountID');
+
+
+    $scope.CurrentUserKey = localStorageService.get('UserKey');
 
     $scope.GetPermission = function (Type, Key) {
         var authData = localStorageService.get('authorizationData');
@@ -45,6 +51,13 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
                    if (response.GetUserPermissionsResult.Success == true) {
+
+                       if (Type == 1) {
+
+                           $scope.Permissions4 = response.GetUserPermissionsResult.Payload;
+
+
+                       }
                        if (Type == 4) {
 
                            $scope.Permissions1 = response.GetUserPermissionsResult.Payload;
@@ -107,6 +120,10 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         setTimeout(function () {
             $scope.GetPermission(5, $scope.CurrentUserKey);
         }, 10);
+
+        setTimeout(function () {
+            $scope.GetPermission(1, $scope.CurrentUserKey);
+        }, 10);
         $scope.$apply();
         setTimeout(function () {
 
@@ -119,6 +136,10 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             }
             for (var i = 0; i < $scope.Permissions3.length; i++) {
                 $scope.Permission.push($scope.Permissions3[i]);
+            }
+
+            for (var i = 0; i < $scope.Permissions4.length; i++) {
+                $scope.Permission.push($scope.Permissions4[i]);
             }
             $scope.$apply();
             $scope.IsActivePermissionLink();
@@ -142,6 +163,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
+
     $scope.logOut = function () {
         localStorageService.set("ActivityCart", "");
 
@@ -158,7 +180,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             _string = $.trim(_string);
         }
 
-        return _string==""?true:false;
+        return _string == "" ? true : false;
     }
 
     $scope.GetTrimmedStringData = function (_string) {
@@ -231,6 +253,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
+
     $scope.changepage = function () {
         setTimeout(
         function () {
@@ -242,11 +265,18 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.$on('$locationChangeStart', function (event) {
 
+
+
         var _path = $location.path();
+
+
+
         if (_path == "/inventory") {
+            $scope.changepage();
             $cordovaKeyboard.disableScroll(true);
         }
         else {
+            $scope.changepage();
             $cordovaKeyboard.disableScroll(false);
         }
 
@@ -256,6 +286,10 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         else {
             UpdateStatusBar(55);
         }
+
+
+
+
     });
 
     $scope.getClass = function (path) {
@@ -326,7 +360,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $scope.SecurityToken = authData.token;
         }
 
-      //  log.info("Image upload processing started at backend side, please be patient .")
+        //  log.info("Image upload processing started at backend side, please be patient .")
         $.ajax
           ({
               type: "POST",
@@ -340,8 +374,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                       log.success("Image has been uploaded success fully for last inventory record.");
                       var _path = $location.path();
-                      if (_path == "/inventory")
-                      {
+                      if (_path == "/inventory") {
                           $scope.GetInventories();
                       }
 
@@ -359,8 +392,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                   }
                   else {
                       if (textStatus != "timeout") {
-                          if (err.status == 200)
-                          {
+                          if (err.status == 200) {
                               log.success("Image has been uploaded success fully for last inventory record.");
                               var _path = $location.path();
                               if (_path == "/inventory") {
@@ -426,5 +458,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         checkurl();
 
     }
+
+
+
 
 }]);
