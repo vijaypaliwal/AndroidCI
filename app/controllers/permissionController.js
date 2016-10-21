@@ -8,11 +8,11 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     $scope.IsLoading = false;
     $scope.LocalItemFieldsList = [];
 
-    $scope.IsAdminopen = true;
-    $scope.IsViewOpen = true;
+    $scope.IsAdminopen = false;
+    $scope.IsViewOpen = false;
     $scope.IsLibrarydataopen = true;
 
-    $scope.IsGlobalopen = true;
+    $scope.IsGlobalopen = false;
 
     
 
@@ -193,6 +193,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
 
             case 4:
                 $scope.IsLibrarydataopen = false;
+                $scope.IsAdminopen = false;
                 $scope.IsGlobalopen = !$scope.IsGlobalopen;
                 $scope.IsViewOpen = false;
                 break;
