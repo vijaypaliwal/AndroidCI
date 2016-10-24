@@ -697,6 +697,8 @@ footer.page-footer {
     margin: 20px;
     height: 64px;
     width: 64px;
+    margin-bottom:10px;
+    margin-top:10px;
 }
 .sidenav-header .avatar-body {
     flex: 1;
