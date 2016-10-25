@@ -1742,6 +1742,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.ImageList.push(_ImgObj);
         CheckScopeBeforeApply();
 
+        log.success("Images captured length"+$scope.ImageList.length);
+
     }
 
     $scope.onFail = function (message) {
