@@ -901,20 +901,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         var _sum = 0;
 
-
+        log.success("Total Image" + $scope.ImageList)
         var _toSendImages = angular.copy($scope.ImageList);
+
+        log.success("Total Image" + $scope.ImageList)
 
         for (var i = 0; i < _toSendImages.length; i++) {
 
             if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
                 _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
-                if (_toSendImages[i].size != null && _toSendImages[i].size != undefined) {
-
-                    _sum = _sum + parseFloat(_toSendImages[i].size);
+                if (_toSendImages[i].size != null && _toSendImages[i].size != undefined)
+                {
+                 _sum = _sum + parseFloat(_toSendImages[i].size);
                 }
             }
 
         }
+
+        log.success("Total Image after" + _toSendImages.length)
 
         if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
@@ -1742,7 +1746,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.ImageList.push(_ImgObj);
         CheckScopeBeforeApply();
 
-        log.success("Images captured length"+$scope.ImageList.length);
+       // log.success("Images captured length"+$scope.ImageList.length);
 
     }
 
