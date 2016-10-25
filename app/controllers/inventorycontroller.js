@@ -901,10 +901,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         var _sum = 0;
 
-        log.success("Total Image" + $scope.ImageList)
+      
         var _toSendImages = angular.copy($scope.ImageList);
 
-        log.success("Total Image" + $scope.ImageList)
+      
 
         for (var i = 0; i < _toSendImages.length; i++) {
 
@@ -918,7 +918,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-        log.success("Total Image after" + _toSendImages.length)
+      //  log.success("Total Image after" + _toSendImages.length)
 
         if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
