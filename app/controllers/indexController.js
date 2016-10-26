@@ -360,7 +360,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $scope.SecurityToken = authData.token;
         }
 
-        log.success("image upload started with " + _NImageList.length + " Images");
+       
         //  log.info("Image upload processing started at backend side, please be patient .")
         $.ajax
           ({
