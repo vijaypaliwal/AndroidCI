@@ -972,7 +972,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _sum = 0;
 
       
-        var _toSendImages = angular.copy($scope.ImageList);
+        var _toSendImages =[]
+           _toSendImages= angular.copy($scope.ImageList);
 
       
 
@@ -1015,8 +1016,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                       if (_toSendImages.length > 0)
                       {
+                          var _tempArray = []
+                          _tempArray = _toSendImages;
                          // log.info("Image upload started it will continue in backend you can do other work.")
-                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages);
+                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _tempArray);
                       }
                       ImageListAndroid = [];
 
