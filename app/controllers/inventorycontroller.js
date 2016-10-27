@@ -986,7 +986,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                  _sum = _sum + parseFloat(_toSendImages[i].size);
                 }
 
-                log.error(_toSendImages.length)
+              
             }
 
         }
@@ -1016,14 +1016,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                       ShowSuccess("Saved");
 
-                    
-
                       if (_toSendImages.length > 0)
                       {
                           var _tempArray = []
                           _tempArray = _toSendImages;
 
-                          log.success(_tempArray.length)
 
                          // log.info("Image upload started it will continue in backend you can do other work.")
                         //  $scope.UploadImage(response.AddInventoryDataResult.Payload, _tempArray);
