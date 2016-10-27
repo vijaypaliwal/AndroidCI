@@ -1007,7 +1007,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
               dataType: 'json',
              
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": _toSendImages }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
                   if (response.AddInventoryDataResult.Success == true) {
@@ -1026,7 +1026,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           log.success(_tempArray.length)
 
                          // log.info("Image upload started it will continue in backend you can do other work.")
-                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _tempArray);
+                        //  $scope.UploadImage(response.AddInventoryDataResult.Payload, _tempArray);
                       }
                       ImageListAndroid = [];
 

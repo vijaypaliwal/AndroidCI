@@ -361,7 +361,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
 
 
-        alert("Images" + _NImageList.length);
+     
 
        
         //  log.info("Image upload processing started at backend side, please be patient .")
