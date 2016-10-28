@@ -512,7 +512,50 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         }
 
 
-        $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
+     //   $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
+
+        $.ajax
+      ({
+          type: "POST",
+          url: serviceBase + 'UploadImage',
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'text json',
+          async: true,
+          data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
+          success: function (response) {
+              if (response.UploadImageResult.Success == true) {
+
+                  log.success("Image has been uploaded success fully for last inventory record.");
+                
+                  CheckScopeBeforeApply();
+              }
+              else {
+
+                  $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
+              }
+
+          },
+          error: function (err, textStatus, errorThrown) {
+              if (err.readyState == 0 || err.status == 0) {
+
+              }
+              else {
+                  if (textStatus != "timeout") {
+                      if (err.status == 200) {
+                          log.success("Image has been uploaded success fully for last inventory record.");
+                        
+
+                      }
+                      else {
+                          log.error(err.statusText);
+
+                      }
+                  }
+              }
+          }
+      });
+
+
 
         log.success("Image save process running, Please wait")
 
