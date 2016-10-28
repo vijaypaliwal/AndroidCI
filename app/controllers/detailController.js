@@ -333,7 +333,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         scanner.scan(function (result) {
 
             $scope.itemscanvalue = result.text;
-
+            $scope.CurrentInventory.pPart = result.text;
             $scope.$apply();
 
          
