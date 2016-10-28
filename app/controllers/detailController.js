@@ -520,6 +520,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
           url: serviceBase + 'UploadImage',
           contentType: 'application/json; charset=utf-8',
           dataType: 'text json',
+          async: false,
           data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
           success: function (response) {
               if (response.UploadImageResult.Success == true) {

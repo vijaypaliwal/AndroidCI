@@ -43,12 +43,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         $(".fa-sign-in").addClass("fa-spin");
         var deferred = $q.defer();
         ShowLoginSuccess();
-        var _Urltopost = serviceBase + "Login";
-        alert(_Urltopost);
         $.ajax
         ({
             type: "POST",
-            url: _Urltopost,
+            url: serviceBase + "Login",
             contentType: 'application/json; charset=utf-8',
             dataType: 'text json',
            

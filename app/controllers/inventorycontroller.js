@@ -1967,7 +1967,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
         $scope.SearchItemValue = "";
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
@@ -1992,7 +1992,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.ScanLocationsearch = function () {
         $scope.SearchLocationValue = "";
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
@@ -2015,7 +2015,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.ScanUOMsearch = function () {
         $scope.SearchLocationValue = "";
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
@@ -2078,7 +2078,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
@@ -2241,7 +2241,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _colarray = _colid.split("_");
         var ControlID = $scope.CurrentActiveField;
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
 
         scanner.scan(function (result) {
