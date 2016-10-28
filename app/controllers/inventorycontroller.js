@@ -2420,10 +2420,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     var mySwiper;
 
 
-    window.onerror = function (error, file, line) {
-        alert("into inventory file Data");
-        alert(error + ", " + file + ", " + line);
-    }
+   
 
     $scope.changeNav = function () {
 
@@ -2451,9 +2448,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     if ($("#myform .swiper-slide-active input").length > 0) {
                         $("#myform .swiper-slide-active input:first").focus();
                         //  SoftKeyboard.show();
-                        alert("In1");
                         $cordovaKeyboard.show();
-                        alert("In2");
+                       
                     }
                 }
             }
