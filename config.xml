@@ -33,14 +33,14 @@
   <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>-->
 
 
-  <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
-  <plugin name="cordova-plugin-statusbar" source="npm"/>
+  <plugin name="phonegap-plugin-barcodescanner" spec="2.0.1" source="npm"/>
+  <plugin name="org.apache.cordova.statusbar" source="npm"/>
   
-  <plugin name="cordova-plugin-camera" source="npm" />
+  <plugin name="org.apache.cordova.camera" source="npm" />
 
-  <plugin name="cordova-plugin-file" source="npm" />
+  <plugin name="org.apache.cordova.file" source="npm" />
 
-  <plugin name="cordova-plugin-file-transfer" source="npm" />
+  <plugin name="org.apache.cordova.file-transfer" source="npm" />
 
   <plugin name="org.apache.cordova.network-information" source="npm"/>
   <plugin name="org.apache.cordova.splashscreen" source="npm"/>
