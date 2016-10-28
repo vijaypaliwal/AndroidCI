@@ -500,6 +500,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.saveimage = function () {
 
+        $(".viewimage").hide();
+
         var _toSendImages = angular.copy($scope.ImageList);
 
         for (var i = 0; i < _toSendImages.length; i++) {
@@ -510,7 +512,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             }
 
         }
-
 
         //   $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
 
@@ -525,6 +526,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
           async: false,
           data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
           success: function (response) {
+
+              window.location.reload();
+
               if (response.UploadImageResult.Success == true) {
 
                   log.success("Image has been uploaded success fully for last inventory record.");
@@ -562,7 +566,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         log.success("Image save process running, Please wait")
 
        
-        $(".viewimage").hide();
+      
 
         setTimeout(function ()
         {
