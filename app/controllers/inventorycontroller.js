@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, localStorageService, log, $compile) {
-    ''
+app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', '$cordovaKeyboard', function ($scope, $location, authService, localStorageService, log, $compile, $cordovaKeyboard) {
+  
     $scope.orders = [];
     $scope.MyinventoryFields = [];
     $scope.InventoryItems = [];
@@ -20,6 +20,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
+
+    
+
+ 
 
 
     $scope.SetIsOpen=function(_bool)
@@ -2430,7 +2434,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         else {
 
-            SoftKeyboard.hide();
+         //   SoftKeyboard.hide();
+
+           
+            $cordovaKeyboard.hide()
 
 
             if ($scope.CurrentActiveField != "Image") {
@@ -2442,12 +2449,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     if ($("#myform .swiper-slide-active input").length > 0) {
                         $("#myform .swiper-slide-active input:first").focus();
-                        SoftKeyboard.show();
+                      //  SoftKeyboard.show();
+                        $cordovaKeyboard.show()
                     }
                 }
             }
-
-
 
 
             //  
@@ -2753,7 +2759,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     else {
 
-                        SoftKeyboard.hide();
+                        $cordovaKeyboard.hide()
+
+                      //  SoftKeyboard.hide();
 
                     }
 
