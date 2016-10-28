@@ -2750,13 +2750,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     else {
 
-                        $cordovaKeyboard.hide()
+                        $cordovaKeyboard.close()
 
                       //  SoftKeyboard.hide();
 
                     }
-
-                  
 
                 }
 
