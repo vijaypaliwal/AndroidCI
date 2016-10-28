@@ -768,7 +768,7 @@
     <script src="scripts/angular-sanitize.js"></script>
     <script src="scripts/angular-route.min.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
-
+    
 
 
     <script src="js/sortableUI.js"></script>
@@ -1236,14 +1236,13 @@
         }
 
         function onDeviceReady() {
-
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
 
             //InitializeModal();
 
-            $cordovaSplashscreen.hide();
+            //$cordovaSplashscreen.hide();
         }
 
         function onOffline()

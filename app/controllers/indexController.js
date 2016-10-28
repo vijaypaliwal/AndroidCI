@@ -38,70 +38,72 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $scope.SecurityToken = authData.token;
         }
 
+        if ($scope.SecurityToken != undefined && $scope.SecurityToken != null && $scope.SecurityToken != "") {
 
-        $.ajax
-           ({
-               type: "POST",
-               url: serviceBase + 'GetUserPermissions',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type, "UserKey": Key }),
-               success: function (response) {
+            $.ajax
+               ({
+                   type: "POST",
+                   url: serviceBase + 'GetUserPermissions',
+                   contentType: 'application/json; charset=utf-8',
+                   dataType: 'text json',
+                   data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type, "UserKey": Key }),
+                   success: function (response) {
 
-                   debugger;
+                       debugger;
 
 
-                   if (response.GetUserPermissionsResult.Success == true) {
+                       if (response.GetUserPermissionsResult.Success == true) {
 
-                       if (Type == 1) {
+                           if (Type == 1) {
 
-                           $scope.Permissions4 = response.GetUserPermissionsResult.Payload;
+                               $scope.Permissions4 = response.GetUserPermissionsResult.Payload;
 
+
+                           }
+                           if (Type == 4) {
+
+                               $scope.Permissions1 = response.GetUserPermissionsResult.Payload;
+
+
+                           }
+
+                           if (Type == 3) {
+
+                               $scope.Permissions2 = response.GetUserPermissionsResult.Payload;
+
+                           }
+
+                           if (Type == 5) {
+
+                               $scope.Permissions3 = response.GetUserPermissionsResult.Payload;
+
+                           }
+                       }
+                       else {
+                           //   $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
 
                        }
-                       if (Type == 4) {
-
-                           $scope.Permissions1 = response.GetUserPermissionsResult.Payload;
 
 
-                       }
 
-                       if (Type == 3) {
+                       $scope.$apply();
+                   },
+                   error: function (response) {
 
-                           $scope.Permissions2 = response.GetUserPermissionsResult.Payload;
+                       //                   alert("Error");
 
-                       }
+                       //   log.error(response.statusText);
+                       //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
 
-                       if (Type == 5) {
+                       //$scope.InventoryObject.Location = 678030;
+                   },
+                   complete: function () {
 
-                           $scope.Permissions3 = response.GetUserPermissionsResult.Payload;
 
-                       }
+
                    }
-                   else {
-                    //   $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
-
-                   }
-
-
-
-                   $scope.$apply();
-               },
-               error: function (response) {
-
-                   alert("Error");
-
-                //   log.error(response.statusText);
-               //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
-
-                   //$scope.InventoryObject.Location = 678030;
-               },
-               complete: function () {
-
-
-
-               }
-           });
+               });
+        }
 
     }
 
