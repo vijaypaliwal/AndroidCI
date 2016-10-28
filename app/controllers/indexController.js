@@ -128,18 +128,28 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         setTimeout(function () {
 
             $scope.Permission = [];
-            for (var i = 0; i < $scope.Permissions1.length; i++) {
-                $scope.Permission.push($scope.Permissions1[i]);
+
+            if ($scope.Permissions1.length > 0) {
+
+                for (var i = 0; i < $scope.Permissions1.length; i++) {
+                    $scope.Permission.push($scope.Permissions1[i]);
+                }
             }
-            for (var i = 0; i < $scope.Permissions2.length; i++) {
-                $scope.Permission.push($scope.Permissions2[i]);
+            if ($scope.Permissions2.length > 0) {
+                for (var i = 0; i < $scope.Permissions2.length; i++) {
+                    $scope.Permission.push($scope.Permissions2[i]);
+                }
             }
-            for (var i = 0; i < $scope.Permissions3.length; i++) {
-                $scope.Permission.push($scope.Permissions3[i]);
+            if ($scope.Permissions3.length > 0) {
+                for (var i = 0; i < $scope.Permissions3.length; i++) {
+                    $scope.Permission.push($scope.Permissions3[i]);
+                }
             }
 
-            for (var i = 0; i < $scope.Permissions4.length; i++) {
-                $scope.Permission.push($scope.Permissions4[i]);
+            if ($scope.Permissions4.length > 0) {
+                for (var i = 0; i < $scope.Permissions4.length; i++) {
+                    $scope.Permission.push($scope.Permissions4[i]);
+                }
             }
             $scope.$apply();
           
