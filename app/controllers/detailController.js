@@ -524,7 +524,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
           data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
           success: function (response)
           {
-              alert("Success");
+              log.success("Image has been uploaded success fully for last inventory record.");
               window.location.reload();
 
               if (response.UploadImageResult.Success == true) {
