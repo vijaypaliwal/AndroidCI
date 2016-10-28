@@ -351,19 +351,13 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
 
-    $scope.UploadImage = function (txnID, ImageList) {
+    $scope.UploadImage = function (txnID, ImageList, pID) {
 
-        var _NImageList = [];
-        _NImageList= ImageList;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
 
-
-     
-
-       
         //  log.info("Image upload processing started at backend side, please be patient .")
         $.ajax
           ({
@@ -372,7 +366,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
               contentType: 'application/json; charset=utf-8',
               dataType: 'text json',
               async: true,
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _NImageList, "txnID": txnID }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID, "pID": pID }),
               success: function (response) {
                   if (response.UploadImageResult.Success == true) {
 
