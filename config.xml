@@ -29,7 +29,6 @@
   <gap:plugin name="org.apache.cordova.vibration"/>
   <gap:plugin name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
   <gap:plugin name="org.apache.cordova.splashscreen" />
-
   <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>-->
 
 
@@ -55,7 +54,7 @@
   <preference name="webviewbounce" value="true" />
   <preference name="UIWebViewBounce" value="true" />
   <preference name="DisallowOverscroll" value="false" />
-  <preference name="phonegap-version" value="cli-5.1.1" />
+  <preference name="phonegap-version" value="cli-6.3.0" />
   <preference name="orientation"   value="default" />
   <preference name="target-device"  value="universal" />
   <preference name="fullscreen" value="false" />
