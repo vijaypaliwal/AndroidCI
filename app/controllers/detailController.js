@@ -513,7 +513,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         }
 
 
-        alert($scope.ImageList.length);
+    
 
         $.ajax
       ({

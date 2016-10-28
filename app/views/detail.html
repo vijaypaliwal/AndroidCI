@@ -93,7 +93,7 @@
                 <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-trash-o"></i></a>
 
             </span>
-            <a ng-if="ImageList.length>0" ng-click="saveimage()" class="btn btn-primary" style="width:90%; margin-top:7px;"> <i class="fa fa-upload"></i> Upload</a>
+            <button type="button" ng-if="ImageList.length>0" ng-click="saveimage()" class="btn btn-primary" style="width:90%; margin-top:7px;"> <i class="fa fa-upload"></i> Upload</button>
 
         </div>
 
@@ -208,8 +208,6 @@
             <div class="page-header">
                 <h4 style="color:#000; padding-left:12px; text-align:left;">Edit Item details </h4>
             </div>
-
-
 
             <div style="text-align:left; color:#000; padding:10px;" class="editsection maincontent" ng-if="IsEditMode==true">
                 <div class="form-group">
