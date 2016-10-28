@@ -512,14 +512,16 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         }
 
 
-     //   $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
+        //   $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
+
+        alert($scope.ImageList.length);
 
         $.ajax
       ({
           type: "POST",
           url: serviceBase + 'UploadImage',
           contentType: 'application/json; charset=utf-8',
-          dataType: 'text json',
+          dataType: 'json',
           async: false,
           data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
           success: function (response) {
