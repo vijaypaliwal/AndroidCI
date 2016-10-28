@@ -38,17 +38,17 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         var data = "UserName=" + loginData.userName + "&Password=" + loginData.password + "&AccountName=" + loginData.account;
 
-        if (loginData.useRefreshTokens) {
-            data = data + "&client_id=" + ngAuthSettings.clientId;
-        }
+    
         $("#loginBtn").addClass("disabled");
         $(".fa-sign-in").addClass("fa-spin");
         var deferred = $q.defer();
         ShowLoginSuccess();
+        var _Urltopost = serviceBase + "Login";
+        alert(_Urltopost);
         $.ajax
         ({
             type: "POST",
-            url: serviceBase + 'Login',
+            url: _Urltopost,
             contentType: 'application/json; charset=utf-8',
             dataType: 'text json',
            

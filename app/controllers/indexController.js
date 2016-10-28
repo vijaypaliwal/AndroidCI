@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('indexController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', '$cordovaStatusbar', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard, $cordovaStatusbar) {
+app.controller('indexController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard',  function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
     function checkurl() {
         var path = "activity";
         if ($location.path().substr(0, path.length) !== path) {
@@ -129,24 +129,24 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
             $scope.Permission = [];
 
-            if ($scope.Permissions1.length > 0) {
+            if ($scope.Permissions1!=undefined && $scope.Permissions1.length > 0) {
 
                 for (var i = 0; i < $scope.Permissions1.length; i++) {
                     $scope.Permission.push($scope.Permissions1[i]);
                 }
             }
-            if ($scope.Permissions2.length > 0) {
+            if ($scope.Permissions2 != undefined && $scope.Permissions2.length > 0) {
                 for (var i = 0; i < $scope.Permissions2.length; i++) {
                     $scope.Permission.push($scope.Permissions2[i]);
                 }
             }
-            if ($scope.Permissions3.length > 0) {
+            if ($scope.Permissions3 != undefined && $scope.Permissions3.length > 0) {
                 for (var i = 0; i < $scope.Permissions3.length; i++) {
                     $scope.Permission.push($scope.Permissions3[i]);
                 }
             }
 
-            if ($scope.Permissions4.length > 0) {
+            if ($scope.Permissions4 != undefined && $scope.Permissions4.length > 0) {
                 for (var i = 0; i < $scope.Permissions4.length; i++) {
                     $scope.Permission.push($scope.Permissions4[i]);
                 }
