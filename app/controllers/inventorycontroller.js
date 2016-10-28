@@ -2417,13 +2417,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-
-
-
     var mySwiper;
 
-    $scope.changeNav = function () {
 
+    window.onerror = function (error, file, line) {
+        alert("into inventory file Data");
+        alert(error + ", " + file + ", " + line);
+    }
+
+    $scope.changeNav = function () {
 
         if (deviceType != "Android" && deviceType != "null") {
 
@@ -2432,13 +2434,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $("#myform .swiper-slide-active input:first").not("input[type='file']").trigger("click");
             $("#myform .swiper-slide-active input:first").not("input[type='file']").trigger("keypress");
         }
-        else {
+        else
+        {
+            //SoftKeyboard.hide();
 
-         //   SoftKeyboard.hide();
-
-           
-            $cordovaKeyboard.hide()
-
+            $cordovaKeyboard.hide();
 
             if ($scope.CurrentActiveField != "Image") {
 
@@ -2449,27 +2449,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     if ($("#myform .swiper-slide-active input").length > 0) {
                         $("#myform .swiper-slide-active input:first").focus();
-                      //  SoftKeyboard.show();
-                        $cordovaKeyboard.show()
+                        //  SoftKeyboard.show();
+                        alert("In1");
+                        $cordovaKeyboard.show();
+                        alert("In2");
                     }
                 }
             }
-
-
-            //  
-
+            //
         }
-
-
-
     }
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
     $scope.slidenumber = function (slidenumber) {
-
-
 
         switch (slidenumber) {
             case 0:
@@ -2594,18 +2588,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.$on('ngRepeatFinished', function () {
 
 
-
-
     });
 
     $scope.$on('ngRepeatFinished1', function () {
 
 
 
-
     });
     $scope.$on('ngRepeatFinished2', function () {
-
 
 
 
