@@ -45,7 +45,7 @@
   <plugin name="org.apache.cordova.network-information" source="npm"/>
   <plugin name="org.apache.cordova.splashscreen" source="npm"/>
   <plugin name="ionic-plugin-keyboard" source="npm"/>
-
+  <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
 
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
@@ -56,7 +56,7 @@
   <preference name="webviewbounce" value="true" />
   <preference name="UIWebViewBounce" value="true" />
   <preference name="DisallowOverscroll" value="false" />
-  <preference name="phonegap-version"  value="cli-6.0.0" />
+  <preference name="phonegap-version"  value="cli-6.0.3" />
   <preference name="orientation"   value="default" />
   <preference name="target-device"  value="universal" />
   <preference name="fullscreen" value="false" />
@@ -115,6 +115,6 @@
   <gap:splash src=".pgbomit/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone" />
 
   <!-- content src="http://www.w3.org/2010/05/video/mediaevents.html" / -->
-  <access origin="*"/>
+ <access origin="*"/>
 
 </widget>
