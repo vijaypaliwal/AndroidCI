@@ -2438,7 +2438,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         {
             //SoftKeyboard.hide();
 
-            $cordovaKeyboard.hide();
+
+            $cordovaKeyboard.close();
 
             if ($scope.CurrentActiveField != "Image") {
 
