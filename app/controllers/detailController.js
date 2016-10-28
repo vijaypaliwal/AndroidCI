@@ -520,7 +520,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
           url: serviceBase + 'UploadImage',
           contentType: 'application/json; charset=utf-8',
           dataType: 'text json',
-          async: true,
           data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
           success: function (response) {
               if (response.UploadImageResult.Success == true) {
@@ -542,11 +541,12 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
               else {
                   if (textStatus != "timeout") {
                       if (err.status == 200) {
+
                           log.success("Image has been uploaded success fully for last inventory record.");
                         
-
                       }
                       else {
+
                           log.error(err.statusText);
 
                       }
@@ -554,7 +554,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
               }
           }
       });
-
 
 
         log.success("Image save process running, Please wait")
@@ -568,10 +567,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         },2000)
 
     }
-
-
-  
-   
 
 
     $scope.addtocart = function (v) {
