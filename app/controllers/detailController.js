@@ -58,8 +58,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.OpenBox = function () {
 
-        $scope.ImageList = [];
-        CheckScopeBeforeApply();
+       
 
         $("#bottommenumodal").modal('hide');
 
@@ -465,7 +464,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                                 //log.success("Inventory updated successfully.");
                                 ShowSuccess("Updated");
                                 $scope.IsEditMode = false;
-
+                                $scope.ImageList = [];
                                 $scope.$apply();
                                 localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                                 $scope.SavingData = false;
