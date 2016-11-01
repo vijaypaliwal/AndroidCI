@@ -58,6 +58,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.OpenBox = function () {
 
+        $scope.ImageList = [];
+        CheckScopeBeforeApply();
+
         $("#bottommenumodal").modal('hide');
 
         $("#myModalforlist").modal("show");
@@ -180,8 +183,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
     $scope.capturePhotoNew = function () {
-        $scope.ImageList = [];
-        CheckScopeBeforeApply();
+  
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 50,
             targetWidth: 120,
@@ -226,8 +228,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.getPhoto = function (source)
     {
-        $scope.ImageList = [];
-        CheckScopeBeforeApply();
+       
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
             destinationType: destinationType.DATA_URL,
