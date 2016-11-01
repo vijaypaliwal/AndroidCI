@@ -86,7 +86,7 @@
                         </div>
                     </div>
 
-        <div style="display:none; margin-top:20px;" class="viewimage">
+        <!--<div style="display:none; margin-top:20px;" class="viewimage">
             <span  ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
 
                 <img src="{{_obj.bytestring}}" height="60" width="60" alt="Alternate Text" />
@@ -95,7 +95,7 @@
             </span>
             <button type="button" ng-if="ImageList.length>0" ng-click="saveimage()" class="btn btn-primary" style="width:90%; margin-top:7px;"> <i class="fa fa-upload"></i> Upload</button>
 
-        </div>
+        </div>-->
 
               
          <div style="position:absolute; margin-top:-33px; right:30px;" class="floating-button animated bouncein delay-3">
@@ -242,7 +242,19 @@
                     <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.lLoc" />
                 </div>
                 <br/>
+
+                <div style="display:none; margin-top:20px;" class="viewimage">
+                    <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+
+                        <img src="{{_obj.bytestring}}" height="60" width="60" alt="Alternate Text" />
+                        <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-trash-o"></i></a>
+
+                    </span>
+                    
+
+                </div>
                 
+                <button ng-click="OpenBox()" class="waves-effect btn btn-primary"> <i class="fa fa-plus"></i> Add Images  </button>
                 <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn btn-primary"> <i class="fa fa-pencil"></i> Update</button>
                 <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-pencil fa-spin"></i> Update</button>
                 <button ng-if="SavingData==false" class="waves-effect  btn btn-gray" ng-click="ToggleEditView()"><i class="fa fa-times"></i> Cancel</button>
@@ -252,11 +264,12 @@
 
         </div>
 
+    <!--<input type="file" id="files" name="files" />-->
     <div id="bottommenumodal" class="modal fade bottommenu">
 
         <div class="modal-body">
             <ul class="animated slideInUp" id="selectAction">
-                <li ng-click="OpenBox()"><span>Upload Image</span><a class="waves-effect btn-danger btn"> <i class="fa fa-picture-o"></i> </a></li>
+                <!--<li ng-click="OpenBox()"><span>Upload Image</span><a class="waves-effect btn-danger btn"> <i class="fa fa-picture-o"></i> </a></li>-->
                 <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="waves-effect btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
                 <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="waves-effect btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
                 <li ng-click="addtocart(CurrentInventory)" ng-show="CanAddIntoCart==false"><span>Select for cart</span><a class="waves-effect btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>

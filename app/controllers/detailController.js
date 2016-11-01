@@ -430,6 +430,19 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
+
+                $(".viewimage").hide();
+
+                var _toSendImages = angular.copy($scope.ImageList);
+
+                for (var i = 0; i < _toSendImages.length; i++) {
+
+                    if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
+                        _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
+               
+                    }
+                }
+
                 $scope.SavingData = true;
                 $scope.$apply();
 
@@ -437,7 +450,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 $.ajax({
                     url: serviceBase + "UpdateInventory",
                     type: 'POST',
-                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data }),
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data, "ImageList": _toSendImages }),
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
