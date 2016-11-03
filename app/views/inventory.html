@@ -61,8 +61,6 @@
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
@@ -294,7 +292,6 @@
 
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                 <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
-
                             </div>
 
                             <div ng-if="obj.cfdDataType=='checkbox'">
@@ -307,7 +304,6 @@
                                 </div>
 
                                 <!--<input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />-->
-
 
                             </div>
 
@@ -433,12 +429,7 @@
 
                             </div>
 
-
-
-
                             <div class="innerCols" ng-click="getstepCustom(1,obj.ColumnMap)" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
-
-
 
                                 <div ng-if="obj.cfdDataType=='string'">
                                     <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
@@ -446,9 +437,7 @@
 
                                 <div ng-if="obj.cfdDataType=='checkbox'">
 
-
                                     <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span>  <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
-
 
                                 </div>
 

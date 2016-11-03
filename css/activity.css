@@ -229,9 +229,9 @@ label {
     transform: rotate(0deg);
 }
 
-
-.pull-right > .dropdown-menu {
-    right: 17px;
+.pull-right > .dropdown-menu 
+{
+ right: 17px;
 }
 
 .panel-heading {
