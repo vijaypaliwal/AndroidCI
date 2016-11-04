@@ -142,6 +142,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
+    $scope.GetCustomColumn=function(ColumnMap)
+    {
+        var _obj = {};
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == ColumnMap) {
+                return $scope.CustomItemDataList[i];
+            }
+           
+        }
+        return _obj;
+
+    }
+
 
     $('#myModal2').on('hidden.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
@@ -844,7 +857,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         };
         $scope.ImageList = [];
 
-       // $("#defaultimg").remove();
+        // $("#defaultimg").remove();
 
         //if ($scope.IsAvailableMyInventoryColumn('Image') == true) {
 
@@ -977,7 +990,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
       
         var _toSendImages =[]
-           _toSendImages= angular.copy($scope.ImageList);
+        _toSendImages= angular.copy($scope.ImageList);
 
       
 
@@ -987,7 +1000,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
                 if (_toSendImages[i].size != null && _toSendImages[i].size != undefined)
                 {
-                 _sum = _sum + parseFloat(_toSendImages[i].size);
+                    _sum = _sum + parseFloat(_toSendImages[i].size);
                 }
 
               
@@ -995,7 +1008,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-      //  log.success("Total Image after" + _toSendImages.length)
+        //  log.success("Total Image after" + _toSendImages.length)
 
         if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
@@ -1026,8 +1039,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           _tempArray = _toSendImages;
 
 
-                         // log.info("Image upload started it will continue in backend you can do other work.")
-                        //  $scope.UploadImage(response.AddInventoryDataResult.Payload, _tempArray);
+                          // log.info("Image upload started it will continue in backend you can do other work.")
+                          //  $scope.UploadImage(response.AddInventoryDataResult.Payload, _tempArray);
                       }
                       ImageListAndroid = [];
 
@@ -1231,11 +1244,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                       // MY inventory column region
                       var _TempArrayMyInventory = response.GetAllDataResult.Payload[0].MyInventoryColumns;
-
+                      var _tempData=[];
                       for (var i = 0; i < _TempArrayMyInventory.length; i++) {
                           var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
                           _TempArrayMyInventory[i].ColumnName = _ColName[0];
-                          $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
+                          _tempData.push(_TempArrayMyInventory[i]);
                       }
 
                       CheckScopeBeforeApply()
@@ -1261,48 +1274,85 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                   }
                               }
                           }
-                          $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
+                         // $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
                       }
-                      CheckScopeBeforeApply()
-                      // Custom Activity Field 
+                      CheckScopeBeforeApply();
+
+
+                      for (var i = 0; i < _tempData.length; i++) {
+
+                          var _obj = {
+                              cfdName: "",
+                              cfdID: 0,
+                              cfdDataType: "",
+                              cfdComboValues: [],
+                              CfValue: "",
+                              ColumnName: _tempData[i].ColumnName,
+                              RowID: _tempData[i].RowID,
+                              ColumnLabel: _tempData[i].ColumnLabel,
+                              Show: _tempData[i].Show,
+                              Sort: _tempData[i].Sort,
+                              mobileorder: _tempData[i].mobileorder,
+                              Required: _tempData[i].Required
+                          }
+
+                          var _CustomObj = $scope.GetCustomColumn(_tempData[i].ColumnName);
+
+                          if (_CustomObj != undefined && _CustomObj != {})
+                          {
+                              _obj.cfdName = _CustomObj.cfdName;
+                              _obj.cfdID = _CustomObj.cfdID;
+                              _obj.cfdDataType = _CustomObj.cfdDataType;
+                              _obj.cfdComboValues = _CustomObj.cfdComboValues;
+                              _obj.CfValue = _CustomObj.CfValue;
+
+
+                              $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _CustomObj.cfdDefaultValue, DataType: _CustomObj.cfdDataType });
+                          }
+
+                          $scope.MyinventoryFields.push(_obj);
+                      }
+
+                         
+                          // Custom Activity Field 
 
                        
 
-                      $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
-                      CheckScopeBeforeApply()
+                          $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
+                          CheckScopeBeforeApply()
 
-                      for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                          for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
 
-                          var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
-                          if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
-                              if (_defaultValue != null && _defaultValue != "") {
-                                  $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
-                              }
-                          }
-                          else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
-                              if (_defaultValue != null && _defaultValue != "") {
-                                  var _myDefault = parseFloat(_defaultValue);
-                                  if (!isNaN(_myDefault)) {
-                                      $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
-
+                              var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                              if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
+                                  if (_defaultValue != null && _defaultValue != "") {
+                                      $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
                                   }
                               }
+                              else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
+                                  if (_defaultValue != null && _defaultValue != "") {
+                                      var _myDefault = parseFloat(_defaultValue);
+                                      if (!isNaN(_myDefault)) {
+                                          $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
+
+                                      }
+                                  }
+                              }
+                              $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
                           }
-                          $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                          CheckScopeBeforeApply()
+                          // Unit Of Measure
+                          $scope.UOMList = response.GetAllDataResult.Payload[0].UnitOfMeasure;
+                          CheckScopeBeforeApply()
+                          // Status
+                          $scope.StatusList = response.GetAllDataResult.Payload[0].Status;
+                          CheckScopeBeforeApply();
+                          $scope.getuom();
+                          $scope.getlocation();
+
+
+                          AfterLoadedData();
                       }
-                      CheckScopeBeforeApply()
-                      // Unit Of Measure
-                      $scope.UOMList = response.GetAllDataResult.Payload[0].UnitOfMeasure;
-                      CheckScopeBeforeApply()
-                      // Status
-                      $scope.StatusList = response.GetAllDataResult.Payload[0].Status;
-                      CheckScopeBeforeApply();
-                      $scope.getuom();
-                      $scope.getlocation();
-
-
-                      AfterLoadedData();
-                  }
                   else {
                       $scope.ShowErrorMessage("Get All look ups", 1, 1, response.GetAllDataResult.Message)
 
@@ -1345,16 +1395,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    
                   if (response.GetMyInventoryColumnsResult.Success == true) {
                 
-                  var _TempArray = response.GetMyInventoryColumnsResult.Payload;
+                      var _TempArray = response.GetMyInventoryColumnsResult.Payload;
 
-                  for (var i = 0; i < _TempArray.length; i++) {
-                      var _ColName = _TempArray[i].ColumnName.split("#");
-                      _TempArray[i].ColumnName = _ColName[0];
-                      if (_TempArray[i].Show == "True") {
-                          $scope.MyinventoryFields.push(_TempArray[i]);
+                      for (var i = 0; i < _TempArray.length; i++) {
+                          var _ColName = _TempArray[i].ColumnName.split("#");
+                          _TempArray[i].ColumnName = _ColName[0];
+                          if (_TempArray[i].Show == "True") {
+                              $scope.MyinventoryFields.push(_TempArray[i]);
+                          }
                       }
-                  }
-                  CheckScopeBeforeApply()
+                      CheckScopeBeforeApply()
                   }
                   else {
                       $scope.ShowErrorMessage("My inventory Columns", 1, 1, response.GetMyInventoryColumnsResult.Message)
@@ -1675,31 +1725,31 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     
 
 
-                   if (Type == 0) {
-                       $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
+                       if (Type == 0) {
+                           $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
 
-                       for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-                           $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
+                           for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                               $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
+                           }
+
                        }
-
-                   }
-                   else if (Type == 1) {
-                       $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
+                       else if (Type == 1) {
+                           $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
 
-                       for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-                           $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                           for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                               $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                           }
+
+                           //  setTimeout(function () { $scope.swiperfunction(); }, 2000);
+
+
+                           CheckScopeBeforeApply()
+
+
                        }
-
-                       //  setTimeout(function () { $scope.swiperfunction(); }, 2000);
-
 
                        CheckScopeBeforeApply()
-
-
-                   }
-
-                   CheckScopeBeforeApply()
                    }
                    else {
                        $scope.ShowErrorMessage("Custom Field's data", 1, 1, response.GetCustomFieldsDataResult.Message)
@@ -1827,7 +1877,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.ImageList.push(_ImgObj);
         CheckScopeBeforeApply();
 
-       // log.success("Images captured length"+$scope.ImageList.length);
+        // log.success("Images captured length"+$scope.ImageList.length);
 
     }
 
@@ -2354,10 +2404,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     //                  CheckScopeBeforeApply()
     //                  }
-//else {
+    //else {
 
-//                          $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
-//}
+    //                          $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
+    //}
 
     //              },
     //              error: function (err, textStatus, errorThrown) {
@@ -2748,7 +2798,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                         $cordovaKeyboard.close()
 
-                      //  SoftKeyboard.hide();
+                        //  SoftKeyboard.hide();
 
                     }
 
@@ -2810,9 +2860,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.notmove = function () {
         //window.location.reload();
         $scope.resetObject();
-          $scope.getstep(0);
+        $scope.getstep(0);
 
-          $("#modal3").modal('hide');
+        $("#modal3").modal('hide');
 
         $(".Addbtn").show()
     }
@@ -2846,7 +2896,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         e.preventDefault()
 
         if ($scope.slide == 0 || $scope.slide == 1000) {
-           // showConfirmInventory();
+            // showConfirmInventory();
 
         }
         else {

@@ -223,10 +223,11 @@ label {
     transform: rotate(45deg);
 }
 
-.movepin {
-    -ms-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+.movepin 
+{
+ -ms-transform: rotate(0deg);
+ -webkit-transform: rotate(0deg);
+ transform: rotate(0deg);
 }
 
 .pull-right > .dropdown-menu 
