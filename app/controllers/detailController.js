@@ -58,8 +58,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.OpenBox = function () {
 
-       
-
         $("#bottommenumodal").modal('hide');
 
         $("#myModalforlist").modal("show");
@@ -182,7 +180,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
     $scope.capturePhotoNew = function () {
-  
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 50,
             targetWidth: 120,
@@ -227,7 +224,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.getPhoto = function (source)
     {
-       
+      
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
             destinationType: destinationType.DATA_URL,
@@ -336,6 +333,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         scanner.scan(function (result) {
 
             $scope.itemscanvalue = result.text;
+
+            
             $scope.CurrentInventory.pPart = result.text;
             $scope.$apply();
 
@@ -433,19 +432,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
-
-                $(".viewimage").hide();
-
-                var _toSendImages = angular.copy($scope.ImageList);
-
-                for (var i = 0; i < _toSendImages.length; i++) {
-
-                    if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
-                        _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
-               
-                    }
-                }
-
                 $scope.SavingData = true;
                 $scope.$apply();
 
@@ -453,7 +439,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 $.ajax({
                     url: serviceBase + "UpdateInventory",
                     type: 'POST',
-                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data, "ImageList": _toSendImages }),
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data, "ImageList": [] }),
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
@@ -464,7 +450,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                                 //log.success("Inventory updated successfully.");
                                 ShowSuccess("Updated");
                                 $scope.IsEditMode = false;
-                                $scope.ImageList = [];
+
                                 $scope.$apply();
                                 localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                                 $scope.SavingData = false;
@@ -516,8 +502,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.saveimage = function () {
 
-        $(".viewimage").hide();
-
         var _toSendImages = angular.copy($scope.ImageList);
 
         for (var i = 0; i < _toSendImages.length; i++) {
@@ -526,59 +510,16 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
                
             }
+
         }
 
 
-    
-
-        $.ajax
-      ({
-          type: "POST",
-          url: serviceBase + 'UploadImage',
-          contentType: 'application/json; charset=utf-8',
-          dataType: 'json',
-          data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
-          success: function (response)
-          {
-              log.success("Image has been uploaded success fully for last inventory record.");
-              window.location.reload();
-
-              if (response.UploadImageResult.Success == true) {
-
-                  log.success("Image has been uploaded success fully for last inventory record.");
-                
-                  CheckScopeBeforeApply();
-              }
-              else {
-
-                  $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
-              }
-
-          },
-          error: function (err, textStatus, errorThrown) {
-              if (err.readyState == 0 || err.status == 0) {
-
-              }
-              else {
-                  if (textStatus != "timeout") {
-                      if (err.status == 200) {
-
-                          log.success("Image has been uploaded successfully for last inventory record.");
-                        
-                      }
-                      else {
-
-                          log.error(err.statusText);
-
-                      }
-                  }
-              }
-          }
-      });
-
+        $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
 
         log.success("Image save process running, Please wait")
 
+       
+        $(".viewimage").hide();
 
         setTimeout(function ()
         {
@@ -586,6 +527,10 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         },2000)
 
     }
+
+
+  
+   
 
 
     $scope.addtocart = function (v) {
@@ -784,11 +729,11 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
     $scope.ToggleEditView = function () {
 
-
+        
         $("#myModal2").modal('hide');
+        $("#bottommenumodal").modal('hide');
         $(".modal-backdrop").remove();
         $("body").removeClass("modal-open");
-
 
 
         $scope.IsEditMode = !$scope.IsEditMode;
