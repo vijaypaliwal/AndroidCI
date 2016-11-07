@@ -10,7 +10,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     $scope.CanAddIntoCart = false;
 
     $scope.mainObjectToSend = [];
-    
+
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
@@ -58,7 +58,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.OpenBox = function () {
 
-       
+
 
         $("#bottommenumodal").modal('hide');
 
@@ -102,8 +102,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
         var files = evt.target.files;
-       var FileName = "";
-      var  StreamData = "";
+        var FileName = "";
+        var StreamData = "";
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
         // Loop through the FileList and render image files as thumbnails.
         for (var i = 0, f; f = files[i]; i++) {
@@ -164,7 +164,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         var id = randomStringNew(5, '0123456789');
         _ImgObj.ImageID = id;
         $(".viewimage").show();
-     
+
         $("#myModalforlist").modal("hide");
 
 
@@ -182,7 +182,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
     $scope.capturePhotoNew = function () {
-  
+
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 50,
             targetWidth: 120,
@@ -226,9 +226,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
 
-    $scope.getPhoto = function (source)
-    {
-       
+    $scope.getPhoto = function (source) {
+
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
             destinationType: destinationType.DATA_URL,
@@ -249,7 +248,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         var id = randomStringNew(5, '0123456789');
         _ImgObj.ImageID = id;
 
-     
+
         $("#myModalforlist").modal("hide");
 
 
@@ -340,7 +339,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             $scope.CurrentInventory.pPart = result.text;
             $scope.$apply();
 
-         
+
 
         }, function (error) {
             log.error("Scanning failed: ", error);
@@ -443,7 +442,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
                     if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
                         _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
-               
+
                     }
                 }
 
@@ -487,7 +486,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                     error: function (err) {
 
                         $scope.SavingData = false;
-                   
+
                         $scope.ShowErrorMessage("Update Inventory Detail", 1, 2, err.statusText);
 
                     },
@@ -525,12 +524,12 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
             if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
                 _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
-               
+
             }
         }
 
 
-    
+
 
         $.ajax
       ({
@@ -539,15 +538,14 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
           contentType: 'application/json; charset=utf-8',
           dataType: 'json',
           data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
-          success: function (response)
-          {
+          success: function (response) {
               log.success("Image has been uploaded success fully for last inventory record.");
               window.location.reload();
 
               if (response.UploadImageResult.Success == true) {
 
                   log.success("Image has been uploaded success fully for last inventory record.");
-                
+
                   CheckScopeBeforeApply();
               }
               else {
@@ -565,7 +563,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                       if (err.status == 200) {
 
                           log.success("Image has been uploaded successfully for last inventory record.");
-                        
+
                       }
                       else {
 
@@ -581,10 +579,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         log.success("Image save process running, Please wait")
 
 
-        setTimeout(function ()
-        {
+        setTimeout(function () {
             $scope.ImageList = [];
-        },2000)
+        }, 2000)
 
     }
 
@@ -654,32 +651,28 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             $scope.$apply();
         }
     };
-    function CheckIntoCartData ()
-    {
+    function CheckIntoCartData() {
         $scope.CanAddIntoCart = false;
-       
+
         var _CartData = localStorageService.get("ActivityCart");
         if (_CartData != null && _CartData != undefined) {
 
             for (var i = 0; i < _CartData.length; i++) {
-                if(_CartData[i].InventoryID== $scope.CurrentInventory.iID)
-                {
+                if (_CartData[i].InventoryID == $scope.CurrentInventory.iID) {
                     $scope.CanAddIntoCart = true;
                 }
             }
         }
         CheckScopeBeforeApply();
 
-        
+
     }
 
-    $scope.removecart=function()
-    {
+    $scope.removecart = function () {
         var _cartData = localStorageService.get("ActivityCart");
         var _newCart = _cartData;
         for (var i = 0; i < _newCart.length; i++) {
-            if (_cartData[i].InventoryID == $scope.CurrentInventory.iID)
-            {
+            if (_cartData[i].InventoryID == $scope.CurrentInventory.iID) {
                 _cartData.splice(i, 1);
                 break;
             }
@@ -687,7 +680,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
         localStorageService.set("ActivityCart", "");
         localStorageService.set("ActivityCart", _cartData);
-      
+
         ShowSuccess('Removed');
 
         setTimeout(function () { $("#myModal2").modal('hide'); }, 1000);
@@ -728,18 +721,18 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
                    if (response.GetItemImagesResult.Success == true) {
-                   
+
                        $scope.ImageListdetail = response.GetItemImagesResult.Payload;
-                   $scope.$apply();
+                       $scope.$apply();
 
-                   setTimeout(function () { InitializeSwiper() }, 10);
+                       setTimeout(function () { InitializeSwiper() }, 10);
 
 
-                   setTimeout(function () {
-                       $(".loadingimage").hide();
-                       $(".imagesection").show();
+                       setTimeout(function () {
+                           $(".loadingimage").hide();
+                           $(".imagesection").show();
 
-                   }, 1000);
+                       }, 1000);
                    }
                    else {
                        $scope.ShowErrorMessage("Item Images", 1, 1, response.GetItemImagesResult.Message)
