@@ -2031,8 +2031,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var dsplit1 = _updateDateval.split("-");
 
         var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
-        d122.setDate(d122.getDate() + 1);
-        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate()-1, 0, 0, 0, 0))
+        d122.setDate(d122.getDate() + _genVar);
+        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
 
         wcfDateStr123 = d122.toMSJSON();
 
@@ -2184,9 +2184,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate;
                 var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-                var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
-                d1.setDate(d1.getDate() + 1);
-                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate() - 1, 0, 0, 0, 0))
+                var d1 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                if (_genVar == 1) {
+
+
+                    d1.setDate(d1.getDate());
+                }
+                else {
+                    d1.setDate(d1.getDate() + 1);
+                }
+                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
 
                 wcfDateStr1 = d11.toMSJSON();
             }
@@ -2194,10 +2201,18 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UnitDate2;
                 var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
+                //  var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
+                var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
 
-                var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
-                d2.setDate(d2.getDate() + 1);
-                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate() - 1, 0, 0, 0, 0))
+                if (_genVar == 1) {
+
+
+                    d2.setDate(d2.getDate());
+                }
+                else {
+                    d2.setDate(d2.getDate() + 1);
+                }
+                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
 
                 wcfDateStr2 = d21.toMSJSON();
 

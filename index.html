@@ -914,7 +914,13 @@
         });
     </script>
     <script>
+        var myDate = new Date();
+        var _genVar = 0;
+        var _timeZone = myDate.getTimezoneOffset();
 
+        if (_timeZone == -330) {
+            _genVar = 1;
+        }
         function randomStringNew(length, chars) {
             var result = '';
             for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];

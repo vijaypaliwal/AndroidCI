@@ -23,7 +23,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     
 
- 
+    $scope.changelocation = function () {
+        var element = $("#Location");
+        var myTag = $('option:selected', element).attr('mytag');
+
+        if (myTag != undefined && myTag != null) {
+            $scope.InventoryObject.lZone = myTag;
+        }
+        else {
+            $scope.InventoryObject.lZone = "";
+        }
+
+
+    }
 
 
     $scope.SetIsOpen=function(_bool)
@@ -108,6 +120,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
     Date.prototype.toMSJSON = function () {
+        this.setHours(this.getHours() - this.getTimezoneOffset() / 60);
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
@@ -940,8 +953,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
 
-            d122.setDate(d122.getDate() + 1);
-            var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate() - 1, 0, 0, 0, 0))
+            d122.setDate(d122.getDate() + _genVar);
+            var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
             wcfDateStr123 = d122.toMSJSON();
 
             $scope.InventoryObject.UniqueDate = wcfDateStr123;
@@ -958,9 +971,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var year = dateObj.getUTCFullYear();
 
 
+
+
         var _updatedate = new Date(year, month, day);
-        _updatedate.setDate(_updatedate.getDate() + 1);
-        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate() - 1, 0, 0, 0, 0))
+        if (_genVar == 0) {
+
+            _updatedate.setDate(_updatedate.getDate() + 1);
+        }
+        else {
+
+            _updatedate.setDate(_updatedate.getDate());
+        }
+        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate(), 0, 0, 0, 0))
 
         var wcfDateStrUpd = _d1122.toMSJSON();
 
@@ -976,12 +998,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
 
-            d1222.setDate(d1222.getDate() + 1);
-            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate() - 1, 0, 0, 0, 0))
+            d1222.setDate(d1222.getDate() + _genVar);
+            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), 0, 0, 0, 0))
 
             wcfDateStr1234 = d1222.toMSJSON();
 
             $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
+
+
+
+
         }
         else {
             $scope.InventoryObject.UnitDate2 = null;
@@ -2699,6 +2725,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _isAvailableLocation = false;
             for (var i = 0; i < $scope.LocationList.length; i++) {
                 if ($.trim($scope.LocationList[i].LocationName) != "" && $scope.LocationList[i].LocationName.toLowerCase() == "in stock") {
+
+                    var myTag = $scope.LocationList[i].LocationZone;
+                    if (myTag != undefined && myTag != null) {
+                        $scope.InventoryObject.lZone = myTag;
+                    }
+                    else {
+                        $scope.InventoryObject.lZone = "";
+                    }
                     _isAvailableLocation = true;
                     break;
                 }
