@@ -152,7 +152,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 }
             }
             $scope.$apply();
-          
+            log.success("Active permission called");
         }, 500);
      
 
