@@ -2204,10 +2204,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 //  var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
                 var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
 
-                if (_genVar == 1) {
-
-
-                    d2.setDate(d2.getDate());
+                if (_genVar == 1)
+                {
+                 d2.setDate(d2.getDate());
                 }
                 else {
                     d2.setDate(d2.getDate() + 1);
