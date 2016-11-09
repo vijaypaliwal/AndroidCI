@@ -75,6 +75,55 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
             return false;
         }
     }
+
+    $scope.getactivepermissionNew = function () {
+        $scope.CurrentUserKey = localStorageService.get('UserKey');
+        setTimeout(function () {
+            $scope.GetPermission(3, $scope.CurrentUserKey);
+        }, 10);
+        setTimeout(function () {
+            $scope.GetPermission(4, $scope.CurrentUserKey);
+        }, 10);
+        setTimeout(function () {
+            $scope.GetPermission(5, $scope.CurrentUserKey);
+        }, 10);
+
+        setTimeout(function () {
+            $scope.GetPermission(1, $scope.CurrentUserKey);
+        }, 10);
+        $scope.$apply();
+        setTimeout(function () {
+
+            $scope.Permission = [];
+
+            if ($scope.Permissions1 != undefined && $scope.Permissions1.length > 0) {
+
+                for (var i = 0; i < $scope.Permissions1.length; i++) {
+                    $scope.Permission.push($scope.Permissions1[i]);
+                }
+            }
+            if ($scope.Permissions2 != undefined && $scope.Permissions2.length > 0) {
+                for (var i = 0; i < $scope.Permissions2.length; i++) {
+                    $scope.Permission.push($scope.Permissions2[i]);
+                }
+            }
+            if ($scope.Permissions3 != undefined && $scope.Permissions3.length > 0) {
+                for (var i = 0; i < $scope.Permissions3.length; i++) {
+                    $scope.Permission.push($scope.Permissions3[i]);
+                }
+            }
+
+            if ($scope.Permissions4 != undefined && $scope.Permissions4.length > 0) {
+                for (var i = 0; i < $scope.Permissions4.length; i++) {
+                    $scope.Permission.push($scope.Permissions4[i]);
+                }
+            }
+            $scope.IsLoading = false;
+            $location.path("/FindItems");
+            $scope.$apply();
+        }, 120);
+
+    }
     $scope.UpdateSecurityToken = function (AccountID, AccountName) {
 
         $scope.IsLoading = true;
@@ -126,10 +175,10 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                         $scope.currentactiveaccount(AccountName);
                         localStorageService.set('AccountID', AccountName);
 
-                        $scope.IsLoading = false;
-                        $scope.getactivepermission();
+                       
+                        
                         authService.GetuserInfo();
-                        $location.path("/FindItems");
+                        $scope.getactivepermissionNew();
 
                         $scope.$apply();
 
