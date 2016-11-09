@@ -153,9 +153,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             }
             $scope.$apply();
             log.success("Active permission called");
-        }, 500);
+        }, 101);
      
-
     }
 
     $scope.checkpermission = function (permissioncode) {
