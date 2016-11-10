@@ -940,10 +940,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.InventoryObject.ItemID = "Automated";
         }
         if ($scope.InventoryObject.UnitNumber1 == "") {
-            $scope.InventoryObject.UnitNumber1 = 0;
+            $scope.InventoryObject.UnitNumber1 = null;
         }
         if ($scope.InventoryObject.UnitNumber2 == "") {
-            $scope.InventoryObject.UnitNumber2 = 0;
+            $scope.InventoryObject.UnitNumber2 = null;
         }
         $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
         var _updateDateval = $scope.InventoryObject.UniqueDate;
@@ -1958,8 +1958,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function init() {
-        //  $cordovaKeyboard.disableScroll(true);
-
         $("#slide-out-left").hide();
         $scope.GetAllData();
 
