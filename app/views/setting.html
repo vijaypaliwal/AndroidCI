@@ -185,11 +185,7 @@
 
             </div>
 
-
-            
-
         </div>
-
 
 
     </button>
@@ -213,18 +209,13 @@
 
         </div>
 
-
-
     </button>
-    <button ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==false && checkpermission('URL:configure/CustomFieldItemList.aspx')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6 restricted">
+    <button ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==false || checkpermission('URL:configure/CustomFieldItemList.aspx')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6 restricted">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-ban"></i>    Manage Custom fields
 
             </div>
-
-
-
 
         </div>
 
