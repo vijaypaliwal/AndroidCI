@@ -23,6 +23,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.Permission2 = [];
     $scope.Permission3 = [];
     $scope.Permission4 = [];
+
+
+    $scope.restricted = function() {
+        log.error("You are Not Authorize to access")
+    }
  
 
 
