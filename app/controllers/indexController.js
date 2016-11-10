@@ -30,8 +30,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
  
 
-
-
     $scope.CurrentAccount = localStorageService.get('AccountID');
 
 

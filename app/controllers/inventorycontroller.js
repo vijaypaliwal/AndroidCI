@@ -21,9 +21,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
+    $scope.IsItemLibrary = true;
+    $scope.IsItemChose = false;
+
+
     
 
     $scope.changelocation = function () {
+
+        $scope.InventoryObject.LocationID = 0;
+
         var element = $("#Location");
         var myTag = $('option:selected', element).attr('mytag');
 
@@ -539,6 +546,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.lZone = obj.DefaultLocationGroup;
         $scope.InventoryObject.ItemGroup = obj.ItemGroup;
 
+        $scope.IsItemChose = true;
 
 
         if ($scope.InventoryObject.CustomPartData.length > 0 && obj.CustomData.length > 0) {
@@ -889,11 +897,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.addinventory = function () {
-
+        if ($scope.IsItemChose == true) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
+
+       
+
 
         $('#addinventories').addClass("disabled");
         $('#addinventories').find(".fa").addClass("fa-spin");
@@ -1116,7 +1127,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               }
           });
 
-        
+
+        }
+        else {
+            log.error("Please select an item from available items list, you are not authorized to create new item.")
+        }
     }
 
     $scope.Inventoryerrorbox = function (error) {
@@ -1961,6 +1976,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#slide-out-left").hide();
         $scope.GetAllData();
 
+        $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
+        $scope.IsItemChose = $scope.IsItemLibrary;
+        CheckScopeBeforeApply();
 
 
     }
