@@ -194,10 +194,10 @@
             </div>
         </div>
     </a>
-    <a ng-if="checkpermission('URL:report/item/views')==true" ng-click="restricted()" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6 restricted">
+    <a ng-if="checkpermission('URL:report/item/views')==false" ng-click="restricted()" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6 restricted">
         <div class="row">
             <div class="col-xs-12">
-                <i class="fa fa-th-list"></i> All Items
+                <i class="fa fa-ban"></i> All Items
             </div>
 
             
@@ -205,7 +205,6 @@
     </a>
 
 </div>
-
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect">
     <i class="fa fa-bars"></i>
