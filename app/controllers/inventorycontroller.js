@@ -1959,6 +1959,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     function init() {
         //  $cordovaKeyboard.disableScroll(true);
+
+        $("#slide-out-left").hide();
         $scope.GetAllData();
 
 
