@@ -789,6 +789,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         setTimeout(function () { InitializeSwiper() }, 10);
 
         setTimeout(function () {
+            $("#bottommenumodal").modal('hide');
+            
             $(".loadingimage").hide();
             $(".imagesection").show();
         }, 300);
