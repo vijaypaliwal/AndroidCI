@@ -567,15 +567,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#locationlistmodal").modal('hide');
         $("#uomlistmodal").modal('hide');
         CheckScopeBeforeApply();
-        alert("When setting item data");
-        alert($scope.InventoryObject.Uom);
     }
 
 
     $scope.onChangeUOMData = function () {
         $scope.InventoryObject.UomID = 0;
         CheckScopeBeforeApply();
-        alert($scope.inventoryobject.Uom);
 
     }
 
