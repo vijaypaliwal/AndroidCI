@@ -1048,7 +1048,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-
+        alert("function called");
         if ($scope.loadingblock == false) {
 
             $scope.myinventoryColumnLoaded = false;
@@ -1155,7 +1155,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.ShowErrorMessage("current inventories", 1, 1, result.GetInventoriesResult.Message)
                 }
 
-                alert("into success");
 
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
@@ -1798,7 +1797,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     function SetSelectedIfAny() {
        // alert("into method");
         // alert($scope.mainObjectToSend.length);
-        if (_IsSetSelectedIfAny == 0) {
 
 
             if ($scope.mainObjectToSend.length > 0) {
@@ -1811,9 +1809,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
             }
 
-            _IsSetSelectedIfAny = 1;
 
-        }
 
     }
 
