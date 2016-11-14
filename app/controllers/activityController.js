@@ -2402,8 +2402,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         localStorageService.set("ActivityCart", []);
         localStorageService.set("SelectedAction", "");
         $scope.$apply();
-        var _myItemsList = localStorageService.get("ActivityCart");
-        alert(_myItemsList.length);
         $location.path("/FindItems");
     }
 
