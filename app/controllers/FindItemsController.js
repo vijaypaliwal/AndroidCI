@@ -1823,14 +1823,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     function init() {
         //   $cordovaKeyboard.disableScroll(false);
         var _myItemsList = localStorageService.get("ActivityCart");
-        alert("Before");
-        alert(_myItemsList);
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
-        alert("After");
-        alert(_myItemsList.length);
-        alert($scope.mainObjectToSend.length);
         $scope.mainObjectToSend = [];
-
+        CheckScopeBeforeApply();
         if (_myItemsList.length > 0) {
 
             $scope.$apply();
