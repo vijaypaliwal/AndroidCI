@@ -420,6 +420,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
     $(window).scroll(function () {
         var _SearchValue = $.trim($("#MasterSearch").val());
+
+        var _tempIsActivityData = localStorageService.get("IsFromActivitySuccess");
+
+        if (_tempIsActivityData != null && _myItemsList != undefined) {
+
+            _IsFromActivitySuccess = parseInt(_tempIsActivityData);
+            alert(_IsFromActivitySuccess);
+        }
         if (_IsFromActivitySuccess==0 && _IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                 if (_PageSize < $scope.totalrecords) {
@@ -1178,6 +1186,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
                 _IsFromActivitySuccess = 0;
+
+                localStorageService.set("IsFromActivitySuccess",0);
                 $cordovaKeyboard.disableScroll(false);
                 SetSelectedIfAny();
             }
