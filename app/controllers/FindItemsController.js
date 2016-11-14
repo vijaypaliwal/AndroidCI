@@ -1392,6 +1392,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
     $scope.PopulateInventoryItems = function () {
         alert("into populate inventory items");
+        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
+        
         $scope.GetMyinventoryColumns();
         $scope.getstatus();
         $scope.GetUnitDataColumns();
