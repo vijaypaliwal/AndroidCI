@@ -198,7 +198,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     $scope.ClearFilter = function () {
-
+        alert("into clear filter");
 
         ClearFilterArray();
         $scope.SearchValue = "";
@@ -233,6 +233,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.filterrecords = function () {
 
+        alert("into filter");
         if (_IsFilterCartItems === 0) {
 
 
@@ -260,7 +261,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
     $('#mylist').on('swipedown', function () {
-
+        alert("into swipe");
 
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() < 500) {
@@ -311,7 +312,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.SearchInventory = function () {
         var _Value = $.trim($('#MasterSearch').val());
 
-
+        alert("into search inventory");
 
 
         switch ($scope.CurrentActiveSearchType) {
@@ -366,6 +367,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     $scope.Showhideimage = function (isshow) {
+        alert("into show hide image");
         $scope.myinventoryColumnLoaded = false;
         CheckScopeBeforeApply();
 
@@ -387,7 +389,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.showhidezerorecord = function (showzero) {
 
-
+        alert("show hide zero record");
         $scope.myinventoryColumnLoaded = false;
         CheckScopeBeforeApply();
 
@@ -417,7 +419,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
     $(window).scroll(function () {
         var _SearchValue = $.trim($("#MasterSearch").val());
-
+        alert("into scroll");
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                 if (_PageSize < $scope.totalrecords) {
