@@ -1155,11 +1155,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.ShowErrorMessage("current inventories", 1, 1, result.GetInventoriesResult.Message)
                 }
 
+                alert("into success");
+
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
 
                 $scope.loadingblock = false;
-
+                _IsSetSelectedIfAny = 0;
                 CheckScopeBeforeApply();
 
             },
@@ -1794,18 +1796,24 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     function SetSelectedIfAny() {
-        alert("into method");
-        alert($scope.mainObjectToSend.length);
-        if ($scope.mainObjectToSend.length > 0) {
-
-            for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
-
-                $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId), true);
+       // alert("into method");
+        // alert($scope.mainObjectToSend.length);
+        if (_IsSetSelectedIfAny == 0) {
 
 
+            if ($scope.mainObjectToSend.length > 0) {
+
+                for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
+
+                    $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId), true);
+
+
+                }
             }
-        }
 
+            _IsSetSelectedIfAny = 1;
+
+        }
 
     }
 
