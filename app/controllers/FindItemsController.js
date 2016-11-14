@@ -1794,12 +1794,16 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     function SetSelectedIfAny() {
+        alert("into method");
+        alert($scope.mainObjectToSend.length);
+        if ($scope.mainObjectToSend.length > 0) {
 
-        for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
+            for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
 
-            $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId), true);
+                $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId), true);
 
 
+            }
         }
 
 
