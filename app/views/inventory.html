@@ -7,13 +7,12 @@
         height: 93px !important;
         overflow-y: auto;
         max-height: 93px;
-        background:#eee;
+        background: #eee;
     }
 
     .darkblue {
-        background-color:rgb(0, 99, 177) !important;
+        background-color: rgb(0, 99, 177) !important;
     }
- 
 </style>
 
 
@@ -34,7 +33,7 @@
             <div style="display:none;" class="swiper-container">
 
 
-              
+
                 <div style="background:#fff; margin-left:0px; margin-right:0px;" class="row">
                     <div style="padding-left: 0px; padding-right: 0px; background: #eee;" class="col-xs-12">
                         <div class="iteminfo">
@@ -186,10 +185,10 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
-                            <label>Select UOM - {{inventoryobject.Uom}} <span class="redText">*</span></label>
+                            <label>Select UOM - {{InventoryObject.Uom}} <span class="redText">*</span></label>
                             <div class="input-group">
 
-                                <select class="form-control" ng-change="onChangeUOMData()" ng-model="inventoryobject.Uom" id="UOM">
+                                <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
                                     <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
 
@@ -560,7 +559,7 @@
                             <td ng-if="CurrentActiveField=='iQty'">
 
                                 <div>
-                                <a ng-click="UpDownValue('Quantity',true)" class="btn btn-gray"><i class="fa fa-plus"></i>Increase</a>
+                                    <a ng-click="UpDownValue('Quantity',true)" class="btn btn-gray"><i class="fa fa-plus"></i>Increase</a>
                                 </div>
                             </td>
 
@@ -1055,12 +1054,12 @@
                     <span class="mylabel">Location</span> <span class="redText">*</span> <span>  {{InventoryObject.Location}} </span>
                 </div>
 
-             
+
 
 
                 <div ng-click="getstep(1,'pDescription')" class="col-md-12 col-xs-12  form-group">
 
-                    <span class="mylabel">Description</span>  <span > {{ InventoryObject.Description }} </span>
+                    <span class="mylabel">Description</span>  <span> {{ InventoryObject.Description }} </span>
 
                 </div>
             </div>
