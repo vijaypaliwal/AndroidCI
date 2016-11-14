@@ -2441,7 +2441,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         //localStorageService.set("ActivityCart", "");
                         //localStorageService.set("SelectedAction", "");
 
-                        $scope.clearCartFunction();
+                        //$scope.clearCartFunction();
+                        $scope.CartFunction(2);
                         $scope.$apply();
                     },
                     error: function (err) {
