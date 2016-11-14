@@ -2436,9 +2436,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         $scope.CurrentCart = [];
                         ShowSuccessActivity('Saved', $scope._CurrentAction);
 
-                        $location.path("/FindItems");
-                        localStorageService.set("ActivityCart", "");
-                        localStorageService.set("SelectedAction", "");
+                        //$location.path("/FindItems");
+                        //localStorageService.set("ActivityCart", "");
+                        //localStorageService.set("SelectedAction", "");
 
                         $scope.clearCartFunction();
                         $scope.$apply();
