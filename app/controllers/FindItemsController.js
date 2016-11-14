@@ -1824,9 +1824,11 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
         alert("After");
         alert(_myItemsList.length);
+        alert($scope.mainObjectToSend.length);
+        $scope.mainObjectToSend = [];
+
         if (_myItemsList.length > 0) {
 
-            $scope.mainObjectToSend = [];
             $scope.$apply();
 
             var j = 0;
@@ -1861,7 +1863,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 });
             }
 
-            CheckScopeBeforeApply();
 
 
         }
@@ -1872,6 +1873,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $scope.getuom();
 
         $scope.SendEmail();
+        CheckScopeBeforeApply();
 
         //SetSelectedIfAny();
 
