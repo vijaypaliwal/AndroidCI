@@ -33,6 +33,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     var _IsActuallySorting = 0;
     var _IsActuallySearching = 0;
     var _IsSetSelectedIfAny = 0;
+    var _IsFromActivitySuccess = 0;
     var SelectedCartItemIds = [];
     var _IsFilterCartItems = 0;
     $scope.UnitDataList = [];
@@ -419,14 +420,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
     $(window).scroll(function () {
         var _SearchValue = $.trim($("#MasterSearch").val());
-        alert("into scroll");
-        if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+        if (_IsFromActivitySuccess==0 && _IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                 if (_PageSize < $scope.totalrecords) {
                     _IsLazyLoadingUnderProgress = 1;
                     _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
                     $scope.myinventoryColumnLoaded = false;
                     CheckScopeBeforeApply();
+                    alert("inventories called");
                     $scope.GetInventories();
                 }
                 else {
@@ -1176,6 +1177,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
+                _IsFromActivitySuccess = 0;
                 $cordovaKeyboard.disableScroll(false);
                 SetSelectedIfAny();
             }
@@ -1823,6 +1825,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     function init() {
         //   $cordovaKeyboard.disableScroll(false);
         var _myItemsList = localStorageService.get("ActivityCart");
+        var _tempIsActivityData = localStorageService.get("IsFromActivitySuccess");
+
+        if (_tempIsActivityData != null && _myItemsList != undefined) {
+
+            _IsFromActivitySuccess = parseInt(_tempIsActivityData);
+            alert(_IsFromActivitySuccess);
+        }
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
         if (_myItemsList.length > 0) {
 

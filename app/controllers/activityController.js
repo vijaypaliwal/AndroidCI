@@ -2440,7 +2440,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         //$location.path("/FindItems");
                         //localStorageService.set("ActivityCart", "");
                         //localStorageService.set("SelectedAction", "");
-
+                        localStorageService.set("IsFromActivitySuccess", 1);
                         $scope.clearCartFunction();
                         $scope.$apply();
                     },
