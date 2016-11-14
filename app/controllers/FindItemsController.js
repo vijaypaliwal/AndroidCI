@@ -1826,6 +1826,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         alert(_myItemsList.length);
         if (_myItemsList.length > 0) {
 
+            $scope.mainObjectToSend = [];
+            $scope.$apply();
+
             var j = 0;
             for (j = 0; j < _myItemsList.length; j++) {
                 var v = _myItemsList[j].InventoryDataList;
