@@ -1048,7 +1048,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-        alert("function called");
+
         if ($scope.loadingblock == false) {
 
             $scope.myinventoryColumnLoaded = false;
@@ -1155,12 +1155,11 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.ShowErrorMessage("current inventories", 1, 1, result.GetInventoriesResult.Message)
                 }
 
-
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
 
                 $scope.loadingblock = false;
-                _IsSetSelectedIfAny = 0;
+
                 CheckScopeBeforeApply();
 
             },
@@ -1390,7 +1389,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         return false;
     }
     $scope.PopulateInventoryItems = function () {
-        alert("Populate called");
+
         $scope.GetMyinventoryColumns();
         $scope.getstatus();
         $scope.GetUnitDataColumns();
@@ -1795,20 +1794,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     function SetSelectedIfAny() {
-        // alert("into method");
-        // alert($scope.mainObjectToSend.length);
+
+        for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
+
+            $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId), true);
 
 
-        if ($scope.mainObjectToSend.length > 0) {
-
-            for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
-
-                $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId), true);
-
-
-            }
         }
-
 
 
     }
@@ -1828,11 +1820,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         //   $cordovaKeyboard.disableScroll(false);
         var _myItemsList = localStorageService.get("ActivityCart");
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
-        $scope.mainObjectToSend = [];
-        CheckScopeBeforeApply();
         if (_myItemsList.length > 0) {
-
-            $scope.$apply();
 
             var j = 0;
             for (j = 0; j < _myItemsList.length; j++) {
@@ -1866,6 +1854,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 });
             }
 
+            CheckScopeBeforeApply();
 
 
         }
@@ -1876,7 +1865,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $scope.getuom();
 
         $scope.SendEmail();
-        CheckScopeBeforeApply();
 
         //SetSelectedIfAny();
 
