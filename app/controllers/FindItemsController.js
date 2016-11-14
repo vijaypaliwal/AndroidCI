@@ -199,7 +199,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     $scope.ClearFilter = function () {
-        alert("into clear filter");
 
         ClearFilterArray();
         $scope.SearchValue = "";
@@ -234,7 +233,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.filterrecords = function () {
 
-        alert("into filter");
         if (_IsFilterCartItems === 0) {
 
 
@@ -262,7 +260,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
     $('#mylist').on('swipedown', function () {
-        alert("into swipe");
 
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() < 500) {
@@ -313,7 +310,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.SearchInventory = function () {
         var _Value = $.trim($('#MasterSearch').val());
 
-        alert("into search inventory");
 
 
         switch ($scope.CurrentActiveSearchType) {
@@ -368,7 +364,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     $scope.Showhideimage = function (isshow) {
-        alert("into show hide image");
         $scope.myinventoryColumnLoaded = false;
         CheckScopeBeforeApply();
 
@@ -390,7 +385,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.showhidezerorecord = function (showzero) {
 
-        alert("show hide zero record");
         $scope.myinventoryColumnLoaded = false;
         CheckScopeBeforeApply();
 
@@ -426,7 +420,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         if (_tempIsActivityData != null && _tempIsActivityData != undefined) {
 
             _IsFromActivitySuccess = parseInt(_tempIsActivityData);
-            alert(_IsFromActivitySuccess);
         }
         if (_IsFromActivitySuccess==0 && _IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -435,7 +428,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
                     $scope.myinventoryColumnLoaded = false;
                     CheckScopeBeforeApply();
-                    alert("inventories called");
                     $scope.GetInventories();
                 }
                 else {
@@ -1403,7 +1395,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         return false;
     }
     $scope.PopulateInventoryItems = function () {
-        alert("into populate inventory items");
         $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
         
         $scope.GetMyinventoryColumns();
@@ -1840,7 +1831,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         if (_tempIsActivityData != null && _myItemsList != undefined) {
 
             _IsFromActivitySuccess = parseInt(_tempIsActivityData);
-            alert(_IsFromActivitySuccess);
         }
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
         if (_myItemsList.length > 0) {
