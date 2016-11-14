@@ -423,7 +423,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         var _tempIsActivityData = localStorageService.get("IsFromActivitySuccess");
 
-        if (_tempIsActivityData != null && _myItemsList != undefined) {
+        if (_tempIsActivityData != null && _tempIsActivityData != undefined) {
 
             _IsFromActivitySuccess = parseInt(_tempIsActivityData);
             alert(_IsFromActivitySuccess);
