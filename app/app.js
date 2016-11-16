@@ -170,6 +170,13 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/contact.html"
     });
 
+
+    $routeProvider.when("/itemgroup", {
+        controller: "itemgroupController",
+        templateUrl: "app/views/itemgroup.html"
+    });
+
+
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });
