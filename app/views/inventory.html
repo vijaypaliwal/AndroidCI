@@ -204,365 +204,370 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
-                            <label>Item Group </label>
-                            <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
-                                <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
-
-                            </div>
-
-
-                            <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
-                                <div class="row requiredfields" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
-                                    <div class="col-md-12">
-
-                                        <a ng-if="IsItemGroupLibrary==false">
-                                            You are not permitted to add new item so please select item from item list.
-                                        </a>
-                                        <a ng-if="IsActiveItemGroupLibrary==false">
-                                            Your item library is locked so please select item from item list.
-                                        </a>
-                                    </div>
-
-                                </div>
-
-                                <label>{{InventoryObject.ItemGroup}}</label>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group" ng-if="obj.ColumnName=='iCostPerUnit'">
-                            <label>Cost per unit</label>
-
-                            <div class="input-group">
-                                <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
-
-                            </div>
-
-                        </div>
-
-
-                        <div ng-if="obj.ColumnName=='Image'">
 
                             <div class="row">
-
                                 <div class="col-xs-12">
+                                    <label>Item Group </label>
+                                    <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
+                                        <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
 
-                                    <h4 style="text-align:center;" ng-if="ImageList.length==0">No Image seleceted</h4>
-
-                                    <div class="viewimage " ng-if="ImageList.length>0" ng-click="viewimages()">
+                                    </div>
 
 
-                                        <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+                                    <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
+                                        <div class="row requiredfields" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
+                                            <div class="col-md-12">
 
-                                            <img src="{{_obj.bytestring}}" ng-if="$index<4" height="60" width="60" ng-class="{'lessOpacity':$index==3}" alt="Alternate Text" />
-                                            <span class="moreCounter" ng-if="ImageList.length>3 && $index==3">3+</span>
-                                        </span>
+                                                <a ng-if="IsItemGroupLibrary==false">
+                                                    You are not permitted to add new item so please select item from item list.
+                                                </a>
+                                                <a ng-if="IsActiveItemGroupLibrary==false">
+                                                    Your item library is locked so please select item from item list.
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <label>{{InventoryObject.ItemGroup}}</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                                <div class="form-group" ng-if="obj.ColumnName=='iCostPerUnit'">
+                                    <label>Cost per unit</label>
+
+                                    <div class="input-group">
+                                        <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
+
+                                    </div>
+
+                                </div>
+
+
+                                <div ng-if="obj.ColumnName=='Image'">
+
+                                    <div class="row">
+
+                                        <div class="col-xs-12">
+
+                                            <h4 style="text-align:center;" ng-if="ImageList.length==0">No Image seleceted</h4>
+
+                                            <div class="viewimage " ng-if="ImageList.length>0" ng-click="viewimages()">
+
+
+                                                <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+
+                                                    <img src="{{_obj.bytestring}}" ng-if="$index<4" height="60" width="60" ng-class="{'lessOpacity':$index==3}" alt="Alternate Text" />
+                                                    <span class="moreCounter" ng-if="ImageList.length>3 && $index==3">3+</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <br />
+                                    </div>
+                                </div>
+
+                                <div ng-if="obj.ColumnName=='iReqValue'" class="form-group">
+                                    <label>{{obj.ColumnLabel}}</label>
+
+                                    <div class="input-group">
+                                        <input id="UniqueTag" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+
+                                    </div>
+                                </div>
+                                <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
+                                    <label>{{obj.ColumnLabel}}</label>
+                                    <div class="input-group">
+                                        <input id="UnitTag2" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+
+                                    </div>
+                                </div>
+                                <div ng-if="obj.ColumnName=='iUnitTag3'" class="form-group">
+
+                                    <label>{{obj.ColumnLabel}}</label>
+                                    <div class="input-group">
+                                        <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+
+                                    </div>
+                                </div>
+                                <div ng-if="obj.ColumnName=='iUniqueDate'" class="form-group">
+                                    <label>{{obj.ColumnLabel}}</label>
+
+                                    <div class="input-group">
+                                        <input id="UniqueDate" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
+
+                                    </div>
+                                </div>
+                                <div ng-if="obj.ColumnName=='iUnitDate2'" class="form-group">
+
+                                    <label>{{obj.ColumnLabel}}</label>
+
+                                    <div class="input-group">
+                                        <input id="UnitDate2" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
+
+                                    </div>
+                                </div>
+                                <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
+                                    <label>{{obj.ColumnLabel}}</label>
+                                    <div class="input-group">
+                                        <input id="UnitNumber1" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
+                                    </div>
+                                </div>
+                                <div ng-if="obj.ColumnName=='iUnitNumber2'" class="form-group">
+
+                                    <label>{{obj.ColumnLabel}}</label>
+
+                                    <div class="input-group">
+
+                                        <input id="UnitNumber2" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true">
+                                    <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
+
+                                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+
+                                        <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
+
+                                    </div>
+
+                                    <div ng-if="obj.cfdDataType=='checkbox'">
+
+                                        <div class="btn-group custombtnGroup">
+                                            <label class="switch1">
+                                                <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+                                        <div class="select">
+                                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
+
+                                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                                        <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+
+                                    </div>
+
+                                    <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                                        <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+
+                                    </div>
+
+
+                                    <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                        <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
 
                                     </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <br />
-                            </div>
-                        </div>
 
-                        <div ng-if="obj.ColumnName=='iReqValue'" class="form-group">
-                            <label>{{obj.ColumnLabel}}</label>
 
-                            <div class="input-group">
-                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+                            <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="swiper-slide CustomActivityCols" end-repeat3>
 
-                            </div>
-                        </div>
-                        <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
-                            <label>{{obj.ColumnLabel}}</label>
-                            <div class="input-group">
-                                <input id="UnitTag2" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                                <div class="form-group">
+                                    <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
+                                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                                        <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
 
-                            </div>
-                        </div>
-                        <div ng-if="obj.ColumnName=='iUnitTag3'" class="form-group">
+                                    </div>
 
-                            <label>{{obj.ColumnLabel}}</label>
-                            <div class="input-group">
-                                <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
 
-                            </div>
-                        </div>
-                        <div ng-if="obj.ColumnName=='iUniqueDate'" class="form-group">
-                            <label>{{obj.ColumnLabel}}</label>
+                                    <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                            <div class="input-group">
-                                <input id="UniqueDate" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
+                                        <div class="btn-group custombtnGroup">
+                                            <label class="switch1">
+                                                <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </div>
 
-                            </div>
-                        </div>
-                        <div ng-if="obj.ColumnName=='iUnitDate2'" class="form-group">
 
-                            <label>{{obj.ColumnLabel}}</label>
+                                    </div>
 
-                            <div class="input-group">
-                                <input id="UnitDate2" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
+                                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
-                            </div>
-                        </div>
-                        <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
-                            <label>{{obj.ColumnLabel}}</label>
-                            <div class="input-group">
-                                <input id="UnitNumber1" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
-                            </div>
-                        </div>
-                        <div ng-if="obj.ColumnName=='iUnitNumber2'" class="form-group">
 
-                            <label>{{obj.ColumnLabel}}</label>
+                                        <div class="select">
+                                            <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
 
-                            <div class="input-group">
+                                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
-                                <input id="UnitNumber2" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
+                                            </select>
+                                        </div>
 
-                            </div>
-                        </div>
 
-                        <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true">
-                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
+                                    </div>
 
-                            <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
+                                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                                        <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
 
-                            </div>
+                                    </div>
 
-                            <div ng-if="obj.cfdDataType=='checkbox'">
+                                    <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                                        <input id="CustomActivity_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
 
-                                <div class="btn-group custombtnGroup">
-                                    <label class="switch1">
-                                        <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
-                                        <div class="slider round"></div>
-                                    </label>
+                                    </div>
+
+                                    <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                        <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+
+                                    </div>
                                 </div>
-
-                            </div>
-
-                            <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
-
-                                <div class="select">
-                                    <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
-
-                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                    </select>
-                                </div>
-
-
-                            </div>
-
-                            <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
-
-                            </div>
-
-                            <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
-
                             </div>
 
 
-                            <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
 
-                            </div>
-                        </div>
+                            <div ng-class="{'detailheight': slide==Totalslides }" class="swiper-slide" ng-show="Isopendiv==true">
+                                <div ng-if="slide==Totalslides" class="allfields">
+                                    <div class="myCols innerCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" end-repeat>
+
+                                        <div ng-if="obj.ColumnName=='iReqValue'" ng-click="getstep(0,'iReqValue')" class="form-group">
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag}}</span>
+
+                                        </div>
+                                        <div ng-if="obj.ColumnName=='iUnitTag2'" ng-click="getstep(0,'iUnitTag2')" class="form-group">
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitTag2}}</span>
+                                        </div>
+                                        <div ng-if="obj.ColumnName=='iUnitTag3'" ng-click="getstep(0,'iUnitTag3')" class="form-group">
+
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitTag3}}</span>
+                                        </div>
+                                        <div ng-if="obj.ColumnName=='iUniqueDate'" ng-click="getstep(0,'iUniqueDate')" class="form-group">
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueDate}}</span>
+                                        </div>
+                                        <div ng-if="obj.ColumnName=='iUnitDate2'" ng-click="getstep(0,'iUnitDate2')" class="form-group">
+
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitDate2}}</span>
+                                        </div>
+                                        <div ng-if="obj.ColumnName=='iUnitNumber1'" ng-click="getstep(0,'iUnitNumber1')" class="form-group">
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber1}}</span>
+
+                                        </div>
+                                        <div ng-if="obj.ColumnName=='iUnitNumber2'" ng-click="getstep(0,'iUnitNumber2')" class="form-group">
+
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber2}}</span>
+
+                                        </div>
+
+
+
+                                        <div ng-if="CheckInCommonArray(obj.ColumnName)!=true" ng-click="getstep(0,obj.ColumnName)" class="form-group">
+
+                                            <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.CustomPartData[$index].Value}}</span>
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <!--<div class="innerCols" ng-click="getstepCustom(1,obj.ColumnMap)" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
+
+
+
+                    <div ng-if="obj.cfdDataType=='string'">
+                        <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='checkbox'">
+
+
+                        <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span>  <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
+
+
+                    </div>
+
+                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+                        <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
+
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'">
+                        <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span>  <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='number'">
+                        <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
                     </div>
 
 
-
-                    <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="swiper-slide CustomActivityCols" end-repeat3>
-
-                        <div class="form-group">
-                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
-                            <div ng-if="obj.cfdDataType=='string'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
-
-                            </div>
-
-
-                            <div ng-if="obj.cfdDataType=='checkbox'" class="">
-
-                                <div class="btn-group custombtnGroup">
-                                    <label class="switch1">
-                                        <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
-                                        <div class="slider round"></div>
-                                    </label>
-                                </div>
-
-
-                            </div>
-
-                            <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
-
-
-                                <div class="select">
-                                    <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
-
-                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                    </select>
-                                </div>
-
-
-                            </div>
-
-
-                            <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
-
-                            </div>
-
-                            <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
-
-                            </div>
-
-                            <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
-
-                            </div>
-                        </div>
+                    <div ng-if="obj.cfdDataType=='currency'">
+                        <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>   {{InventoryObject.CustomPartData[$index].Value}} </span>
                     </div>
 
+                </div>-->
 
 
-                    <div ng-class="{'detailheight': slide==Totalslides }" class="swiper-slide" ng-show="Isopendiv==true">
-                        <div ng-if="slide==Totalslides" class="allfields">
-                            <div class="myCols innerCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" end-repeat>
 
-                                <div ng-if="obj.ColumnName=='iReqValue'" ng-click="getstep(0,'iReqValue')" class="form-group">
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag}}</span>
+
+                                    <div class="innerCols" ng-repeat="obj in CustomActivityDataList" ng-click="getstepCustom(2,obj.ColumnMap)" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" end-repeat3>
+
+
+
+
+
+                                        <div ng-if="obj.cfdDataType=='string'">
+
+
+                                            <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+
+
+                                        </div>
+
+
+                                        <div ng-if="obj.cfdDataType=='checkbox'">
+                                            <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+
+                                        </div>
+
+                                        <div ng-if="obj.cfdDataType=='combobox'">
+
+                                            <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+
+                                        </div>
+
+
+                                        <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'">
+                                            <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                                        </div>
+
+                                        <div ng-if="obj.cfdDataType=='number'">
+                                            <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                                        </div>
+
+                                        <div ng-if="obj.cfdDataType=='currency'">
+                                            <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                                        </div>
+
+
+                                    </div>
 
                                 </div>
-                                <div ng-if="obj.ColumnName=='iUnitTag2'" ng-click="getstep(0,'iUnitTag2')" class="form-group">
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitTag2}}</span>
-                                </div>
-                                <div ng-if="obj.ColumnName=='iUnitTag3'" ng-click="getstep(0,'iUnitTag3')" class="form-group">
-
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitTag3}}</span>
-                                </div>
-                                <div ng-if="obj.ColumnName=='iUniqueDate'" ng-click="getstep(0,'iUniqueDate')" class="form-group">
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueDate}}</span>
-                                </div>
-                                <div ng-if="obj.ColumnName=='iUnitDate2'" ng-click="getstep(0,'iUnitDate2')" class="form-group">
-
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitDate2}}</span>
-                                </div>
-                                <div ng-if="obj.ColumnName=='iUnitNumber1'" ng-click="getstep(0,'iUnitNumber1')" class="form-group">
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber1}}</span>
-
-                                </div>
-                                <div ng-if="obj.ColumnName=='iUnitNumber2'" ng-click="getstep(0,'iUnitNumber2')" class="form-group">
-
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber2}}</span>
-
-                                </div>
-
-
-
-                                <div ng-if="CheckInCommonArray(obj.ColumnName)!=true" ng-click="getstep(0,obj.ColumnName)" class="form-group">
-
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.CustomPartData[$index].Value}}</span>
-
-                                </div>
-
                             </div>
-
-
-
-
-                            <!--<div class="innerCols" ng-click="getstepCustom(1,obj.ColumnMap)" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
-
-
-
-                                <div ng-if="obj.cfdDataType=='string'">
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='checkbox'">
-
-
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span>  <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
-
-
-                                </div>
-
-                                <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
-
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
-
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'">
-                                    <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span>  <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='number'">
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-
-                                <div ng-if="obj.cfdDataType=='currency'">
-                                    <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>   {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-                            </div>-->
-
-
-
-
-                            <div class="innerCols" ng-repeat="obj in CustomActivityDataList" ng-click="getstepCustom(2,obj.ColumnMap)" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" end-repeat3>
-
-
-
-
-
-                                <div ng-if="obj.cfdDataType=='string'">
-
-
-                                    <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
-
-
-                                </div>
-
-
-                                <div ng-if="obj.cfdDataType=='checkbox'">
-                                    <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
-
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='combobox'">
-
-                                    <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
-
-                                </div>
-
-
-                                <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'">
-                                    <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='number'">
-                                    <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='currency'">
-                                    <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
-                                </div>
-
-
-                            </div>
-
                         </div>
-                    </div>
-                </div>
                 <div class="btnarea">
                     <table style="width:100%;">
                         <tr>
