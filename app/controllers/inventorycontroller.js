@@ -22,6 +22,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     };
 
     $scope.IsItemLibrary = true;
+    $scope.IsLocationLibrary = true;
+    $scope.IsUOMLibrary = true;
+    $scope.IsStatusLibrary = true;
+
     $scope.IsItemChose = false;
 
     $scope.IsItemGroupChose = false;
@@ -2068,6 +2072,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         else {
             $scope.IsItemGroupChose = false;
         }
+
+        $scope.IsLocationLibrary = $scope.checkpermission('URL:Manage/Location');
+        $scope.IsUOMLibrary = $scope.checkpermission('URL:Manage/UnitOfMeasure');
+        $scope.IsStatusLibrary = $scope.checkpermission('URL:Manage/Status');
         CheckScopeBeforeApply();
 
 
@@ -2266,16 +2274,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _IsActiveScan = true;
         switch (ControlID) {
             case "iStatusValue":
-                _IsActiveScan = $scope.IsActiveStatusLibrary;
+                _IsActiveScan = $scope.IsActiveStatusLibrary && $scope.IsStatusLibrary;
+                
+               
+                
                 break;
             case "lLoc":
-                _IsActiveScan = $scope.IsActiveLocationLibrary;
+                _IsActiveScan = $scope.IsActiveLocationLibrary && $scope.IsLocationLibrary;
                 break;
             case "uomUOM":
-                    _IsActiveScan = $scope.IsActiveUOMLibrary;
+                _IsActiveScan = $scope.IsActiveUOMLibrary && $scope.IsUOMLibrary;
                     break;
             case "pCountFrq":
-                _IsActiveScan = $scope.IsActiveItemGroupLibrary;
+                _IsActiveScan = $scope.IsActiveItemGroupLibrary && $scope.IsItemGroupLibrary;
                 break;
             default:
                 _IsActiveScan = true;
