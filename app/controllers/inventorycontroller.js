@@ -418,6 +418,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             else if (id == "#Location") {
                 $scope.InventoryObject.Location = _value;
             }
+            else if (id == "#Status") {
+                $(id).val(_value);
+                $scope.InventoryObject.Status = _value;
+            }
             else {
                 $(id).val(_value);
 
