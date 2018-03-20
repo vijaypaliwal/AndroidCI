@@ -7,6 +7,15 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         account: "",
         useRefreshTokens: false
     };
+
+    if (serviceBase == "http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/") {
+
+        $("#currentserver").html("Development");
+
+    }
+    else {
+        $("#currentserver").html("");
+    }
  
     $scope.message = "";
     $scope.DefaultAccount = function () {
@@ -76,7 +85,6 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
 
     $scope.InIt();
 
-    
 
     $scope.login = function ()
     {
@@ -90,17 +98,14 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         authService.login($scope.loginData).then(function (response)
         {
            
-            $scope.GetProfileData();
-
+           
+            
            
             $scope.getactivepermission();
 
             $scope.IsOwner = localStorageService.get('IsOwner');
 
        
-            debugger;
-
-
          
            
             //$location.path('/FindItems');

@@ -196,8 +196,11 @@ app.config(function ($routeProvider) {
 //var serviceBaseUrl = 'https://test.inventory4.com/';
 //var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
 
-var serviceBaseUrl = 'https://mobile.clearlyinventory.com/';
-var serviceBase = 'https://mobile.clearlyinventory.com/ClearlyInventoryAPI.svc/';
+//var serviceBaseUrl = 'https://mobile.clearlyinventory.com/';
+//var serviceBase = 'https://mobile.clearlyinventory.com/ClearlyInventoryAPI.svc/';
+
+var serviceBaseUrl = 'http://staging-mobile.u8i9.com/';
+var serviceBase = 'http://staging-mobile.u8i9.com/ClearlyInventoryAPI.svc/';
 
 //var serviceBaseUrl = 'http://mobile-staging.inventory4.com/';
 //var serviceBase = 'http://mobile-staging.inventory4.com/ClearlyInventoryAPI.svc/';
