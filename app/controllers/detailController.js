@@ -15,7 +15,17 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
+    $scope.IsEmptyAllcheck = function (Obj) {
+        var _return = true;
 
+
+        if (Obj.iUnitNumber2 == null && Obj.iUnitNumber1 == null && Obj.iUnitDate2 == null && Obj.iUniqueDate == null && Obj.iStatusValue == "" && Obj.iReqValue == "" && Obj.iUnitTag2 == "" && Obj.iUnitTag3 == "") {
+            _return = false;
+        }
+
+        return _return;
+
+    }
     $scope.logOut = function () {
 
 
@@ -514,6 +524,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         return bytes;
     }
 
+    
+
     $scope.saveimage = function () {
 
         $(".viewimage").hide();
@@ -539,7 +551,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
           dataType: 'json',
           data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": _toSendImages, "txnID": 0, "pID": $scope.CurrentInventory.pID }),
           success: function (response) {
-              log.success("Image has been uploaded success fully for last inventory record.");
+              log.success("Image has been uploaded successfully for last inventory record.");
               window.location.reload();
 
               if (response.UploadImageResult.Success == true) {
@@ -619,7 +631,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             iReqValue: v.iReqValue,
             iCostPerUnit: v.pDefaultCost,
         }
-
+        var _defaultQty = $scope.GetDefaultQty();
         _cartData.push({
             InventoryID: mainObjectToSend.uId,
             IsLineItemData: [],
@@ -629,11 +641,11 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             AdjustActionQuantity: "",
             AdjustCalculation: "",
             InventoryDataList: mainObjectToSend,
-            IncreaseDecreaseVMData: ({ ActionQuantity: "" }),
-            MoveTransactionData: ({ ActionQuantity: "", StatusToUpdate: mainObjectToSend.iStatusValue, MoveToLocationText: "", MoveToLocation: "" }),
-            UpdateTransactionData: ({ ActionQuantity: "", StatusToUpdate: mainObjectToSend.iStatusValue }),
-            ApplyTransactionData: ({ ActionQuantity: "", UnitTag1: mainObjectToSend.iReqValue, UnitTag2: mainObjectToSend.iUnitTag2, UnitTag3: mainObjectToSend.iUnitTag3, UniqueDate: mainObjectToSend.iUniqueDate_date, UnitDate2: mainObjectToSend.iUnitDate2_date, UnitNumber1: mainObjectToSend.iUnitNumber1, UnitNumber2: mainObjectToSend.iUnitNumber2 }),
-            ConvertTransactionData: ({ ActionFromQuantity: "", ActionToQuantity: "", ToUOMID: 0 }),
+            IncreaseDecreaseVMData: ({ ActionQuantity: _defaultQty }),
+            MoveTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend.iStatusValue, MoveToLocationText: "", MoveToLocation: "" }),
+            UpdateTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend.iStatusValue }),
+            ApplyTransactionData: ({ ActionQuantity: _defaultQty, UnitTag1: mainObjectToSend.iReqValue, UnitTag2: mainObjectToSend.iUnitTag2, UnitTag3: mainObjectToSend.iUnitTag3, UniqueDate: mainObjectToSend.iUniqueDate_date, UnitDate2: mainObjectToSend.iUnitDate2_date, UnitNumber1: mainObjectToSend.iUnitNumber1, UnitNumber2: mainObjectToSend.iUnitNumber2 }),
+            ConvertTransactionData: ({ ActionFromQuantity: _defaultQty, ActionToQuantity: _defaultQty, ToUOMID: 0 }),
         });
 
         localStorageService.set("ActivityCart", "");
@@ -693,7 +705,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
 
         $scope.MyinventoryFieldsNames = localStorageService.get("unitdatafieldsobject");
-
 
         $scope.itemlabel = $scope.CurrentInventory.pPart
         CheckIntoCartData();

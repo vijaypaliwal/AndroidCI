@@ -38,7 +38,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         var data = "UserName=" + loginData.userName + "&Password=" + loginData.password + "&AccountName=" + loginData.account;
 
-    
+        if (loginData.useRefreshTokens) {
+            data = data + "&client_id=" + ngAuthSettings.clientId;
+        }
         $("#loginBtn").addClass("disabled");
         $(".fa-sign-in").addClass("fa-spin");
         var deferred = $q.defer();
@@ -46,24 +48,27 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         $.ajax
         ({
             type: "POST",
-            url: serviceBase + "Login",
+            url: serviceBase + 'Login',
             contentType: 'application/json; charset=utf-8',
             dataType: 'text json',
            
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
 
-                debugger;
-
+               
+                var _modedata = localStorageService.get('DefaultInvmode');
                  
 
                 $("#loginBtn").removeClass("disabled");
                 $(".fa-sign-in").removeClass("fa-spin");
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
+                $("#myloginModal").hide();
                 $(".side-nav").show();
                 if (response.LoginResult.Success == true) {
+                    if ($.trim(_modedata) == "") {
 
-
+                        localStorageService.set('DefaultInvmode', "Vertical");
+                    }
                     if (loginData.useRefreshTokens) {
                         localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
                         localStorageService.set('lastlogindata', { userName: loginData.userName, Password: loginData.password, AccountName: loginData.account });
@@ -148,15 +153,17 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                success: function (response) {
 
 
-                   debugger;
+                   
 
 
                     
                    _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
                    localStorageService.set('LockLibrary', response.GetUserInfoResult.Payload[0]);
+                   localStorageService.set('AllowNegativeQuantity', response.GetUserInfoResult.Payload[0].AllowNegativeQuantity);
+                   localStorageService.set('AutoClear', response.GetUserInfoResult.Payload[0].AutoClear);
 
-
+                   localStorageService.set('DefaultQty', response.GetUserInfoResult.Payload[0].DefaultQty);
                    IsActiveLocationLibrary = response.GetUserInfoResult.Payload[0].IsActiveLocationLibrary;
                    IsActiveStatusLibrary = response.GetUserInfoResult.Payload[0].IsActiveStatusLibrary;
                    IsActiveUOMLibrary = response.GetUserInfoResult.Payload[0].IsActiveUOMLibrary;
@@ -180,7 +187,16 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 
-                       _UserInfo.picURl = serviceBaseUrl + "Logos/" + response.GetUserInfoResult.Payload[0].ProfilePic
+                       if (response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("png") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("jpg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("jpeg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("gif") != -1) {
+                           _UserInfo.picURl = response.GetUserInfoResult.Payload[0].ProfilePic
+                       }
+
+                       else {
+
+                           _UserInfo.picURl = "img/dummy-user48.png";
+
+                       }
+                  
                        
                    }
 

@@ -125,10 +125,10 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
                   $scope.MyInventorycolumns = [];
 
                   var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
-                  for (var i = 0; i <_myinventorycols.length; i++) {
-                      if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
+                  for (var i = 0; i < _myinventorycols.length; i++) {
+                      var obj= _myinventorycols[i];
+                      if (obj.ColumnName != "HasConversion" && obj.ColumnName != "ActionQty" && obj.ColumnName != 'iUpdateQty' && obj.ColumnName != 'iUpdateDate' && obj.ColumnName != 'iLastAction')
                       {
-                          debugger;
                           _myinventorycols[i].Show = _myinventorycols[i].Show == "True" ? true : false;
 
                           $scope.MyInventorycolumns.push(_myinventorycols[i]);
@@ -204,7 +204,15 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
     }
 
   
+    $scope.$on('$locationChangeStart', function (event) {
 
+        if (counter == 0) {
+
+            $scope.saveColumns();
+        }
+
+
+    });
    
 
     $scope.saveColumns = function () {
@@ -212,7 +220,7 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
         $(".fa-check").addClass("fa-spin");
 
        // $scope.LocationsLoaded = false;
-
+         counter = 1;
         $scope.loadingbutton = true;
 
         for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
@@ -242,9 +250,9 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
                dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
               success: function (response) {
-
+                  counter = 0;
                   if (response.SaveMyInventoryColumnResult.Success == true) {
-                 
+                  
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton = false
                   ShowSuccess("Updated");
@@ -259,6 +267,7 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
               },
               error: function (err)
               {
+                  counter = 0;
                   console.log(err);
                   $scope.LocationsLoaded = true;
                   $(".fa-check").removeClass("fa-spin");

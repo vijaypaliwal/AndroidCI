@@ -132,15 +132,17 @@
             </div>
         </div>
 
-        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;">
+        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;" ng-if="IsEmptyAllcheck(CurrentInventory)==true">
             <div class="c-widget">
                 <div class="c-widget-figure primary-color">
                     <i class="fa fa-list udt"></i>
                 </div>
+
+
                 <div class="c-widget-body">
-                  
+
                     <p class="m-0" ng-if="CurrentInventory.iStatusValue!=''"> <span>Status:</span> {{CurrentInventory.iStatusValue}} </p>
-                
+
 
                     <p class="m-0" ng-if="CurrentInventory.iReqValue != ''">
                         <span> {{GetUnitDataLabel('iReqValue')}}:</span> {{CurrentInventory.iReqValue}}
@@ -169,14 +171,14 @@
                     <p class="m-0" ng-if="CurrentInventory.iUnitNumber2 != null">
                         <span> {{GetUnitDataLabel('iUnitNumber2')}}: </span>{{CurrentInventory.iUnitNumber2}}
                     </p>
-                  
+
                 </div>
 
             </div>
-          
 
 
-         
+
+
 
         </div>
 
@@ -299,15 +301,12 @@
                     <!--<a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Library</a>-->
                     <a ng-click="getPhoto()"><i class="fa fa-picture-o"></i> From Photo Library</a>
                 </li>
+
+                <li style="background:#9e9e9e;">
+                    <a  data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
+                </li>
             </ul>
-
-
-
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn width-100 btn-gray" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-        </div>
-
     </div>
 
 

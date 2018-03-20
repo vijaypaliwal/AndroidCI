@@ -13,16 +13,14 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/login.html"
     });
 
-
-
     $routeProvider.when("/mainmenu", {
         controller: "mainmenuController",
         templateUrl: "app/views/mainmenu.html"
     });
 
     $routeProvider.when("/help", {
-        controller: "helpController",
-        templateUrl: "app/views/help.html"
+        controller: "helpNewController",
+        templateUrl: "app/views/helpNew.html"
     });
 
     $routeProvider.when("/signup", {
@@ -102,13 +100,13 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/tokens", {
-        controller: "tokensManagerController",
-        templateUrl: "app/views/tokens.html"
+     controller: "tokensManagerController",
+     templateUrl: "app/views/tokens.html"
     });
 
     $routeProvider.when("/associate", {
-        controller: "associateController",
-        templateUrl: "app/views/associate.html"
+       controller: "associateController",
+      templateUrl: "app/views/associate.html"
     });
 
     $routeProvider.when("/reportmenu", {
@@ -155,11 +153,11 @@ app.config(function ($routeProvider) {
         controller: "selectcolumnsController",
         templateUrl: "app/views/selectcolumns.html"
     });
+
     $routeProvider.when("/customfield", {
         controller: "customfieldController",
         templateUrl: "app/views/customfield.html"
     });
-
     $routeProvider.when("/permission", {
         controller: "permissionController",
         templateUrl: "app/views/permission.html"
@@ -169,11 +167,14 @@ app.config(function ($routeProvider) {
         controller: "contactController",
         templateUrl: "app/views/contact.html"
     });
-
-
     $routeProvider.when("/itemgroup", {
         controller: "itemgroupController",
         templateUrl: "app/views/itemgroup.html"
+    });
+
+    $routeProvider.when("/configuresetting", {
+        controller: "configuresettingController",
+        templateUrl: "app/views/configuresetting.html"
     });
 
 
@@ -181,10 +182,26 @@ app.config(function ($routeProvider) {
 
 });
 
-//var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
+
 //var serviceBaseUrl = 'http://localhost:7440/';
-var serviceBaseUrl = 'https://test.inventory4.com/';
-var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
+//var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
+
+//var serviceBaseUrl = 'http://dev.style.u8i9.com/';
+//var serviceBase = 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/';
+
+//var serviceBaseUrl = 'https://test.inventory4.com/';
+//var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
+
+
+//var serviceBaseUrl = 'https://test.inventory4.com/';
+//var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
+
+var serviceBaseUrl = 'https://mobile.clearlyinventory.com/';
+var serviceBase = 'https://mobile.clearlyinventory.com/ClearlyInventoryAPI.svc/';
+
+//var serviceBaseUrl = 'http://mobile-staging.inventory4.com/';
+//var serviceBase = 'http://mobile-staging.inventory4.com/ClearlyInventoryAPI.svc/';
+
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
@@ -218,3 +235,4 @@ app.factory('log', function () {
 });
 
 
+ 

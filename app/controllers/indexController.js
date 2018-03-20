@@ -114,6 +114,87 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
+    $scope.MonthlistGlobal = [];
+
+    function GetMonthTextAndValue(Num, Type, Year) {
+        var _monthValue = "";
+        switch (Num) {
+            case 1:
+                _monthValue = Type == 1 ? "January " : "Jan, ";
+                break;
+            case 2:
+                _monthValue = Type == 1 ? "February " : "Feb, ";
+                break;
+            case 3:
+                _monthValue = Type == 1 ? "March " : "Mar, ";
+                break;
+            case 4:
+                _monthValue = Type == 1 ? "April " : "Apr, ";
+                break;
+            case 5:
+                _monthValue = Type == 1 ? "May " : "May, ";
+                break;
+
+            case 6:
+                _monthValue = Type == 1 ? "June " : "Jun, ";
+                break;
+            case 7:
+                _monthValue = Type == 1 ? "July " : "Jul, ";
+                break;
+            case 8:
+                _monthValue = Type == 1 ? "August " : "Aug, ";
+                break;
+            case 9:
+                _monthValue = Type == 1 ? "September " : "Sep, ";
+                break;
+            case 10:
+                _monthValue = Type == 1 ? "October " : "Oct, ";
+                break;
+
+            case 11:
+                _monthValue = Type == 1 ? "November " : "Nov, ";
+                break;
+            case 12:
+                _monthValue = Type == 1 ? "December " : "Dec, ";
+                break;
+            default:
+
+        }
+
+        return _monthValue + Year;
+
+    }
+    function FillMonthlist() {
+
+        $scope.MonthlistGlobal = [];
+        var CurrentYear = new Date().getFullYear();
+
+        $scope.MonthlistGlobal.push({ Text: "None", Value: "" });
+        for (var i = CurrentYear - 10; i <= CurrentYear + 10; i++) {
+
+            for (var j = 1; j <= 12; j++) {
+                $scope.MonthlistGlobal.push({ Text: GetMonthTextAndValue(j, 1, i), Value: GetMonthTextAndValue(j, 2, i) })
+            }
+
+        }
+
+
+
+    }
+    
+    $scope.GetDefaultQty=function()
+    {
+        var _DefaultQty = localStorageService.get('DefaultQty');
+
+        if (_DefaultQty == "1" || _DefaultQty == 1)
+        {
+            return 1;
+        }
+        else {
+            return "";
+        }
+
+    }
     $scope.locked = function () {
         log.error("This Library is locked");
     }
@@ -126,7 +207,10 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.IsActiveUOMLibrary = IsActiveUOMLibrary;
         $scope.IsActiveItemLibrary = IsActiveItemLibrary;
         $scope.IsActiveItemGroupLibrary = IsActiveItemGroupLibrary;
+        $scope.GetProfileData();
+        FillMonthlist();
 
+      
 
 
 
@@ -266,19 +350,22 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.getactivepermission = function () {
         $scope.CurrentUserKey=localStorageService.get('UserKey');
+        $scope.GetPermission(1, $scope.CurrentUserKey);
+
+
         setTimeout(function () {
             $scope.GetPermission(3, $scope.CurrentUserKey);
         }, 10);
+
         setTimeout(function () {
             $scope.GetPermission(4, $scope.CurrentUserKey);
         }, 10);
+
         setTimeout(function () {
             $scope.GetPermission(5, $scope.CurrentUserKey);
         }, 10);
 
-        setTimeout(function () {
-            $scope.GetPermission(1, $scope.CurrentUserKey);
-        }, 10);
+
         $scope.$apply();
         setTimeout(function () {
 
@@ -374,7 +461,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
         switch (Type) {
             case 1:
-                log.error(_returnError);
+               // log.error(_returnError);
                 break;
             case 2:
                 log.warning(_returnError);
@@ -392,8 +479,26 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                 $(".modal").modal("hide");
                 HideGlobalWaitingDiv();
+
+
+                var _path = $location.path();
+
+
+                if (_path != "/login") {
+                    $("#modalerror").modal('show');
+                    $("#errortext").html(exception);
+                }
+               
+            }
+            else {
+                alert("timeout error");
+            }
+        
+        }
+        else {
+            if (exception == "timeout") {
                 $("#modalerror").modal('show');
-                $("#errortext").html(exception);
+                $("#errortext").html("Slow Network error");
             }
         }
     });
@@ -407,8 +512,16 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.errorbox = function (error) {
 
-        $("#modalerror").modal('show');
-        $("#errortext").html(error)
+        var _path = $location.path();
+
+
+
+        if (_path != "/login") {
+            $("#modalerror").modal('show');
+            $("#errortext").html(error)
+        }
+
+    
 
     }
 
@@ -429,7 +542,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         var _path = $location.path();
 
   
-
+        _CurrentUrl = _path;
         if (_path == "/inventory") {
             $scope.changepage();
             $cordovaKeyboard.disableScroll(true);
@@ -445,6 +558,34 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         else {
             UpdateStatusBar(55);
         }
+
+     
+
+        //document.addEventListener("backbutton", function (e) {
+        //    e.preventDefault();
+        //    var _path = $location.path();
+
+
+
+        //    if (_path == "/inventory") {
+        //        var box = bootbox.confirm("Are you sure ?", function (result) {
+        //            if (result) {
+        //                history.back(1);
+
+        //            }
+
+
+
+        //        });
+
+        //        box.on("shown.bs.modal", function () {
+        //            $(".mybootboxbody").html("please complete current add inventory process or you can leave by press ok . ");
+
+        //        });
+              
+                
+        //    }
+        //}, false);
 
    
 
@@ -468,7 +609,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 console.log($scope.UserInfoData);
                 $scope.username = $scope.UserInfoData.username;
                 $scope.myprofileimage = $scope.UserInfoData.myprofileimage;
-                $scope.picURl = $scope.UserInfoData.picURl;
+                $scope.ProfilePicURl = $scope.UserInfoData.picURl;
                 $scope.$apply();
             }
         }, 1000)
@@ -619,7 +760,104 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
+    $scope.UpdateSecurityTokenGlobal = function () {
+        $scope.userName = "";
+        var _path = $location.path();
+        var AccountID = localStorageService.get('AccountDBID');
+        if (_path != "/login" && $.trim(AccountID) != "") {
 
+            var authData = localStorageService.get('lastlogindata');
+            if (authData) {
+                $scope.userName = authData.userName;
+            }
+
+            $.ajax({
+
+                type: "POST",
+                url: serviceBase + "UpdateSecurityTokenWithUserName",
+                contentType: 'application/json; charset=utf-8',
+
+                dataType: 'json',
+                async: true,
+                data: JSON.stringify({ "UserName": $scope.userName, "AccountID": AccountID }),
+                error: function (err, textStatus) {
+
+
+                    if (err.readyState == 0 || err.status == 0) {
+
+                    }
+                    else {
+
+
+                        if (textStatus != "timeout") {
+
+
+                            $scope.ShowErrorMessage("update security token", 2, 1, err.statusText);
+                        }
+                    }
+                },
+
+                success: function (data) {
+
+
+                    if (data.UpdateSecurityTokenWithUserNameResult.Success == true) {
+
+
+                        if (data.UpdateSecurityTokenWithUserNameResult != null && data.UpdateSecurityTokenWithUserNameResult.Payload != null) {
+                            var _token = data.UpdateSecurityTokenWithUserNameResult.Payload;
+
+                            localStorageService.set('authorizationData', { token: _token });
+
+
+
+
+                        }
+                    }
+                    else {
+
+                        $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenWithUserNameResult.Message);
+                    }
+                }
+            });
+        }
+    }
+
+
+
+    //setInterval("UpdateToken", 10000);
+
+    setInterval(function () {
+        $scope.UpdateSecurityTokenGlobal();
+    }, 2400000);
+
+    document.addEventListener('resume', function () {
+        if (cordova.backgroundapp.resumeType == 'normal') {
+            $scope.UpdateSecurityTokenGlobal();
+        }
+    });
     initIndex();
 
 }]);
+
+app.directive('ngModel', [
+        function () {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs, ctrl) {
+
+                
+                       // ctrl.$pristine = false;
+                       
+
+
+                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+
+                            if (!$(element).hasClass("unitDatePicker")) {
+
+                                element.trigger("change");
+                            }
+                        });
+                }
+            };
+        }
+]);

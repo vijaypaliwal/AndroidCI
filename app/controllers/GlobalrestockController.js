@@ -1,7 +1,68 @@
 ﻿'use strict';
 app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
+    $scope.yearList = [];
+    $scope.dayList = [];
+    $scope.monthList = [];
 
+    $scope.hourList = [];
+    $scope.minuteList = [];
+    $scope.secondList = [];
+
+
+    for (var i = 1; i <= 24; i++) {
+        $scope.hourList.push(i);
+    }
+
+
+
+    for (var i = 1; i <= 60; i++) {
+        $scope.minuteList.push(i);
+    }
+
+
+
+    for (var i = 1; i <= 60; i++) {
+        $scope.secondList.push(i);
+    }
+
+
+    $scope.monthList = [
+           { id: 1, text: "January" },
+           { id: 2, text: "February" },
+           { id: 3, text: "March" },
+           { id: 4, text: "April" },
+           { id: 5, text: "May" },
+           { id: 6, text: "June" },
+           { id: 7, text: "July" },
+           { id: 8, text: "August" },
+           { id: 9, text: "September" },
+           { id: 10, text: "October" },
+           { id: 11, text: "November" },
+           { id: 12, text: "December" }
+
+    ];
+
+    for (var i = 1990; i <= 2020; i++) {
+        $scope.yearList.push(i);
+    }
+
+
+    for (var i = 1; i <= 31; i++) {
+        $scope.dayList.push(i);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    $scope.clearAllFilter = false;
     $scope.CurrentView = { Name: "Global Restock" };
     $scope.GlobalRestockViews = [];
     $scope.GlobalRestockList = [];
@@ -20,6 +81,15 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
     var _TotalRecordsCurrent = 0;
     var _masterSearch = "";
     $scope.loadingblock = false;
+
+
+    $scope.weeklist = [];
+
+    $scope.CurrentYear = new Date().getFullYear();
+
+    for (var i = 1; i <= 52; i++) {
+        $scope.weeklist.push(i);
+    }
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -78,6 +148,9 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             case "money":
                 return "num-eq";
                 break;
+            case "bool":
+                return "bool";
+                break;
 
 
             default:
@@ -126,6 +199,10 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             $scope.FilterArray[i].SearchValue = "";
         }
 
+
+        $scope.clearAllFilter = true;
+
+
         $scope.FilterData.SearchValue = "";
         CheckScopeBeforeApply();
         $scope.GetGlobalDataAccordingToView();
@@ -165,7 +242,43 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             return DataType;
         }
     }
+    $scope.getCustomSpecialType = function (FieldName) {
+        debugger;
+        var type = "";
+        var Map = "";
 
+        type = "part";
+        Map = FieldName;
+        if ($scope.CustomItemDataList.length > 0) {
+            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+
+
+
+                if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType.toLowerCase() == type) {
+                    return $scope.CustomItemDataList[i];
+                }
+            }
+        }
+        else {
+        }
+    }
+
+    // Get Column type according to column name
+    $scope.getColumnType = function (ColumnName) {
+
+        var ColumnType = "system"
+        var _column = $scope.getCustomSpecialType(ColumnName);
+        if (_column != undefined) {
+
+            for (var i = 0; i < $scope.Columns.length; i++) {
+                if ($scope.Columns[i].ColumnID == _column.cfdID) {
+                    ColumnType = $scope.Columns[i].ColumnType.toLowerCase();
+                    return ColumnType;
+                }
+            }
+        }
+        return ColumnType;
+    }
     $scope.GetColumnDataType=function(ColumnName)
     {
         var DataType=""
@@ -382,6 +495,10 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             case "cn":
                 _returnPath = path + "Contains.gif";
                 break;
+            case "nc":
+                _returnPath = path + "DoesNotContain.gif";
+                break;
+
             case "date-after":
                 _returnPath = path + "OnOrAfter.gif";
                 break;
@@ -397,8 +514,47 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             case "date-gte":
                 _returnPath = path + "GreaterThanOrEqualTo.gif";
                 break;
+            case "Empty":
+                _returnPath = path + "IsNull.gif";
+                break;
         }
         return _returnPath;
+    }
+
+
+    var trueFalseArray = [];
+
+    $scope.GetTrueFalseArray = function () {
+        trueFalseArray.push("true");
+        trueFalseArray.push("false");
+
+        return trueFalseArray;
+    }
+    $scope.GetBooleabData = function (ColumnName) {
+        debugger;
+
+
+        var BooeanArray = [];
+
+        var type = "";
+        var Map = "";
+        if (ColumnName.includes("t_")) {
+            type = "inventory";
+            Map = ColumnName.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ColumnName;
+        }
+
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
+                BooeanArray.push($scope.CustomItemDataList[i].cfdTruelabel);
+                BooeanArray.push($scope.CustomItemDataList[i].cfdFalselabel);
+            }
+        }
+
+        return BooeanArray;
     }
 
     
@@ -599,23 +755,95 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                 return $scope.GlobalRestockList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.GlobalRestockList[Index].number_12) : "";
                 break;
 
-            case "bool_1":
-                return $scope.GlobalRestockList[Index].bool_1 != null ? $scope.GlobalRestockList[Index].bool_1 : "";
+           case "bool_1":
+               if ($scope.GlobalRestockList[Index].bool_1 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.GlobalRestockList[Index].bool_1 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.GlobalRestockList[Index].bool_1 != null ? $scope.GlobalRestockList[Index].bool_1 : "";
                 break;
-            case "bool_2":
-                return $scope.GlobalRestockList[Index].bool_2 != null ? $scope.GlobalRestockList[Index].bool_2 : "";
+           case "bool_2":
+               if ($scope.GlobalRestockList[Index].bool_2 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.GlobalRestockList[Index].bool_2 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.GlobalRestockList[Index].bool_2 != null ? $scope.GlobalRestockList[Index].bool_2 : "";
                 break;
-            case "bool_3":
-                return $scope.GlobalRestockList[Index].bool_3 != null ? $scope.GlobalRestockList[Index].bool_3 : "";
+           case "bool_3":
+               if ($scope.GlobalRestockList[Index].bool_3 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.GlobalRestockList[Index].bool_3 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.GlobalRestockList[Index].bool_3 != null ? $scope.GlobalRestockList[Index].bool_3 : "";
                 break;
-            case "bool_4":
-                return $scope.GlobalRestockList[Index].bool_4 != null ? $scope.GlobalRestockList[Index].bool_4 : "";
+           case "bool_4":
+               if ($scope.GlobalRestockList[Index].bool_4 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.GlobalRestockList[Index].bool_4 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.GlobalRestockList[Index].bool_4 != null ? $scope.GlobalRestockList[Index].bool_4 : "";
                 break;
-            case "bool_5":
-                return $scope.GlobalRestockList[Index].bool_5 != null ? $scope.GlobalRestockList[Index].bool_5 : "";
+           case "bool_5":
+               if ($scope.GlobalRestockList[Index].bool_5 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.GlobalRestockList[Index].bool_5 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.GlobalRestockList[Index].bool_5 != null ? $scope.GlobalRestockList[Index].bool_5 : "";
                 break;
-            case "bool_6":
-                return $scope.GlobalRestockList[Index].bool_6 != null ? $scope.GlobalRestockList[Index].bool_6 : "";
+           case "bool_6":
+               if ($scope.GlobalRestockList[Index].bool_6 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.GlobalRestockList[Index].bool_6 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.GlobalRestockList[Index].bool_6 != null ? $scope.GlobalRestockList[Index].bool_6 : "";
                 break;
 
             case "date_1":
@@ -745,6 +973,174 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
     $scope.showfilter = function () {
         $("#filtermodal").modal("show")
     }
+    function GetColumnDataType(ColumnName) {
+
+        for (var i = 0; i < $scope.Columns.length; i++) {
+            if ($scope.Columns[i].ColumnID == ColumnName) {
+                return $scope.Columns[i].ColumnDataType;
+            }
+
+        }
+
+        return "";
+
+    }
+    function formatDate(date) {
+        if (date != null && date != undefined && date != "") {
+
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+        else {
+            return date;
+        }
+    }
+    function ConvertToProperFilter(_Filters) {
+
+        debugger;
+        if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
+            for (var i = 0; i < _Filters.length; i++) {
+                switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
+                    case "Decimal":
+                    case "decimal":
+                    case "number":
+                    case "currency":
+                        if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && $.trim(_Filters[i].SearchValue) != "") {
+
+                            _Filters[i].SearchValue = parseFloat(_Filters[i].SearchValue);
+                        }
+                        break;
+                    case "Date":
+                    case "date":
+                    case "datetime":
+                        if (_Filters[i].FilterOperator != "date-year" && _Filters[i].FilterOperator != "date-month" && _Filters[i].FilterOperator != "date-day" && _Filters[i].FilterOperator != "date-hour" && _Filters[i].FilterOperator != "date-minute" && _Filters[i].FilterOperator != "date-second") {
+
+                            if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && _Filters[i].SearchValue != "") {
+
+                                if (_Filters[i].SearchValue.includes("AM") || _Filters[i].SearchValue.includes("PM")) {
+                                    if (_Filters[i].SearchValue.includes("1900")) {
+                                        var x = _Filters[i].SearchValue.split(" ");
+                                        var y = x[1].split(":");
+
+
+                                        if (_Filters[i].SearchValue.includes("PM")) {
+                                            y[0] = parseInt(y[0]) + 12;
+                                        }
+
+                                        if (y[0].length < 2) {
+                                            y[0] = "0" + y[0]
+                                        }
+                                        if (y[1].length < 2) {
+                                            y[1] = "0" + y[1]
+                                        }
+
+
+                                        _Filters[i].SearchValue = y[0] + ":" + y[1];
+                                        break;
+                                    }
+                                    else {
+                                        var x = _Filters[i].SearchValue.split(" ");
+                                        var replaced = x[0].split("/");
+                                        var Datereplaced = x[1].split(":");
+
+                                        if (replaced[0].length < 2) {
+                                            replaced[0] = "0" + replaced[0]
+                                        }
+
+                                        if (replaced[1].length < 2) {
+                                            replaced[1] = "0" + replaced[1]
+                                        }
+
+                                        if (Datereplaced[0].length < 2) {
+                                            Datereplaced[0] = "0" + Datereplaced[0]
+                                        }
+
+                                        if (Datereplaced[1].length < 2) {
+                                            Datereplaced[1] = "0" + Datereplaced[1]
+                                        }
+
+
+                                        var newdate = replaced[2] + "-" + replaced[0] + "-" + replaced[1];
+
+                                        _Filters[i].SearchValue = newdate + "T" + Datereplaced[0] + ":" + Datereplaced[1]
+                                        break;
+                                    }
+                                }
+                            }
+
+
+                            _Filters[i].SearchValue = formatDate(_Filters[i].SearchValue);
+                        }
+                        else {
+                            _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        }
+                        break;
+
+                    case "checkbox":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue == null ? " " : _Filters[i].SearchValue.toLowerCase();
+                        break;
+                    case "combobox":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        break;
+                    case "string":
+                    case "String":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        break;
+                    default:
+                }
+            }
+            $scope.FilterArray = _Filters;
+        }
+        setTimeout(function () {
+
+            $(".weekfilter").each(function () {
+
+                var _val = $(this).attr("currentvalue");
+                if ($.trim(_val) != "") {
+
+                    $(this).val(_val);
+                    $(this).trigger("change");
+                }
+            });
+        }, 1000);
+        CheckScopeBeforeApply();
+    }
+
+
+
+
+
+    function ChangeBooleanOperator() {
+        debugger;
+        for (var i = 0; i < $scope.FilterArray.length ; i++) {
+            if ($scope.FilterArray[i].ColumnName.includes("bool")) {
+                $scope.FilterArray[i].FilterOperator = 'bool';
+            }
+        }
+
+        console.log("Filter Array after changing the boolean operator");
+        console.log($scope.FilterArray);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     $scope.GetGlobalDataAccordingToView=function()
     {
@@ -791,17 +1187,42 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
 
 
             }, 1000);
+
+            for (var i = 0 ; i < $scope.FilterArray.length ; i++) {
+
+                if ($scope.FilterArray[i].FilterOperator == "Empty") {
+                    if ($scope.clearAllFilter != true) {
+                        $scope.FilterArray[i].SearchValue = "NULL";
+
+                    }
+                }
+                var fieldSpecialType = $scope.getCustomSpecialType($scope.FilterArray[i].ColumnName);
+                if (fieldSpecialType != undefined) {
+                    if ($.trim($scope.FilterArray[i].SearchValue) != "") {
+                        if (fieldSpecialType.cfdSpecialType == 2) {
+                            // For DateTime Fields
+                        }
+                        if (fieldSpecialType.cfdSpecialType == 3) {
+                            // For Time Fields
+                            if ($scope.FilterArray[i].FilterOperator != "date-hour" && $scope.FilterArray[i].FilterOperator != "date-minute" && $scope.FilterArray[i].FilterOperator != "date-second") {
+
+                                $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                            }
+                        }
+                    }
+                }
+            }
             $.ajax
               ({
                   type: "POST",
                   url: serviceBase + 'GetGlobalRestock',
-                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray,  masterSearch: $scope.FilterData.SearchValue,  PageSize: _PageSize, ViewID: $scope.CurrentView.GridLayoutID }),
+                  data: JSON.stringify({ ClearFilter: $scope.clearAllFilter, SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, masterSearch: $scope.FilterData.SearchValue, PageSize: _PageSize, ViewID: $scope.CurrentView.GridLayoutID }),
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {
                       $scope.isDataLoading = true;
                       $scope.isviewload = true;
-
+                      $scope.clearAllFilter = false;
                       if (response.GetGlobalRestockResult.Success == true) {
                      
                       
@@ -811,9 +1232,12 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                       $scope.totalrecords = response.GetGlobalRestockResult.Payload[0].TotalRercords;
                       $scope.Columns = response.GetGlobalRestockResult.Payload[0].Columns;
                       $scope.ActualTotalRecords = response.GetGlobalRestockResult.Payload[0].ActualTotalRecords;
-                      $scope.FilterArray = response.GetGlobalRestockResult.Payload[0].Filters;
+                      //$scope.FilterArray = response.GetGlobalRestockResult.Payload[0].Filters;
+                      ConvertToProperFilter(response.GetGlobalRestockResult.Payload[0].Filters);
                       CheckScopeBeforeApply();
-                    
+
+                      ChangeBooleanOperator();
+                          //FillFilterArray()
                       UpdateFilterArray();
 
                       }
@@ -938,9 +1362,10 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
     }
 
     function init() {
+        $scope.GetCustomDataField(0);
         $scope.getuom();
         $scope.GetGlobalViews();
-        $scope.GetCustomDataField(0);
+
         CheckScopeBeforeApply();
       
     

@@ -59,7 +59,7 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
 
                    }
                    else {
-                       $scope.ShowErrorMessage("Getting Status count", 1, 1, response.GetStatusResult.Message)
+                       $scope.ShowErrorMessage("Getting Status count", 1, 1, response.GetStatusResult.Message);
 
                    }
                    $scope.IsStatusLoading = false;
@@ -213,7 +213,9 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
 
                       var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
                       for (var i = 0; i < _myinventorycols.length; i++) {
-                          if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty") {
+                          var obj = _myinventorycols[i];
+                          if (obj.ColumnName != "HasConversion" && obj.ColumnName != "ActionQty" && obj.ColumnName != 'iUpdateQty' && obj.ColumnName != 'iUpdateDate' && obj.ColumnName != 'iLastAction')
+                              {
                               $scope.columnlist.push(_myinventorycols[i]);
                               if (_myinventorycols[i].mobileorder != 0) {
                                   $scope.columnlist2.push(_myinventorycols[i]);
@@ -270,15 +272,10 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
               },
               error: function (err, textStatus, errorThrown) {
                   $scope.IsCustomfieldLoading = false;
-                  if (err.readyState == 0 || err.status == 0) {
-
-                  }
-                  else {
+                  $scope.IsCustomfieldLoading = false;
+                  if (textStatus != "timeout") {
                       $scope.IsCustomfieldLoading = false;
-                      if (textStatus != "timeout") {
-                          $scope.IsCustomfieldLoading = false;
-                          $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
-                      }
+                      $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
                   }
 
 

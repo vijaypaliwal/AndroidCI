@@ -19,12 +19,30 @@
     .lime {
         background: #cddc39 !important; 
     }
+
+    .btn-lightgreen {
+        background: #FF5722;
+        color: #fff;
+    }
+
+       .col-xs-9 {
+          text-overflow: ellipsis;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    margin-bottom: 0px;
+    line-height: 3;
+    overflow: hidden;
+    padding-left:0;
+
+    }
 </style>
 
 <div class="title-header">
     <div class="row">
         <div class="col-xs-12">
-            <h4 class="titletext">Manage setting</h4>
+            <h4 class="titletext">Manage Settings</h4>
         </div>
     </div>
 </div>
@@ -251,6 +269,37 @@
 
 
     </button>
+
+    <button type="button" ng-if="checkpermission('URL:configure/default.aspx')==true" ng-click="GoTo('/configuresetting')" class="waves-effect waves-light btn-large btn-lightgreen width-100 animated bouncein delay-6">
+        <div class="row">
+            <div class="col-xs-9">
+                <i class="fa fa-cog"></i>    Default Settings
+
+            </div>
+
+
+            <div class="col-xs-3">
+                <div>4</div>
+            </div>
+
+        </div>
+
+
+
+    </button>
+
+    <button ng-if="checkpermission('URL:configure/default.aspx')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6 restricted">
+        <div class="row">
+            <div class="col-xs-9">
+                <i class="fa fa-ban"></i>   Default Settings
+
+            </div>
+
+        </div>
+
+
+
+    </button>
     <div>
         <br />
         <br />
@@ -265,8 +314,8 @@
 <div id="bottommenumodal" class="modal bottommenu fade">
     <div class="modal-body">
         <ul class="animated slideInUp selectAction">
-            <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
-            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
+            <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
+            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect  btn-warning btn"> <i class="fa fa-shopping-cart"></i> </a></li>
             <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-th-list"></i> </a></li>
             <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
         </ul>

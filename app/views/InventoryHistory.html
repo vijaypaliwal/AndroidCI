@@ -1,7 +1,3 @@
-﻿
-
-
-
 
 <link href="css/history.css" rel="stylesheet" />
 
@@ -19,10 +15,6 @@
 
 <a href="#/detail" class="newbackbtn left15"> <i class="fa fa-arrow-left"></i> </a>
 
-
-
-
-
 <div style="text-align:left; padding-left:12px; padding-right:12px;" class="top50 container" >
 
 
@@ -30,7 +22,7 @@
         <div class="row">
             <div class="col-xs-7">
                 <p style="margin-bottom:4px;">{{CurrentInventory.pPart}} </p>
-                <small> {{CurrentInventory.pDescription}} </small>
+                <p style="font-size:13px;"> {{CurrentInventory.pDescription}} </p>
             </div>
             <div class="col-xs-5">
                 <div style="text-align:right">
@@ -41,12 +33,12 @@
 
         <div class="row">
             <div class="col-xs-6">
-                <p>Loc {{CurrentInventory.lLoc}} </p>
+                <p>Loc: {{CurrentInventory.lLoc}} </p>
               
             </div>
             <div class="col-xs-6">
                 <div style="text-align:right">
-                    <p>Status {{CurrentInventory.iStatusValue}} </p>
+                    <p>Status: {{CurrentInventory.iStatusValue}} </p>
                 </div>
                
             </div>
@@ -70,7 +62,11 @@
 
                 <div class="dropdown" >
                     <button style=" width:100%; height:47px;padding:0px; border:transparent;" type="button" data-toggle="dropdown" class="waves-effect btn btn-warning">
-                    <span ng-if="Activity==''">Activity </span> <span ng-if="Activity!=''"><span ng-if="Activity!='Apply'">{{Activity}} </span><span ng-if="Activity=='Apply'">Tag </span></span>  <i class="fa fa-caret-down"></i></button>
+                    <span ng-if="Activity==''">Activity </span> 
+                    <span ng-if="Activity!=''">
+                        <span style="font-size:13px;text-transform:capitalize;" ng-if="Activity!='Apply'">{{Activity}} </span>
+                        <span ng-if="Activity=='Apply'">Tag </span></span> 
+                     <i class="fa fa-caret-down"></i></button>
                     <ul class="dropdown-menu" style="width:100%;">
                         <li><a ng-click="Activity=''">All</a></li>
                         <li><a ng-click="Activity='Increase'">Increase</a></li>
@@ -79,11 +75,9 @@
                         <li><a ng-click="Activity='Update'">Update</a></li>
                         <li><a ng-click="Activity='Apply'">Tag</a></li>
                         <li><a ng-click="Activity='Move'">Move</a></li>
+                        <li><a ng-click="Activity='Move, Tag, & Update'">Move, Tag, & Update</a></li>
                     </ul>
                 </div>
-
-                
-
             </div>
         </div>
     </div>
@@ -93,13 +87,11 @@
     <div ng-repeat="_obj in Recentactivities" ng-if="isSearching==false && Recentactivities.length>0">
 
 
-
-
         <div ng-if="_obj.ParentAction=='Increase'" class="activityinfo bgm-increase">
             <div class="row">
                 <div class="col-xs-2">
                     <span class="btn-floating resize btn-large waves-effect waves-light accent-color btn z-depth-1">
-                     I
+                        I
                     </span>
                 </div>
                 <div class="col-xs-7">
@@ -203,12 +195,26 @@
             </div>
         </div>
 
-        
-      
+        <div ng-if="_obj.ParentAction=='Move, Tag, & Update'" class="bgm-movetagupdate activityinfo">
+            <div class="row">
+                <div class="col-xs-2">
+                    <span class="btn-floating resize btn-large waves-effect waves-light accent-color btn z-depth-1">
+                        M
+                    </span>
+                </div>
+                <div class="col-xs-7">
+                    <h5>Move, Tag, & Update {{_obj.itQtyChange}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+                </div>
+                <div class="col-xs-3">
+                    <div style="text-align:right; margin-right:5px; margin-top:12px;" ng-if="_obj.CanUndo==true">
+                        <a style="height:30px; width:30px; background:#fff; border-radius:100%; border:transparent; padding:0px; line-height:30px; text-align:center;" class="btn waves-effect" ng-click="Undo(_obj.itID,_obj.itInvID,_obj.itParentTransID)"> <i class="fa fa-undo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div ng-if="Recentactivities.length==0 && isSearching==false">
         <h4>No Data available, please update your search data and then give it another shot. </h4>
-
     </div>
 </div>
 
@@ -227,6 +233,32 @@
     </div>
 </div>
 
+<a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
+
+<script>
+
+    var offset = 50;
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    var offset_opacity = 1200;
+    //duration of the top scrolling animation (in ms)
+    var scroll_top_duration = 700;
+    //grab the "back to top" link
+    var $back_to_top = $('.cd-top');
+
+    function scrollToTop() {
+
+        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
+    }
+
+
+
+    $(window).scroll(function () {
+        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('cd-fade-out');
+        }
+    });
+</script>
 
 
 

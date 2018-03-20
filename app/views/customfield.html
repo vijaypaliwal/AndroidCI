@@ -3,6 +3,12 @@
 
 <link href="css/customfield.css" rel="stylesheet" />
 
+<style>
+    .clearicon {
+        color:#ccc;
+    }
+</style>
+
 
 <div class="title-header">
     <div class="row">
@@ -37,8 +43,8 @@
     </div>
 
     <div ng-show="Issearch==true" class="row rowMargin">
-        <input type="text" placeholder="Type Name, datatype to search" ng-model="SearchString" class="form-control" name="name" value=" " />
-        <i class="fa fa-times clearicon" ng-if="GetTrimmedStringData(SearchString)!=''" ng-click="ClearFilter()"></i>
+        <input type="text" placeholder="Type Name, datatype to search" ng-model="SearchString" class="form-control hideaddclear" name="name" value=" " />
+        <i class="fa fa-times-circle clearicon" ng-if="GetTrimmedStringData(SearchString)!=''" ng-click="ClearFilter()"></i>
     </div>
 
 
@@ -72,18 +78,26 @@
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning ng-binding"> {{$index+1}} </a>
+                                <a style="margin-top:17px;" class="btn text btn-warning ng-binding"> {{$index+1}} </a>
                             </div>
 
                             <div class="col-xs-6">
                                 <a class="text ng-binding">{{_obj.ColumnLabel}} </a>
-                                <small class="smallText">{{_obj.Show}}</small>
+                                <a style="font-size:14px;" class="text">Do Not Allow Duplicate Entries</a>
+                                <!--<small class="smallText">{{_obj.Show}}</small>-->
                             </div>
                             <div class="col-xs-4" >
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
 
-                                        <input type="checkbox" ng-change="UpdateUnitData(_obj.RowID,_obj.originalMobileOrder)" ng-model="_obj.originalMobileOrder">
+                                        <input type="checkbox" ng-change="UpdateUnitData(_obj.RowID,_obj.originalMobileOrder, _obj.IsUnique)" ng-model="_obj.originalMobileOrder">
+                                        <div class="slider round"></div>
+                                    </label>
+
+                                    <br />
+
+                                    <label class="switch1">
+                                        <input type="checkbox" ng-change="UpdateUnitData(_obj.RowID,_obj.originalMobileOrder, _obj.IsUnique)" ng-model="_obj.IsUnique">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
@@ -112,7 +126,15 @@
 
                 </td>
             </tr>
+            <tr ng-show="IsItemOpen==true">
+                <td>
 
+                    <div class="infoareas" style=" color: #756262; padding: 5px;">
+                        You can create new fields in the web version of Clearly Inventory and they will appear here.
+                    </div>
+                </td>
+
+            </tr>
             <tr ng-repeat="_obj in  _LocalCustomItemFieldsList= (LocalCustomItemFieldsList |  filter: searchData1)" ng-show="IsItemOpen==true">
                 <td>
                     <div class="infoareas">
@@ -151,6 +173,7 @@
                     </div>
                 </td>
             </tr>
+       
             <tr>
                 <td>
                     <div class="infoareas columnHeader" ng-click="openClosePanel(3)">
@@ -160,7 +183,15 @@
                     </div>
                 </td>
             </tr>
+            <tr ng-show="IsActivityOpen==true">
+                <td>
 
+                    <div class="infoareas" style=" color: #756262; padding: 5px;">
+                        You can create new fields in the web version of Clearly Inventory and they will appear here.
+                    </div>
+                </td>
+
+            </tr>
             <tr ng-repeat="_obj in  _LocalCustomActivityFieldsList= (LocalCustomActivityFieldsList | filter: searchData1)" ng-show="IsActivityOpen==true">
 
                 <td>
@@ -182,7 +213,7 @@
 
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
-                                        <input type="checkbox" ng-change="UpdateCustomField(_obj)" ng-model="_obj.IsActive">
+                                        <input type="checkbox" ng-disabled="IsSaving" ng-change="UpdateCustomField(_obj)" ng-model="_obj.IsActive">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
@@ -204,6 +235,8 @@
 
 
     </table>
+    <br /><br />
+
 </div>
 
 <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
@@ -291,7 +324,13 @@
     </div>
 
 </div>
+<div ng-if="IsSaving==true">
 
+    <div class="modal-backdrop fade in"></div>
+    <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+        <img src="img/loader.gif" alt="Alternate Text" />
+    </div>
+</div>
 <script>
 
     var offset = 50;

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('AccountsController', ['$scope', '$location', 'authService','localStorageService', 'ngAuthSettings', 'log', function ($scope, $location, authService,localStorageService, ngAuthSettings, log) {
+app.controller('AccountsController', ['$scope', '$location', 'authService','localStorageService', 'ngAuthSettings', function ($scope, $location, authService,localStorageService, ngAuthSettings) {
 
 
 
@@ -10,8 +10,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
     $scope.AccountsList = [];
     $scope.IsLoading = false;
     $scope.CurrentAccount = "";
-    $scope.GetUserAccounts=function()
-    {
+    $scope.GetUserAccounts = function () {
         $scope.IsLoading = true;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -26,25 +25,12 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
             dataType: 'json',
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken}),
-            error: function (err, textStatus, errorThrown) {
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+            error: function (err) {
                 $scope.IsLoading = false;
-                if (err.readyState == 0 || err.status == 0)
-                {
-
-                }
-                else {
-
-                    if (textStatus != "timeout") {
-
-                        $scope.ShowErrorMessage("Get user Accounts", 2, 1, err.statusText);
-                    }
-                }
             },
 
             success: function (data) {
-
-                debugger;
 
                 if (data.GetUserAccountsResult.Success == true) {
 
@@ -53,8 +39,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                     }
                 }
                 else {
-                    $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetUserAccountsResult.Message)
-
+                    $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetUserAccountsResult.Message);
 
                 }
                 $scope.IsLoading = false;
@@ -62,73 +47,25 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                 $scope.$apply();
             }
         });
-    }
+    };
    
 
-    $scope.CheckCurrentAccount=function(Account)
-    {
-        if($scope.CurrentAccount==Account)
-        {
+    $scope.CheckCurrentAccount = function (Account, AccountID) {
+        if ($scope.CurrentAccount == Account) {
+
+            localStorageService.set('AccountDBID', AccountID);
             return true;
         }
         else {
             return false;
         }
-    }
-
-    $scope.getactivepermissionNew = function () {
-        $scope.CurrentUserKey = localStorageService.get('UserKey');
-        setTimeout(function () {
-            $scope.GetPermission(3, $scope.CurrentUserKey);
-        }, 10);
-        setTimeout(function () {
-            $scope.GetPermission(4, $scope.CurrentUserKey);
-        }, 10);
-        setTimeout(function () {
-            $scope.GetPermission(5, $scope.CurrentUserKey);
-        }, 10);
-
-        setTimeout(function () {
-            $scope.GetPermission(1, $scope.CurrentUserKey);
-        }, 10);
-        $scope.$apply();
-        setTimeout(function () {
-
-            $scope.Permission = [];
-
-            if ($scope.Permissions1 != undefined && $scope.Permissions1.length > 0) {
-
-                for (var i = 0; i < $scope.Permissions1.length; i++) {
-                    $scope.Permission.push($scope.Permissions1[i]);
-                }
-            }
-            if ($scope.Permissions2 != undefined && $scope.Permissions2.length > 0) {
-                for (var i = 0; i < $scope.Permissions2.length; i++) {
-                    $scope.Permission.push($scope.Permissions2[i]);
-                }
-            }
-            if ($scope.Permissions3 != undefined && $scope.Permissions3.length > 0) {
-                for (var i = 0; i < $scope.Permissions3.length; i++) {
-                    $scope.Permission.push($scope.Permissions3[i]);
-                }
-            }
-
-            if ($scope.Permissions4 != undefined && $scope.Permissions4.length > 0) {
-                for (var i = 0; i < $scope.Permissions4.length; i++) {
-                    $scope.Permission.push($scope.Permissions4[i]);
-                }
-            }
-            $scope.IsLoading = false;
-            $location.path("/FindItems");
-            $scope.$apply();
-        }, 120);
-
-    }
+    };
     $scope.UpdateSecurityToken = function (AccountID, AccountName) {
 
         $scope.IsLoading = true;
 
         var authData = localStorageService.get('authorizationData');
+        localStorageService.set('AccountDBID', AccountID);
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
@@ -142,7 +79,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
             dataType: 'json',
 
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "AccountID": AccountID }),
-            error: function (err, textStatus, errorThrown) {
+            error: function (err, textStatus) {
                 $scope.UOMSearching = false;
 
                 $scope.IsLoading = false;
@@ -175,10 +112,10 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                         $scope.currentactiveaccount(AccountName);
                         localStorageService.set('AccountID', AccountName);
 
-                       
-                        
+                        $scope.IsLoading = false;
+                        $scope.getactivepermission();
                         authService.GetuserInfo();
-                        $scope.getactivepermissionNew();
+                        $location.path("/FindItems");
 
                         $scope.$apply();
 
@@ -188,13 +125,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                 }
                 else {
                     $scope.IsLoading = false;
-                    $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenResult.Message)
-
-
+                    $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenResult.Message);
                 }
-
-
-
             }
         });
     }

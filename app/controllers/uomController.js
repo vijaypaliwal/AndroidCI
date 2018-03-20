@@ -138,7 +138,7 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
 
         if (_StatusValue != "") {
 
-           
+
 
             $scope.UOMToCreate = $("#UOMToCreate").val();
             var authData = localStorageService.get('authorizationData');
@@ -174,7 +174,7 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
                                     $scope.$apply();
                                     $('#UOMToCreate').val("");
                                     $('#UOMToCreate').focus();
-                                 
+
                                 }
                                 else {
                                     $scope.getuom();
@@ -182,15 +182,33 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
                                 }
                             }
 
-                      
+
 
                             if ($scope.mode == 3) {
-                                ShowSuccess("Updated");
-                                $scope.getuom();
-                                $scope.mode = 1;
+
+                                $scope.IsProcessing = false;
+                                $scope.$apply();
+
+
+                                $scope.similar = false;
+
+
+                             
+
+
+                                if ($scope.similar == false) {
+                                    ShowSuccess("Updated");
+                                    $scope.getuom();
+                                    $scope.mode = 1;
+                                }
+
+
+
+
+
                             }
 
-                        
+
 
                         }
 
