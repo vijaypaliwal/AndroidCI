@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('signupController', ['$scope', 'localStorageService', '$location', '$timeout', 'authService', 'log', function ($scope, localStorageService, $location, $timeout, authService, log) {
+app.controller('signupController', ['$scope','localStorageService', '$location', '$timeout', 'authService', 'log', function ($scope,localStorageService, $location, $timeout, authService, log) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";
@@ -10,15 +10,14 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
         account: "",
         useRefreshTokens: false
     };
-
     $scope.registration = {
-        FirstName: "",
-        LastName: "",
-        OrganizationName: "",
-        Email: "",
-        UserName: "",
-        Password: "",
-        TAndC: false
+        Name:"",
+    Company:"",
+    Email:"",
+    Account:"",
+    UserName:"",
+    Password:"",
+    TAndC:false
     };
     $scope.dataType = "password";
 
@@ -30,7 +29,7 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
         $.ajax
         ({
             type: "POST",
-            url: serviceBase + 'NewSignup',
+            url: serviceBase + 'Signup',
             contentType: 'application/json; charset=utf-8',
 
             dataType: 'json',
@@ -41,20 +40,20 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
                 $('#mysignupModal').hide();
                 $scope.IsProcessing = false;
                 $scope.$apply();
-                if (response.NewSignupResult.Success == true) {
+                if (response.SignupResult.Success == true) {
 
                     log.success("You are successfully registered");
                     localStorageService.set("LatestSignUp", true);
 
-                    localStorageService.set('lastlogindata', { userName: response.NewSignupResult.Payload.UserName, Password: response.NewSignupResult.Payload.Password, AccountName: response.NewSignupResult.Payload.Account });
+                    localStorageService.set('lastlogindata', { userName: response.SignupResult.Payload.UserName, Password: response.SignupResult.Payload.Password, AccountName: response.SignupResult.Payload.Account });
                     //$location.path('/login');
-                    $scope.loginAfterSignup(response.NewSignupResult.Payload.UserName, response.NewSignupResult.Payload.Password, response.NewSignupResult.Payload.Account);
+                    $scope.loginAfterSignup(response.SignupResult.Payload.UserName, response.SignupResult.Payload.UserName, response.SignupResult.Payload.Account);
                     $scope.$apply();
                 }
                 else {
-                    log.error(response.NewSignupResult.Message);
+                    log.error(response.SignupResult.Message);
                 }
-
+            
             },
             error: function (err) {
                 debugger;
@@ -66,7 +65,7 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
 
             }
         });
-
+       
     };
 
 
@@ -85,8 +84,8 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
         $scope.$apply();
         authService.login($scope.loginData).then(function (response) {
 
-
-
+         
+         
 
             $scope.IsOwner = localStorageService.get('IsOwner');
 
@@ -106,9 +105,9 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
     $scope.showpassword = function () {
         $(".showbtn").hide();
         $(".hidebtn").show();
-        $("#Password").attr("type", "text");
+        $("#Password").attr("type","text");
         $scope.$apply();
-
+       
     }
 
 
@@ -119,26 +118,13 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
 
     }
 
+    
 
-    function init() {
-        $scope.registration = {
-            FirstName: "",
-            LastName: "",
-            OrganizationName: "",
-            Email: "",
-            UserName: "",
-            Password: "",
-            TAndC: false
-        };
-        $scope.$apply();
-        setTimeout(function () {
-            $("#firstName").focus();
 
-        }, 100);
-    }
-
-    $scope.CheckIsRequiredfields = function () {
-        if ($scope.registration.Name == "" || $scope.registration.Company == "" || $scope.registration.Account == "" || $scope.registration.Email == "" || $scope.registration.UserName == "" || $scope.registration.Password == "") {
+    $scope.CheckIsRequiredfields=function()
+    {
+        if($scope.registration.Name=="" ||$scope.registration.Company=="" || $scope.registration.Account=="" ||$scope.registration.Email=="" || $scope.registration.UserName=="" ||$scope.registration.Password=="")
+        {
             return true;
         }
         else {
@@ -151,7 +137,5 @@ app.controller('signupController', ['$scope', 'localStorageService', '$location'
             $location.path('/login');
         }, 2000);
     }
-
-    init();
 
 }]);
