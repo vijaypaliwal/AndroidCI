@@ -43,11 +43,14 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
                 if (response.SignupResult.Success == true) {
 
                     log.success("You are successfully registered");
+
+                
+
                     localStorageService.set("LatestSignUp", true);
 
                     localStorageService.set('lastlogindata', { userName: response.SignupResult.Payload.UserName, Password: response.SignupResult.Payload.Password, AccountName: response.SignupResult.Payload.Account });
                     //$location.path('/login');
-                    $scope.loginAfterSignup(response.SignupResult.Payload.UserName, response.SignupResult.Payload.UserName, response.SignupResult.Payload.Account);
+                    $scope.loginAfterSignup(response.SignupResult.Payload.UserName, response.SignupResult.Payload.Password, response.SignupResult.Payload.Account);
                     $scope.$apply();
                 }
                 else {
@@ -84,8 +87,6 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
         $scope.$apply();
         authService.login($scope.loginData).then(function (response) {
 
-         
-         
 
             $scope.IsOwner = localStorageService.get('IsOwner');
 
